@@ -1,21 +1,23 @@
-package util;
+package repository;
 
-import model.Task;
+import entity.Task;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class TasksUtil {
 
     public static final Map<Integer, Task> TASK_BASE = new HashMap<>();
 
-    public static Task createTask(String description, String project) {
-        Task task = new Task(description, project);
-        TASK_BASE.put(task.getId(), task);
+    public static Task createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, int projectId) {
+
+        Task task = new Task(taskName, taskDescription, taskDateBegin, taskDateEnd, projectId);
+        TASK_BASE.put(task.getTaskId(), task);
         return task;
     }
 
     public static void addTask(Task task) {
-        TASK_BASE.put(task.getId(), task);
+        TASK_BASE.put(task.getTaskId(), task);
     }
 
     public static Task getTaskById(int id) {

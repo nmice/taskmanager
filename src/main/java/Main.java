@@ -1,12 +1,9 @@
-import model.Task;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static util.TasksUtil.TASK_BASE;
-import static util.TasksUtil.createTask;
+import static repository.TasksUtil.TASK_BASE;
+import static repository.TasksUtil.createTask;
 
 public class Main {
 
@@ -21,24 +18,33 @@ public class Main {
                 new Task("Task three", "Project two")
         );*/
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the command (C - create/R - read/U - update/D - delete) :");
         String command = scanner.nextLine();
 
+
+
         if (command.equalsIgnoreCase("c")) {
-            System.out.println("Please enter description of task :");
+            System.out.println("Please enter a name of the task :");
             String description = scanner.nextLine();
-            System.out.println("Please enter project :");
+            System.out.println("Please enter a description of the task :");
             String project = scanner.nextLine();
-            createTask(description, project);
+            System.out.println("Please enter date of begin :");
+            String dateBegin = scanner.nextLine();
+            System.out.println("Please enter date of end :");
+            String dateEnd = scanner.nextLine();
+            System.out.println("Please enter project ID :");
+            int projectID = scanner.nextInt();
+            createTask(description, project, LocalDate.parse(dateBegin, formatter), LocalDate.parse(dateEnd, formatter), projectID);
+            System.out.println(TASK_BASE);
         }
 
         if (command.equalsIgnoreCase("r")) {
-            System.out.println("Please input ID of task for read Task by ID:");
-            int id = scanner.nextInt();
-
-            System.out.println(TASK_BASE);
+             System.out.println(TASK_BASE);
         }
+
     }
 
 }
