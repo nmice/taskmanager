@@ -1,8 +1,6 @@
-package entity;
+package ru.neginskiy.tm.entity;
 
 import java.time.LocalDate;
-
-import static repository.TasksUtil.getNewId;
 
 public class Task {
 
@@ -11,7 +9,7 @@ public class Task {
     private String taskDescription;
     private LocalDate taskDateBegin;
     private LocalDate taskDateEnd;
-    private Project project;
+    private int projectId;
 
     public int getTaskId() {
         return taskId;
@@ -33,8 +31,8 @@ public class Task {
         return taskDateEnd;
     }
 
-    public Project getProject() {
-        return project;
+    public int getProjectId() {
+        return projectId;
     }
 
     public void setTaskName(String taskName) {
@@ -53,17 +51,17 @@ public class Task {
         this.taskDateEnd = taskDateEnd;
     }
 
-    public void setProject(int projectId) {
-        this.project = project;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public Task(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, int projectId) {
-        this.taskId = getNewId();
+/*        this.taskId = getNewId();*/
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.taskDateBegin = taskDateBegin;
         this.taskDateEnd = taskDateEnd;
-        this.project = project;
+        this.projectId = projectId;
     }
 
     @Override
@@ -74,7 +72,7 @@ public class Task {
                 ", taskDescription='" + taskDescription + '\'' +
                 ", taskDateBegin=" + taskDateBegin +
                 ", taskDateEnd=" + taskDateEnd +
-                ", projectId=" + project +
+                ", projectId=" + projectId +
                 '}';
     }
 }

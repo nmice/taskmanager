@@ -1,4 +1,4 @@
-package entity;
+package ru.neginskiy.tm.entity;
 
 import java.time.LocalDate;
 
@@ -13,6 +13,7 @@ public class Project {
     public int getProjectId() {
         return projectId;
     }
+
     public String getProjectName() {
         return projectName;
     }

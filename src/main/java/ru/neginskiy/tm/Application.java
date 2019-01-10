@@ -1,11 +1,11 @@
+package ru.neginskiy.tm;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static repository.TasksUtil.TASK_BASE;
-import static repository.TasksUtil.createTask;
 
-public class Main {
+public class Application {
 
     public static void main(String[] args) {
 
@@ -24,8 +24,6 @@ public class Main {
         System.out.println("Enter the command (C - create/R - read/U - update/D - delete) :");
         String command = scanner.nextLine();
 
-
-
         if (command.equalsIgnoreCase("c")) {
             System.out.println("Please enter a name of the task :");
             String description = scanner.nextLine();
@@ -37,12 +35,12 @@ public class Main {
             String dateEnd = scanner.nextLine();
             System.out.println("Please enter project ID :");
             int projectID = scanner.nextInt();
-            createTask(description, project, LocalDate.parse(dateBegin, formatter), LocalDate.parse(dateEnd, formatter), projectID);
-            System.out.println(TASK_BASE);
+/*            createTask(description, project, LocalDate.parse(dateBegin, formatter), LocalDate.parse(dateEnd, formatter), projectID);
+            System.out.println(taskBase);*/
         }
 
         if (command.equalsIgnoreCase("r")) {
-             System.out.println(TASK_BASE);
+/*             System.out.println(taskBase);*/
         }
 
     }
