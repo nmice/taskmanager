@@ -1,17 +1,19 @@
 package ru.neginskiy.tm.entity;
 
 import java.time.LocalDate;
+import java.util.UUID;
+
 
 public class Task {
 
-    private int taskId;
+    private final String taskId = UUID.randomUUID().toString();;
     private String taskName;
     private String taskDescription;
     private LocalDate taskDateBegin;
     private LocalDate taskDateEnd;
-    private int projectId;
+    private String projectId;//String UUID
 
-    public int getTaskId() {
+    public String getTaskId() {
         return taskId;
     }
 
@@ -31,7 +33,7 @@ public class Task {
         return taskDateEnd;
     }
 
-    public int getProjectId() {
+    public String getProjectId() {
         return projectId;
     }
 
@@ -51,26 +53,19 @@ public class Task {
         this.taskDateEnd = taskDateEnd;
     }
 
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
-    public Task(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, int projectId) {
-/*        this.taskId = getNewId();*/
-        this.taskName = taskName;
-        this.taskDescription = taskDescription;
-        this.taskDateBegin = taskDateBegin;
-        this.taskDateEnd = taskDateEnd;
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
     @Override
     public String toString() {
-        return "[taskId = " + taskId +
-                ", taskName = " + taskName +
-                ", taskDescription = " + taskDescription +
-                ", taskDateBegin = " + taskDateBegin +
-                ", taskDateEnd = " + taskDateEnd +
-                ", projectId = " + projectId + "]\r\n";
+        return "Task{" +
+                "taskId='" + taskId + '\'' +
+                ", taskName='" + taskName + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", taskDateBegin=" + taskDateBegin +
+                ", taskDateEnd=" + taskDateEnd +
+                ", projectId='" + projectId + '\'' +
+                '}';
     }
 }

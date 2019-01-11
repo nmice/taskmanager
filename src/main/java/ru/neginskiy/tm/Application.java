@@ -21,10 +21,10 @@ public class Application {
         stringToCommand.put("cp", new CreateProjectCommand());
         stringToCommand.put("rp", new ProjectListCommand());
         stringToCommand.put("up", new EditProjectCommand());
-        stringToCommand.put("dp", new DeleteProjectCommand());
+        stringToCommand.put("dp", new DeleteProjectCommand());//to BT
 
-        ProjectRepository projectRepository = new ProjectRepository();
-        TaskRepository taskRepository = new TaskRepository();
+        ProjectRepository projectRepository = new ProjectRepository();//toBT
+        TaskRepository taskRepository = new TaskRepository();//BT
 
         while (true) {
             System.out.println("Enter the command: \r\n" +
