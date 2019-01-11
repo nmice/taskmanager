@@ -12,37 +12,42 @@
 
 <h4>[command]</h4>
 
-AbstractCommand - абстрактный класс комманды
+<li> AbstractCommand - абстрактный класс комманды</li>
 
-CreateProjectCommand - класс создания нового проекта
+<li> CreateProjectCommand - класс создания нового проекта</li>
 
-CreateTaskCommand - класс создания новой задачи
+<li> CreateTaskCommand - класс создания новой задачи</li>
 
-DeleteProjectCommand - класс удаления проекта
+<li> DeleteProjectCommand - класс удаления проекта</li>
 
-DeleteTaskCommand - класс удаления задачи
+<li> DeleteTaskCommand - класс удаления задачи</li>
 
-EditProjectCommand - класс корректировки проекта
+<li> EditProjectCommand - класс корректировки проекта</li>
 
-EditTaskCommand - класс корректировки задачи
+<li> EditTaskCommand - класс корректировки задачи</li>
 
-ProjectListCommand - класс выдачи информации по всем проектам
+<li> ProjectListCommand - класс выдачи информации по всем проектам</li>
 
-TaskListCommand - класс выдачи информации по всем задачам
+<li> TaskListCommand - класс выдачи информации по всем задачам</li>
 
 <h4>[entity]</h4>
-Task - задача
-Project - проект
+
+<li> Task - задача</li>
+
+<li> Project - проект</li>
 
 <h4>[repository]</h4>
 
-TaskRepository - класс для создания и управления задачами
-ProjectRepository - класс для создания и управления проектами
+<li> TaskRepository - класс для создания и управления задачами</li>
+
+<li> ProjectRepository - класс для создания и управления проектами</li>
 
 <h4>App - основной класс</h4>
 
 <h3>Сборка проекта</h3>
+
  mvn clean install
 
 <h3>Запуск</h3>
+
  java -jar ./taskmanager.jar
