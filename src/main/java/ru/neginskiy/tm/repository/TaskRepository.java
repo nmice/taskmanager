@@ -1,7 +1,6 @@
 package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Task;
-
 import java.time.LocalDate;
 import java.util.*;
 
