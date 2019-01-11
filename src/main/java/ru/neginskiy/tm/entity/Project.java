@@ -49,4 +49,21 @@ public class Project {
     public void setProjectDateEnd(LocalDate projectDateEnd) {
         this.projectDateEnd = projectDateEnd;
     }
+
+    public Project(int projectId, String projectName, String projectDescription, LocalDate projectDateBegin, LocalDate projectDateEnd) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.projectDateBegin = projectDateBegin;
+        this.projectDateEnd = projectDateEnd;
+    }
+
+    @Override
+    public String toString() {
+        return "[projectId = " + projectId +
+                ", projectName = " + projectName +
+                ", projectDescription = " + projectDescription +
+                ", projectDateBegin = " + projectDateBegin +
+                ", projectDateEnd = " + projectDateEnd + "]\r\n";
+    }
 }
