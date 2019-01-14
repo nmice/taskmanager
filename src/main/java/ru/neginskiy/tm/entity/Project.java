@@ -1,16 +1,17 @@
 package ru.neginskiy.tm.entity;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Project {
 
-    private int projectId;
+    private String projectId = UUID.randomUUID().toString();
     private String projectName;
     private String projectDescription;
     private LocalDate projectDateBegin;
     private LocalDate projectDateEnd;
 
-    public int getProjectId() {
+    public String getProjectId() {
         return projectId;
     }
 
@@ -30,7 +31,7 @@ public class Project {
         return projectDateEnd;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
@@ -47,14 +48,6 @@ public class Project {
     }
 
     public void setProjectDateEnd(LocalDate projectDateEnd) {
-        this.projectDateEnd = projectDateEnd;
-    }
-
-    public Project(int projectId, String projectName, String projectDescription, LocalDate projectDateBegin, LocalDate projectDateEnd) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.projectDescription = projectDescription;
-        this.projectDateBegin = projectDateBegin;
         this.projectDateEnd = projectDateEnd;
     }
 

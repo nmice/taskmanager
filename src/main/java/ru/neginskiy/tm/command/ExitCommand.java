@@ -1,19 +1,19 @@
 package ru.neginskiy.tm.command;
 
-public class ProjectListCommand extends AbstractCommand {
+public class ExitCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        //System.out.println(getAllProjects());//TODO
+        System.exit(1);
     }
 
     @Override
     public String command() {
-        return "projectlist";
+        return "exit";
     }
 
     @Override
     public String description() {
-        return " - Get project list";
+        return " - Exit program";
     }
 }

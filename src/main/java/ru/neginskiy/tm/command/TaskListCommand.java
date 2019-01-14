@@ -1,21 +1,19 @@
 package ru.neginskiy.tm.command;
 
-import static ru.neginskiy.tm.repository.TaskRepository.getAllTasks;
-
 public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        System.out.println(getAllTasks());
+        //System.out.println(getAllTasks());//TODO
     }
 
     @Override
     public String command() {
-        return null;
+        return "tasklist";
     }
 
     @Override
     public String description() {
-        return null;
+        return " - Get task list";
     }
 }

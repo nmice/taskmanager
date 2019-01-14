@@ -1,17 +1,22 @@
 package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Task;
+
 import java.time.LocalDate;
 import java.util.*;
 
 public class TaskRepository {
 
-    public Map<Integer, Task> taskBase = new HashMap<>();
+    public Map<String, Task> taskBase = new HashMap<>();
 
-    public void createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, int projectId) {
-        Task task = new Task(taskName, taskDescription, taskDateBegin, taskDateEnd, projectId);
-        taskBase.put(getNewId(), task);
-        return;
+    public void createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, String projectId) {
+        Task task = new Task();
+        task.setTaskName(taskName);
+        task.setTaskDescription(taskDescription);
+        task.setTaskDateBegin(taskDateBegin);
+        task.setTaskDateEnd(taskDateEnd);
+        task.setProjectId(projectId);
+        taskBase.put(task.getTaskId(), task);
     }
 
     public void addTask(Task task) {
@@ -51,9 +56,5 @@ public class TaskRepository {
 
     public int getTaskBaseSize() {
         return taskBase.size();
-    }
-
-    public int getNewId() {
-        return getTaskBaseSize() + 1;
     }
 }

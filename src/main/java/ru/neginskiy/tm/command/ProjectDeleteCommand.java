@@ -2,25 +2,23 @@ package ru.neginskiy.tm.command;
 
 import java.util.Scanner;
 
-import static ru.neginskiy.tm.repository.TaskRepository.deleteTask;
-
-public class DeleteTaskCommand extends AbstractCommand {
+public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter project ID number to remove: ");
-        int taskId = scanner.nextInt();
-        deleteTask(taskId);
+        int projectId = scanner.nextInt();
+        //deleteProject(projectId);//TODO
     }
 
     @Override
     public String command() {
-        return null;
+        return "projectdelete";
     }
 
     @Override
     public String description() {
-        return null;
+        return " - Delete task";
     }
 }

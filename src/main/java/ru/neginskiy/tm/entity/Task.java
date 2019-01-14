@@ -6,12 +6,12 @@ import java.util.UUID;
 
 public class Task {
 
-    private final String taskId = UUID.randomUUID().toString();;
+    private final String taskId = UUID.randomUUID().toString();
     private String taskName;
     private String taskDescription;
     private LocalDate taskDateBegin;
     private LocalDate taskDateEnd;
-    private String projectId;//String UUID
+    private String projectId = UUID.randomUUID().toString();//String UUID
 
     public String getTaskId() {
         return taskId;
@@ -69,3 +69,4 @@ public class Task {
                 '}';
     }
 }
+//taskName

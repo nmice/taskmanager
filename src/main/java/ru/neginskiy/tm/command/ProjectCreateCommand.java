@@ -1,40 +1,34 @@
 package ru.neginskiy.tm.command;
 
-import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.repository.TaskRepository;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static ru.neginskiy.tm.repository.TaskRepository.*;
 
-public class CreateTaskCommand extends AbstractCommand {
+public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter a name of the task :");
+        System.out.println("Please enter a name of the project :");
         String name = scanner.nextLine();
-        System.out.println("Please enter a description of the task :");
+        System.out.println("Please enter a description of the project :");
         String description = scanner.nextLine();
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
         String dateBegin = scanner.nextLine();
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
         String dateEnd = scanner.nextLine();
-        System.out.println("Please enter number - project ID :");
-        int projectID = scanner.nextInt();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        createTask(name, description, LocalDate.parse(dateBegin, formatter), LocalDate.parse(dateEnd, formatter), projectID);
+        //createProject(name, description, LocalDate.parse(dateBegin, formatter), LocalDate.parse(dateEnd, formatter));//TODO
     }
 
     @Override
     public String command() {
-        return null;
+        return "projectcreate";
     }
 
     @Override
     public String description() {
-        return null;
+        return " - Create a new project";
     }
 }
