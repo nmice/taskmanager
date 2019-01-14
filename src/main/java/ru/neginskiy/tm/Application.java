@@ -13,19 +13,6 @@ public class Application {
 
     public static void main(String[] args) {
 
-        Map<String, AbstractCommand> stringToCommand = new HashMap<>();
-        stringToCommand.put("ct", new CreateTaskCommand());
-        stringToCommand.put("rt", new TaskListCommand());
-        stringToCommand.put("ut", new EditTaskCommand());
-        stringToCommand.put("dt", new DeleteTaskCommand());
-        stringToCommand.put("cp", new CreateProjectCommand());
-        stringToCommand.put("rp", new ProjectListCommand());
-        stringToCommand.put("up", new EditProjectCommand());
-        stringToCommand.put("dp", new DeleteProjectCommand());//to BT
-
-        ProjectRepository projectRepository = new ProjectRepository();//toBT
-        TaskRepository taskRepository = new TaskRepository();//BT
-
         while (true) {
             System.out.println("Enter the command: \r\n" +
                     "CT - create Task \r\n" +

@@ -45,15 +45,15 @@ public class TaskRepository {
         addTask(task);
     }
 
-    public static void deleteTask(int id) {
+    public void deleteTask(int id) {
         taskBase.remove(id);
     }
 
-    public static int getTaskBaseSize() {
+    public int getTaskBaseSize() {
         return taskBase.size();
     }
 
-    public static int getNewId() {
+    public int getNewId() {
         return getTaskBaseSize() + 1;
     }
 }
