@@ -4,6 +4,7 @@ import ru.neginskiy.tm.command.AbstractCommand;
 import ru.neginskiy.tm.repository.ProjectRepository;
 import ru.neginskiy.tm.repository.TaskRepository;
 import ru.neginskiy.tm.service.ProjectService;
+import ru.neginskiy.tm.service.TaskService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +13,8 @@ import java.util.Scanner;
 public class Bootstrap {
 
     private final Map<String, AbstractCommand> stringToCommand = new HashMap<>();
-    private final ProjectRepository projectRepository = new ProjectRepository();
-    private final TaskRepository taskRepository = new TaskRepository();
-    private final ProjectService projectService = new ProjectService(projectRepository);
-
+    private final TaskService taskService = new TaskService(new TaskRepository());
+    private final ProjectService projectService = new ProjectService(new ProjectRepository());
 
     public void init(Class[] classes) throws IllegalAccessException, InstantiationException {
         registry(classes);
@@ -55,11 +54,11 @@ public class Bootstrap {
         return stringToCommand;
     }
 
-    public ProjectRepository getProjectRepository() {
-        return projectRepository;
+    public ProjectService getProjectService() {
+        return projectService;
     }
 
-    public TaskRepository getTaskRepository() {
-        return taskRepository;
+    public TaskService getTaskService() {
+        return taskService;
     }
 }

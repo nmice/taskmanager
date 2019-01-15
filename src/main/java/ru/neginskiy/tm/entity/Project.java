@@ -5,59 +5,58 @@ import java.util.UUID;
 
 public class Project {
 
-    private String projectId = UUID.randomUUID().toString();
-    private String projectName;
-    private String projectDescription;
-    private LocalDate projectDateBegin;
-    private LocalDate projectDateEnd;
-//todo change naming of variable
+    private String id = UUID.randomUUID().toString();
+    private String name;
+    private String description;
+    private LocalDate dateBegin;
+    private LocalDate dateEnd;
 
-    public String getProjectId() {
-        return projectId;
+    public String getId() {
+        return id;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getName() {
+        return name;
     }
 
-    public String getProjectDescription() {
-        return projectDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public LocalDate getProjectDateBegin() {
-        return projectDateBegin;
+    public LocalDate getDateBegin() {
+        return dateBegin;
     }
 
-    public LocalDate getProjectDateEnd() {
-        return projectDateEnd;
+    public LocalDate getDateEnd() {
+        return dateEnd;
     }
 
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setProjectDescription(String projectDescription) {
-        this.projectDescription = projectDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setProjectDateBegin(LocalDate projectDateBegin) {
-        this.projectDateBegin = projectDateBegin;
+    public void setDateBegin(LocalDate dateBegin) {
+        this.dateBegin = dateBegin;
     }
 
-    public void setProjectDateEnd(LocalDate projectDateEnd) {
-        this.projectDateEnd = projectDateEnd;
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     @Override
     public String toString() {
-        return "[projectId = " + projectId +
-                ", projectName = " + projectName +
-                ", projectDescription = " + projectDescription +
-                ", projectDateBegin = " + projectDateBegin +
-                ", projectDateEnd = " + projectDateEnd + "]\r\n";
+        return "ID: " + id +
+                ", " + name +
+                " (" + description +
+                "), " + dateBegin +
+                " - " + dateEnd;
     }
 }

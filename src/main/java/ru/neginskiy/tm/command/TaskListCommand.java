@@ -1,10 +1,15 @@
 package ru.neginskiy.tm.command;
 
+import ru.neginskiy.tm.entity.Task;
+
 public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        //System.out.println(getAllTasks());//TODO
+        for (Task task: getBootstrap().getTaskService().getAllTasks()){
+            System.out.println(task);
+        }
+//        getBootstrap().getTaskService().getAllTasks().forEach(System.out::println);
     }
 
     @Override

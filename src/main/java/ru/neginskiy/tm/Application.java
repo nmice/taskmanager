@@ -5,12 +5,12 @@ import ru.neginskiy.tm.controller.Bootstrap;
 
 public class Application {
 
-    private static Class[] clazz = {ExitCommand.class, HelpCommand.class,
-            TaskDeleteCommand.class, TaskEditCommand.class, TaskListCommand.class, ProjectCreateCommand.class,
-            ProjectDeleteCommand.class, ProjectEditCommand.class, ProjectListCommand.class};
+    private static final Class[] CLAZZ = {ExitCommand.class, HelpCommand.class,
+            TaskCreateCommand.class, TaskDeleteCommand.class, TaskEditCommand.class, TaskListCommand.class,
+            ProjectCreateCommand.class, ProjectDeleteCommand.class, ProjectEditCommand.class, ProjectListCommand.class};
 
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         Bootstrap bt = new Bootstrap();
-        bt.init(clazz);
+        bt.init(CLAZZ);
     }
 }

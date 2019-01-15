@@ -7,9 +7,10 @@ public class ProjectDeleteCommand extends AbstractCommand {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter project ID number to remove: ");
-        int projectId = scanner.nextInt();
-        //deleteProject(projectId);//TODO
+        System.out.println("Please enter project ID to remove: ");
+        String projectId = scanner.nextLine();
+        getBootstrap().getProjectService().deleteProject(projectId);
+        getBootstrap().getTaskService().deleteTasksByProjectId(projectId);
     }
 
     @Override
@@ -19,6 +20,6 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Delete task";
+        return " - Delete project";
     }
 }

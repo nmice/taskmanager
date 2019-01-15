@@ -1,30 +1,24 @@
 package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Project;
-import ru.neginskiy.tm.entity.Task;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class ProjectRepository {
 
-    public Map<String, Project> projectBase = new HashMap<>();
+    private Map<String, Project> projectBase = new HashMap<>();
 
-    public void createProject(String projectName, String projectDescription, LocalDate projectDateBegin, LocalDate projectDateEnd, String projectId) {
+    public void createProject(String projectName, String projectDescription, LocalDate projectDateBegin, LocalDate projectDateEnd) {
         Project project = new Project();
-        project.setProjectName(projectName);
-        project.setProjectDescription(projectDescription);
-        project.setProjectDateBegin(projectDateBegin);
-        project.setProjectDateEnd(projectDateEnd);
-        project.setProjectId(projectId);
-        projectBase.put(project.getProjectId(), project);
+        project.setName(projectName);
+        project.setDescription(projectDescription);
+        project.setDateBegin(projectDateBegin);
+        project.setDateEnd(projectDateEnd);
+        projectBase.put(project.getId(), project);
     }
 
-    public void addProject(Project project) {
-        projectBase.put(project.getProjectId(), project);
-    }
-
-    public Project getProjectById(int id) {
+    public Project getProjectById(String id) {
         return projectBase.get(id);
     }
 
@@ -35,19 +29,19 @@ public class ProjectRepository {
         return allProjectsList;
     }
 
-    public void updateProjectName(int projectId, String projectName) {
-        projectBase.get(projectId).setProjectName(projectName);
+    public void updateProjectName(String projectId, String projectName) {
+        projectBase.get(projectId).setName(projectName);
     }
 
-    public void updateProjectDescription(int projectId, String projectDescription) {
-        projectBase.get(projectId).setProjectName(projectDescription);
+    public void updateProjectDescription(String projectId, String projectDescription) {
+        projectBase.get(projectId).setName(projectDescription);
     }
 
-    public void updateProjectEndDate(int projectId, LocalDate projectEndDate) {
-        projectBase.get(projectId).setProjectDateEnd(projectEndDate);
+    public void updateProjectEndDate(String projectId, LocalDate projectEndDate) {
+        projectBase.get(projectId).setDateEnd(projectEndDate);
     }
 
-    public void deleteProject(int id) {
+    public void deleteProject(String id) {
         projectBase.remove(id);
     }
 

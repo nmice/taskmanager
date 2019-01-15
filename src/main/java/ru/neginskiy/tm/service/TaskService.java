@@ -7,17 +7,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class TaskService {
-    TaskRepository taskRepository;
+
+    private final TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     public void createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, String projectId) {
         taskRepository.createTask(taskName, taskDescription, taskDateBegin, taskDateEnd, projectId);
     }
 
-    public void addTask(Task task) {
-        taskRepository.addTask(task);
-    }
-
-    public Task getTaskById(int id) {
+    public Task getTaskById(String id) {
         return taskRepository.getTaskById(id);
     }
 
@@ -25,33 +26,25 @@ public class TaskService {
         return taskRepository.getAllTasks();
     }
 
-    public void updateTaskName(int taskId, String taskName) {
+    public void updateTaskName(String taskId, String taskName) {
         taskRepository.updateTaskName(taskId, taskName);
     }
 
-    public void updateTaskDescription(int taskId, String taskDescription) {
+    public void updateTaskDescription(String taskId, String taskDescription) {
         taskRepository.updateTaskDescription(taskId, taskDescription);
     }
 
-    public void updateTaskEndDate(int taskId, LocalDate taskEndDate) {
+    public void updateTaskEndDate(String taskId, LocalDate taskEndDate) {
         taskRepository.updateTaskEndDate(taskId, taskEndDate);
     }
 
-    public void updateTask(Task task) {
-        taskRepository.updateTask(task);
-    }
-
-    public void deleteTask(int id) {
+    public void deleteTask(String id) {
         taskRepository.deleteTask(id);
     }
 
-    public int getTaskBaseSize() {
-        return taskRepository.getTaskBaseSize();
+    public void deleteTasksByProjectId(String projectId) {
+        taskRepository.deleteTasksByProjectId(projectId);
     }
 
-    public TaskService(TaskRepository projectRepository) {
-        this.taskRepository = projectRepository;
-    }
-
-    //TODO TRcode + TR obj + !null
+    //TODO !null
 }

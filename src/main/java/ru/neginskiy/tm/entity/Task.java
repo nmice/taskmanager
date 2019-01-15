@@ -6,51 +6,51 @@ import java.util.UUID;
 
 public class Task {
 
-    private final String taskId = UUID.randomUUID().toString();
-    private String taskName;
-    private String taskDescription;
-    private LocalDate taskDateBegin;
-    private LocalDate taskDateEnd;
-    private String projectId = UUID.randomUUID().toString();//String UUID
+    private final String id = UUID.randomUUID().toString();
+    private String name;
+    private String description;
+    private LocalDate dateBegin;
+    private LocalDate dateEnd;
+    private String projectId = UUID.randomUUID().toString();
 
-    public String getTaskId() {
-        return taskId;
+    public String getId() {
+        return id;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public LocalDate getTaskDateBegin() {
-        return taskDateBegin;
+    public LocalDate getDateBegin() {
+        return dateBegin;
     }
 
-    public LocalDate getTaskDateEnd() {
-        return taskDateEnd;
+    public LocalDate getDateEnd() {
+        return dateEnd;
     }
 
     public String getProjectId() {
         return projectId;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setTaskDateBegin(LocalDate taskDateBegin) {
-        this.taskDateBegin = taskDateBegin;
+    public void setDateBegin(LocalDate dateBegin) {
+        this.dateBegin = dateBegin;
     }
 
-    public void setTaskDateEnd(LocalDate taskDateEnd) {
-        this.taskDateEnd = taskDateEnd;
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public void setProjectId(String projectId) {
@@ -59,14 +59,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "taskId='" + taskId + '\'' +
-                ", taskName='" + taskName + '\'' +
-                ", taskDescription='" + taskDescription + '\'' +
-                ", taskDateBegin=" + taskDateBegin +
-                ", taskDateEnd=" + taskDateEnd +
-                ", projectId='" + projectId + '\'' +
-                '}';
+        return "ID: " + id +
+                ", " + name +
+                " (" + description +
+                "), " + dateBegin +
+                " - " + dateEnd +
+                ", projectId: " + projectId;
     }
 }
-//taskName

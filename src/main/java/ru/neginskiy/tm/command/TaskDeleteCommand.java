@@ -7,9 +7,9 @@ public class TaskDeleteCommand extends AbstractCommand {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter project ID number to remove: ");
-        int taskId = scanner.nextInt();
-        //deleteTask(taskId);//TODO
+        System.out.println("Please enter task ID to remove: ");
+        String id = scanner.nextLine();
+        getBootstrap().getTaskService().deleteTask(id);
     }
 
     @Override

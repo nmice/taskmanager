@@ -7,23 +7,19 @@ import java.util.*;
 
 public class TaskRepository {
 
-    public Map<String, Task> taskBase = new HashMap<>();
+    private Map<String, Task> taskBase = new HashMap<>();
 
     public void createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, String projectId) {
         Task task = new Task();
-        task.setTaskName(taskName);
-        task.setTaskDescription(taskDescription);
-        task.setTaskDateBegin(taskDateBegin);
-        task.setTaskDateEnd(taskDateEnd);
+        task.setName(taskName);
+        task.setDescription(taskDescription);
+        task.setDateBegin(taskDateBegin);
+        task.setDateEnd(taskDateEnd);
         task.setProjectId(projectId);
-        taskBase.put(task.getTaskId(), task);
+        taskBase.put(task.getId(), task);
     }
 
-    public void addTask(Task task) {
-        taskBase.put(task.getTaskId(), task);
-    }
-
-    public Task getTaskById(int id) {
+    public Task getTaskById(String id) {
         return taskBase.get(id);
     }
 
@@ -34,27 +30,36 @@ public class TaskRepository {
         return allTasksList;
     }
 
-    public void updateTaskName(int taskId, String taskName) {
-        taskBase.get(taskId).setTaskName(taskName);
+    public void updateTaskName(String taskId, String taskName) {
+        taskBase.get(taskId).setName(taskName);
     }
 
-    public void updateTaskDescription(int taskId, String taskDescription) {
-        taskBase.get(taskId).setTaskName(taskDescription);
+    public void updateTaskDescription(String taskId, String taskDescription) {
+        taskBase.get(taskId).setName(taskDescription);
     }
 
-    public void updateTaskEndDate(int taskId, LocalDate taskEndDate) {
-        taskBase.get(taskId).setTaskDateEnd(taskEndDate);
+    public void updateTaskEndDate(String taskId, LocalDate taskEndDate) {
+        taskBase.get(taskId).setDateEnd(taskEndDate);
     }
 
-    public void updateTask(Task task) {
+/*    public void updateTask(Task task) {
         addTask(task);
+    }*/
+
+    public void deleteTask(String id) {
+        taskBase.remove(id);
     }
 
-    public void deleteTask(int id) {
-        taskBase.remove(id);
+    public void deleteTasksByProjectId(String projectId) {
+        for (Task task : taskBase.values()) {
+            if (projectId.equals(task.getProjectId())) {
+                deleteTask(task.getId());
+            }
+        }
     }
 
     public int getTaskBaseSize() {
         return taskBase.size();
     }
+
 }
