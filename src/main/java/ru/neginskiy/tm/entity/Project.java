@@ -10,6 +10,7 @@ public class Project {
     private String projectDescription;
     private LocalDate projectDateBegin;
     private LocalDate projectDateEnd;
+//todo change naming of variable
 
     public String getProjectId() {
         return projectId;
