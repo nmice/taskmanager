@@ -2,19 +2,18 @@ package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Project;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class ProjectRepository {
 
     private Map<String, Project> projectBase = new HashMap<>();
 
-    public void createProject(String projectName, String projectDescription, LocalDate projectDateBegin, LocalDate projectDateEnd) {
+    public void createProject(String name, String description, Date dateBegin, Date dateEnd) {
         Project project = new Project();
-        project.setName(projectName);
-        project.setDescription(projectDescription);
-        project.setDateBegin(projectDateBegin);
-        project.setDateEnd(projectDateEnd);
+        project.setName(name);
+        project.setDescription(description);
+        project.setDateBegin(dateBegin);
+        project.setDateEnd(dateEnd);
         projectBase.put(project.getId(), project);
     }
 
@@ -37,15 +36,11 @@ public class ProjectRepository {
         projectBase.get(projectId).setName(projectDescription);
     }
 
-    public void updateProjectEndDate(String projectId, LocalDate projectEndDate) {
+    public void updateProjectEndDate(String projectId, Date projectEndDate) {
         projectBase.get(projectId).setDateEnd(projectEndDate);
     }
 
     public void deleteProject(String id) {
         projectBase.remove(id);
-    }
-
-    public int getProjectBaseSize() {
-        return projectBase.size();
-    }
+    }//todo read wright
 }

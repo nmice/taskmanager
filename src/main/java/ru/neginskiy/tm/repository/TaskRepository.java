@@ -1,20 +1,18 @@
 package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Task;
-
-import java.time.LocalDate;
 import java.util.*;
 
 public class TaskRepository {
 
     private Map<String, Task> taskBase = new HashMap<>();
 
-    public void createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, String projectId) {
+    public void createTask(String taskName, String description, Date dateBegin, Date dateEnd, String projectId) {
         Task task = new Task();
         task.setName(taskName);
-        task.setDescription(taskDescription);
-        task.setDateBegin(taskDateBegin);
-        task.setDateEnd(taskDateEnd);
+        task.setDescription(description);
+        task.setDateBegin(dateBegin);
+        task.setDateEnd(dateEnd);
         task.setProjectId(projectId);
         taskBase.put(task.getId(), task);
     }
@@ -30,16 +28,16 @@ public class TaskRepository {
         return allTasksList;
     }
 
-    public void updateTaskName(String taskId, String taskName) {
-        taskBase.get(taskId).setName(taskName);
+    public void updateTaskName(String id, String name) {
+        taskBase.get(id).setName(name);
     }
 
-    public void updateTaskDescription(String taskId, String taskDescription) {
-        taskBase.get(taskId).setName(taskDescription);
+    public void updateTaskDescription(String id, String description) {
+        taskBase.get(id).setDescription(description);
     }
 
-    public void updateTaskEndDate(String taskId, LocalDate taskEndDate) {
-        taskBase.get(taskId).setDateEnd(taskEndDate);
+    public void updateTaskEndDate(String id, Date dateEnd) {
+        taskBase.get(id).setDateEnd(dateEnd);
     }
 
 /*    public void updateTask(Task task) {
@@ -57,9 +55,4 @@ public class TaskRepository {
             }
         }
     }
-
-    public int getTaskBaseSize() {
-        return taskBase.size();
-    }
-
 }

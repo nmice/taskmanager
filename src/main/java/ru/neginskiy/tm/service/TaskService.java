@@ -3,7 +3,7 @@ package ru.neginskiy.tm.service;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class TaskService {
@@ -14,7 +14,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void createTask(String taskName, String taskDescription, LocalDate taskDateBegin, LocalDate taskDateEnd, String projectId) {
+    public void createTask(String taskName, String taskDescription, Date taskDateBegin, Date taskDateEnd, String projectId) {
         taskRepository.createTask(taskName, taskDescription, taskDateBegin, taskDateEnd, projectId);
     }
 
@@ -34,8 +34,8 @@ public class TaskService {
         taskRepository.updateTaskDescription(taskId, taskDescription);
     }
 
-    public void updateTaskEndDate(String taskId, LocalDate taskEndDate) {
-        taskRepository.updateTaskEndDate(taskId, taskEndDate);
+    public void updateTaskEndDate(String taskId, Date dateEnd) {
+        taskRepository.updateTaskEndDate(taskId, dateEnd);
     }
 
     public void deleteTask(String id) {
@@ -45,6 +45,5 @@ public class TaskService {
     public void deleteTasksByProjectId(String projectId) {
         taskRepository.deleteTasksByProjectId(projectId);
     }
-
     //TODO !null
 }

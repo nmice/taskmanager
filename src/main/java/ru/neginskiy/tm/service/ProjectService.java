@@ -3,19 +3,19 @@ package ru.neginskiy.tm.service;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.repository.ProjectRepository;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    public ProjectService(ProjectRepository projectRepository){
+    public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
-    public void createProject(String projectName, String projectDescription, LocalDate projectDateBegin, LocalDate projectDateEnd) {
-        projectRepository.createProject(projectName, projectDescription, projectDateBegin, projectDateEnd);
+    public void createProject(String name, String description, Date dateBegin, Date dateEnd) {
+        projectRepository.createProject(name, description, dateBegin, dateEnd);
     }
 
     public Project getProjectById(String id) {
@@ -34,12 +34,17 @@ public class ProjectService {
         projectRepository.updateProjectDescription(projectId, projectDescription);
     }
 
-    public void updateProjectEndDate(String projectId, LocalDate projectEndDate) {
-        projectRepository.updateProjectEndDate(projectId, projectEndDate);
+    public void updateProjectEndDate(String projectId, Date dateEnd) {
+        projectRepository.updateProjectEndDate(projectId, dateEnd);
     }
 
     public void deleteProject(String id) {
+        if (id == null || id.isEmpty()) {
+            return;
+        }
+        if (projectRepository.getProjectById(id) == null) {
+            return;
+        }
         projectRepository.deleteProject(id);
-    }
-
+    }//todo just business logic
 }

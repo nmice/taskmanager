@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 public class Project {
@@ -8,8 +8,8 @@ public class Project {
     private String id = UUID.randomUUID().toString();
     private String name;
     private String description;
-    private LocalDate dateBegin;
-    private LocalDate dateEnd;
+    private Date dateBegin;//todo change to Date
+    private Date dateEnd;//todo change to Date
 
     public String getId() {
         return id;
@@ -23,11 +23,11 @@ public class Project {
         return description;
     }
 
-    public LocalDate getDateBegin() {
+    public Date getDateBegin() {
         return dateBegin;
     }
 
-    public LocalDate getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
@@ -43,17 +43,17 @@ public class Project {
         this.description = description;
     }
 
-    public void setDateBegin(LocalDate dateBegin) {
+    public void setDateBegin(Date dateBegin) {
         this.dateBegin = dateBegin;
     }
 
-    public void setDateEnd(LocalDate dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 
     @Override
     public String toString() {
-        return "ID: " + id +
+        return "ID:" + id +
                 ", " + name +
                 " (" + description +
                 "), " + dateBegin +

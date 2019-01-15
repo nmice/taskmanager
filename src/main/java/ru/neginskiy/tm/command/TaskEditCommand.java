@@ -1,7 +1,8 @@
 package ru.neginskiy.tm.command;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import ru.neginskiy.tm.util.DateUtil;
+
+import java.util.Date;
 import java.util.Scanner;
 
 public class TaskEditCommand extends AbstractCommand {
@@ -19,18 +20,17 @@ public class TaskEditCommand extends AbstractCommand {
         String updateCommandString = scanner.nextLine().toLowerCase().trim();
         switch (updateCommandString) {
             case "changename":
-                System.out.println("Please enter a new project name: ");
+                System.out.println("Please enter a new task name: ");
                 String name = scanner.nextLine();
                 getBootstrap().getTaskService().updateTaskName(id, name);
             case "changedescription":
-                System.out.println("Please enter a new project description: ");
-                String projectDescription = scanner.nextLine();
-                getBootstrap().getTaskService().updateTaskDescription(id, projectDescription);
+                System.out.println("Please enter a new task description: ");
+                String description = scanner.nextLine();
+                getBootstrap().getTaskService().updateTaskDescription(id, description);
             case "changeenddate":
-                System.out.println("Please enter a new project end date: ");
-                String projectEndDate = scanner.nextLine();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                getBootstrap().getTaskService().updateTaskEndDate(id, LocalDate.parse(projectEndDate, formatter));
+                System.out.println("Please enter a new task end date: ");
+                Date endDate = DateUtil.getFormattedDateFromKb("new task end date", "dd-MM-yyyy");
+                getBootstrap().getTaskService().updateTaskEndDate(id, endDate);
         }
     }
 

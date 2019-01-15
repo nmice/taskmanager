@@ -1,7 +1,8 @@
 package ru.neginskiy.tm.command;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import ru.neginskiy.tm.util.DateUtil;
+
+import java.util.Date;
 import java.util.Scanner;
 
 public class ProjectCreateCommand extends AbstractCommand {
@@ -17,26 +18,12 @@ public class ProjectCreateCommand extends AbstractCommand {
         String description = scanner.nextLine();
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String dateBegin = scanner.nextLine();
-        try {
-            LocalDate.parse(dateBegin, formatter);
-        } catch (Exception e) {
-            System.out.println("Incorrect date format, please try again");
-            System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-            dateBegin = scanner.nextLine();
-        }
+        Date dateBegin = DateUtil.getFormattedDateFromKb("begin date", "dd-MM-yyyy");
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-        String dateEnd = scanner.nextLine();
-        try {
-            LocalDate.parse(dateEnd, formatter);
-        } catch (Exception e) {
-            System.out.println("Incorrect date format, please try again");
-            System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-            dateEnd = scanner.nextLine();
-        }
-        getBootstrap().getProjectService().createProject(name, description, LocalDate.parse(dateBegin, formatter), LocalDate.parse(dateEnd, formatter));
+        Date dateEnd = DateUtil.getFormattedDateFromKb("begin date", "dd-MM-yyyy");
+
+        getBootstrap().getProjectService().createProject(name, description, dateBegin, dateEnd);
     }
 
     @Override
