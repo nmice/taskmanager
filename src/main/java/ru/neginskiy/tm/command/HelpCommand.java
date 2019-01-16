@@ -5,7 +5,7 @@ public class HelpCommand extends AbstractCommand {
     @Override
     public void execute() {
         for (AbstractCommand command : getBootstrap().getStringToCommand().values()) {
-            System.out.printf("%-13s%s%n", command.command(), command.description());
+            System.out.printf("%-13s%s%s%n", command.command(), " - ", command.description());
         }
         System.out.println();
      }
@@ -17,6 +17,6 @@ public class HelpCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Print help";
+        return "Print help";
     }
 }

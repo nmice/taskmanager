@@ -14,11 +14,18 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
+    public void merge(Project project) {
+        projectRepository.merge(project);
+    }
+
     public void createProject(String name, String description, Date dateBegin, Date dateEnd) {
         projectRepository.createProject(name, description, dateBegin, dateEnd);
     }
 
     public Project getProjectById(String id) {
+        if (projectRepository.getProjectById(id) == null) {
+            return null;
+        }
         return projectRepository.getProjectById(id);
     }
 
@@ -34,17 +41,19 @@ public class ProjectService {
         projectRepository.updateProjectDescription(projectId, projectDescription);
     }
 
-    public void updateProjectEndDate(String projectId, Date dateEnd) {
-        projectRepository.updateProjectEndDate(projectId, dateEnd);
+    public void updateProjectEndDate(String projectId, Date projectEndDate) {
+        projectRepository.updateProjectEndDate(projectId, projectEndDate);
     }
 
-    public void deleteProject(String id) {
+    public Project deleteProject(String id) {
         if (id == null || id.isEmpty()) {
-            return;
+            return null;
         }
         if (projectRepository.getProjectById(id) == null) {
-            return;
+            return null;
         }
-        projectRepository.deleteProject(id);
-    }//todo just business logic
+        return projectRepository.deleteProject(id);
+    }
+
+     //todo just business logic
 }

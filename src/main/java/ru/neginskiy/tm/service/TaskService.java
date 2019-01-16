@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.service;
 
+import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.repository.TaskRepository;
 
@@ -14,8 +15,8 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void createTask(String taskName, String taskDescription, Date taskDateBegin, Date taskDateEnd, String projectId) {
-        taskRepository.createTask(taskName, taskDescription, taskDateBegin, taskDateEnd, projectId);
+    public void merge(Task task) {
+        taskRepository.merge(task);
     }
 
     public Task getTaskById(String id) {

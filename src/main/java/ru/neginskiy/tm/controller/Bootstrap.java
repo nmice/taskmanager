@@ -15,6 +15,7 @@ public class Bootstrap {
     private final Map<String, AbstractCommand> stringToCommand = new HashMap<>();
     private final TaskService taskService = new TaskService(new TaskRepository());
     private final ProjectService projectService = new ProjectService(new ProjectRepository());
+    private final Scanner scanner = new Scanner(System.in);
 
     public void init(Class[] classes) throws IllegalAccessException, InstantiationException {
         registry(classes);
@@ -29,7 +30,7 @@ public class Bootstrap {
         }
     }
 
-    public void registry(Class clazz) throws IllegalAccessException, InstantiationException {
+    private void registry(Class clazz) throws IllegalAccessException, InstantiationException {
         final Object o = clazz.newInstance();
         if (o instanceof AbstractCommand){
             final AbstractCommand abstractCommand = (AbstractCommand) clazz.newInstance();
@@ -40,14 +41,17 @@ public class Bootstrap {
 
     private void receiveCommand(){
         System.out.println("Enter command: ");
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine().toLowerCase().trim();
+        String text = readLine();
         try {
             AbstractCommand command = stringToCommand.get(text);
             command.execute();
         } catch (Exception e) {
             System.out.println("Incorrect command, try again...");
         }
+    }
+
+    public String readLine(){
+        return scanner.nextLine().trim();
     }
 
     public Map<String, AbstractCommand> getStringToCommand() {

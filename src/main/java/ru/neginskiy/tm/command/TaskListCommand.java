@@ -19,6 +19,6 @@ public class TaskListCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Get task list";
+        return "Get task list";
     }
 }

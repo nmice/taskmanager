@@ -19,6 +19,6 @@ public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Delete task";
+        return "Delete task";
     }
 }

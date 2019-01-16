@@ -14,6 +14,6 @@ public class ExitCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Exit program";
+        return "Exit program";
     }
 }

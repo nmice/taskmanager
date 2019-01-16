@@ -29,7 +29,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 getBootstrap().getProjectService().updateProjectDescription(id, projectDescription);
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
-                Date dateEnd = DateUtil.getFormattedDateFromKb("new project end date", "dd-MM-yyyy");
+                Date dateEnd = DateUtil.getDateBeginFromKbOrDefault();
                 getBootstrap().getProjectService().updateProjectEndDate(id, dateEnd);
         }
     }
@@ -41,6 +41,6 @@ public class ProjectEditCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Edit project";
+        return "Edit project";
     }
 }

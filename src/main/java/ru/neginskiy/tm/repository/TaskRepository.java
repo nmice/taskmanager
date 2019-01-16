@@ -1,21 +1,17 @@
 package ru.neginskiy.tm.repository;
 
+import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
+
 import java.util.*;
 
 public class TaskRepository {
 
     private Map<String, Task> taskBase = new HashMap<>();
 
-    public void createTask(String taskName, String description, Date dateBegin, Date dateEnd, String projectId) {
-        Task task = new Task();
-        task.setName(taskName);
-        task.setDescription(description);
-        task.setDateBegin(dateBegin);
-        task.setDateEnd(dateEnd);
-        task.setProjectId(projectId);
+    public void merge(Task task) {
         taskBase.put(task.getId(), task);
-    }
+    }//TODO for create and update
 
     public Task getTaskById(String id) {
         return taskBase.get(id);

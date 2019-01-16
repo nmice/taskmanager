@@ -29,7 +29,7 @@ public class TaskEditCommand extends AbstractCommand {
                 getBootstrap().getTaskService().updateTaskDescription(id, description);
             case "changeenddate":
                 System.out.println("Please enter a new task end date: ");
-                Date endDate = DateUtil.getFormattedDateFromKb("new task end date", "dd-MM-yyyy");
+                Date endDate = DateUtil.getDateBeginFromKbOrDefault();
                 getBootstrap().getTaskService().updateTaskEndDate(id, endDate);
         }
     }
@@ -41,6 +41,6 @@ public class TaskEditCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Edit task";
+        return "Edit task";
     }
 }

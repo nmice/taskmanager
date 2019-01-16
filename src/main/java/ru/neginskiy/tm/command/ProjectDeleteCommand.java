@@ -1,5 +1,7 @@
 package ru.neginskiy.tm.command;
 
+import ru.neginskiy.tm.entity.Project;
+
 import java.util.Scanner;
 
 public class ProjectDeleteCommand extends AbstractCommand {
@@ -9,7 +11,11 @@ public class ProjectDeleteCommand extends AbstractCommand {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter project ID to remove: ");
         String projectId = scanner.nextLine();
-        getBootstrap().getProjectService().deleteProject(projectId);
+        Project project = getBootstrap().getProjectService().deleteProject(projectId);
+        if(project == null){
+            System.out.println("Project not found");
+            return;
+        }
         getBootstrap().getTaskService().deleteTasksByProjectId(projectId);
     }
 
@@ -20,6 +26,6 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Delete project";
+        return "Delete project";
     }
 }

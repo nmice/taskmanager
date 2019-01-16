@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -53,10 +54,11 @@ public class Project {
 
     @Override
     public String toString() {
-        return "ID:" + id +
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return "ID: " + id +
                 ", " + name +
                 " (" + description +
-                "), " + dateBegin +
-                " - " + dateEnd;
+                "), " + formatter.format(dateBegin) +
+                " - " + formatter.format(dateEnd);
     }
 }

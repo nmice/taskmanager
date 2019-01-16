@@ -19,6 +19,6 @@ public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public String description() {
-        return " - Get project list";
+        return "Get project list";
     }
 }

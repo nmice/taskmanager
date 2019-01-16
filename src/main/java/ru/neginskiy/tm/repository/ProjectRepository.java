@@ -8,6 +8,10 @@ public class ProjectRepository {
 
     private Map<String, Project> projectBase = new HashMap<>();
 
+    public void merge(Project project){
+        projectBase.put(project.getId(), project);
+    }//TODO for create and update
+
     public void createProject(String name, String description, Date dateBegin, Date dateEnd) {
         Project project = new Project();
         project.setName(name);
@@ -40,7 +44,9 @@ public class ProjectRepository {
         projectBase.get(projectId).setDateEnd(projectEndDate);
     }
 
-    public void deleteProject(String id) {
+    public Project deleteProject(String id) {
+        Project project = projectBase.get(id);
         projectBase.remove(id);
+        return project;
     }//todo read wright
 }
