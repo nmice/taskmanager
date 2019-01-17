@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.command;
 
-import ru.neginskiy.tm.util.DateUtil;
+import ru.neginskiy.tm.util.StringToDateUtil;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -29,7 +29,7 @@ public class TaskEditCommand extends AbstractCommand {
                 getBootstrap().getTaskService().updateDescription(id, description);
             case "changeenddate":
                 System.out.println("Please enter a new task end date: ");
-                Date endDate = DateUtil.getDateBeginFromKbOrDefault();
+                Date endDate = StringToDateUtil.getDateFromStr();
                 getBootstrap().getTaskService().updateEndDate(id, endDate);
         }
     }

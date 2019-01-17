@@ -51,7 +51,12 @@ public class Bootstrap {
     }
 
     public String readLine(){
-        return scanner.nextLine().trim();
+        String str = scanner.nextLine().trim();
+        if (str.isEmpty()) {
+            System.out.println("Incorrect input");
+            return null;
+        }
+        return str;
     }
 
     public Map<String, AbstractCommand> getStringToCommand() {

@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.command;
 
-import ru.neginskiy.tm.util.DateUtil;
+import ru.neginskiy.tm.util.StringToDateUtil;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -29,7 +29,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 getBootstrap().getProjectService().updateDescription(id, projectDescription);
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
-                Date dateEnd = DateUtil.getDateBeginFromKbOrDefault();
+                Date dateEnd = StringToDateUtil.getDateFromStr();
                 getBootstrap().getProjectService().updateEndDate(id, dateEnd);
         }
     }

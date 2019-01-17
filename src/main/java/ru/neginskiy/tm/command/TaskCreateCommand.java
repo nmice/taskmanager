@@ -2,7 +2,7 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.util.DateUtil;
+import ru.neginskiy.tm.util.StringToDateUtil;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -22,16 +22,16 @@ public class TaskCreateCommand extends AbstractCommand {
 
         System.out.println("Please enter a name of the task :");
         String name = getBootstrap().readLine();
-        name = DateUtil.getCorrectStrOrDefault(name,"New Task");
+        name = StringToDateUtil.getCorrectStrOrDefault(name,"New Task");
 
         System.out.println("Please enter a description of the task :");
-        String description = DateUtil.getCorrectStrOrDefault(description(),"New Description");
+        String description = StringToDateUtil.getCorrectStrOrDefault(description(),"New Description");
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-        Date dateBegin = DateUtil.getDateBeginFromKbOrDefault();
+        Date dateBegin = StringToDateUtil.getDateFromStr();
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-        Date dateEnd = DateUtil.getDateBeginFromKbOrDefault();
+        Date dateEnd = StringToDateUtil.getDateFromStr();
 
         Task task = new Task();
         task.setProjectId(projectID);

@@ -1,9 +1,10 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
-import ru.neginskiy.tm.util.DateUtil;
 
 import java.util.Date;
+
+import static ru.neginskiy.tm.util.StringToDateUtil.getDateFromStr;
 
 public class ProjectCreateCommand extends AbstractCommand {
 
@@ -13,22 +14,23 @@ public class ProjectCreateCommand extends AbstractCommand {
 
         System.out.println("Please enter a name of the project :");
         String name = getBootstrap().readLine();
-        project.setName(DateUtil.getCorrectStrOrDefault(name, "New Project"));
+        project.setName(name);
 
         System.out.println("Please enter a description of the project :");
         String description = getBootstrap().readLine();
-        project.setDescription(DateUtil.getCorrectStrOrDefault(description,"New Description"));
+        project.setDescription(description);
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-        project.setDateBegin(DateUtil.getDateBeginFromKbOrDefault());
+        Date dateBegin = getDateFromStr(getBootstrap().readLine());
+        project.setDateBegin(dateBegin);
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-        Date dateEnd = DateUtil.getDateEndFromKbOrDefault();
+        Date dateEnd = getDateFromStr(getBootstrap().readLine());
         project.setDateEnd(dateEnd);
 
         if (dateEnd.compareTo(dateBegin) < 0) {
-            System.out.println("End date must be later than the begin date, the default task date is one day");
-            dateEnd = new Date(System.currentTimeMillis() + ONE_DAY);
+            System.out.println("End date must be later than the begin date, incorrect input");
+            project.setDateEnd(null);
         }
 
         getBootstrap().getProjectService().merge(project);
