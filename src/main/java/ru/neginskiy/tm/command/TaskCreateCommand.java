@@ -53,14 +53,13 @@ public class TaskCreateCommand extends AbstractCommand {
         Date dateEnd = getDateFromStr(getBootstrap().readLine());
         task.setDateEnd(dateEnd);
 
-        if (dateEnd.compareTo(dateBegin) < 0) {
+        if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
             System.out.println("End date must be later than the begin date, incorrect input");
             task.setDateEnd(null);
         }
 
         getBootstrap().getTaskService().merge(task);
         System.out.println("New task created");
-
     }
 
     @Override

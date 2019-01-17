@@ -28,7 +28,7 @@ public class ProjectCreateCommand extends AbstractCommand {
         Date dateEnd = getDateFromStr(getBootstrap().readLine());
         project.setDateEnd(dateEnd);
 
-        if (dateEnd.compareTo(dateBegin) < 0) {
+        if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
             System.out.println("End date must be later than the begin date, incorrect input");
             project.setDateEnd(null);
         }

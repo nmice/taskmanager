@@ -5,14 +5,13 @@ import java.util.Date;
 
 public class StringToDateUtil {
 
+    public static final String PATTERN = "dd-MM-yyyy";
+
     public static Date getDateFromStr(String str) {
-        Date date = null;
         try {
-            SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy");
-            date = parser.parse(str);
+            return new SimpleDateFormat(PATTERN).parse(str);
         } catch (Exception e) {
-            System.out.println("Incorrect input");
+            return null;
         }
-        return date;
     }
 }

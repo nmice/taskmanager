@@ -52,7 +52,8 @@ public class TaskEditCommand extends AbstractCommand {
             case "changeenddate":
                 System.out.println("Please enter a new task end date: ");
                 Date dateEnd = getDateFromStr(getBootstrap().readLine());
-                if (dateEnd.compareTo(task.getDateBegin()) < 0) {
+                Date dateBegin = task.getDateBegin();
+                if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
                     System.out.println("End date must be later than the begin date, incorrect input");
                     return;
                 }

@@ -53,7 +53,8 @@ public class ProjectEditCommand extends AbstractCommand {
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
                 Date dateEnd = getDateFromStr(getBootstrap().readLine());
-                if (dateEnd.compareTo(project.getDateBegin()) < 0) {
+                Date dateBegin = project.getDateBegin();
+                if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
                     System.out.println("End date must be later than the begin date, incorrect input");
                     return;
                 }
