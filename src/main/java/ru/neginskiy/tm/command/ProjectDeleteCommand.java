@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
+import ru.neginskiy.tm.entity.Task;
 
 import java.util.List;
 
@@ -30,7 +31,13 @@ public class ProjectDeleteCommand extends AbstractCommand {
         }
 
         getBootstrap().getProjectService().delete(id);
-        getBootstrap().getTaskService().deleteByProjectId(id);
+        List<Task> taskList = getBootstrap().getTaskService().getAll();
+        for (Task task : taskList) {
+            if (id.equals(task.getProjectId())) {
+                getBootstrap().getProjectService().delete(task.getId());
+            }
+        }
+        //getBootstrap().getTaskService().deleteByProjectId(id);
 
         System.out.println("Project and nested tasks deleted");
     }

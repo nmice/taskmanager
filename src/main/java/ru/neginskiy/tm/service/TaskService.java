@@ -7,42 +7,34 @@ import java.util.List;
 
 public class TaskService {
 
-    private final TaskRepository taskRepository;
+    private final TaskRepository entityRepository;
 
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public TaskService(TaskRepository entityRepository) {
+        this.entityRepository = entityRepository;
     }
 
     public void merge(Task task) {
         if (task == null) {
             return;
         }
-        taskRepository.merge(task);
+        entityRepository.merge(task);
     }
 
     public Task getById(String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return taskRepository.getById(id);
+        return entityRepository.getById(id);
     }
 
     public List<Task> getAll() {
-        return taskRepository.getAll();
+        return entityRepository.getAll();
     }
 
     public void delete(String id) {
         if (id == null || id.isEmpty()) {
             return;
         }
-        taskRepository.delete(id);
+        entityRepository.delete(id);
     }
-
-    public void deleteByProjectId(String id) {
-        if (id == null || id.isEmpty()) {
-            return;
-        }
-        taskRepository.deleteByProjectId(id);
-    }
-    //
 }

@@ -7,34 +7,34 @@ import java.util.List;
 
 public class ProjectService {
 
-    private final ProjectRepository projectRepository;
+    private final ProjectRepository entityRepository;
 
-    public ProjectService(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public ProjectService(ProjectRepository entityRepository) {
+        this.entityRepository = entityRepository;
     }
 
     public void merge(Project project) {
         if (project == null) {
             return;
         }
-        projectRepository.merge(project);
+        entityRepository.merge(project);
     }
 
     public Project getById(String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return projectRepository.getById(id);
+        return entityRepository.getById(id);
     }
 
     public List<Project> getAll() {
-        return projectRepository.getAll();
+        return entityRepository.getAll();
     }
 
-    public Project delete(String id) {
+    public void delete(String id) {
         if (id == null || id.isEmpty()) {
-            return null;
+            return;
         }
-        return projectRepository.delete(id);
+        entityRepository.delete(id);
     }
 }

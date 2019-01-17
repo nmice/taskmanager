@@ -2,19 +2,13 @@ package ru.neginskiy.tm.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
-public class Project {
+public class Project extends AbstractEntity{
 
-    private final String id = UUID.randomUUID().toString();
     private String name;
     private String description;
     private Date dateBegin;
     private Date dateEnd;
-
-    public String getId() {
-        return id;
-    }
 
     public String getName() {
         return name;

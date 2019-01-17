@@ -2,20 +2,14 @@ package ru.neginskiy.tm.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
-public class Task {
+public class Task extends AbstractEntity {
 
-    private final String id = UUID.randomUUID().toString();
     private String name;
     private String description;
     private Date dateBegin;
     private Date dateEnd;
     private String projectId;
-
-    public String getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -62,4 +56,5 @@ public class Task {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return name + " (" + description + "), " + formatter.format(dateBegin) + " - " + formatter.format(dateEnd);
     }
+
 }
