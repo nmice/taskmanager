@@ -9,7 +9,7 @@ public class TaskDeleteCommand extends AbstractCommand {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter task ID to remove: ");
         String id = scanner.nextLine();
-        getBootstrap().getTaskService().deleteTask(id);
+        getBootstrap().getTaskService().delete(id);
     }
 
     @Override

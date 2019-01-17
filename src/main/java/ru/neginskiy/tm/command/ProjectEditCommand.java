@@ -12,7 +12,7 @@ public class ProjectEditCommand extends AbstractCommand {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter project ID to update: ");
         String id = scanner.nextLine();
-        System.out.println(getBootstrap().getProjectService().getProjectById(id));
+        System.out.println(getBootstrap().getProjectService().getById(id));
         System.out.println("Enter the command: \r\n" +
                 "changename        - change name of Project \r\n" +
                 "changedescription - change description of Project \r\n" +
@@ -22,15 +22,15 @@ public class ProjectEditCommand extends AbstractCommand {
             case "changename":
                 System.out.println("Please enter a new project name: ");
                 String projectName = scanner.nextLine();
-                getBootstrap().getProjectService().updateProjectName(id, projectName);
+                getBootstrap().getProjectService().updateName(id, projectName);
             case "changedescription":
                 System.out.println("Please enter a new project description: ");
                 String projectDescription = scanner.nextLine();
-                getBootstrap().getProjectService().updateProjectDescription(id, projectDescription);
+                getBootstrap().getProjectService().updateDescription(id, projectDescription);
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
                 Date dateEnd = DateUtil.getDateBeginFromKbOrDefault();
-                getBootstrap().getProjectService().updateProjectEndDate(id, dateEnd);
+                getBootstrap().getProjectService().updateEndDate(id, dateEnd);
         }
     }
 

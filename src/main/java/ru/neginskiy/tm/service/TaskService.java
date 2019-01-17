@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.service;
 
-import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.repository.TaskRepository;
 
@@ -19,32 +18,32 @@ public class TaskService {
         taskRepository.merge(task);
     }
 
-    public Task getTaskById(String id) {
-        return taskRepository.getTaskById(id);
+    public Task getById(String id) {
+        return taskRepository.getById(id);
     }
 
-    public List<Task> getAllTasks() {
-        return taskRepository.getAllTasks();
+    public List<Task> getAll() {
+        return taskRepository.getAll();
     }
 
-    public void updateTaskName(String taskId, String taskName) {
-        taskRepository.updateTaskName(taskId, taskName);
+    public void updateName(String id, String name) {
+        taskRepository.updateName(id, name);
     }
 
-    public void updateTaskDescription(String taskId, String taskDescription) {
-        taskRepository.updateTaskDescription(taskId, taskDescription);
+    public void updateDescription(String id, String Description) {
+        taskRepository.updateDescription(id, Description);
     }
 
-    public void updateTaskEndDate(String taskId, Date dateEnd) {
-        taskRepository.updateTaskEndDate(taskId, dateEnd);
+    public void updateEndDate(String id, Date dateEnd) {
+        taskRepository.updateEndDate(id, dateEnd);
     }
 
-    public void deleteTask(String id) {
-        taskRepository.deleteTask(id);
+    public void delete(String id) {
+        taskRepository.delete(id);
     }
 
-    public void deleteTasksByProjectId(String projectId) {
-        taskRepository.deleteTasksByProjectId(projectId);
+    public void deleteByProjectId(String id) {
+        taskRepository.deleteByProjectId(id);
     }
     //TODO !null
 }

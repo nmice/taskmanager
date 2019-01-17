@@ -9,8 +9,8 @@ public class Project {
     private String id = UUID.randomUUID().toString();
     private String name;
     private String description;
-    private Date dateBegin;//todo change to Date
-    private Date dateEnd;//todo change to Date
+    private Date dateBegin;
+    private Date dateEnd;
 
     public String getId() {
         return id;

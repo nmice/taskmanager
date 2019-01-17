@@ -14,7 +14,7 @@ public class TaskCreateCommand extends AbstractCommand {
         System.out.println("Please enter project ID for the task :");
         Scanner scanner = new Scanner(System.in);
         String projectID = scanner.nextLine();
-        Project project = getBootstrap().getProjectService().getProjectById(projectID);
+        Project project = getBootstrap().getProjectService().getById(projectID);
         if (project == null) {
             System.out.println("Incorrect input, project not found");
             return;
@@ -40,7 +40,7 @@ public class TaskCreateCommand extends AbstractCommand {
         task.setDateBegin(dateBegin);
         task.setDateEnd(dateEnd);
 
-        getBootstrap().getTaskService().merge(task);//readline
+        getBootstrap().getTaskService().merge(task);//todo readline
     }
 
     @Override

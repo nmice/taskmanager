@@ -21,30 +21,30 @@ public class ProjectRepository {
         projectBase.put(project.getId(), project);
     }
 
-    public Project getProjectById(String id) {
+    public Project getById(String id) {
         return projectBase.get(id);
     }
 
-    public List<Project> getAllProjects() {
+    public List<Project> getAll() {
         Collection<Project> c = projectBase.values();
         List<Project> allProjectsList = new ArrayList<>();
         allProjectsList.addAll(c);
         return allProjectsList;
     }
 
-    public void updateProjectName(String projectId, String projectName) {
+    public void updateName(String projectId, String projectName) {
         projectBase.get(projectId).setName(projectName);
     }
 
-    public void updateProjectDescription(String projectId, String projectDescription) {
+    public void updateDescription(String projectId, String projectDescription) {
         projectBase.get(projectId).setName(projectDescription);
     }
 
-    public void updateProjectEndDate(String projectId, Date projectEndDate) {
+    public void updateEndDate(String projectId, Date projectEndDate) {
         projectBase.get(projectId).setDateEnd(projectEndDate);
     }
 
-    public Project deleteProject(String id) {
+    public Project delete(String id) {
         Project project = projectBase.get(id);
         projectBase.remove(id);
         return project;

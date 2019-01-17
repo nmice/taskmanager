@@ -6,10 +6,10 @@ public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        for (Project project : getBootstrap().getProjectService().getAllProjects()) {
+        for (Project project : getBootstrap().getProjectService().getAll()) {
             System.out.println(project);
         }
-//        getBootstrap().getProjectService().getAllProjects().forEach(System.out::println);
+//        getBootstrap().getProjectService().getAll().forEach(System.out::println);
     }
 
     @Override

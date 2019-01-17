@@ -6,10 +6,10 @@ public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        for (Task task: getBootstrap().getTaskService().getAllTasks()){
+        for (Task task: getBootstrap().getTaskService().getAll()){
             System.out.println(task);
         }
-//        getBootstrap().getTaskService().getAllTasks().forEach(System.out::println);
+//        getBootstrap().getTaskService().getAll().forEach(System.out::println);
     }
 
     @Override

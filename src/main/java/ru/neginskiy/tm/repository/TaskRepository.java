@@ -1,53 +1,48 @@
 package ru.neginskiy.tm.repository;
 
-import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 
 import java.util.*;
 
 public class TaskRepository {
 
-    private Map<String, Task> taskBase = new HashMap<>();
+    private Map<String, Task> entityBase = new HashMap<>();
 
     public void merge(Task task) {
-        taskBase.put(task.getId(), task);
+        entityBase.put(task.getId(), task);
     }//TODO for create and update
 
-    public Task getTaskById(String id) {
-        return taskBase.get(id);
+    public Task getById(String id) {
+        return entityBase.get(id);
     }
 
-    public List<Task> getAllTasks() {
-        Collection<Task> c = taskBase.values();
+    public List<Task> getAll() {
+        Collection<Task> c = entityBase.values();
         List<Task> allTasksList = new ArrayList<>();
         allTasksList.addAll(c);
         return allTasksList;
     }
 
-    public void updateTaskName(String id, String name) {
-        taskBase.get(id).setName(name);
+    public void updateName(String id, String name) {
+        entityBase.get(id).setName(name);
     }
 
-    public void updateTaskDescription(String id, String description) {
-        taskBase.get(id).setDescription(description);
+    public void updateDescription(String id, String description) {
+        entityBase.get(id).setDescription(description);
     }
 
-    public void updateTaskEndDate(String id, Date dateEnd) {
-        taskBase.get(id).setDateEnd(dateEnd);
+    public void updateEndDate(String id, Date dateEnd) {
+        entityBase.get(id).setDateEnd(dateEnd);
     }
 
-/*    public void updateTask(Task task) {
-        addTask(task);
-    }*/
-
-    public void deleteTask(String id) {
-        taskBase.remove(id);
+    public void delete(String id) {
+        entityBase.remove(id);
     }
 
-    public void deleteTasksByProjectId(String projectId) {
-        for (Task task : taskBase.values()) {
+    public void deleteByProjectId(String projectId) {
+        for (Task task : entityBase.values()) {
             if (projectId.equals(task.getProjectId())) {
-                deleteTask(task.getId());
+                delete(task.getId());
             }
         }
     }

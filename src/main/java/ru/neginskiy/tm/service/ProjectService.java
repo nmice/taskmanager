@@ -18,41 +18,37 @@ public class ProjectService {
         projectRepository.merge(project);
     }
 
-    public void createProject(String name, String description, Date dateBegin, Date dateEnd) {
-        projectRepository.createProject(name, description, dateBegin, dateEnd);
-    }
-
-    public Project getProjectById(String id) {
-        if (projectRepository.getProjectById(id) == null) {
+    public Project getById(String id) {
+        if (projectRepository.getById(id) == null) {
             return null;
         }
-        return projectRepository.getProjectById(id);
+        return projectRepository.getById(id);
     }
 
-    public List<Project> getAllProjects() {
-        return projectRepository.getAllProjects();
+    public List<Project> getAll() {
+        return projectRepository.getAll();
     }
 
-    public void updateProjectName(String projectId, String projectName) {
-        projectRepository.updateProjectName(projectId, projectName);
+    public void updateName(String id, String name) {
+        projectRepository.updateName(id, name);
     }
 
-    public void updateProjectDescription(String projectId, String projectDescription) {
-        projectRepository.updateProjectDescription(projectId, projectDescription);
+    public void updateDescription(String id, String description) {
+        projectRepository.updateDescription(id, description);
     }
 
-    public void updateProjectEndDate(String projectId, Date projectEndDate) {
-        projectRepository.updateProjectEndDate(projectId, projectEndDate);
+    public void updateEndDate(String id, Date endDate) {
+        projectRepository.updateEndDate(id, endDate);
     }
 
-    public Project deleteProject(String id) {
+    public Project delete(String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        if (projectRepository.getProjectById(id) == null) {
+        if (projectRepository.getById(id) == null) {
             return null;
         }
-        return projectRepository.deleteProject(id);
+        return projectRepository.delete(id);
     }
 
      //todo just business logic

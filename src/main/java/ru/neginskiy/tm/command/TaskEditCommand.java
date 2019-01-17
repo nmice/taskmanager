@@ -12,7 +12,7 @@ public class TaskEditCommand extends AbstractCommand {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter task ID to update: ");
         String id = scanner.nextLine();
-        System.out.println(getBootstrap().getTaskService().getTaskById(id));
+        System.out.println(getBootstrap().getTaskService().getById(id));
         System.out.println("Enter the command: \r\n" +
                 "changename        - change name of Task \r\n" +
                 "changedescription - change description of Task \r\n" +
@@ -22,15 +22,15 @@ public class TaskEditCommand extends AbstractCommand {
             case "changename":
                 System.out.println("Please enter a new task name: ");
                 String name = scanner.nextLine();
-                getBootstrap().getTaskService().updateTaskName(id, name);
+                getBootstrap().getTaskService().updateName(id, name);
             case "changedescription":
                 System.out.println("Please enter a new task description: ");
                 String description = scanner.nextLine();
-                getBootstrap().getTaskService().updateTaskDescription(id, description);
+                getBootstrap().getTaskService().updateDescription(id, description);
             case "changeenddate":
                 System.out.println("Please enter a new task end date: ");
                 Date endDate = DateUtil.getDateBeginFromKbOrDefault();
-                getBootstrap().getTaskService().updateTaskEndDate(id, endDate);
+                getBootstrap().getTaskService().updateEndDate(id, endDate);
         }
     }
 
