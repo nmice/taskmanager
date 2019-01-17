@@ -1,10 +1,11 @@
 package ru.neginskiy.tm.entity;
 
-import java.text.SimpleDateFormat;
+import ru.neginskiy.tm.api.IEntity;
+
 import java.util.Date;
 import java.util.UUID;
 
-public class Project {
+public class AbstractEntity implements IEntity {
 
     private final String id = UUID.randomUUID().toString();
     private String name;
@@ -46,11 +47,5 @@ public class Project {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
-    }
-
-    @Override
-    public String toString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return name + " (" + description + "), " + formatter.format(dateBegin) + " - " + formatter.format(dateEnd);
     }
 }

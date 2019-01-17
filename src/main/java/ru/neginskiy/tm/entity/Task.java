@@ -11,7 +11,7 @@ public class Task {
     private String description;
     private Date dateBegin;
     private Date dateEnd;
-    private String projectId = UUID.randomUUID().toString();
+    private String projectId;
 
     public String getId() {
         return id;
@@ -60,11 +60,6 @@ public class Task {
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return "ID: " + id +
-                ", " + name +
-                " (" + description +
-                "), " + formatter.format(dateBegin) +
-                " - " + formatter.format(dateEnd) +
-                ", ProjectID: " + projectId;
+        return name + " (" + description + "), " + formatter.format(dateBegin) + " - " + formatter.format(dateEnd);
     }
 }
