@@ -5,7 +5,7 @@ import ru.neginskiy.tm.repository.TaskRepository;
 
 import java.util.List;
 
-public class TaskService {
+public class TaskService extends AbstractService<Task>{
 
     private final TaskRepository entityRepository;
 
@@ -31,10 +31,10 @@ public class TaskService {
         return entityRepository.getAll();
     }
 
-    public void delete(String id) {
+    public Task delete(String id) {
         if (id == null || id.isEmpty()) {
-            return;
+            return null;
         }
-        entityRepository.delete(id);
+        return entityRepository.delete(id);
     }
 }

@@ -45,11 +45,13 @@ public class ProjectEditCommand extends AbstractCommand {
                 String name = getBootstrap().readLine();
                 project.setName(name);
                 System.out.println("Name changed");
+                break;
             case "changedescription":
                 System.out.println("Please enter a new project description: ");
                 String description = getBootstrap().readLine();
                 project.setDescription(description);
                 System.out.println("Description changed");
+                break;
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
                 Date dateEnd = getDateFromStr(getBootstrap().readLine());
@@ -60,6 +62,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 }
                 project.setDateEnd(dateEnd);
                 System.out.println("End date changed");
+                break;
         }
 
         getBootstrap().getProjectService().merge(project);

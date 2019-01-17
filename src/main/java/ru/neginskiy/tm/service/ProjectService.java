@@ -5,7 +5,7 @@ import ru.neginskiy.tm.repository.ProjectRepository;
 
 import java.util.List;
 
-public class ProjectService {
+public class ProjectService extends AbstractService<Project> {
 
     private final ProjectRepository entityRepository;
 
@@ -31,10 +31,10 @@ public class ProjectService {
         return entityRepository.getAll();
     }
 
-    public void delete(String id) {
+    public Project delete(String id) {
         if (id == null || id.isEmpty()) {
-            return;
+            return null;
         }
-        entityRepository.delete(id);
+        return entityRepository.delete(id);
     }
 }

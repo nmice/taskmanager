@@ -46,7 +46,6 @@ public class Bootstrap {
             AbstractCommand command = stringToCommand.get(text);
             command.execute();
         } catch (Exception e) {
-            System.out.println("Incorrect command, try again...");
         }
     }
 

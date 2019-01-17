@@ -58,6 +58,11 @@ public class TaskCreateCommand extends AbstractCommand {
             task.setDateEnd(null);
         }
 
+        if (name == null && description == null && dateBegin == null && dateEnd == null){
+            System.out.println("New project not created!");
+            return;
+        }
+
         getBootstrap().getTaskService().merge(task);
         System.out.println("New task created");
     }
