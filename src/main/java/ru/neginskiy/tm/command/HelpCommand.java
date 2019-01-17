@@ -8,7 +8,7 @@ public class HelpCommand extends AbstractCommand {
             System.out.printf("%-13s%s%s%n", command.command(), " - ", command.description());
         }
         System.out.println();
-     }
+    }
 
     @Override
     public String command() {

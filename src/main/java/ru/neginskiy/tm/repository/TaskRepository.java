@@ -10,7 +10,7 @@ public class TaskRepository {
 
     public void merge(Task task) {
         entityBase.put(task.getId(), task);
-    }//TODO for create and update
+    }
 
     public Task getById(String id) {
         return entityBase.get(id);
@@ -23,20 +23,10 @@ public class TaskRepository {
         return allTasksList;
     }
 
-    public void updateName(String id, String name) {
-        entityBase.get(id).setName(name);
-    }
-
-    public void updateDescription(String id, String description) {
-        entityBase.get(id).setDescription(description);
-    }
-
-    public void updateEndDate(String id, Date dateEnd) {
-        entityBase.get(id).setDateEnd(dateEnd);
-    }
-
-    public void delete(String id) {
+    public Task delete(String id) {
+        Task task = entityBase.get(id);
         entityBase.remove(id);
+        return task;
     }
 
     public void deleteByProjectId(String projectId) {

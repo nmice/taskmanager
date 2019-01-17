@@ -6,47 +6,26 @@ import java.util.*;
 
 public class ProjectRepository {
 
-    private Map<String, Project> projectBase = new HashMap<>();
+    private Map<String, Project> entityBase = new HashMap<>();
 
     public void merge(Project project){
-        projectBase.put(project.getId(), project);
-    }//TODO for create and update
-
-    public void createProject(String name, String description, Date dateBegin, Date dateEnd) {
-        Project project = new Project();
-        project.setName(name);
-        project.setDescription(description);
-        project.setDateBegin(dateBegin);
-        project.setDateEnd(dateEnd);
-        projectBase.put(project.getId(), project);
+        entityBase.put(project.getId(), project);
     }
 
     public Project getById(String id) {
-        return projectBase.get(id);
+        return entityBase.get(id);
     }
 
     public List<Project> getAll() {
-        Collection<Project> c = projectBase.values();
+        Collection<Project> c = entityBase.values();
         List<Project> allProjectsList = new ArrayList<>();
         allProjectsList.addAll(c);
         return allProjectsList;
     }
 
-    public void updateName(String projectId, String projectName) {
-        projectBase.get(projectId).setName(projectName);
-    }
-
-    public void updateDescription(String projectId, String projectDescription) {
-        projectBase.get(projectId).setName(projectDescription);
-    }
-
-    public void updateEndDate(String projectId, Date projectEndDate) {
-        projectBase.get(projectId).setDateEnd(projectEndDate);
-    }
-
     public Project delete(String id) {
-        Project project = projectBase.get(id);
-        projectBase.remove(id);
+        Project project = entityBase.get(id);
+        entityBase.remove(id);
         return project;
-    }//todo read wright
+    }
 }

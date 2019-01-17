@@ -2,21 +2,37 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
 
-import java.util.Scanner;
+import java.util.List;
 
 public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter project ID to remove: ");
-        String projectId = scanner.nextLine();
-        Project project = getBootstrap().getProjectService().delete(projectId);
-        if(project == null){
-            System.out.println("Project not found");
+        System.out.println("Please select project number to remove :");
+        List<Project> projectList = getBootstrap().getProjectService().getAll();
+        int indexOfProject = 0;
+        for (Project project : projectList) {
+            System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
+        }
+        int projectNumber;
+        String id;
+        try {
+            projectNumber = Integer.parseInt(getBootstrap().readLine());
+            Project project = projectList.get(projectNumber);
+            if (project == null) {
+                System.out.println("Incorrect input, project not found");
+                return;
+            }
+            id = project.getId();
+        } catch (Exception e) {
+            System.out.println("Incorrect input, project not found");
             return;
         }
-        getBootstrap().getTaskService().deleteByProjectId(projectId);
+
+        getBootstrap().getProjectService().delete(id);
+        getBootstrap().getTaskService().deleteByProjectId(id);
+
+        System.out.println("Project and nested tasks deleted");
     }
 
     @Override

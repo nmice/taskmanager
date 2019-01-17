@@ -32,14 +32,14 @@ public class Bootstrap {
 
     private void registry(Class clazz) throws IllegalAccessException, InstantiationException {
         final Object o = clazz.newInstance();
-        if (o instanceof AbstractCommand){
+        if (o instanceof AbstractCommand) {
             final AbstractCommand abstractCommand = (AbstractCommand) clazz.newInstance();
             abstractCommand.setBootstrap(this);
             stringToCommand.put(abstractCommand.command(), abstractCommand);
         }
     }
 
-    private void receiveCommand(){
+    private void receiveCommand() {
         System.out.println("Enter command: ");
         String text = readLine();
         try {
@@ -50,7 +50,7 @@ public class Bootstrap {
         }
     }
 
-    public String readLine(){
+    public String readLine() {
         String str = scanner.nextLine().trim();
         if (str.isEmpty()) {
             System.out.println("Incorrect input");

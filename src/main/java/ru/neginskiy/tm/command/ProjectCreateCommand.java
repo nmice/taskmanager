@@ -34,6 +34,7 @@ public class ProjectCreateCommand extends AbstractCommand {
         }
 
         getBootstrap().getProjectService().merge(project);
+        System.out.println("New project created");
     }
 
     @Override

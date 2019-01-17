@@ -3,7 +3,6 @@ package ru.neginskiy.tm.service;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import java.util.Date;
 import java.util.List;
 
 public class TaskService {
@@ -15,10 +14,16 @@ public class TaskService {
     }
 
     public void merge(Task task) {
+        if (task == null) {
+            return;
+        }
         taskRepository.merge(task);
     }
 
     public Task getById(String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
         return taskRepository.getById(id);
     }
 
@@ -26,24 +31,18 @@ public class TaskService {
         return taskRepository.getAll();
     }
 
-    public void updateName(String id, String name) {
-        taskRepository.updateName(id, name);
-    }
-
-    public void updateDescription(String id, String Description) {
-        taskRepository.updateDescription(id, Description);
-    }
-
-    public void updateEndDate(String id, Date dateEnd) {
-        taskRepository.updateEndDate(id, dateEnd);
-    }
-
     public void delete(String id) {
+        if (id == null || id.isEmpty()) {
+            return;
+        }
         taskRepository.delete(id);
     }
 
     public void deleteByProjectId(String id) {
+        if (id == null || id.isEmpty()) {
+            return;
+        }
         taskRepository.deleteByProjectId(id);
     }
-    //TODO !null
+    //
 }
