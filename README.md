@@ -10,37 +10,67 @@
 
 <h3>Структура проекта</h3>
 
+<h4>[api]</h4>
+
+<li> ICommand - интерфейс команд</li>
+
+<li> IProjectService - интерфейс реализации команд над проектами</li>
+
+<li> IRepository - интерфейс репозиториев</li>
+
+<li> ITaskService - интерфейс реализации команд над задачами</li>
+
 <h4>[command]</h4>
 
-<li> AbstractCommand - абстрактный класс комманды</li>
+<li> AbstractCommand - абстрактный класс команды</li>
 
-<li> CreateProjectCommand - класс создания нового проекта</li>
+<li> ExitCommand - класс команды выхода</li>
 
-<li> CreateTaskCommand - класс создания новой задачи</li>
+<li> HelpCommand - класс команды помощь</li>
 
-<li> DeleteProjectCommand - класс удаления проекта</li>
+<li> ProjectCreateCommand - класс создания нового проекта</li>
 
-<li> DeleteTaskCommand - класс удаления задачи</li>
+<li> ProjectDeleteCommand - класс удаления проекта</li>
 
-<li> EditProjectCommand - класс корректировки проекта</li>
-
-<li> EditTaskCommand - класс корректировки задачи</li>
+<li> ProjectEditCommand - класс корректировки проекта</li>
 
 <li> ProjectListCommand - класс выдачи информации по всем проектам</li>
 
+<li> TaskCreateCommand - класс создания новой задачи</li>
+
+<li> TaskDeleteCommand - класс удаления задачи</li>
+
+<li> TaskEditCommand - класс корректировки задачи</li>
+
 <li> TaskListCommand - класс выдачи информации по всем задачам</li>
+
+<h4>[controller]</h4>
+
+<li> Bootstrap - класс начальной загрузки программы</li>
 
 <h4>[entity]</h4>
 
-<li> Task - задача</li>
+<li> AbstractEntity - абстрактный класс сущности</li>
 
-<li> Project - проект</li>
+<li> Task - класс задача</li>
+
+<li> Project - класс проект</li>
 
 <h4>[repository]</h4>
 
-<li> TaskRepository - класс для создания и управления задачами</li>
+<li> AbstractRepository - абстрактный класс репозитория</li>
 
-<li> ProjectRepository - класс для создания и управления проектами</li>
+<li> ProjectRepository - класс для хранения и доступа к проектам</li>
+
+<li> TaskRepository - класс для хранения и доступа к задачам</li>
+
+<h4>[repository]</h4>
+
+<li> AbstractService - абстрактный класс сервиса</li>
+
+<li> ProjectService - класс для выполнения операций над проектами</li>
+
+<li> TaskService - класс для выполнения операций над задачами</li>
 
 <h4>Application - основной класс</h4>
 
