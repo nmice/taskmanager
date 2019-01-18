@@ -19,6 +19,7 @@ public class Bootstrap {
 
     public void init(Class[] classes) throws IllegalAccessException, InstantiationException {
         registry(classes);
+        //todo regInNet()
         while (true) {
             receiveCommand();
         }
@@ -75,4 +76,6 @@ public class Bootstrap {
     public TaskService getTaskService() {
         return taskService;
     }
+
+    //Todo publish(url, new ProjectEndpoint()) in new method registryInNet()
 }
