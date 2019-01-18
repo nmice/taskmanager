@@ -33,10 +33,12 @@ public class ProjectCreateCommand extends AbstractCommand {
             project.setDateEnd(null);
         }
 
+/*
         if (name == null && description == null && dateBegin == null && dateEnd == null){
             System.out.println("New project not created!");
             return;
         }
+*/
 
             getBootstrap().getProjectService().merge(project);
         System.out.println("New project created");
