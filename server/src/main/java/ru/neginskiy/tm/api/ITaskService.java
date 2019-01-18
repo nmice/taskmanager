@@ -13,5 +13,5 @@ public interface ITaskService {
     List<Task> getAll();
 
     Task delete(String id);
-    
+
 }
