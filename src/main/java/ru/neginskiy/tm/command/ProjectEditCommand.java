@@ -11,24 +11,22 @@ public class ProjectEditCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        Project project;
-
         System.out.println("Please select project number to update :");
         List<Project> projectList = getBootstrap().getProjectService().getAll();
         int indexOfProject = 0;
-        for (Project projectInList : projectList) {
-            System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", projectInList.getName());
+        for (Project project : projectList) {
+            System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
         }
 
-        int projectNumber;
+        Project project;
         try {
-            projectNumber = Integer.parseInt(getBootstrap().readLine());
+            int projectNumber = Integer.parseInt(getBootstrap().readLine());
             project = projectList.get(projectNumber);
-            System.out.println(project);
             if (project == null) {
                 System.out.println("Incorrect input, project not found");
                 return;
             }
+            System.out.println(project);
         } catch (Exception e) {
             System.out.println("Incorrect input, project not found");
             return;
@@ -37,6 +35,7 @@ public class ProjectEditCommand extends AbstractCommand {
         System.out.println("Enter the command for update: \r\n" +
                 "changename        - Change name of project \r\n" +
                 "changedescription - Change description of project \r\n" +
+                "changebegindate   - Change a begin date of project \r\n" +
                 "changeenddate     - Change a end date of project");
         String updateCommandString = getBootstrap().readLine();
         switch (updateCommandString) {
@@ -52,11 +51,28 @@ public class ProjectEditCommand extends AbstractCommand {
                 project.setDescription(description);
                 System.out.println("Description changed");
                 break;
+            case "changebegindate":
+                System.out.println("Please enter a new project begin date: ");
+                Date dateBegin = getDateFromStr(getBootstrap().readLine());
+                if (dateBegin == null) {
+                    return;
+                }
+                Date dateEnd = project.getDateEnd();
+                if (dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
+                    System.out.println("End date must be later than the begin date, incorrect input");
+                    return;
+                }
+                project.setDateBegin(dateBegin);
+                System.out.println("Begin date changed");
+                break;
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
-                Date dateEnd = getDateFromStr(getBootstrap().readLine());
-                Date dateBegin = project.getDateBegin();
-                if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
+                dateEnd = getDateFromStr(getBootstrap().readLine());
+                if (dateEnd == null) {
+                    return;
+                }
+                dateBegin = project.getDateBegin();
+                if (dateBegin != null && dateEnd.compareTo(dateBegin) < 0) {
                     System.out.println("End date must be later than the begin date, incorrect input");
                     return;
                 }

@@ -2,11 +2,18 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
 
+import java.util.List;
+
 public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        for (Project project : getBootstrap().getProjectService().getAll()) {
+        List<Project> projectList = getBootstrap().getProjectService().getAll();
+        if (projectList.size() == 0) {
+            System.out.println("Projects not found");
+            return;
+        }
+        for (Project project : projectList) {
             System.out.println(project);
         }
     }

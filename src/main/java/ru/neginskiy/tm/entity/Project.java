@@ -3,7 +3,9 @@ package ru.neginskiy.tm.entity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Project extends AbstractEntity{
+public class Project extends AbstractEntity {
+
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     private String name;
     private String description;
@@ -44,7 +46,6 @@ public class Project extends AbstractEntity{
 
     @Override
     public String toString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return name + " (" + description + "), " + formatter.format(dateBegin) + " - " + formatter.format(dateEnd);
+        return String.format("%s (%s), %s - %s", name, description, dateBegin == null ? null : formatter.format(dateBegin), dateEnd == null ? null : formatter.format(dateEnd));
     }
 }

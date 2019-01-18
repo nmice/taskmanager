@@ -22,25 +22,29 @@ public class ProjectCreateCommand extends AbstractCommand {
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
         Date dateBegin = getDateFromStr(getBootstrap().readLine());
+        if (dateBegin == null){
+            System.out.println("Invalid date or format");
+        }
         project.setDateBegin(dateBegin);
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
         Date dateEnd = getDateFromStr(getBootstrap().readLine());
+        if (dateEnd == null){
+            System.out.println("Invalid date or format");
+        }
         project.setDateEnd(dateEnd);
 
         if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
-            System.out.println("End date must be later than the begin date, incorrect input");
+            System.out.println("Incorrect input: End date must be later than the begin date!");
             project.setDateEnd(null);
         }
 
-/*
-        if (name == null && description == null && dateBegin == null && dateEnd == null){
-            System.out.println("New project not created!");
+        if (name == null && description == null && dateBegin == null && dateEnd == null) {
+            System.out.println("All fields are empty, new project is not created!");
             return;
         }
-*/
 
-            getBootstrap().getProjectService().merge(project);
+        getBootstrap().getProjectService().merge(project);
         System.out.println("New project created");
     }
 

@@ -12,29 +12,33 @@ public class TaskCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        Task task = new Task();
+        List<Project> projectList = getBootstrap().getProjectService().getAll();
+        if (projectList.size() == 0) {
+            System.out.println("Projects not found, please create a project first for the task");
+            return;
+        }
 
         System.out.println("Please select project number for the task :");
-        List<Project> projectList = getBootstrap().getProjectService().getAll();
         int indexOfProject = 0;
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
         }
 
-        int projectNumber;
-        String projectId;
+        Project project;
         try {
-            projectNumber = Integer.parseInt(getBootstrap().readLine());
-            Project project = projectList.get(projectNumber);
+            int projectNumber = Integer.parseInt(getBootstrap().readLine());
+            project = projectList.get(projectNumber);
             if (project == null) {
                 System.out.println("Incorrect input, project not found");
                 return;
             }
-            projectId = project.getId();
         } catch (Exception e) {
             System.out.println("Incorrect input, project not found");
             return;
         }
+        String projectId = project.getId();
+
+        Task task = new Task();
         task.setProjectId(projectId);
 
         System.out.println("Please enter a name of the task :");
@@ -47,19 +51,25 @@ public class TaskCreateCommand extends AbstractCommand {
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
         Date dateBegin = getDateFromStr(getBootstrap().readLine());
+        if (dateBegin == null){
+            System.out.println("Invalid date or format");
+        }
         task.setDateBegin(dateBegin);
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
         Date dateEnd = getDateFromStr(getBootstrap().readLine());
+        if (dateEnd == null){
+            System.out.println("Invalid date or format");
+        }
         task.setDateEnd(dateEnd);
 
         if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
-            System.out.println("End date must be later than the begin date, incorrect input");
+            System.out.println("Incorrect input: End date must be later than the begin date!");
             task.setDateEnd(null);
         }
 
         if (name == null && description == null && dateBegin == null && dateEnd == null){
-            System.out.println("New project not created!");
+            System.out.println("All fields are empty, new task is not created!");
             return;
         }
 
@@ -77,3 +87,7 @@ public class TaskCreateCommand extends AbstractCommand {
         return "Create a new task";
     }
 }
+
+
+
+

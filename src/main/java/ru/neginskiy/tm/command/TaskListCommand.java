@@ -2,11 +2,18 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Task;
 
+import java.util.List;
+
 public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        for (Task task : getBootstrap().getTaskService().getAll()) {
+        List<Task> taskList = getBootstrap().getTaskService().getAll();
+        if (taskList.size() == 0) {
+            System.out.println("Tasks not found");
+            return;
+        }
+        for (Task task : taskList) {
             System.out.println(task);
         }
     }

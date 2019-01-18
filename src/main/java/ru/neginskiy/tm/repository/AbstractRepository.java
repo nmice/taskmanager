@@ -9,8 +9,8 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
 
     private Map<String, T> entityBase = new HashMap<>();
 
-    public void merge(T t) {
-        entityBase.put(t.getId(), t);
+    public void merge(T entity) {
+        entityBase.put(entity.getId(), entity);
     }
 
     public T getById(String id) {
@@ -23,8 +23,8 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
     }
 
     public T delete(String id) {
-        T project = entityBase.get(id);
+        T entity = entityBase.get(id);
         entityBase.remove(id);
-        return project;
+        return entity;
     }
 }

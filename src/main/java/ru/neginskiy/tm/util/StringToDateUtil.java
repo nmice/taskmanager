@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class StringToDateUtil {
 
-    public static final String PATTERN = "dd-MM-yyyy";
+    private static final String PATTERN = "dd-MM-yyyy";
 
     public static Date getDateFromStr(String str) {
         try {

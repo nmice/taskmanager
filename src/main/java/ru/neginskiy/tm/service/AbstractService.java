@@ -1,12 +1,11 @@
 package ru.neginskiy.tm.service;
 
-import ru.neginskiy.tm.api.IRepository;
 import ru.neginskiy.tm.entity.AbstractEntity;
 import ru.neginskiy.tm.repository.AbstractRepository;
 
 import java.util.List;
 
-public abstract class AbstractService<T extends AbstractEntity, R extends AbstractRepository> implements IRepository<T> {
+public abstract class AbstractService<T extends AbstractEntity, R extends AbstractRepository<T>>/* implements IService */{
 
     R entityRepository;
 
@@ -21,7 +20,7 @@ public abstract class AbstractService<T extends AbstractEntity, R extends Abstra
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return (T) entityRepository.getById(id);
+        return entityRepository.getById(id);
     }
 
     public List<T> getAll() {
@@ -32,6 +31,6 @@ public abstract class AbstractService<T extends AbstractEntity, R extends Abstra
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return (T) entityRepository.delete(id);
+        return entityRepository.delete(id);
     }
 }

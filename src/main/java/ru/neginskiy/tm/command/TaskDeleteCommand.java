@@ -8,27 +8,31 @@ public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        System.out.println("Please select task number to remove :");
         List<Task> taskList = getBootstrap().getTaskService().getAll();
-        int indexOfProject = 0;
-        for (Task task : taskList) {
-            System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", task.getName());
+        if (taskList.size() == 0) {
+            System.out.println("Tasks not found");
+            return;
         }
-        int number;
-        String id;
+
+        System.out.println("Please select task number to remove :");
+        int indexOfTask = 0;
+        for (Task task : taskList) {
+            System.out.printf("%-3s%s%s%n", indexOfTask++, " - ", task.getName());
+        }
+
+        Task task;
         try {
-            number = Integer.parseInt(getBootstrap().readLine());
-            Task task = taskList.get(number);
+            int taskNumber = Integer.parseInt(getBootstrap().readLine());
+            task = taskList.get(taskNumber);
             if (task == null) {
                 System.out.println("Incorrect input, task not found");
                 return;
             }
-            id = task.getId();
         } catch (Exception e) {
             System.out.println("Incorrect input, task not found");
             return;
         }
-        getBootstrap().getTaskService().delete(id);
+        getBootstrap().getTaskService().delete(task.getId());
         System.out.println("Task deleted");
     }
 

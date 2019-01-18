@@ -42,10 +42,16 @@ public class Bootstrap {
     private void receiveCommand() {
         System.out.println("Enter command: ");
         String text = readLine();
+        if (text == null) {
+            return;
+        }
         try {
             AbstractCommand command = stringToCommand.get(text);
+            if (command == null) {
+                System.out.println("Incorrect command");
+            }
             command.execute();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 

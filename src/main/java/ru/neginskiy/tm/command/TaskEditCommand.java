@@ -19,15 +19,14 @@ public class TaskEditCommand extends AbstractCommand {
         }
 
         Task task;
-        int taskNumber;
         try {
-            taskNumber = Integer.parseInt(getBootstrap().readLine());
+            int taskNumber = Integer.parseInt(getBootstrap().readLine());
             task = taskList.get(taskNumber);
-            System.out.println(task);
             if (task == null) {
                 System.out.println("Incorrect input, task not found");
                 return;
             }
+            System.out.println(task);
         } catch (Exception e) {
             System.out.println("Incorrect input, task not found");
             return;
@@ -36,6 +35,7 @@ public class TaskEditCommand extends AbstractCommand {
         System.out.println("Enter the command: \r\n" +
                 "changename        - change name of task \r\n" +
                 "changedescription - change description of task \r\n" +
+                "changebegindate   - Change a begin date of task \r\n" +
                 "changeenddate     - change a end date of task");
         String updateCommandString = getBootstrap().readLine();
         switch (updateCommandString) {
@@ -44,21 +44,42 @@ public class TaskEditCommand extends AbstractCommand {
                 String name = getBootstrap().readLine();
                 task.setName(name);
                 System.out.println("Name changed");
+                break;
             case "changedescription":
                 System.out.println("Please enter a new task description: ");
                 String description = getBootstrap().readLine();
                 task.setDescription(description);
                 System.out.println("Description changed");
+                break;
+
+            case "changebegindate":
+                System.out.println("Please enter a new task begin date: ");
+                Date dateBegin = getDateFromStr(getBootstrap().readLine());
+                if (dateBegin == null) {
+                    return;
+                }
+                Date dateEnd = task.getDateEnd();
+                if (dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
+                    System.out.println("End date must be later than the begin date, incorrect input");
+                    return;
+                }
+                task.setDateBegin(dateBegin);
+                System.out.println("Begin date changed");
+                break;
             case "changeenddate":
                 System.out.println("Please enter a new task end date: ");
-                Date dateEnd = getDateFromStr(getBootstrap().readLine());
-                Date dateBegin = task.getDateBegin();
-                if (dateBegin != null && dateEnd != null && dateEnd.compareTo(dateBegin) < 0) {
+                dateEnd = getDateFromStr(getBootstrap().readLine());
+                if (dateEnd == null) {
+                    return;
+                }
+                dateBegin = task.getDateBegin();
+                if (dateBegin != null && dateEnd.compareTo(dateBegin) < 0) {
                     System.out.println("End date must be later than the begin date, incorrect input");
                     return;
                 }
                 task.setDateEnd(dateEnd);
                 System.out.println("End date changed");
+                break;
         }
         getBootstrap().getTaskService().merge(task);
         System.out.println("Task updated");
