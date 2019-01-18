@@ -66,8 +66,6 @@
 
 <h4>[repository]</h4>
 
-<li> AbstractService - абстрактный класс сервиса</li>
-
 <li> ProjectService - класс для выполнения операций над проектами</li>
 
 <li> TaskService - класс для выполнения операций над задачами</li>
