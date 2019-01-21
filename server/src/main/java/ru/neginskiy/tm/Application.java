@@ -7,7 +7,8 @@ public class Application {
 
     private static final Class[] CLASSES = {ExitCommand.class, HelpCommand.class,
             TaskCreateCommand.class, TaskDeleteCommand.class, TaskEditCommand.class, TaskListCommand.class,
-            ProjectCreateCommand.class, ProjectDeleteCommand.class, ProjectEditCommand.class, ProjectListCommand.class};
+            ProjectCreateCommand.class, ProjectDeleteCommand.class, ProjectEditCommand.class, ProjectListCommand.class,
+            UserCreateCommand.class, UserLoginCommand.class};
 
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         Bootstrap bt = new Bootstrap();

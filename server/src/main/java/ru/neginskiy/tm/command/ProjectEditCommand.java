@@ -1,13 +1,14 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
+import ru.neginskiy.tm.util.StringToDateUtil;
 
 import java.util.Date;
 import java.util.List;
 
-import static ru.neginskiy.tm.util.StringToDateUtil.getDateFromStr;
-
 public class ProjectEditCommand extends AbstractCommand {
+
+    private final boolean secure = false;
 
     @Override
     public void execute() {
@@ -53,7 +54,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 break;
             case "changebegindate":
                 System.out.println("Please enter a new project begin date: ");
-                Date dateBegin = getDateFromStr(getBootstrap().readLine());
+                Date dateBegin = StringToDateUtil.getDateFromStr(getBootstrap().readLine());
                 if (dateBegin == null) {
                     return;
                 }
@@ -67,7 +68,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 break;
             case "changeenddate":
                 System.out.println("Please enter a new project end date: ");
-                dateEnd = getDateFromStr(getBootstrap().readLine());
+                dateEnd = StringToDateUtil.getDateFromStr(getBootstrap().readLine());
                 if (dateEnd == null) {
                     return;
                 }
@@ -93,5 +94,10 @@ public class ProjectEditCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Edit project";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

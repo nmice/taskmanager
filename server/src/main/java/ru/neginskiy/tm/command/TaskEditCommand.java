@@ -1,13 +1,14 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Task;
+import ru.neginskiy.tm.util.StringToDateUtil;
 
 import java.util.Date;
 import java.util.List;
 
-import static ru.neginskiy.tm.util.StringToDateUtil.getDateFromStr;
-
 public class TaskEditCommand extends AbstractCommand {
+
+    private final boolean secure = false;
 
     @Override
     public void execute() {
@@ -54,7 +55,7 @@ public class TaskEditCommand extends AbstractCommand {
 
             case "changebegindate":
                 System.out.println("Please enter a new task begin date: ");
-                Date dateBegin = getDateFromStr(getBootstrap().readLine());
+                Date dateBegin = StringToDateUtil.getDateFromStr(getBootstrap().readLine());
                 if (dateBegin == null) {
                     return;
                 }
@@ -68,7 +69,7 @@ public class TaskEditCommand extends AbstractCommand {
                 break;
             case "changeenddate":
                 System.out.println("Please enter a new task end date: ");
-                dateEnd = getDateFromStr(getBootstrap().readLine());
+                dateEnd = StringToDateUtil.getDateFromStr(getBootstrap().readLine());
                 if (dateEnd == null) {
                     return;
                 }
@@ -93,5 +94,10 @@ public class TaskEditCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Edit task";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

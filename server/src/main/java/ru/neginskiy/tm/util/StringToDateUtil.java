@@ -7,6 +7,7 @@ public class StringToDateUtil {
 
     private static final String PATTERN = "dd-MM-yyyy";
 
+
     public static Date getDateFromStr(String str) {
         try {
             return new SimpleDateFormat(PATTERN).parse(str);

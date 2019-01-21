@@ -6,6 +6,8 @@ import java.util.List;
 
 public class TaskDeleteCommand extends AbstractCommand {
 
+    private final boolean secure = false;
+
     @Override
     public void execute() {
         List<Task> taskList = getBootstrap().getTaskService().getAll();
@@ -44,5 +46,10 @@ public class TaskDeleteCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Delete task";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

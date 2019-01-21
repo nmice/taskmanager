@@ -1,12 +1,13 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.entity.Project;
+import ru.neginskiy.tm.util.StringToDateUtil;
 
 import java.util.Date;
 
-import static ru.neginskiy.tm.util.StringToDateUtil.getDateFromStr;
-
 public class ProjectCreateCommand extends AbstractCommand {
+
+    private final boolean secure = false;
 
     @Override
     public void execute() {
@@ -21,14 +22,14 @@ public class ProjectCreateCommand extends AbstractCommand {
         project.setDescription(description);
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-        Date dateBegin = getDateFromStr(getBootstrap().readLine());
+        Date dateBegin = StringToDateUtil.getDateFromStr(getBootstrap().readLine());
         if (dateBegin == null){
             System.out.println("Invalid date or format");
         }
         project.setDateBegin(dateBegin);
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-        Date dateEnd = getDateFromStr(getBootstrap().readLine());
+        Date dateEnd = StringToDateUtil.getDateFromStr(getBootstrap().readLine());
         if (dateEnd == null){
             System.out.println("Invalid date or format");
         }
@@ -56,5 +57,10 @@ public class ProjectCreateCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Create a new project";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

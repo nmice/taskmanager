@@ -2,6 +2,8 @@ package ru.neginskiy.tm.command;
 
 public class ExitCommand extends AbstractCommand {
 
+    private final boolean secure = true;
+
     @Override
     public void execute() {
         System.exit(1);
@@ -15,5 +17,10 @@ public class ExitCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Exit program";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

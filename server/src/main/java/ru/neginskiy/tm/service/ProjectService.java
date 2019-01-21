@@ -1,14 +1,14 @@
 package ru.neginskiy.tm.service;
 
-import ru.neginskiy.tm.api.IProjectService;
 import ru.neginskiy.tm.entity.Project;
+import ru.neginskiy.tm.api.IProjectService;
 import ru.neginskiy.tm.repository.ProjectRepository;
 
 import java.util.List;
 
 public class ProjectService implements IProjectService {
 
-    private ProjectRepository entityRepository;
+    private final ProjectRepository entityRepository;
 
     public ProjectService(ProjectRepository entityRepository) {
         this.entityRepository = entityRepository;

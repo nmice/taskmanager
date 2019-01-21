@@ -1,29 +1,29 @@
 package ru.neginskiy.tm.service;
 
-import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.repository.TaskRepository;
-import ru.neginskiy.tm.api.ITaskService;
+import ru.neginskiy.tm.api.IUserService;
+import ru.neginskiy.tm.entity.User;
+import ru.neginskiy.tm.repository.UserRepository;
 
 import java.util.List;
 
-public class TaskService implements ITaskService {
+public class UserService implements IUserService {
 
-    private final TaskRepository entityRepository;
+    private final UserRepository entityRepository;
 
-    public TaskService(TaskRepository entityRepository) {
+    public UserService(UserRepository entityRepository) {
         this.entityRepository = entityRepository;
     }
 
     @Override
-    public void merge(Task task) {
-        if (task == null) {
+    public void merge(User user) {
+        if (user == null) {
             return;
         }
-        entityRepository.merge(task);
+        entityRepository.merge(user);
     }
 
     @Override
-    public Task getById(String id) {
+    public User getById(String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
@@ -31,12 +31,12 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public List<Task> getAll() {
+    public List<User> getAll() {
         return entityRepository.getAll();
     }
 
     @Override
-    public Task delete(String id) {
+    public User delete(String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }

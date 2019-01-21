@@ -1,11 +1,18 @@
 package ru.neginskiy.tm.controller;
 
 import ru.neginskiy.tm.command.AbstractCommand;
-import ru.neginskiy.tm.repository.ProjectRepository;
+import ru.neginskiy.tm.endpoint.ProjectEndpoint;
+import ru.neginskiy.tm.endpoint.TaskEndpoint;
+import ru.neginskiy.tm.endpoint.UserEndpoint;
 import ru.neginskiy.tm.repository.TaskRepository;
+import ru.neginskiy.tm.entity.User;
+import ru.neginskiy.tm.repository.ProjectRepository;
+import ru.neginskiy.tm.repository.UserRepository;
 import ru.neginskiy.tm.service.ProjectService;
 import ru.neginskiy.tm.service.TaskService;
+import ru.neginskiy.tm.service.UserService;
 
+import javax.xml.ws.Endpoint;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,14 +22,34 @@ public class Bootstrap {
     private final Map<String, AbstractCommand> stringToCommand = new HashMap<>();
     private final TaskService taskService = new TaskService(new TaskRepository());
     private final ProjectService projectService = new ProjectService(new ProjectRepository());
+    private final UserService userService = new UserService(new UserRepository());
+
+    private User activeUser;
+
     private final Scanner scanner = new Scanner(System.in);
 
     public void init(Class[] classes) throws IllegalAccessException, InstantiationException {
         registry(classes);
-        //todo regInNet()
+        registryInNet();
+        if (userService.getAll().size() == 0) {
+            createTestUser();
+        }
         while (true) {
             receiveCommand();
         }
+    }
+
+    private void createTestUser() {
+        User testUser = new User();
+        testUser.setLogin("test");
+        testUser.setPassword(String.valueOf(("test").hashCode()));
+        getUserService().merge(testUser);
+    }
+
+    private void registryInNet() {
+        Endpoint.publish("http://localhost:8080/TaskEndpoint", new TaskEndpoint(taskService));
+        Endpoint.publish("http://localhost:8080/ProjectEndpoint", new ProjectEndpoint(projectService));
+        Endpoint.publish("http://localhost:8080/UserEndpoint", new UserEndpoint(userService));
     }
 
     private void registry(Class... classes) throws InstantiationException, IllegalAccessException {
@@ -42,22 +69,25 @@ public class Bootstrap {
 
     private void receiveCommand() {
         System.out.println("Enter command: ");
-        String text = readLine();
+        final String text = readLine();
         if (text == null) {
             return;
         }
+        final AbstractCommand command = stringToCommand.get(text);
+        if (command == null) {
+            System.out.println("Incorrect command");
+            return;
+        }
         try {
-            AbstractCommand command = stringToCommand.get(text);
-            if (command == null) {
-                System.out.println("Incorrect command");
+            if (getActiveUser() != null || command.isSecure()) {
+                command.execute();
             }
-            command.execute();
         } catch (Exception ignored) {
         }
     }
 
     public String readLine() {
-        String str = scanner.nextLine().trim();
+        final String str = scanner.nextLine().trim();
         if (str.isEmpty()) {
             System.out.println("Incorrect input");
             return null;
@@ -77,5 +107,15 @@ public class Bootstrap {
         return taskService;
     }
 
-    //Todo publish(url, new ProjectEndpoint()) in new method registryInNet()
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public User getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
+    }
 }

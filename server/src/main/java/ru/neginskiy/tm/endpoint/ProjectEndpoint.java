@@ -4,6 +4,7 @@ import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.service.ProjectService;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
@@ -15,13 +16,14 @@ public class ProjectEndpoint {
     public ProjectEndpoint(ProjectService projectService) {
         this.projectService = projectService;
     }
+
     @WebMethod
-    public void merge(Project project) {
+    public void merge(@WebParam(name = "project") Project project) {
         projectService.merge(project);
     }
 
     @WebMethod
-    public Project getById(String id) {
+    public Project getById(@WebParam(name = "id") String id) {
         return projectService.getById(id);
     }
 
@@ -31,9 +33,7 @@ public class ProjectEndpoint {
     }
 
     @WebMethod
-    public Project delete(String id) {
+    public Project delete(@WebParam(name = "id") String id) {
         return projectService.delete(id);
     }
-
-    //Todo methods - return something
 }

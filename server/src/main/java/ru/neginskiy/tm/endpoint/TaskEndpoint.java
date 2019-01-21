@@ -4,6 +4,7 @@ import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.service.TaskService;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
@@ -17,12 +18,12 @@ public class TaskEndpoint {
     }
 
     @WebMethod
-    public void merge(Task task) {
+    public void merge(@WebParam(name = "task") Task task) {
         taskService.merge(task);
     }
 
     @WebMethod
-    public Task getById(String id) {
+    public Task getById(@WebParam(name = "id") String id) {
         return taskService.getById(id);
     }
 
@@ -32,9 +33,7 @@ public class TaskEndpoint {
     }
 
     @WebMethod
-    public Task delete(String id) {
+    public Task delete(@WebParam(name = "id") String id) {
         return taskService.delete(id);
     }
-
-    //Todo methods - return something
 }

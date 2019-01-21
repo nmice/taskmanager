@@ -14,4 +14,6 @@ public abstract class AbstractCommand implements ICommand {
     public void setBootstrap(Bootstrap bootstrap) {
         this.bootstrap = bootstrap;
     }
+
+    public abstract boolean isSecure();
 }

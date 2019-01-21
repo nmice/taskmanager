@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ProjectDeleteCommand extends AbstractCommand {
 
+    private final boolean secure = false;
+
     @Override
     public void execute() {
         List<Project> projectList = getBootstrap().getProjectService().getAll();
@@ -58,5 +60,10 @@ public class ProjectDeleteCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Delete project";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

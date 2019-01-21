@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ProjectListCommand extends AbstractCommand {
 
+    private final boolean secure = false;
+
     @Override
     public void execute() {
         List<Project> projectList = getBootstrap().getProjectService().getAll();
@@ -26,5 +28,10 @@ public class ProjectListCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Get project list";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }

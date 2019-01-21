@@ -6,6 +6,8 @@ import java.util.List;
 
 public class TaskListCommand extends AbstractCommand {
 
+    private final boolean secure = false;
+
     @Override
     public void execute() {
         List<Task> taskList = getBootstrap().getTaskService().getAll();
@@ -26,5 +28,10 @@ public class TaskListCommand extends AbstractCommand {
     @Override
     public String description() {
         return "Get task list";
+    }
+
+    @Override
+    public boolean isSecure() {
+        return secure;
     }
 }
