@@ -16,6 +16,7 @@ public class TaskEndpoint {
     public TaskEndpoint(TaskService taskService) {
         this.taskService = taskService;
     }
+    //todo rename methods and generate code for client"
 
     @WebMethod
     public void merge(@WebParam(name = "task") Task task) {
