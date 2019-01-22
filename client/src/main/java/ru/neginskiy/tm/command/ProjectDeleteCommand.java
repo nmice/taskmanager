@@ -11,7 +11,7 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAll();
+        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveUser().getId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;
@@ -39,7 +39,7 @@ public class ProjectDeleteCommand extends AbstractCommand {
         getBootstrap().getProjectEndpointService().projectDelete(id);
         System.out.println("Project deleted");
 
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAll();
+        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveUser().getId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;

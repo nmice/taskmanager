@@ -1,22 +1,23 @@
 package ru.neginskiy.tm.command;
 
-public class ExitCommand extends AbstractCommand {
+public class UserLogoutCommand extends AbstractCommand {
 
-    private final boolean secure = true;
+    private final boolean secure = false;
 
     @Override
     public void execute() {
-        System.exit(1);
+        getBootstrap().setActiveUser(null);
+        System.out.println("You are logout");
     }
 
     @Override
     public String command() {
-        return "exit";
+        return "logout";
     }
 
     @Override
     public String description() {
-        return "Exit program";
+        return "Log out";
     }
 
     @Override

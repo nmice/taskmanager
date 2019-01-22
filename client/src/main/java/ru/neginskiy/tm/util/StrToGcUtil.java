@@ -17,16 +17,15 @@ public class StrToGcUtil {
         Date date;
         try {
             date = new SimpleDateFormat(PATTERN).parse(str);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return null;
         }
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);
-
-        XMLGregorianCalendar xmlGregCal = null;
+        XMLGregorianCalendar xmlGregCal;
         try {
             xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-        } catch (DatatypeConfigurationException e) {
+        } catch (Exception e) {
             return null;
         }
         return xmlGregCal;

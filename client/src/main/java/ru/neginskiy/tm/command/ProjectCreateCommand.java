@@ -13,6 +13,7 @@ public class ProjectCreateCommand extends AbstractCommand {
     @Override
     public void execute() {
         Project project = new Project();
+        project.setUserId(getBootstrap().getActiveUser().getId());
 
         System.out.println("Please enter a name of the project :");
         String name = getBootstrap().readLine();

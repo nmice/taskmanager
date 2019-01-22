@@ -14,7 +14,7 @@ public class TaskEditCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please select project number to update :");
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAll();
+        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveUser().getId());
         int index = 0;
         for (Task task : taskList) {
             System.out.printf("%-3s%s%s%n", index++, " - ", task.getName());

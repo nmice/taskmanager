@@ -10,7 +10,7 @@ public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAll();
+        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveUser().getId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;

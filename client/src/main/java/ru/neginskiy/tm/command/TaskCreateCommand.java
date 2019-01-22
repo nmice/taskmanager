@@ -14,7 +14,7 @@ public class TaskCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAll();
+        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveUser().getId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found, please create a project first for the task");
             return;
@@ -42,6 +42,8 @@ public class TaskCreateCommand extends AbstractCommand {
 
         Task task = new Task();
         task.setProjectId(projectId);
+        project.setUserId(getBootstrap().getActiveUser().getId());
+
 
         System.out.println("Please enter a name of the task :");
         String name = getBootstrap().readLine();
