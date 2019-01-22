@@ -18,22 +18,22 @@ public class ProjectEndpoint {
     }
 
     @WebMethod
-    public void merge(@WebParam(name = "project") Project project) {
+    public void projectMerge(@WebParam(name = "project") Project project) {
         projectService.merge(project);
     }
 
     @WebMethod
-    public Project getById(@WebParam(name = "id") String id) {
+    public Project projectGetById(@WebParam(name = "id") String id) {
         return projectService.getById(id);
     }
 
     @WebMethod
-    public List<Project> getAll() {
+    public List<Project> projectGetAll() {
         return projectService.getAll();
     }
 
     @WebMethod
-    public Project delete(@WebParam(name = "id") String id) {
+    public Project projectDelete(@WebParam(name = "id") String id) {
         return projectService.delete(id);
     }
 }

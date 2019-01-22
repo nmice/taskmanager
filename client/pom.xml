@@ -10,7 +10,7 @@
     </parent>
     <build>
         <plugins>
-<!--            <plugin>
+            <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
                 <version>3.2.7</version>
@@ -21,7 +21,7 @@
                         <configuration>
                             <sourceRoot>${project.basedir}/src/main/java</sourceRoot>
                             <wsdlOptions>
-                                &lt;!&ndash; На все Endpoint +?wsdl&ndash;&gt;
+                                <!-- На все Endpoint +?wsdl-->
                                 <wsdlOption>
                                     <wsdl>http://localhost:8080/TaskEndpoint?wsdl</wsdl>
                                 </wsdlOption>
@@ -38,7 +38,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
 
     </build>

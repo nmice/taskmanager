@@ -19,22 +19,22 @@ public class TaskEndpoint {
     //todo rename methods and generate code for client"
 
     @WebMethod
-    public void merge(@WebParam(name = "task") Task task) {
+    public void taskMerge(@WebParam(name = "task") Task task) {
         taskService.merge(task);
     }
 
     @WebMethod
-    public Task getById(@WebParam(name = "id") String id) {
+    public Task taskGetById(@WebParam(name = "id") String id) {
         return taskService.getById(id);
     }
 
     @WebMethod
-    public List<Task> getAll() {
+    public List<Task> taskGetAll() {
         return taskService.getAll();
     }
 
     @WebMethod
-    public Task delete(@WebParam(name = "id") String id) {
+    public Task taskDelete(@WebParam(name = "id") String id) {
         return taskService.delete(id);
     }
 }

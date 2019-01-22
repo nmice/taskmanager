@@ -47,7 +47,7 @@ public class Bootstrap {
     }
 
     private void registryInNet() {
-        Endpoint.publish("http://localhost:8080/TaskEndpoint", new TaskEndpoint(taskService));
+        Endpoint.publish("http://localhost:8080/TaskEndpoint?wsdl", new TaskEndpoint(taskService));
         Endpoint.publish("http://localhost:8080/ProjectEndpoint", new ProjectEndpoint(projectService));
         Endpoint.publish("http://localhost:8080/UserEndpoint", new UserEndpoint(userService));
     }
