@@ -28,8 +28,8 @@ public class TaskEndpoint {
     }
 
     @WebMethod
-    public List<Task> taskGetAll() {
-        return taskService.getAll();
+    public List<Task> taskGetAllByUserId(@WebParam(name = "userId") String userId) {
+        return taskService.getAllByUserId(userId);
     }
 
     @WebMethod

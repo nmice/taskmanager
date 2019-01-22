@@ -22,7 +22,7 @@ public class Bootstrap {
 
     public void init() {
         registryInNet();
-        /*if (userService.getAll().size() == 0) {
+        /*if (userService.getAllByUserId().size() == 0) {
             createTestUser();
         }*/
     }

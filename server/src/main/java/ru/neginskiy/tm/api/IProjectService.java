@@ -10,7 +10,7 @@ public interface IProjectService {
 
     Project getById(String id);
 
-    List<Project> getAll();
+    List<Project> getAllByUserId(String userId);
 
     Project delete(String id);
 }

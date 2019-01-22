@@ -11,6 +11,7 @@ public class Project extends AbstractEntity {
     private String description;
     private Date dateBegin;
     private Date dateEnd;
+    private String userId;
 
     public String getName() {
         return name;
@@ -28,6 +29,10 @@ public class Project extends AbstractEntity {
         return dateEnd;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -42,6 +47,10 @@ public class Project extends AbstractEntity {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

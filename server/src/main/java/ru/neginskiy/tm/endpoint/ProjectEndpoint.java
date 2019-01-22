@@ -28,8 +28,8 @@ public class ProjectEndpoint {
     }
 
     @WebMethod
-    public List<Project> projectGetAll() {
-        return projectService.getAll();
+    public List<Project> projectGetAllByUserId(@WebParam(name = "userId") String userId) {
+        return projectService.getAllByUserId(userId);
     }
 
     @WebMethod

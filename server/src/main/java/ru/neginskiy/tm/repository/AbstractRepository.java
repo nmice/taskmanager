@@ -7,7 +7,7 @@ import java.util.*;
 
 public abstract class AbstractRepository<T extends AbstractEntity> implements IRepository<T> {
 
-    private Map<String, T> entityBase = new HashMap<>();
+    protected Map<String, T> entityBase = new HashMap<>();
 
     public void merge(T entity) {
         entityBase.put(entity.getId(), entity);

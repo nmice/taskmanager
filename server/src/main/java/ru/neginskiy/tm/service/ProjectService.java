@@ -31,8 +31,11 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<Project> getAll() {
-        return entityRepository.getAll();
+    public List<Project> getAllByUserId(String userId) {
+        if (userId == null || userId.isEmpty()) {
+            return null;
+        }
+        return entityRepository.getAllByUserId(userId);
     }
 
     @Override

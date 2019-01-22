@@ -31,8 +31,11 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public List<Task> getAll() {
-        return entityRepository.getAll();
+    public List<Task> getAllByUserId(String userId) {
+        if (userId == null || userId.isEmpty()) {
+            return null;
+        }
+        return entityRepository.getAllByUserId(userId);
     }
 
     @Override

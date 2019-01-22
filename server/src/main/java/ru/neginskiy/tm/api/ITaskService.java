@@ -10,7 +10,7 @@ public interface ITaskService {
 
     Task getById(String id);
 
-    List<Task> getAll();
+    List<Task> getAllByUserId(String userId);
 
     Task delete(String id);
 
