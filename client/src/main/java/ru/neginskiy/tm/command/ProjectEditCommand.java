@@ -5,6 +5,7 @@ import ru.neginskiy.tm.endpoint.Project;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
 
+import static ru.neginskiy.tm.util.GcToStrUtil.getStrFromGc;
 import static ru.neginskiy.tm.util.StrToGcUtil.getGcFromStr;
 
 public class ProjectEditCommand extends AbstractCommand {
@@ -28,7 +29,8 @@ public class ProjectEditCommand extends AbstractCommand {
                 System.out.println("Incorrect input, project not found");
                 return;
             }
-            System.out.println(project);
+            System.out.printf("%s (%s), %s - %s%n", project.getName(), project.getDescription(), getStrFromGc(project.getDateBegin()), getStrFromGc(project.getDateEnd()));
+
         } catch (Exception e) {
             System.out.println("Incorrect input, project not found");
             return;

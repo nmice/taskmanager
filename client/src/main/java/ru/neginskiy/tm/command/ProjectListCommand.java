@@ -4,6 +4,8 @@ import ru.neginskiy.tm.endpoint.Project;
 
 import java.util.List;
 
+import static ru.neginskiy.tm.util.GcToStrUtil.getStrFromGc;
+
 public class ProjectListCommand extends AbstractCommand {
 
     private final boolean secure = false;
@@ -16,7 +18,8 @@ public class ProjectListCommand extends AbstractCommand {
             return;
         }
         for (Project project : projectList) {
-            System.out.println(project);//todo getter
+            System.out.printf("%s (%s), %s - %s%n", project.getName(), project.getDescription(), getStrFromGc(project.getDateBegin()), getStrFromGc(project.getDateEnd()));
+
         }
     }
 

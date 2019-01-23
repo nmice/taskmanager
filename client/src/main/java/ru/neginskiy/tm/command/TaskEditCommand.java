@@ -5,6 +5,7 @@ import ru.neginskiy.tm.endpoint.Task;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
 
+import static ru.neginskiy.tm.util.GcToStrUtil.getStrFromGc;
 import static ru.neginskiy.tm.util.StrToGcUtil.getGcFromStr;
 
 public class TaskEditCommand extends AbstractCommand {
@@ -28,7 +29,7 @@ public class TaskEditCommand extends AbstractCommand {
                 System.out.println("Incorrect input, task not found");
                 return;
             }
-            System.out.println(task);
+            System.out.printf("%s (%s), %s - %s%n", task.getName(), task.getDescription(), getStrFromGc(task.getDateBegin()), getStrFromGc(task.getDateEnd()));
         } catch (Exception e) {
             System.out.println("Incorrect input, task not found");
             return;

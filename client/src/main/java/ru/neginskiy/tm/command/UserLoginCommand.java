@@ -1,6 +1,9 @@
 package ru.neginskiy.tm.command;
 
+import ru.neginskiy.tm.endpoint.Session;
 import ru.neginskiy.tm.endpoint.User;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class UserLoginCommand extends AbstractCommand {
 
@@ -31,6 +34,10 @@ public class UserLoginCommand extends AbstractCommand {
         User user = getBootstrap().getUserEndpointService().findUser(login, passwordHash);
         if (user != null) {
             getBootstrap().setActiveUser(user);
+
+            Session session = new Session();
+            session.setUserId(user.getId());
+            getBootstrap().setActiveSession(session);
             System.out.println("You are logged in as " + user.getLogin());
             return;
         }
