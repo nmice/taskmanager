@@ -38,6 +38,7 @@ public class UserLoginCommand extends AbstractCommand {
             Session session = new Session();
             session.setUserId(user.getId());
             getBootstrap().setActiveSession(session);
+
             System.out.println("You are logged in as " + user.getLogin());
             return;
         }

@@ -18,6 +18,8 @@ import javax.xml.ws.Endpoint;
 
 public class Bootstrap {
 
+    private static final String SECRET_KEY = "taskmanager3000";
+
     private final TaskService taskService = new TaskService(new TaskRepository());
     private final ProjectService projectService = new ProjectService(new ProjectRepository());
     private final UserService userService = new UserService(new UserRepository());

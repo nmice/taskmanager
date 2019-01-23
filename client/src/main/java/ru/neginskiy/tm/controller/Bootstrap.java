@@ -13,6 +13,8 @@ public class Bootstrap {
     private final TaskEndpoint taskEndpointService = new TaskEndpointService().getTaskEndpointPort();
     private final ProjectEndpoint projectEndpointService = new ProjectEndpointService().getProjectEndpointPort();
     private final UserEndpoint userEndpointService = new UserEndpointService().getUserEndpointPort();
+    private final SessionEndpoint sessionEndpointService = new SessionEndpointService().getSessionEndpointPort();
+
     private User activeUser;
     private Session activeSession;
 
