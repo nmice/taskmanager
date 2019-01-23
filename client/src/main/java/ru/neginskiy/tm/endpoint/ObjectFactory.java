@@ -24,14 +24,14 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _UserDelete_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userDelete");
-    private final static QName _UserDeleteResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userDeleteResponse");
-    private final static QName _UserGetAll_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userGetAll");
-    private final static QName _UserGetAllResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userGetAllResponse");
-    private final static QName _UserGetById_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userGetById");
-    private final static QName _UserGetByIdResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userGetByIdResponse");
-    private final static QName _UserMerge_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userMerge");
-    private final static QName _UserMergeResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "userMergeResponse");
+    private final static QName _SessionDelete_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionDelete");
+    private final static QName _SessionDeleteResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionDeleteResponse");
+    private final static QName _SessionGetAll_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetAll");
+    private final static QName _SessionGetAllResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetAllResponse");
+    private final static QName _SessionGetById_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetById");
+    private final static QName _SessionGetByIdResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetByIdResponse");
+    private final static QName _SessionMerge_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionMerge");
+    private final static QName _SessionMergeResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionMergeResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.neginskiy.tm.endpoint
@@ -41,147 +41,147 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UserDelete }
+     * Create an instance of {@link SessionDelete }
      * 
      */
-    public UserDelete createUserDelete() {
-        return new UserDelete();
+    public SessionDelete createSessionDelete() {
+        return new SessionDelete();
     }
 
     /**
-     * Create an instance of {@link UserDeleteResponse }
+     * Create an instance of {@link SessionDeleteResponse }
      * 
      */
-    public UserDeleteResponse createUserDeleteResponse() {
-        return new UserDeleteResponse();
+    public SessionDeleteResponse createSessionDeleteResponse() {
+        return new SessionDeleteResponse();
     }
 
     /**
-     * Create an instance of {@link UserGetAll }
+     * Create an instance of {@link SessionGetAll }
      * 
      */
-    public UserGetAll createUserGetAll() {
-        return new UserGetAll();
+    public SessionGetAll createSessionGetAll() {
+        return new SessionGetAll();
     }
 
     /**
-     * Create an instance of {@link UserGetAllResponse }
+     * Create an instance of {@link SessionGetAllResponse }
      * 
      */
-    public UserGetAllResponse createUserGetAllResponse() {
-        return new UserGetAllResponse();
+    public SessionGetAllResponse createSessionGetAllResponse() {
+        return new SessionGetAllResponse();
     }
 
     /**
-     * Create an instance of {@link UserGetById }
+     * Create an instance of {@link SessionGetById }
      * 
      */
-    public UserGetById createUserGetById() {
-        return new UserGetById();
+    public SessionGetById createSessionGetById() {
+        return new SessionGetById();
     }
 
     /**
-     * Create an instance of {@link UserGetByIdResponse }
+     * Create an instance of {@link SessionGetByIdResponse }
      * 
      */
-    public UserGetByIdResponse createUserGetByIdResponse() {
-        return new UserGetByIdResponse();
+    public SessionGetByIdResponse createSessionGetByIdResponse() {
+        return new SessionGetByIdResponse();
     }
 
     /**
-     * Create an instance of {@link UserMerge }
+     * Create an instance of {@link SessionMerge }
      * 
      */
-    public UserMerge createUserMerge() {
-        return new UserMerge();
+    public SessionMerge createSessionMerge() {
+        return new SessionMerge();
     }
 
     /**
-     * Create an instance of {@link UserMergeResponse }
+     * Create an instance of {@link SessionMergeResponse }
      * 
      */
-    public UserMergeResponse createUserMergeResponse() {
-        return new UserMergeResponse();
+    public SessionMergeResponse createSessionMergeResponse() {
+        return new SessionMergeResponse();
     }
 
     /**
-     * Create an instance of {@link User }
+     * Create an instance of {@link Session }
      * 
      */
-    public User createUser() {
-        return new User();
+    public Session createSession() {
+        return new Session();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserDelete }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionDelete }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userDelete")
-    public JAXBElement<UserDelete> createUserDelete(UserDelete value) {
-        return new JAXBElement<UserDelete>(_UserDelete_QNAME, UserDelete.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionDelete")
+    public JAXBElement<SessionDelete> createSessionDelete(SessionDelete value) {
+        return new JAXBElement<SessionDelete>(_SessionDelete_QNAME, SessionDelete.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserDeleteResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionDeleteResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userDeleteResponse")
-    public JAXBElement<UserDeleteResponse> createUserDeleteResponse(UserDeleteResponse value) {
-        return new JAXBElement<UserDeleteResponse>(_UserDeleteResponse_QNAME, UserDeleteResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionDeleteResponse")
+    public JAXBElement<SessionDeleteResponse> createSessionDeleteResponse(SessionDeleteResponse value) {
+        return new JAXBElement<SessionDeleteResponse>(_SessionDeleteResponse_QNAME, SessionDeleteResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserGetAll }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionGetAll }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userGetAll")
-    public JAXBElement<UserGetAll> createUserGetAll(UserGetAll value) {
-        return new JAXBElement<UserGetAll>(_UserGetAll_QNAME, UserGetAll.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionGetAll")
+    public JAXBElement<SessionGetAll> createSessionGetAll(SessionGetAll value) {
+        return new JAXBElement<SessionGetAll>(_SessionGetAll_QNAME, SessionGetAll.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserGetAllResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionGetAllResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userGetAllResponse")
-    public JAXBElement<UserGetAllResponse> createUserGetAllResponse(UserGetAllResponse value) {
-        return new JAXBElement<UserGetAllResponse>(_UserGetAllResponse_QNAME, UserGetAllResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionGetAllResponse")
+    public JAXBElement<SessionGetAllResponse> createSessionGetAllResponse(SessionGetAllResponse value) {
+        return new JAXBElement<SessionGetAllResponse>(_SessionGetAllResponse_QNAME, SessionGetAllResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserGetById }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionGetById }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userGetById")
-    public JAXBElement<UserGetById> createUserGetById(UserGetById value) {
-        return new JAXBElement<UserGetById>(_UserGetById_QNAME, UserGetById.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionGetById")
+    public JAXBElement<SessionGetById> createSessionGetById(SessionGetById value) {
+        return new JAXBElement<SessionGetById>(_SessionGetById_QNAME, SessionGetById.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserGetByIdResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionGetByIdResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userGetByIdResponse")
-    public JAXBElement<UserGetByIdResponse> createUserGetByIdResponse(UserGetByIdResponse value) {
-        return new JAXBElement<UserGetByIdResponse>(_UserGetByIdResponse_QNAME, UserGetByIdResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionGetByIdResponse")
+    public JAXBElement<SessionGetByIdResponse> createSessionGetByIdResponse(SessionGetByIdResponse value) {
+        return new JAXBElement<SessionGetByIdResponse>(_SessionGetByIdResponse_QNAME, SessionGetByIdResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserMerge }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionMerge }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userMerge")
-    public JAXBElement<UserMerge> createUserMerge(UserMerge value) {
-        return new JAXBElement<UserMerge>(_UserMerge_QNAME, UserMerge.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionMerge")
+    public JAXBElement<SessionMerge> createSessionMerge(SessionMerge value) {
+        return new JAXBElement<SessionMerge>(_SessionMerge_QNAME, SessionMerge.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UserMergeResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SessionMergeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "userMergeResponse")
-    public JAXBElement<UserMergeResponse> createUserMergeResponse(UserMergeResponse value) {
-        return new JAXBElement<UserMergeResponse>(_UserMergeResponse_QNAME, UserMergeResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionMergeResponse")
+    public JAXBElement<SessionMergeResponse> createSessionMergeResponse(SessionMergeResponse value) {
+        return new JAXBElement<SessionMergeResponse>(_SessionMergeResponse_QNAME, SessionMergeResponse.class, null, value);
     }
 
 }

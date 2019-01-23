@@ -36,4 +36,15 @@ public class UserEndpoint {
     public User userDelete(@WebParam(name = "id") String id) {
         return userService.delete(id);
     }
+
+    @WebMethod
+    public boolean isRegistredLogin(@WebParam(name = "login") String login) {
+        return userService.isRegistredLogin(login);
+    }
+
+    @WebMethod
+    public User findUser (@WebParam(name="login") String login,
+            @WebParam(name="passwordHash") String passwordHash) {
+        return userService.findUser(login, passwordHash);
+    }
 }

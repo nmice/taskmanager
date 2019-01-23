@@ -42,7 +42,7 @@ public class TaskCreateCommand extends AbstractCommand {
 
         Task task = new Task();
         task.setProjectId(projectId);
-        project.setUserId(getBootstrap().getActiveUser().getId());
+        task.setUserId(getBootstrap().getActiveUser().getId());
 
 
         System.out.println("Please enter a name of the task :");
@@ -65,12 +65,12 @@ public class TaskCreateCommand extends AbstractCommand {
         if (dateEnd == null) {
             System.out.println("Invalid date or format");
         }
-        task.setDateEnd(dateEnd);
 
-        if (dateBegin != null && dateEnd != null && dateEnd.getMillisecond() < dateBegin.getMillisecond()) {
+        if (dateBegin != null && dateEnd != null && dateEnd.compare(dateBegin)<0) {
             System.out.println("Incorrect input: End date must be later than the begin date!");
             task.setDateEnd(null);
         }
+        task.setDateEnd(dateEnd);
 
         if (name == null && description == null && dateBegin == null && dateEnd == null) {
             System.out.println("All fields are empty, new task is not created!");

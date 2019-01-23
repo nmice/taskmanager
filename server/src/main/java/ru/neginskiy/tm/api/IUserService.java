@@ -14,4 +14,8 @@ public interface IUserService {
 
     User delete(String id);
 
+    User findUser(String login, String passwordHash);
+
+    public boolean isRegistredLogin(String login);
+
 }

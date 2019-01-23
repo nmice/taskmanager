@@ -13,8 +13,8 @@ public class Bootstrap {
     private final TaskEndpoint taskEndpointService = new TaskEndpointService().getTaskEndpointPort();
     private final ProjectEndpoint projectEndpointService = new ProjectEndpointService().getProjectEndpointPort();
     private final UserEndpoint userEndpointService = new UserEndpointService().getUserEndpointPort();
-
     private User activeUser;
+    private Session activeSession;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -78,11 +78,11 @@ public class Bootstrap {
         return projectEndpointService;
     }
 
-       public TaskEndpoint getTaskEndpointService() {
+    public TaskEndpoint getTaskEndpointService() {
         return taskEndpointService;
     }
 
-       public UserEndpoint getUserEndpointService() {
+    public UserEndpoint getUserEndpointService() {
         return userEndpointService;
     }
 
@@ -92,5 +92,13 @@ public class Bootstrap {
 
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
+    }
+
+    public Session getActiveSession() {
+        return activeSession;
+    }
+
+    public void setActiveSession(Session activeSession) {
+        this.activeSession = activeSession;
     }
 }

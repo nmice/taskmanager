@@ -42,4 +42,20 @@ public class UserService implements IUserService {
         }
         return entityRepository.delete(id);
     }
+
+    @Override
+    public User findUser(String login, String passwordHash) {
+        if (login == null || passwordHash == null) {
+            return null;
+        }
+        return entityRepository.findUser(login, passwordHash);
+    }
+
+    @Override
+    public boolean isRegistredLogin(String login) {
+        if (login == null) {
+            return true;
+        }
+        return entityRepository.isRegistredLogin(login);
+    }
 }

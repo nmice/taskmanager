@@ -4,6 +4,8 @@ import ru.neginskiy.tm.endpoint.Task;
 
 import java.util.List;
 
+import static ru.neginskiy.tm.util.GcToStrUtil.getStrFromGc;
+
 public class TaskListCommand extends AbstractCommand {
 
     private final boolean secure = false;
@@ -16,7 +18,7 @@ public class TaskListCommand extends AbstractCommand {
             return;
         }
         for (Task task : taskList) {
-            System.out.println(task);
+            System.out.printf("%s (%s), %s - %s%n", task.getName(), task.getDescription(), getStrFromGc(task.getDateBegin()), getStrFromGc(task.getDateEnd()));
         }
     }
 

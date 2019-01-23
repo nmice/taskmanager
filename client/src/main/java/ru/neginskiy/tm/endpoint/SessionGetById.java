@@ -3,17 +3,16 @@ package ru.neginskiy.tm.endpoint;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for abstractEntity complex type.
+ * <p>Java class for sessionGetById complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="abstractEntity"&gt;
+ * &lt;complexType name="sessionGetById"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
@@ -27,13 +26,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "abstractEntity", propOrder = {
+@XmlType(name = "sessionGetById", propOrder = {
     "id"
 })
-@XmlSeeAlso({
-    Session.class
-})
-public abstract class AbstractEntity {
+public class SessionGetById {
 
     protected String id;
 

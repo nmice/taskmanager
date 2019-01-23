@@ -16,7 +16,7 @@ public class ProjectListCommand extends AbstractCommand {
             return;
         }
         for (Project project : projectList) {
-            System.out.println(project);
+            System.out.println(project);//todo getter
         }
     }
 

@@ -12,18 +12,13 @@ public class StrToGcUtil {
 
     private static final String PATTERN = "dd-MM-yyyy";
 
-    public static XMLGregorianCalendar getGcFromStr(String str){
+    public static XMLGregorianCalendar getGcFromStr(String str) {
 
-        Date date;
-        try {
-            date = new SimpleDateFormat(PATTERN).parse(str);
-        } catch (Exception e) {
-            return null;
-        }
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(date);
         XMLGregorianCalendar xmlGregCal;
         try {
+            Date date = new SimpleDateFormat(PATTERN).parse(str);
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(date);
             xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
         } catch (Exception e) {
             return null;

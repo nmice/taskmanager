@@ -35,12 +35,12 @@ public class ProjectCreateCommand extends AbstractCommand {
         if (dateEnd == null) {
             System.out.println("Invalid date or format");
         }
-        project.setDateEnd(dateEnd);
 
-        if (dateBegin != null && dateEnd != null && dateEnd.getMillisecond() < dateBegin.getMillisecond()) {
+        if (dateBegin != null && dateEnd != null && dateEnd.compare(dateBegin) < 0) {
             System.out.println("Incorrect input: End date must be later than the begin date!");
             project.setDateEnd(null);
         }
+        project.setDateEnd(dateEnd);
 
         if (name == null && description == null && dateBegin == null && dateEnd == null) {
             System.out.println("All fields are empty, new project is not created!");

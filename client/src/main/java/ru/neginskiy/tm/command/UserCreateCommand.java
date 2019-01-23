@@ -2,8 +2,6 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.User;
 
-import java.util.List;
-
 public class UserCreateCommand extends AbstractCommand {
 
     private final boolean secure = true;
@@ -18,12 +16,10 @@ public class UserCreateCommand extends AbstractCommand {
             System.out.println("Empty field, no new user created!");
             return;
         }
-        List<User> userList = getBootstrap().getUserEndpointService().userGetAll();
-        for (User userInList: userList){
-            if (userInList.getLogin().equals(login)){
-                System.out.println("This login is already registered, no new user created!");
-                return;
-            }
+
+        if (getBootstrap().getUserEndpointService().isRegistredLogin(login)) {
+            System.out.println("This login is already registered, no new user created!");
+            return;
         }
         user.setLogin(login);
 
