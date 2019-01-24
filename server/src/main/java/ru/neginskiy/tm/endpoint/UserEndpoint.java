@@ -43,8 +43,8 @@ public class UserEndpoint {
     }
 
     @WebMethod
-    public User findUser (@WebParam(name="login") String login,
-            @WebParam(name="passwordHash") String passwordHash) {
+    public User findUser(@WebParam(name = "login") String login,
+                         @WebParam(name = "passwordHash") String passwordHash) {
         return userService.findUser(login, passwordHash);
     }
 }

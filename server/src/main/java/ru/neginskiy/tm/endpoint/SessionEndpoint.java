@@ -28,12 +28,12 @@ public class SessionEndpoint {
     }
 
     @WebMethod
-    public List<Session> sessionGetAll() {
-        return sessionService.getAll();
+    public Session sessionDelete(@WebParam(name = "id") String id) {
+        return sessionService.delete(id);
     }
 
     @WebMethod
-    public Session sessionDelete(@WebParam(name = "id") String id) {
-        return sessionService.delete(id);
+    public Session getNewSession(@WebParam(name = "userId") String userId) {
+        return sessionService.getNewSession(userId);
     }
 }

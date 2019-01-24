@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.endpoint;
 
 import ru.neginskiy.tm.entity.Task;
+import ru.neginskiy.tm.service.SessionService;
 import ru.neginskiy.tm.service.TaskService;
 
 import javax.jws.WebMethod;
@@ -12,9 +13,11 @@ import java.util.List;
 public class TaskEndpoint {
 
     private TaskService taskService;
+    private SessionService sessionService;
 
     public TaskEndpoint(TaskService taskService) {
         this.taskService = taskService;
+        this.sessionService = sessionService;
     }
 
     @WebMethod
