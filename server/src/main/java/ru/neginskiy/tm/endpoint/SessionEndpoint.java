@@ -1,19 +1,18 @@
 package ru.neginskiy.tm.endpoint;
 
+import ru.neginskiy.tm.api.ISessionService;
 import ru.neginskiy.tm.entity.Session;
-import ru.neginskiy.tm.service.SessionService;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.util.List;
 
 @WebService
 public class SessionEndpoint {
 
-    private SessionService sessionService;
+    private ISessionService sessionService;
 
-    public SessionEndpoint(SessionService sessionService) {
+    public SessionEndpoint(ISessionService sessionService) {
         this.sessionService = sessionService;
     }
 
