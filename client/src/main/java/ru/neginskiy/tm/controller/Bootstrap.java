@@ -88,6 +88,10 @@ public class Bootstrap {
         return userEndpointService;
     }
 
+    public SessionEndpoint getSessionEndpointService() {
+        return sessionEndpointService;
+    }
+
     public User getActiveUser() {
         return activeUser;
     }

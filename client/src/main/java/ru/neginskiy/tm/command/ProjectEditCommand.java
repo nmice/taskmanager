@@ -85,6 +85,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 System.out.println("End date changed");
                 break;
         }
+
         getBootstrap().getProjectEndpointService().projectMerge(project);
         System.out.println("Project updated");
     }

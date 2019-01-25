@@ -24,10 +24,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetNewSession_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "getNewSession");
+    private final static QName _GetNewSessionResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "getNewSessionResponse");
+    private final static QName _IsUncorrectSession_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "isUncorrectSession");
+    private final static QName _IsUncorrectSessionResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "isUncorrectSessionResponse");
     private final static QName _SessionDelete_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionDelete");
     private final static QName _SessionDeleteResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionDeleteResponse");
-    private final static QName _SessionGetAll_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetAll");
-    private final static QName _SessionGetAllResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetAllResponse");
     private final static QName _SessionGetById_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetById");
     private final static QName _SessionGetByIdResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionGetByIdResponse");
     private final static QName _SessionMerge_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "sessionMerge");
@@ -38,6 +40,38 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetNewSession }
+     * 
+     */
+    public GetNewSession createGetNewSession() {
+        return new GetNewSession();
+    }
+
+    /**
+     * Create an instance of {@link GetNewSessionResponse }
+     * 
+     */
+    public GetNewSessionResponse createGetNewSessionResponse() {
+        return new GetNewSessionResponse();
+    }
+
+    /**
+     * Create an instance of {@link IsUncorrectSession }
+     * 
+     */
+    public IsUncorrectSession createIsUncorrectSession() {
+        return new IsUncorrectSession();
+    }
+
+    /**
+     * Create an instance of {@link IsUncorrectSessionResponse }
+     * 
+     */
+    public IsUncorrectSessionResponse createIsUncorrectSessionResponse() {
+        return new IsUncorrectSessionResponse();
     }
 
     /**
@@ -54,22 +88,6 @@ public class ObjectFactory {
      */
     public SessionDeleteResponse createSessionDeleteResponse() {
         return new SessionDeleteResponse();
-    }
-
-    /**
-     * Create an instance of {@link SessionGetAll }
-     * 
-     */
-    public SessionGetAll createSessionGetAll() {
-        return new SessionGetAll();
-    }
-
-    /**
-     * Create an instance of {@link SessionGetAllResponse }
-     * 
-     */
-    public SessionGetAllResponse createSessionGetAllResponse() {
-        return new SessionGetAllResponse();
     }
 
     /**
@@ -113,6 +131,42 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetNewSession }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "getNewSession")
+    public JAXBElement<GetNewSession> createGetNewSession(GetNewSession value) {
+        return new JAXBElement<GetNewSession>(_GetNewSession_QNAME, GetNewSession.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetNewSessionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "getNewSessionResponse")
+    public JAXBElement<GetNewSessionResponse> createGetNewSessionResponse(GetNewSessionResponse value) {
+        return new JAXBElement<GetNewSessionResponse>(_GetNewSessionResponse_QNAME, GetNewSessionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IsUncorrectSession }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "isUncorrectSession")
+    public JAXBElement<IsUncorrectSession> createIsUncorrectSession(IsUncorrectSession value) {
+        return new JAXBElement<IsUncorrectSession>(_IsUncorrectSession_QNAME, IsUncorrectSession.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IsUncorrectSessionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "isUncorrectSessionResponse")
+    public JAXBElement<IsUncorrectSessionResponse> createIsUncorrectSessionResponse(IsUncorrectSessionResponse value) {
+        return new JAXBElement<IsUncorrectSessionResponse>(_IsUncorrectSessionResponse_QNAME, IsUncorrectSessionResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SessionDelete }{@code >}}
      * 
      */
@@ -128,24 +182,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionDeleteResponse")
     public JAXBElement<SessionDeleteResponse> createSessionDeleteResponse(SessionDeleteResponse value) {
         return new JAXBElement<SessionDeleteResponse>(_SessionDeleteResponse_QNAME, SessionDeleteResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SessionGetAll }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionGetAll")
-    public JAXBElement<SessionGetAll> createSessionGetAll(SessionGetAll value) {
-        return new JAXBElement<SessionGetAll>(_SessionGetAll_QNAME, SessionGetAll.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SessionGetAllResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "sessionGetAllResponse")
-    public JAXBElement<SessionGetAllResponse> createSessionGetAllResponse(SessionGetAllResponse value) {
-        return new JAXBElement<SessionGetAllResponse>(_SessionGetAllResponse_QNAME, SessionGetAllResponse.class, null, value);
     }
 
     /**

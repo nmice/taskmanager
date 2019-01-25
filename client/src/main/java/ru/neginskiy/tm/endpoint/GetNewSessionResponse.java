@@ -3,20 +3,21 @@ package ru.neginskiy.tm.endpoint;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for sessionMerge complex type.
+ * <p>Java class for getNewSessionResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="sessionMerge"&gt;
+ * &lt;complexType name="getNewSessionResponse"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="session" type="{http://endpoint.tm.neginskiy.ru/}session" minOccurs="0"/&gt;
+ *         &lt;element name="return" type="{http://endpoint.tm.neginskiy.ru/}session" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -26,35 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "sessionMerge", propOrder = {
-    "session"
+@XmlType(name = "getNewSessionResponse", propOrder = {
+    "_return"
 })
-public class SessionMerge {
+public class GetNewSessionResponse {
 
-    protected Session session;
+    @XmlElement(name = "return")
+    protected Session _return;
 
     /**
-     * Gets the value of the session property.
+     * Gets the value of the return property.
      * 
      * @return
      *     possible object is
      *     {@link Session }
      *     
      */
-    public Session getSession() {
-        return session;
+    public Session getReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the session property.
+     * Sets the value of the return property.
      * 
      * @param value
      *     allowed object is
      *     {@link Session }
      *     
      */
-    public void setSession(Session value) {
-        this.session = value;
+    public void setReturn(Session value) {
+        this._return = value;
     }
 
 }

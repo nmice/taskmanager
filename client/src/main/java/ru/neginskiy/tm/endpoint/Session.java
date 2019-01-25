@@ -3,9 +3,7 @@ package ru.neginskiy.tm.endpoint;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -18,7 +16,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;extension base="{http://endpoint.tm.neginskiy.ru/}abstractEntity"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="dateBegin" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/&gt;
+ *         &lt;element name="signature" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="userId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/extension&gt;
@@ -30,39 +28,38 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "session", propOrder = {
-    "dateBegin",
+    "signature",
     "userId"
 })
 public class Session
     extends AbstractEntity
 {
 
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar dateBegin;
+    protected String signature;
     protected String userId;
 
     /**
-     * Gets the value of the dateBegin property.
+     * Gets the value of the signature property.
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getDateBegin() {
-        return dateBegin;
+    public String getSignature() {
+        return signature;
     }
 
     /**
-     * Sets the value of the dateBegin property.
+     * Sets the value of the signature property.
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setDateBegin(XMLGregorianCalendar value) {
-        this.dateBegin = value;
+    public void setSignature(String value) {
+        this.signature = value;
     }
 
     /**

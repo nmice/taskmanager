@@ -17,7 +17,7 @@ public class SessionEndpoint {
     }
 
     @WebMethod
-    public void sessionMerge(@WebParam(name = "user") Session session) {
+    public void sessionMerge(@WebParam(name = "session") Session session) {
         sessionService.merge(session);
     }
 
@@ -34,5 +34,10 @@ public class SessionEndpoint {
     @WebMethod
     public Session getNewSession(@WebParam(name = "userId") String userId) {
         return sessionService.getNewSession(userId);
+    }
+
+    @WebMethod
+    public boolean isUncorrectSession(@WebParam(name = "session") Session session) {
+        return sessionService.isUncorrectSession(session);
     }
 }

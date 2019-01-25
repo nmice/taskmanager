@@ -11,4 +11,6 @@ public interface ISessionService {
     Session delete(String id);
 
     Session getNewSession(String userId);
+
+    boolean isUncorrectSession(Session session);
 }

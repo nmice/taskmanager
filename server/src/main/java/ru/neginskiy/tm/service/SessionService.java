@@ -43,4 +43,13 @@ public class SessionService implements ISessionService {
         }
         return entityRepository.getNewSession(userId);
     }
+
+    @Override
+    public boolean isUncorrectSession(Session session) {
+        if (session == null) {
+            return true;
+        }
+        return entityRepository.isUncorrectSession(session);
+    }
+
 }
