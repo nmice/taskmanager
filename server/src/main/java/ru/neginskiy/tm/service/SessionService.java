@@ -1,8 +1,12 @@
 package ru.neginskiy.tm.service;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import ru.neginskiy.tm.api.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.repository.SessionRepository;
+
+import java.io.InputStream;
+import java.util.Properties;
 
 public class SessionService implements ISessionService {
 
@@ -11,6 +15,12 @@ public class SessionService implements ISessionService {
     public SessionService(SessionRepository entityRepository) {
         this.entityRepository = entityRepository;
     }
+
+    private static final int SALT_COUNTER = 1000;
+
+    private static final String PROPERTY_FILE = "/config.properties";
+
+    private final String SECRET_KEY = "secretKey";
 
     @Override
     public void merge(Session session) {
@@ -41,7 +51,24 @@ public class SessionService implements ISessionService {
         if (userId == null) {
             return null;
         }
-        return entityRepository.getNewSession(userId);
+        final Session session = new Session();
+        session.setUserId(userId);
+        try {
+            final InputStream is = getClass().getResourceAsStream(PROPERTY_FILE);
+            final Properties properties = new Properties();
+            properties.load(is);
+            final String secretKey = properties.getProperty(SECRET_KEY);
+
+            String signature = DigestUtils.md5Hex(session.getId());
+            for (int i = 0; i < SALT_COUNTER; i++) {
+                signature = DigestUtils.md5Hex(signature + secretKey);
+            }
+            session.setSignature(signature);
+            merge(session);//Add to Session repository
+            return session;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
