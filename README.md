@@ -10,15 +10,77 @@
 
 <h3>Структура проекта</h3>
 
+<h3>- server -</h3>
+
 <h4>[api]</h4>
 
-<li> ICommand - интерфейс команд</li>
-
-<li> IProjectService - интерфейс реализации команд над проектами</li>
+<li> IProjectService - интерфейс операций над проектами</li>
 
 <li> IRepository - интерфейс репозиториев</li>
 
-<li> ITaskService - интерфейс реализации команд над задачами</li>
+<li> ISessionService - интерфейс операций над сессиями</li>
+
+<li> ITaskService - интерфейс операций над задачами</li>
+
+<li> IUserService - интерфейс операций над пользователями</li>
+
+<li> ServiceLocator - интерфейс доступа к сервисам</li>
+
+<h4>[controller]</h4>
+
+<li> Bootstrap - класс начальной загрузки программы на сервере</li>
+
+<h4>[endpoint]</h4>
+
+<li> ProjectEndpoint - класс для сетевого доступа к сервисам проектов</li>
+
+<li> SessionEndpoint - класс для сетевого доступа к сервисам cессий</li>
+
+<li> TaskEndpoint - класс для сетевого доступа к сервисам задач</li>
+
+<li> UserEndpoint - класс для сетевого доступа к сервисам пользователей</li>
+
+<h4>[entity]</h4>
+
+<li> AbstractEntity - абстрактный класс сущности</li>
+
+<li> Project - класс проект</li>
+
+<li> Session - класс сессия</li>
+
+<li> Task - класс задача</li>
+
+<li> User - класс пользователь</li>
+
+<h4>[repository]</h4>
+
+<li> AbstractRepository - абстрактный класс репозитория</li>
+
+<li> ProjectRepository - класс для хранения и доступа к хранилищу проектов</li>
+
+<li> SessionRepository - класс для хранения и доступа к хранилищу сессий</li>
+
+<li> TaskRepository - класс для хранения и доступа к хранилищу задач</li>
+
+<li> UserRepository - класс для хранения и доступа к хранилищу пользователей</li>
+
+<h4>[service]</h4>
+
+<li> ProjectService - класс для выполнения операций над проектами</li>
+
+<li> SessionService - класс для выполнения операций над сессиями</li>
+
+<li> TaskService - класс для выполнения операций над задачами</li>
+
+<li> UserService - класс для выполнения операций над пользователями</li>
+
+<h4>Application - основной класс на сервере</h4>
+
+<h3>- client -</h3>
+
+<h4>[api]</h4>
+
+<li> ICommand - интерфейс команд</li>
 
 <h4>[command]</h4>
 
@@ -46,31 +108,18 @@
 
 <h4>[controller]</h4>
 
-<li> Bootstrap - класс начальной загрузки программы</li>
+<li> Bootstrap - класс начальной загрузки программы на клиенте</li>
 
-<h4>[entity]</h4>
+<h4>[endpoint]</h4>
 
-<li> AbstractEntity - абстрактный класс сущности</li>
+<li> Классы, сгенерированные с помощью Endpoint</li>
 
-<li> Task - класс задача</li>
+<h4>[util]</h4>
 
-<li> Project - класс проект</li>
+<li> GcToStrUtil - утильный класс с методом для перевода <i>XMLGregorianCalendar</i> в <i>String</i></li>
+<li> StrToGcUtil - утильный класс с методом для перевода <i>String</i> в <i>XMLGregorianCalendar</i></li>
 
-<h4>[repository]</h4>
-
-<li> AbstractRepository - абстрактный класс репозитория</li>
-
-<li> ProjectRepository - класс для хранения и доступа к проектам</li>
-
-<li> TaskRepository - класс для хранения и доступа к задачам</li>
-
-<h4>[repository]</h4>
-
-<li> ProjectService - класс для выполнения операций над проектами</li>
-
-<li> TaskService - класс для выполнения операций над задачами</li>
-
-<h4>Application - основной класс</h4>
+<h4>App - основной класс на клиенте</h4>
 
 <h3>Сборка проекта</h3>
 
