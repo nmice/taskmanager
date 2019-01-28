@@ -38,18 +38,6 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
         String id = project.getId();
 
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveUser().getId());
-        if (taskList.size() == 0) {
-            System.out.println("Tasks not found");
-        } else {
-            for (Task task : taskList) {
-                if (id.equals(task.getProjectId())) {
-                    getBootstrap().getTaskEndpointService().taskDelete(task.getId());
-                }
-            }
-            System.out.println("Project's tasks deleted");
-        }
-
         getBootstrap().getProjectEndpointService().projectDelete(id);
         System.out.println("Project deleted");
     }

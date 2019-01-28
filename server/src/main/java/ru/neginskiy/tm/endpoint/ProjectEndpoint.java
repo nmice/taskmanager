@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.endpoint;
 
 import ru.neginskiy.tm.api.IProjectService;
+import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.Project;
 
 import javax.jws.WebMethod;
@@ -11,29 +12,29 @@ import java.util.List;
 @WebService
 public class ProjectEndpoint {
 
-    private IProjectService projectService;
+    private ServiceLocator serviceLocator;
 
-    public ProjectEndpoint(IProjectService projectService) {
-        this.projectService = projectService;
+    public ProjectEndpoint(ServiceLocator serviceLocator) {
+        this.serviceLocator = serviceLocator;
     }
 
     @WebMethod
     public void projectMerge(@WebParam(name = "project") Project project) {
-        projectService.merge(project);
+        serviceLocator.getProjectService().merge(project);
     }
 
     @WebMethod
     public Project projectGetById(@WebParam(name = "id") String id) {
-        return projectService.getById(id);
+        return serviceLocator.getProjectService().getById(id);
     }
 
     @WebMethod
     public List<Project> projectGetAllByUserId(@WebParam(name = "userId") String userId) {
-        return projectService.getAllByUserId(userId);
+        return serviceLocator.getProjectService().getAllByUserId(userId);
     }
 
     @WebMethod
     public Project projectDelete(@WebParam(name = "id") String id) {
-        return projectService.delete(id);
+        return serviceLocator.getProjectService().delete(id);
     }
 }

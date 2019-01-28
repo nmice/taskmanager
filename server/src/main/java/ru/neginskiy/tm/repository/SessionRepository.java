@@ -21,9 +21,9 @@ public class SessionRepository extends AbstractRepository<Session> {
             Properties properties = new Properties();
             properties.load(new FileReader(file));
             String secretKey = properties.getProperty("secretKey");
-            String signature = session.getId();
+            String signature = DigestUtils.md5Hex(session.getId());
             for (int i = 0; i < SALT_COUNTER; i++) {
-                signature += DigestUtils.md5Hex(session.getId()) + secretKey;
+                signature = DigestUtils.md5Hex(signature + secretKey);
             }
             session.setSignature(signature);
             merge(session);//Add to Session repository

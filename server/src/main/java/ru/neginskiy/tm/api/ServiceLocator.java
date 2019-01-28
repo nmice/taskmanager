@@ -1,9 +1,10 @@
 package ru.neginskiy.tm.api;
 
-import ru.neginskiy.tm.service.ProjectService;
-
 public interface ServiceLocator {
 
-    ProjectService getProjectService();
+    IProjectService getProjectService();
+    ISessionService getSessionService();
+    ITaskService getTaskService();
+    IUserService getUserService();
 
 }
