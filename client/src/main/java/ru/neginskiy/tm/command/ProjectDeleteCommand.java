@@ -1,7 +1,6 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
-import ru.neginskiy.tm.endpoint.Task;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveUser().getId());
+        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;
@@ -38,7 +37,7 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
         String id = project.getId();
 
-        getBootstrap().getProjectEndpointService().projectDelete(id);
+        getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
         System.out.println("Project deleted");
     }
 

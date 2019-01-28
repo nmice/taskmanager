@@ -12,7 +12,7 @@ public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveUser().getId());
+        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;

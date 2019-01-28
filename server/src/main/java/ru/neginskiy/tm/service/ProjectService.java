@@ -45,23 +45,10 @@ public class ProjectService implements IProjectService {
 
     @Override
     public Project delete(String id) {
-        List<Task> taskList = taskRepository.;
-        if (taskList.size() == 0) {
-            System.out.println("Tasks not found");
-        } else {
-            for (Task task : taskList) {
-                if (id.equals(task.getProjectId())) {
-                    getBootstrap().getTaskEndpointService().taskDelete(task.getId());
-                }
-            }
-            System.out.println("Project's tasks deleted");
-        }
-
-
-
         if (id == null || id.isEmpty()) {
             return null;
         }
+        taskRepository.deleteByProjectId(id);
         return projectRepository.delete(id);
     }
 }

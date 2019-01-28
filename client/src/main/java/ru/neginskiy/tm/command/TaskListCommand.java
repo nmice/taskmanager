@@ -12,7 +12,7 @@ public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveUser().getId());
+        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;

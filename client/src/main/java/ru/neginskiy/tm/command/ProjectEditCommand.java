@@ -15,7 +15,7 @@ public class ProjectEditCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please select project number to update :");
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveUser().getId());
+        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         int indexOfProject = 0;
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
@@ -86,7 +86,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 break;
         }
 
-        getBootstrap().getProjectEndpointService().projectMerge(project);
+        getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
         System.out.println("Project updated");
     }
 

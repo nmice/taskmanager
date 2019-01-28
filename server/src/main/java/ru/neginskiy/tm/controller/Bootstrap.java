@@ -5,6 +5,7 @@ import ru.neginskiy.tm.endpoint.ProjectEndpoint;
 import ru.neginskiy.tm.endpoint.SessionEndpoint;
 import ru.neginskiy.tm.endpoint.TaskEndpoint;
 import ru.neginskiy.tm.endpoint.UserEndpoint;
+import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.repository.TaskRepository;
 import ru.neginskiy.tm.repository.ProjectRepository;
@@ -30,20 +31,20 @@ public class Bootstrap implements ServiceLocator {
 
     public void init() {
         registryInNet();
-        /*if (userService.getAllByUserId().size() == 0) {
+        if (userService.getAll().size() == 0) {
             createTestUser();
-        }*/
+        }
     }
 
- /*   private void createTestUser() {
+    private void createTestUser() {
         User testUser = new User();
         testUser.setLogin("test");
         testUser.setPassword(String.valueOf(("test").hashCode()));
         getUserService().merge(testUser);
-    }*/
+    }
 
     private void registryInNet() {
-        Endpoint.publish("http://localhost:8080/TaskEndpoint?wsdl", new TaskEndpoint(taskService));
+        Endpoint.publish("http://localhost:8080/TaskEndpoint?wsdl", new TaskEndpoint(this));
         Endpoint.publish("http://localhost:8080/ProjectEndpoint?wsdl", new ProjectEndpoint(this));
         Endpoint.publish("http://localhost:8080/UserEndpoint?wsdl", new UserEndpoint(userService));
         Endpoint.publish("http://localhost:8080/SessionEndpoint?wsdl", new SessionEndpoint(sessionService));

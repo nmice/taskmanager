@@ -18,4 +18,13 @@ public class TaskRepository extends AbstractRepository<Task> {
         }
         return resultList;
     }
+
+    public void deleteByProjectId(String projectId) {
+        for (Task task : entityBase.values()) {
+            if (projectId.equals(task.getProjectId())) {
+                delete(task.getId());
+            }
+        }
+    }
+
 }

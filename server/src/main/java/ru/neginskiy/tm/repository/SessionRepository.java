@@ -17,7 +17,9 @@ public class SessionRepository extends AbstractRepository<Session> {
         Session session = new Session();
         session.setUserId(userId);
         try {
-            File file = new File(("src/main/resources/config.properties"));
+/*            InputStream is = getClass().getResourceAsStream(filename);
+            properties.load(is);*/
+            File file = new File(("server/src/main/resources/config.properties"));
             Properties properties = new Properties();
             properties.load(new FileReader(file));
             String secretKey = properties.getProperty("secretKey");

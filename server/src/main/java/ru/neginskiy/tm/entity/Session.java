@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Session extends AbstractEntity {
 
-    private final Date timeStamp = new Date();
+    private Date timeStamp = new Date();//default
     private String userId;
     private String signature;
 
@@ -22,6 +22,10 @@ public class Session extends AbstractEntity {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void timeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public void setSignature(String signature) {
