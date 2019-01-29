@@ -16,6 +16,7 @@ import ru.neginskiy.tm.service.TaskService;
 import ru.neginskiy.tm.service.UserService;
 
 import javax.xml.ws.Endpoint;
+import java.sql.*;
 
 public class Bootstrap implements ServiceLocator {
 
@@ -33,6 +34,17 @@ public class Bootstrap implements ServiceLocator {
         registryInNet();
         if (userService.getAll().size() == 0) {
             createTestUser();
+        }
+        String url = "jdbc:mysql://localhost:3636/tm_database";
+        String username = "root";
+        String password = "root";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM employee");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
     }
 
