@@ -1,7 +1,5 @@
 package ru.neginskiy.tm.util;
 
-import ru.neginskiy.tm.entity.Session;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
