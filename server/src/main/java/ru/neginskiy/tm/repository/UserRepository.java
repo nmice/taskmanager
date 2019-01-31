@@ -2,10 +2,15 @@ package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.User;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository extends AbstractRepository<User> {
+
+    public UserRepository(Connection connection) {
+        this.connection = connection;
+    }
 
     public User findUser(String login, String passwordHash) {
         List<User> userList = new ArrayList<>(entityBase.values());

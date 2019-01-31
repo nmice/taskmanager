@@ -6,9 +6,6 @@ import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
 
-import java.io.InputStream;
-import java.util.Properties;
-
 public class SessionService implements ISessionService {
 
     private final SessionRepository entityRepository;

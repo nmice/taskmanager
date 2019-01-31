@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.controller;
 
 import ru.neginskiy.tm.api.*;
+import ru.neginskiy.tm.connection.DBConnection;
 import ru.neginskiy.tm.endpoint.ProjectEndpoint;
 import ru.neginskiy.tm.endpoint.SessionEndpoint;
 import ru.neginskiy.tm.endpoint.TaskEndpoint;
@@ -20,17 +21,27 @@ import java.sql.*;
 
 public class Bootstrap implements ServiceLocator {
 
-    private final TaskRepository taskRepository = new TaskRepository();
-    private final ProjectRepository projectRepository = new ProjectRepository();
-    private final UserRepository userRepository = new UserRepository();
-    private final SessionRepository sessionRepository = new SessionRepository();
+    private final DBConnection dbConnection = new DBConnection();
 
-    private final ITaskService taskService = new TaskService(taskRepository);
-    private final IProjectService projectService = new ProjectService(projectRepository, taskRepository);
-    private final IUserService userService = new UserService(userRepository);
-    private final ISessionService sessionService = new SessionService(sessionRepository);
+    private ITaskService taskService;
+    private IProjectService projectService;
+    private IUserService userService;
+    private ISessionService sessionService;
 
     public void init() {
+        dbConnection.initDB();
+        Connection connection = dbConnection.getConnection();
+
+        final TaskRepository taskRepository = new TaskRepository(connection);
+        final ProjectRepository projectRepository = new ProjectRepository(connection);
+        final UserRepository userRepository = new UserRepository(connection);
+        final SessionRepository sessionRepository = new SessionRepository(connection);
+
+        taskService = new TaskService(taskRepository);
+        projectService = new ProjectService(projectRepository, taskRepository);
+        userService = new UserService(userRepository);
+        sessionService = new SessionService(sessionRepository);
+
         registryInNet();
         if (userService.getAll().size() == 0) {
             createTestUser();
@@ -66,5 +77,9 @@ public class Bootstrap implements ServiceLocator {
 
     public ISessionService getSessionService() {
         return sessionService;
+    }
+
+    public Connection getConnection() {
+        return dbConnection.getConnection();
     }
 }

@@ -2,11 +2,16 @@ package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Task;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class TaskRepository extends AbstractRepository<Task> {
+
+    public TaskRepository(Connection connection){
+        this.connection = connection;
+    }
 
     public List<Task> getAllByUserId(String userId) {
         Collection<Task> c = entityBase.values();

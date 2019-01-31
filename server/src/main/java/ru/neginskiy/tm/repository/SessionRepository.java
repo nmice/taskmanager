@@ -2,9 +2,15 @@ package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Session;
 
+import java.sql.Connection;
+
 public class SessionRepository extends AbstractRepository<Session> {
 
     private static final int SESSION_LIFETIME = 1800_000;//30 minutes
+
+    public SessionRepository(Connection connection) {
+        this.connection = connection;
+    }
 
     public boolean isUncorrectSession(Session session) {
         Session sessionInRepo = getById(session.getId());

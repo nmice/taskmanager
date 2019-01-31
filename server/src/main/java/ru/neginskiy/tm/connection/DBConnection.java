@@ -1,38 +1,30 @@
 package ru.neginskiy.tm.connection;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
+import ru.neginskiy.tm.entity.User;
 
 import java.sql.*;
 
+import static ru.neginskiy.tm.util.AppConfig.*;
+
 public class DBConnection {
 
-    public final Connection connection;
-
-    public DBConnection(Connection connection) {
-        this.connection = connection;
-    }
+    private Connection connection;
 
     public void initDB() {
-        String url = "jdbc:mysql://localhost:3636/tm_database";
-        String username = "root";
-        String password = "root";
-
-//            Class.forName("com.mysql.jdbc.Driver");
-        Driver driver = null;
         try {
-            driver = new FabricMySQLDriver();
-            DriverManager.registerDriver(driver);
-        } catch (SQLException e) {
+            Class.forName(DB_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             Statement statement = connection.createStatement()) {
-            statement.execute("INSERT INTO `user` (id,login,passwordHash) VALUES ('1234','MIKE',36050252useruser');");
-            //ResultSet resultSet = statement.executeQuery("SELECT * FROM ");
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
-
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 }
