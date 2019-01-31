@@ -6,6 +6,7 @@ public class UserLogoutCommand extends AbstractCommand {
 
     @Override
     public void execute() {
+        getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession().getId());
         getBootstrap().setActiveUser(null);
         System.out.println("You are logout");
     }

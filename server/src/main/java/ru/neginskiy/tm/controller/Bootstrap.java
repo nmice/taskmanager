@@ -35,17 +35,7 @@ public class Bootstrap implements ServiceLocator {
         if (userService.getAll().size() == 0) {
             createTestUser();
         }
-        String url = "jdbc:mysql://localhost:3636/tm_database";
-        String username = "root";
-        String password = "root";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM employee");
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        //conn
     }
 
     private void createTestUser() {
@@ -56,10 +46,10 @@ public class Bootstrap implements ServiceLocator {
     }
 
     private void registryInNet() {
-        Endpoint.publish("http://localhost:8080/TaskEndpoint?wsdl", new TaskEndpoint(this));
-        Endpoint.publish("http://localhost:8080/ProjectEndpoint?wsdl", new ProjectEndpoint(this));
-        Endpoint.publish("http://localhost:8080/UserEndpoint?wsdl", new UserEndpoint(userService));
-        Endpoint.publish("http://localhost:8080/SessionEndpoint?wsdl", new SessionEndpoint(sessionService));
+        Endpoint.publish("http://localhost:1234/TaskEndpoint?wsdl", new TaskEndpoint(this));
+        Endpoint.publish("http://localhost:1234/ProjectEndpoint?wsdl", new ProjectEndpoint(this));
+        Endpoint.publish("http://localhost:1234/UserEndpoint?wsdl", new UserEndpoint(userService));
+        Endpoint.publish("http://localhost:1234/SessionEndpoint?wsdl", new SessionEndpoint(sessionService));
     }
 
     public IProjectService getProjectService() {

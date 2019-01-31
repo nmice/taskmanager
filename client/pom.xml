@@ -22,16 +22,16 @@
                             <wsdlOptions>
                                 <!-- На все Endpoint +?wsdl-->
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8080/TaskEndpoint?wsdl</wsdl>
+                                    <wsdl>http://localhost:1234/TaskEndpoint?wsdl</wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8080/ProjectEndpoint?wsdl</wsdl>
+                                    <wsdl>http://localhost:1234/ProjectEndpoint?wsdl</wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8080/UserEndpoint?wsdl</wsdl>
+                                    <wsdl>http://localhost:1234/UserEndpoint?wsdl</wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8080/SessionEndpoint?wsdl</wsdl>
+                                    <wsdl>http://localhost:1234/SessionEndpoint?wsdl</wsdl>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
