@@ -24,7 +24,7 @@ public class Session extends AbstractEntity {
         this.userId = userId;
     }
 
-    public void timeStamp(Date timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 

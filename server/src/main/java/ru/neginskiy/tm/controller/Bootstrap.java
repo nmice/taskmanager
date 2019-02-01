@@ -52,7 +52,7 @@ public class Bootstrap implements ServiceLocator {
     private void createTestUser() {
         User testUser = new User();
         testUser.setLogin("test");
-        testUser.setPassword(String.valueOf(("test").hashCode()));
+        testUser.setPasswordHash(String.valueOf(("test").hashCode()));
         getUserService().merge(testUser);
     }
 
