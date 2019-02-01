@@ -30,7 +30,7 @@ public class UserCreateCommand extends AbstractCommand {
             return;
         }
         String passwordHash = String.valueOf(password.hashCode());
-        user.setPassword(passwordHash);
+        user.setPasswordHash(passwordHash);
 
         getBootstrap().getUserEndpointService().userMerge(user);
         System.out.println("New user created");

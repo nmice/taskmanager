@@ -44,19 +44,19 @@ public class ProjectEditCommand extends AbstractCommand {
         String updateCommandString = getBootstrap().readLine();
         switch (updateCommandString) {
             case "changename":
-                System.out.println("Please enter a new project name: ");
+                System.out.println("Please enter a new project name : ");
                 String name = getBootstrap().readLine();
                 project.setName(name);
                 System.out.println("Name changed");
                 break;
             case "changedescription":
-                System.out.println("Please enter a new project description: ");
+                System.out.println("Please enter a new project description : ");
                 String description = getBootstrap().readLine();
                 project.setDescription(description);
                 System.out.println("Description changed");
                 break;
             case "changebegindate":
-                System.out.println("Please enter a new project begin date: ");
+                System.out.println("Please enter a new project begin date in the format DD-MM-YYYY :");
                 XMLGregorianCalendar dateBegin = getGcFromStr(getBootstrap().readLine());
                 if (dateBegin == null) {
                     return;
@@ -71,7 +71,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 System.out.println("Begin date changed");
                 break;
             case "changeenddate":
-                System.out.println("Please enter a new project end date: ");
+                System.out.println("Please enter a new project end date in the format DD-MM-YYYY :");
                 dateEnd = getGcFromStr(getBootstrap().readLine());
                 if (dateEnd == null) {
                     return;

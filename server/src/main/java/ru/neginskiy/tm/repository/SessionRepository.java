@@ -7,8 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
 public class SessionRepository extends AbstractRepository<Session> {
 
@@ -39,7 +40,7 @@ public class SessionRepository extends AbstractRepository<Session> {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, session.getId());
             preparedStatement.setString(2, session.getSignature());
-            preparedStatement.setDate(3, new java.sql.Date(session.getTimeStamp().getTime()));
+            preparedStatement.setDate(3, prepare(session.getTimeStamp()));
             preparedStatement.setString(4, session.getUserId());
             /*int euReturnValue = */
             preparedStatement.executeUpdate();
@@ -51,7 +52,7 @@ public class SessionRepository extends AbstractRepository<Session> {
     @Override
     public Session getById(String id) {
         Session session = new Session();
-        String query = "SELECT * FROM session where 'id'=?";
+        String query = "SELECT * FROM session where id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -59,19 +60,11 @@ public class SessionRepository extends AbstractRepository<Session> {
             while (resultSet.next()) {
                 session.setId(resultSet.getString("id"));
                 session.setSignature(resultSet.getString("signature"));
-                session.setTimeStamp(new Date(resultSet.getDate("timeStamp").getTime()));
+                session.setTimeStamp(prepare(resultSet.getDate("timeStamp")));
                 session.setUserId(resultSet.getString("userId"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return session;
     }
@@ -87,20 +80,12 @@ public class SessionRepository extends AbstractRepository<Session> {
                 Session session = new Session();
                 session.setId(resultSet.getString("id"));
                 session.setSignature(resultSet.getString("signature"));
-                session.setTimeStamp(new Date(resultSet.getDate("timeStamp").getTime()));
+                session.setTimeStamp(prepare(resultSet.getDate("timeStamp")));
                 session.setUserId(resultSet.getString("userId"));
                 resultList.add(session);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return resultList;
     }
@@ -108,21 +93,13 @@ public class SessionRepository extends AbstractRepository<Session> {
     @Override
     public Session delete(String id) {
         Session session = getById(id);
-        String query = "DELETE FROM session where 'id'=?";
+        String query = "DELETE FROM session where id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return session;
     }

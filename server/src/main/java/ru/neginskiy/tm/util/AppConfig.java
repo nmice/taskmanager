@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class AppConfig {
 
-    private static final String PROPERTY_FILE = "/config.properties";
+    private static final String PROPERTY_FILE = "config.properties";
     public static String SECRET_KEY;
     public static int SALT_COUNTER;
     public static String DB_URL;
@@ -14,9 +14,10 @@ public class AppConfig {
     public static String DB_PASSWORD;
     public static String DB_DRIVER;
 
-    public void init() {
-        final InputStream is = getClass().getResourceAsStream(PROPERTY_FILE);
+    public static void init() {
         final Properties properties = new Properties();
+        final InputStream is = AppConfig.class.getClassLoader().getResourceAsStream(PROPERTY_FILE);
+
         try {
             properties.load(is);
             SECRET_KEY = properties.getProperty("secretKey");
@@ -30,4 +31,3 @@ public class AppConfig {
         }
     }
 }
-

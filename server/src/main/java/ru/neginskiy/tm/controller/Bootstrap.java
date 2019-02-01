@@ -15,6 +15,7 @@ import ru.neginskiy.tm.service.ProjectService;
 import ru.neginskiy.tm.service.SessionService;
 import ru.neginskiy.tm.service.TaskService;
 import ru.neginskiy.tm.service.UserService;
+import ru.neginskiy.tm.util.AppConfig;
 
 import javax.xml.ws.Endpoint;
 import java.sql.*;
@@ -29,6 +30,7 @@ public class Bootstrap implements ServiceLocator {
     private ISessionService sessionService;
 
     public void init() {
+        AppConfig.init();
         dbConnection.initDB();
         Connection connection = dbConnection.getConnection();
 
@@ -42,11 +44,12 @@ public class Bootstrap implements ServiceLocator {
         userService = new UserService(userRepository);
         sessionService = new SessionService(sessionRepository);
 
+        createTestUser();
+
         registryInNet();
         if (userService.getAll().size() == 0) {
-            createTestUser();
+            //createTestUser();
         }
-        //conn
     }
 
     private void createTestUser() {
@@ -54,6 +57,10 @@ public class Bootstrap implements ServiceLocator {
         testUser.setLogin("test");
         testUser.setPasswordHash(String.valueOf(("test").hashCode()));
         getUserService().merge(testUser);
+        User testUser2 = new User();
+        testUser2.setLogin("test2");
+        testUser2.setPasswordHash(String.valueOf(("test2").hashCode()));
+        getUserService().merge(testUser2);
     }
 
     private void registryInNet() {

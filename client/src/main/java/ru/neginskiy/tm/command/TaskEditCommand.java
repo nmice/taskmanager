@@ -36,27 +36,27 @@ public class TaskEditCommand extends AbstractCommand {
         }
 
         System.out.println("Enter the command: \r\n" +
-                "changename        - change name of task \r\n" +
-                "changedescription - change description of task \r\n" +
+                "changename        - Change name of task \r\n" +
+                "changedescription - Change description of task \r\n" +
                 "changebegindate   - Change a begin date of task \r\n" +
-                "changeenddate     - change a end date of task");
+                "changeenddate     - Change a end date of task");
         String updateCommandString = getBootstrap().readLine();
         switch (updateCommandString) {
             case "changename":
-                System.out.println("Please enter a new task name: ");
+                System.out.println("Please enter a new task name : ");
                 String name = getBootstrap().readLine();
                 task.setName(name);
                 System.out.println("Name changed");
                 break;
             case "changedescription":
-                System.out.println("Please enter a new task description: ");
+                System.out.println("Please enter a new task description : ");
                 String description = getBootstrap().readLine();
                 task.setDescription(description);
                 System.out.println("Description changed");
                 break;
 
             case "changebegindate":
-                System.out.println("Please enter a new task begin date: ");
+                System.out.println("Please enter a new task begin date in the format DD-MM-YYYY :");
                 XMLGregorianCalendar dateBegin = getGcFromStr(getBootstrap().readLine());
                 if (dateBegin == null) {
                     return;
@@ -70,7 +70,7 @@ public class TaskEditCommand extends AbstractCommand {
                 System.out.println("Begin date changed");
                 break;
             case "changeenddate":
-                System.out.println("Please enter a new task end date: ");
+                System.out.println("Please enter a new task end date in the format DD-MM-YYYY :");
                 dateEnd = getGcFromStr(getBootstrap().readLine());
                 if (dateEnd == null) {
                     return;
