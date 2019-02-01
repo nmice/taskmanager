@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ProjectRepository extends AbstractRepository<Project> {
@@ -19,15 +18,9 @@ public class ProjectRepository extends AbstractRepository<Project> {
     public List<Project> getAllByUserId(String userId) {
         List<Project> resultList = new ArrayList<>();
         String query = "SELECT * FROM project where 'userId'=?";
-//        String query = "INSERT INTO `user` VALUES (?,?,?);";
-        PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userId);
-//            preparedStatement.setString(1, "id");
-//            preparedStatement.setString(2, "user");
-//            preparedStatement.setString(3, "password");
-//            preparedStatement.execute();
             ResultSet resultSet = preparedStatement.executeQuery();//.getResultSet();
             while (resultSet.next()) {
                 Project project = new Project();
@@ -47,6 +40,35 @@ public class ProjectRepository extends AbstractRepository<Project> {
 
     @Override
     public void merge(Project entity) {
+        //проверить в базе наличие проекта по его id
+        //если проекта нет - insert into...
+        //если проект есть, update по очереди по всем полям
+
+
+        String query = "INSERT INTO project(id,name,description,dateBegin,dateEnd,userId) VALUES (4,'Printer') ON DUPLICATE KEY UPDATE name = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();//.getResultSet();
+            while (resultSet.next()) {
+                Project project = new Project();
+                project.setId(resultSet.getString("id"));
+                project.setName(resultSet.getString("name"));
+                project.setDescription(resultSet.getString("description"));
+                project.setDateBegin(resultSet.getDate("dateBegin"));
+                project.setDateEnd(resultSet.getDate("dateEnd"));
+                project.setUserId(resultSet.getString("userId"));
+                resultList.add(project);
+            }
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return;
+        //        String query = "INSERT INTO `user` VALUES (?,?,?);";
+        //            preparedStatement.setString(1, "id");
+//            preparedStatement.setString(2, "user");
+//            preparedStatement.setString(3, "password");
+//            preparedStatement.execute();
 /*        PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO `user` VALUES (?,?,?);");

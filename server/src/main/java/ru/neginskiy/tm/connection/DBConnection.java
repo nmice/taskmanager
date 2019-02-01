@@ -1,8 +1,5 @@
 package ru.neginskiy.tm.connection;
 
-import com.mysql.fabric.jdbc.FabricMySQLDriver;
-import ru.neginskiy.tm.entity.User;
-
 import java.sql.*;
 
 import static ru.neginskiy.tm.util.AppConfig.*;
