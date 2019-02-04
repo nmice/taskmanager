@@ -18,31 +18,21 @@ public class ProjectRepository extends AbstractRepository<Project> {
     }
 
     public List<Project> getAllByUserId(String userId) {
-        List<Project> resultList = new ArrayList<>();
-        String query = "SELECT * FROM project where userId=?";
+        final String query = "SELECT * FROM project where userId=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Project project = new Project();
-                project.setId(resultSet.getString("id"));
-                project.setName(resultSet.getString("name"));
-                project.setDescription(resultSet.getString("description"));
-                project.setDateBegin(prepare(resultSet.getDate("dateBegin")));
-                project.setDateEnd(prepare(resultSet.getDate("dateEnd")));
-                project.setUserId(resultSet.getString("userId"));
-                resultList.add(project);
-            }
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            return fetchAll(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultList;
+        return new ArrayList<>();
     }
 
     @Override
     public void merge(Project project) {
-        String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
+        final String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
                 "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)";
         try {
@@ -53,7 +43,6 @@ public class ProjectRepository extends AbstractRepository<Project> {
             preparedStatement.setDate(4, prepare(project.getDateBegin()));
             preparedStatement.setDate(5, prepare(project.getDateEnd()));
             preparedStatement.setString(6, project.getUserId());
-            /*int euReturnValue = */
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,60 +51,65 @@ public class ProjectRepository extends AbstractRepository<Project> {
 
     @Override
     public Project getById(String id) {
-        Project project = new Project();
-        String query = "SELECT * FROM project where id=?";
+        final String query = "SELECT * FROM project where id=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                project.setId(resultSet.getString("id"));
-                project.setName(resultSet.getString("name"));
-                project.setDescription(resultSet.getString("description"));
-                project.setDateBegin(prepare(resultSet.getDate("dateBegin")));
-                project.setDateEnd(prepare(resultSet.getDate("dateEnd")));
-                project.setUserId(resultSet.getString("userId"));
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return fetch(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return project;
+        return null;
     }
 
     @Override
     public List<Project> getAll() {
-        List<Project> resultList = new ArrayList<>();
-        String query = "SELECT * FROM project";
+        final String query = "SELECT * FROM project";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Project project = new Project();
-                project.setId(resultSet.getString("id"));
-                project.setName(resultSet.getString("name"));
-                project.setDescription(resultSet.getString("description"));
-                project.setDateBegin(prepare(resultSet.getDate("dateBegin")));
-                project.setDateEnd(prepare(resultSet.getDate("dateEnd")));
-                project.setUserId(resultSet.getString("userId"));
-                resultList.add(project);
-            }
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            return fetchAll(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultList;
+        return new ArrayList<>();
     }
 
     @Override
     public Project delete(String id) {
-        Project project = getById(id);
-        String query = "DELETE FROM project where id=?";
+        final Project project = getById(id);
+        final String query = "DELETE FROM project where id=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return project;
+    }
+
+    @Override
+    protected Project fetch(ResultSet resultSet) throws SQLException {
+        final Project project = new Project();
+        project.setId(resultSet.getString("id"));
+        project.setName(resultSet.getString("name"));
+        project.setDescription(resultSet.getString("description"));
+        project.setDateBegin(prepare(resultSet.getDate("dateBegin")));
+        project.setDateEnd(prepare(resultSet.getDate("dateEnd")));
+        project.setUserId(resultSet.getString("userId"));
+        return project;
+    }
+
+    @Override
+    protected List<Project> fetchAll(ResultSet resultSet) throws SQLException {
+        final List<Project> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            resultList.add(fetch(resultSet));
+        }
+        return resultList;
     }
 }

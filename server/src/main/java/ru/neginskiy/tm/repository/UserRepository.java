@@ -16,32 +16,27 @@ public class UserRepository extends AbstractRepository<User> {
     }
 
     public User findUser(String login, String passwordHash) {
-        User user = new User();
-        String query = "SELECT * FROM `user` WHERE login=? AND passwordHash=?";
+        final String query = "SELECT * FROM `user` WHERE login=? AND passwordHash=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, passwordHash);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                user.setId(resultSet.getString("id"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPasswordHash(resultSet.getString("passwordHash"));
-            } else {
-                return null;
+                return fetch(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     public boolean isRegistredLogin(String login) {
-        String query = "SELECT * FROM `user` where login=?";
+        final String query = "SELECT * FROM `user` where login=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            final ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
         } catch (
                 SQLException e) {
@@ -52,14 +47,13 @@ public class UserRepository extends AbstractRepository<User> {
 
     @Override
     public void merge(User user) {
-        String query = "INSERT INTO `user` (id,login,passwordHash) VALUES (?, ?, ?) " +
+        final String query = "INSERT INTO `user` (id,login,passwordHash) VALUES (?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE login = VALUES(login), passwordHash = VALUES(passwordHash)";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getId());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPasswordHash());
-            /*int euReturnValue = */
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,47 +62,37 @@ public class UserRepository extends AbstractRepository<User> {
 
     @Override
     public User getById(String id) {
-        User user = new User();
-        String query = "SELECT * FROM `user` where id=?";
+        final String query = "SELECT * FROM `user` where id=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                user.setId(resultSet.getString("id"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPasswordHash(resultSet.getString("passwordHash"));
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return fetch(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     @Override
     public List<User> getAll() {
-        List<User> resultList = new ArrayList<>();
-        String query = "SELECT * FROM `user`";
+        final String query = "SELECT * FROM `user`";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getString("id"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPasswordHash(resultSet.getString("passwordHash"));
-                resultList.add(user);
-            }
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            return fetchAll(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultList;
+        return new ArrayList<>();
     }
 
     @Override
     public User delete(String id) {
-        User user = getById(id);
-        String query = "DELETE FROM `user` where id=?";
+        final User user = getById(id);
+        final String query = "DELETE FROM `user` where id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -117,5 +101,23 @@ public class UserRepository extends AbstractRepository<User> {
             e.printStackTrace();
         }
         return user;
+    }
+
+    @Override
+    protected User fetch(ResultSet resultSet) throws SQLException {
+        final User user = new User();
+        user.setId(resultSet.getString("id"));
+        user.setLogin(resultSet.getString("login"));
+        user.setPasswordHash(resultSet.getString("passwordHash"));
+        return user;
+    }
+
+    @Override
+    protected List<User> fetchAll(ResultSet resultSet) throws SQLException {
+        final List<User> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            resultList.add(fetch(resultSet));
+        }
+        return resultList;
     }
 }

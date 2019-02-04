@@ -54,7 +54,7 @@ public class SessionService implements ISessionService {
             signature = DigestUtils.md5Hex(signature + secretKey);
         }
         session.setSignature(signature);
-        merge(session);//Add to Session repository
+        entityRepository.merge(session);//Add to Session repository
         return session;
     }
 

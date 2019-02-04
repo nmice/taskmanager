@@ -20,7 +20,7 @@ public class SessionRepository extends AbstractRepository<Session> {
     }
 
     public boolean isUncorrectSession(Session session) {
-        Session sessionInBase = getById(session.getId());
+        final Session sessionInBase = getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {//Session is not in a repository OR Signature is incorrect
             return true;
         }
@@ -33,16 +33,15 @@ public class SessionRepository extends AbstractRepository<Session> {
 
     @Override
     public void merge(Session session) {
-        String query = "INSERT INTO session (id,signature,timeStamp,userId) VALUES (?, ?, ?, ?) " +
+        final String query = "INSERT INTO session (id,signature,timeStamp,userId) VALUES (?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE id = VALUES(id), signature = VALUES(signature), " +
                 "timeStamp = VALUES(timeStamp), userId = VALUES(userId)";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, session.getId());
             preparedStatement.setString(2, session.getSignature());
             preparedStatement.setDate(3, prepare(session.getTimeStamp()));
             preparedStatement.setString(4, session.getUserId());
-            /*int euReturnValue = */
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,56 +50,63 @@ public class SessionRepository extends AbstractRepository<Session> {
 
     @Override
     public Session getById(String id) {
-        Session session = new Session();
-        String query = "SELECT * FROM session where id=?";
+        final String query = "SELECT * FROM session where id=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                session.setId(resultSet.getString("id"));
-                session.setSignature(resultSet.getString("signature"));
-                session.setTimeStamp(prepare(resultSet.getDate("timeStamp")));
-                session.setUserId(resultSet.getString("userId"));
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return fetch(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return session;
+        return null;
     }
 
     @Override
     public List<Session> getAll() {
-        List<Session> resultList = new ArrayList<>();
-        String query = "SELECT * FROM session";
+        final String query = "SELECT * FROM session";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Session session = new Session();
-                session.setId(resultSet.getString("id"));
-                session.setSignature(resultSet.getString("signature"));
-                session.setTimeStamp(prepare(resultSet.getDate("timeStamp")));
-                session.setUserId(resultSet.getString("userId"));
-                resultList.add(session);
-            }
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            return fetchAll(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultList;
+        return new ArrayList<>();
     }
 
     @Override
     public Session delete(String id) {
-        Session session = getById(id);
-        String query = "DELETE FROM session where id=?";
+        final Session session = getById(id);
+        final String query = "DELETE FROM session where id=?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            final PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return session;
+    }
+
+    @Override
+    protected Session fetch(ResultSet resultSet) throws SQLException {
+        final Session session = new Session();
+        session.setId(resultSet.getString("id"));
+        session.setSignature(resultSet.getString("signature"));
+        session.setTimeStamp(prepare(resultSet.getDate("timeStamp")));
+        session.setUserId(resultSet.getString("userId"));
+        return session;
+    }
+
+    @Override
+    protected List<Session> fetchAll(ResultSet resultSet) throws SQLException {
+        final List<Session> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            resultList.add(fetch(resultSet));
+        }
+        return resultList;
     }
 }

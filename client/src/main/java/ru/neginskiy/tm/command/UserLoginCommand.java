@@ -32,6 +32,7 @@ public class UserLoginCommand extends AbstractCommand {
         String passwordHash = String.valueOf(password.hashCode());
 
         User user = getBootstrap().getUserEndpointService().findUser(login, passwordHash);
+
         if (user != null) {
             getBootstrap().setActiveUser(user);
 
