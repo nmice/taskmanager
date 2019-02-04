@@ -7,25 +7,25 @@ import java.util.Properties;
 public class AppConfig {
 
     private static final String PROPERTY_FILE = "config.properties";
-    public static String SECRET_KEY;
-    public static int SALT_COUNTER;
-    public static String DB_URL;
-    public static String DB_USERNAME;
-    public static String DB_PASSWORD;
-    public static String DB_DRIVER;
+    public static String secretKey;
+    public static int saltCounter;
+    public static String dbUrl;
+    public static String dbUsername;
+    public static String dbPassword;
+    public static String dbDriver;
 
-    public static void init() {
+    static {
         final Properties properties = new Properties();
         final InputStream is = AppConfig.class.getClassLoader().getResourceAsStream(PROPERTY_FILE);
 
         try {
             properties.load(is);
-            SECRET_KEY = properties.getProperty("secretKey");
-            SALT_COUNTER = Integer.parseInt(properties.getProperty("saltCounter"));
-            DB_URL = properties.getProperty("db.url");
-            DB_USERNAME = properties.getProperty("db.username");
-            DB_PASSWORD = properties.getProperty("db.password");
-            DB_DRIVER = properties.getProperty("db.driver");
+            secretKey = properties.getProperty("secretKey");
+            saltCounter = Integer.parseInt(properties.getProperty("saltCounter"));
+            dbUrl = properties.getProperty("db.url");
+            dbUsername = properties.getProperty("db.username");
+            dbPassword = properties.getProperty("db.password");
+            dbDriver = properties.getProperty("db.driver");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -30,7 +30,6 @@ public class Bootstrap implements ServiceLocator {
     private ISessionService sessionService;
 
     public void init() {
-        AppConfig.init();
         dbConnection.initDB();
         Connection connection = dbConnection.getConnection();
 

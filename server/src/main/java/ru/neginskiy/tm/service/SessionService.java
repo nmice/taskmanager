@@ -46,8 +46,8 @@ public class SessionService implements ISessionService {
         final Session session = new Session();
         session.setUserId(userId);
 
-        final String secretKey = AppConfig.SECRET_KEY;
-        final int saltCounter = AppConfig.SALT_COUNTER;
+        final String secretKey = AppConfig.secretKey;
+        final int saltCounter = AppConfig.saltCounter;
 
         String signature = DigestUtils.md5Hex(session.getId());
         for (int i = 0; i < saltCounter; i++) {
