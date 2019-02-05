@@ -3,6 +3,7 @@ package ru.neginskiy.tm.service;
 import org.apache.commons.codec.digest.DigestUtils;
 import ru.neginskiy.tm.api.ISessionService;
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.error.UncorrectSessionException;
 import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
 
@@ -12,22 +13,6 @@ public class SessionService implements ISessionService {
 
     public SessionService(SessionRepository entityRepository) {
         this.entityRepository = entityRepository;
-    }
-
-    @Override
-    public void merge(Session session) {
-        if (session == null) {
-            return;
-        }
-        entityRepository.merge(session);
-    }
-
-    @Override
-    public Session getById(String id) {
-        if (id == null || id.isEmpty()) {
-            return null;
-        }
-        return entityRepository.getById(id);
     }
 
     @Override
@@ -59,11 +44,11 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public boolean isUncorrectSession(Session session) {
+    public void validate(Session session) throws UncorrectSessionException {
         if (session == null) {
-            return true;
+            throw new UncorrectSessionException();
         }
-        return entityRepository.isUncorrectSession(session);
+        entityRepository.validate(session);
     }
 
 }

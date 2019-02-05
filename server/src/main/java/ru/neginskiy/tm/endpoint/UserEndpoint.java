@@ -22,20 +22,6 @@ public class UserEndpoint {
         userService.merge(user);
     }
 
-    @WebMethod
-    public User userGetById(@WebParam(name = "id") String id) {
-        return userService.getById(id);
-    }
-
-    @WebMethod
-    public List<User> userGetAll() {
-        return userService.getAll();
-    }
-
-    @WebMethod
-    public User userDelete(@WebParam(name = "id") String id) {
-        return userService.delete(id);
-    }
 
     @WebMethod
     public boolean isRegistredLogin(@WebParam(name = "login") String login) {

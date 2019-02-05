@@ -2,6 +2,7 @@ package ru.neginskiy.tm.endpoint;
 
 import ru.neginskiy.tm.api.ISessionService;
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -17,18 +18,13 @@ public class SessionEndpoint {
     }
 
     @WebMethod
-    public void sessionMerge(@WebParam(name = "session") Session session) {
-        sessionService.merge(session);
-    }
-
-    @WebMethod
-    public Session sessionGetById(@WebParam(name = "id") String id) {
-        return sessionService.getById(id);
-    }
-
-    @WebMethod
-    public Session sessionDelete(@WebParam(name = "id") String id) {
-        return sessionService.delete(id);
+    public Session sessionDelete(@WebParam(name = "session") Session session) {
+        try {
+            sessionService.validate(session);
+        } catch (UncorrectSessionException e) {
+            return null;
+        }
+        return sessionService.delete(session.getId());
     }
 
     @WebMethod
@@ -36,8 +32,8 @@ public class SessionEndpoint {
         return sessionService.getNewSession(userId);
     }
 
-    @WebMethod
-    public boolean isUncorrectSession(@WebParam(name = "session") Session session) {
-        return sessionService.isUncorrectSession(session);
-    }
+/*    @WebMethod
+    public void validate(@WebParam(name = "session") Session session) throws UncorrectSessionException {
+        sessionService.validate(session);
+    }*/
 }

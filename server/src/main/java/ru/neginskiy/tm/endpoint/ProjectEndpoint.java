@@ -3,6 +3,7 @@ package ru.neginskiy.tm.endpoint;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -21,7 +22,9 @@ public class ProjectEndpoint {
     @WebMethod
     public void projectMerge(@WebParam(name = "session") Session session,
                              @WebParam(name = "project") Project project) {
-        if (serviceLocator.getSessionService().isUncorrectSession(session)) {
+        try {
+            serviceLocator.getSessionService().validate(session);
+        } catch (UncorrectSessionException e) {
             return;
         }
         serviceLocator.getProjectService().merge(project);
@@ -30,7 +33,9 @@ public class ProjectEndpoint {
     @WebMethod
     public Project projectGetById(@WebParam(name = "session") Session session,
                                   @WebParam(name = "id") String id) {
-        if (serviceLocator.getSessionService().isUncorrectSession(session)) {
+        try {
+            serviceLocator.getSessionService().validate(session);
+        } catch (UncorrectSessionException e) {
             return null;
         }
         return serviceLocator.getProjectService().getById(id);
@@ -39,7 +44,9 @@ public class ProjectEndpoint {
     @WebMethod
     public List<Project> projectGetAllByUserId(@WebParam(name = "session") Session session,
                                                @WebParam(name = "userId") String userId) {
-        if (serviceLocator.getSessionService().isUncorrectSession(session)) {
+        try {
+            serviceLocator.getSessionService().validate(session);
+        } catch (UncorrectSessionException e) {
             return null;
         }
         return serviceLocator.getProjectService().getAllByUserId(userId);
@@ -48,7 +55,9 @@ public class ProjectEndpoint {
     @WebMethod
     public Project projectDelete(@WebParam(name = "session") Session session,
                                  @WebParam(name = "id") String id) {
-        if (serviceLocator.getSessionService().isUncorrectSession(session)) {
+        try {
+            serviceLocator.getSessionService().validate(session);
+        } catch (UncorrectSessionException e) {
             return null;
         }
         return serviceLocator.getProjectService().delete(id);

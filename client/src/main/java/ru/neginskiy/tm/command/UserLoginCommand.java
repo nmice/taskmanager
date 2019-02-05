@@ -3,8 +3,6 @@ package ru.neginskiy.tm.command;
 import ru.neginskiy.tm.endpoint.Session;
 import ru.neginskiy.tm.endpoint.User;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 public class UserLoginCommand extends AbstractCommand {
 
     private final boolean secure = true;

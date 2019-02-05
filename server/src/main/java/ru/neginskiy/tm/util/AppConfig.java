@@ -9,6 +9,7 @@ public class AppConfig {
     private static final String PROPERTY_FILE = "config.properties";
     public static String secretKey;
     public static int saltCounter;
+    public static int sessionLifetime;
     public static String dbUrl;
     public static String dbUsername;
     public static String dbPassword;
@@ -22,10 +23,12 @@ public class AppConfig {
             properties.load(is);
             secretKey = properties.getProperty("secretKey");
             saltCounter = Integer.parseInt(properties.getProperty("saltCounter"));
+            sessionLifetime = Integer.parseInt(properties.getProperty("sessionLifetime"));
             dbUrl = properties.getProperty("db.url");
             dbUsername = properties.getProperty("db.username");
             dbPassword = properties.getProperty("db.password");
             dbDriver = properties.getProperty("db.driver");
+
         } catch (IOException e) {
             e.printStackTrace();
         }

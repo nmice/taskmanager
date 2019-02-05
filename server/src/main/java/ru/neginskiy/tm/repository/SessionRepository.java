@@ -1,6 +1,8 @@
 package ru.neginskiy.tm.repository;
 
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.error.UncorrectSessionException;
+import ru.neginskiy.tm.util.AppConfig;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,22 +15,21 @@ import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
 public class SessionRepository extends AbstractRepository<Session> {
 
-    private static final int SESSION_LIFETIME = 1800_000;//30 minutes
+    private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
 
     public SessionRepository(Connection connection) {
         this.connection = connection;
     }
 
-    public boolean isUncorrectSession(Session session) {
+    public void validate(Session session) throws UncorrectSessionException {
         final Session sessionInBase = getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {//Session is not in a repository OR Signature is incorrect
-            return true;
+            throw new UncorrectSessionException();
         }
         if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {//Session is correct, but older than 30min
             delete(session.getId());
-            return true;
+            throw new UncorrectSessionException();
         }
-        return false;
     }
 
     @Override

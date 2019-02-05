@@ -46,9 +46,6 @@ public class Bootstrap implements ServiceLocator {
         createTestUser();
 
         registryInNet();
-        if (userService.getAll().size() == 0) {
-            //createTestUser();
-        }
     }
 
     private void createTestUser() {

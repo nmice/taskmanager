@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.api;
 
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.error.UncorrectSessionException;
 
 public interface ISessionService {
 
@@ -8,5 +9,5 @@ public interface ISessionService {
 
     Session getNewSession(String userId);
 
-    boolean isUncorrectSession(Session session);
+    void validate(Session session) throws UncorrectSessionException;
 }

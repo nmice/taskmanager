@@ -6,7 +6,7 @@ public class ExitCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession().getId());
+        getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
         System.exit(0);
     }
 
