@@ -8,6 +8,8 @@ public interface IUserService {
 
     void merge(User user);
 
+    User getById(String id);
+
     User findUser(String login, String passwordHash);
 
     public boolean isRegistredLogin(String login);

@@ -21,6 +21,14 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User getById(String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
+        return entityRepository.getById(id);
+    }
+
+    @Override
     public User findUser(String login, String passwordHash) {
         if (login == null || passwordHash == null) {
             return null;

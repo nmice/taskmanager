@@ -14,6 +14,7 @@ public class Bootstrap {
     private final ProjectEndpoint projectEndpointService = new ProjectEndpointService().getProjectEndpointPort();
     private final UserEndpoint userEndpointService = new UserEndpointService().getUserEndpointPort();
     private final SessionEndpoint sessionEndpointService = new SessionEndpointService().getSessionEndpointPort();
+    private final DataEndpoint DataEndpointService = new DataEndpointService().getDataEndpointPort();
 
     private User activeUser;
     private Session activeSession;
@@ -90,6 +91,10 @@ public class Bootstrap {
 
     public SessionEndpoint getSessionEndpointService() {
         return sessionEndpointService;
+    }
+
+    public DataEndpoint getDataEndpointService() {
+        return DataEndpointService;
     }
 
     public User getActiveUser() {

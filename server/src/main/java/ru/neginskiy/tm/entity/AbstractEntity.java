@@ -1,8 +1,9 @@
 package ru.neginskiy.tm.entity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements Serializable {
 
     private String id = UUID.randomUUID().toString();
 

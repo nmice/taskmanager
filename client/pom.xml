@@ -33,6 +33,9 @@
                                 <wsdlOption>
                                     <wsdl>http://localhost:1234/SessionEndpoint?wsdl</wsdl>
                                 </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>http://localhost:1234/DataEndpoint?wsdl</wsdl>
+                                </wsdlOption>
                             </wsdlOptions>
                         </configuration>
                         <goals>
