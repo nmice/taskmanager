@@ -8,10 +8,8 @@ public class Application {
         Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
-         +В репо всех прописать фетч и файнал,
-         +Апперкейс переменных поменять в аппконфиг
-         +SessionRepo, UserRepo закрыть дыры
-         +boolean validate return поменять на void Validate throw new exception
-         -Сериализация - save, load*/
+            -Сериализация - save, load
+            -MyBatis
+        */
     }
 }

@@ -22,11 +22,13 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
 
     abstract T fetch(ResultSet resultSet) throws SQLException;
 
-    List<T> fetchAll(ResultSet resultSet) throws SQLException {
+    abstract List<T> fetchAll(ResultSet resultSet) throws SQLException;
+
+/*    List<T> fetchAll(ResultSet resultSet) throws SQLException {
         final List<T> resultList = new ArrayList<>();
         while (resultSet.next()) {
             resultList.add(fetch(resultSet));
         }
         return resultList;
-    }
+    }*/
 }
