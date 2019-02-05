@@ -9,5 +9,4 @@ public interface ServiceLocator {
     ITaskService getTaskService();
     IUserService getUserService();
     DataService getDataService();
-
 }
