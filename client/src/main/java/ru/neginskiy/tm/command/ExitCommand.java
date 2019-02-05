@@ -1,12 +1,18 @@
 package ru.neginskiy.tm.command;
 
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
+
 public class ExitCommand extends AbstractCommand {
 
     private final boolean secure = true;
 
     @Override
     public void execute() {
-        getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
+        try {
+            getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.exit(0);
     }
 

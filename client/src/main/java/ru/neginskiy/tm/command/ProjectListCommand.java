@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import java.util.List;
 
@@ -12,14 +13,18 @@ public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        List<Project> projectList = null;
+        try {
+            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;
         }
         for (Project project : projectList) {
             System.out.printf("%s (%s), %s - %s%n", project.getName(), project.getDescription(), getStrFromGc(project.getDateBegin()), getStrFromGc(project.getDateEnd()));
-
         }
     }
 

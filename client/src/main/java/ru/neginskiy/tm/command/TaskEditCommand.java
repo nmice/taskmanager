@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Task;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
@@ -15,7 +16,12 @@ public class TaskEditCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please select project number to update :");
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        List<Task> taskList = null;
+        try {
+            taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         int index = 0;
         for (Task task : taskList) {
             System.out.printf("%-3s%s%s%n", index++, " - ", task.getName());
@@ -84,7 +90,11 @@ public class TaskEditCommand extends AbstractCommand {
                 System.out.println("End date changed");
                 break;
         }
-        getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
+        try {
+            getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.out.println("Task updated");
     }
 

@@ -1,5 +1,7 @@
 package ru.neginskiy.tm.command;
 
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
+
 public class DataBinSaveCommand extends AbstractCommand {
 
     @Override
@@ -9,7 +11,11 @@ public class DataBinSaveCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        getBootstrap().getDataEndpointService().saveDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        try {
+            getBootstrap().getDataEndpointService().saveDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
     }
 
     @Override

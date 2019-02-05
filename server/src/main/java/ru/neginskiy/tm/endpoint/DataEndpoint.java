@@ -18,24 +18,16 @@ public class DataEndpoint {
     }
 
     @WebMethod
-    public void saveDataBin (@WebParam(name = "session") Session session,
-                             @WebParam(name = "userId") String userId){
-        try {
-            serviceLocator.getSessionService().validate(session);
-        } catch (UncorrectSessionException e) {
-            return;
-        }
+    public void saveDataBin(@WebParam(name = "session") Session session,
+                            @WebParam(name = "userId") String userId) throws UncorrectSessionException {
+        serviceLocator.getSessionService().validate(session);
         serviceLocator.getDataService().saveDataBin(userId);
     }
 
     @WebMethod
-    public void loadDataBin (@WebParam(name = "session") Session session,
-                             @WebParam(name = "userId") String userId){
-        try {
-            serviceLocator.getSessionService().validate(session);
-        } catch (UncorrectSessionException e) {
-            return;
-        }
+    public void loadDataBin(@WebParam(name = "session") Session session,
+                            @WebParam(name = "userId") String userId) throws UncorrectSessionException {
+        serviceLocator.getSessionService().validate(session);
         serviceLocator.getDataService().loadDataBin(userId);
     }
 }

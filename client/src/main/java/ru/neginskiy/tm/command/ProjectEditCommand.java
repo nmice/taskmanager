@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
@@ -15,7 +16,12 @@ public class ProjectEditCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please select project number to update :");
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        List<Project> projectList = null;
+        try {
+            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         int indexOfProject = 0;
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
@@ -86,7 +92,11 @@ public class ProjectEditCommand extends AbstractCommand {
                 break;
         }
 
-        getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
+        try {
+            getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.out.println("Project updated");
     }
 

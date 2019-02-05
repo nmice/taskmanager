@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Task;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import java.util.List;
 
@@ -10,7 +11,12 @@ public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        List<Task> taskList = null;
+        try {
+            taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;
@@ -34,7 +40,11 @@ public class TaskDeleteCommand extends AbstractCommand {
             System.out.println("Incorrect input, task not found");
             return;
         }
-        getBootstrap().getTaskEndpointService().taskDelete(getBootstrap().getActiveSession(), task.getId());
+        try {
+            getBootstrap().getTaskEndpointService().taskDelete(getBootstrap().getActiveSession(), task.getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.out.println("Task deleted");
     }
 

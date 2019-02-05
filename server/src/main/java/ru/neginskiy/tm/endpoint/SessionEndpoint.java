@@ -18,12 +18,8 @@ public class SessionEndpoint {
     }
 
     @WebMethod
-    public Session sessionDelete(@WebParam(name = "session") Session session) {
-        try {
-            sessionService.validate(session);
-        } catch (UncorrectSessionException e) {
-            return null;
-        }
+    public Session sessionDelete(@WebParam(name = "session") Session session) throws UncorrectSessionException {
+        sessionService.validate(session);
         return sessionService.delete(session.getId());
     }
 
@@ -31,9 +27,4 @@ public class SessionEndpoint {
     public Session getNewSession(@WebParam(name = "userId") String userId) {
         return sessionService.getNewSession(userId);
     }
-
-/*    @WebMethod
-    public void validate(@WebParam(name = "session") Session session) throws UncorrectSessionException {
-        sessionService.validate(session);
-    }*/
 }

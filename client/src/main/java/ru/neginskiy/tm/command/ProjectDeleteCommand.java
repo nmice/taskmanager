@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import java.util.List;
 
@@ -10,7 +11,12 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        List<Project> projectList = null;
+        try {
+            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;
@@ -37,7 +43,11 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
         String id = project.getId();
 
-        getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
+        try {
+            getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.out.println("Project deleted");
     }
 

@@ -2,6 +2,7 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
 import ru.neginskiy.tm.endpoint.Task;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
@@ -14,7 +15,12 @@ public class TaskCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        List<Project> projectList = null;
+        try {
+            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         if (projectList.size() == 0) {
             System.out.println("Projects not found, please create a project first for the task");
             return;
@@ -77,7 +83,11 @@ public class TaskCreateCommand extends AbstractCommand {
             return;
         }
 
-        getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
+        try {
+            getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.out.println("New task created");
     }
 

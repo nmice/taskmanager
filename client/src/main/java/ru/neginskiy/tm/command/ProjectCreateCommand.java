@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -47,7 +48,11 @@ public class ProjectCreateCommand extends AbstractCommand {
             return;
         }
 
-        getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
+        try {
+            getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
+        } catch (UncorrectSessionException_Exception e) {
+            System.out.println("Uncorrect session, please log in");
+        }
         System.out.println("New project created");
     }
 
