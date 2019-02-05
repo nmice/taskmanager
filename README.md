@@ -123,8 +123,8 @@
 
 <h3>Сборка проекта</h3>
 
- mvn clean install
+<li> mvn clean install</li>
 
 <h3>Запуск</h3>
 
- java -jar ./taskmanager.jar
+<li> java -jar ./taskmanager.jar</li>

@@ -19,11 +19,11 @@ public class DataService {
     }
 
     public void saveDataBin(String userId) {
-        List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
-        List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
-        String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
+        final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
+        final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
+        final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("projects-" + userLogin + ".dat"))) {
+        try (final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("projects-" + userLogin + ".dat"))) {
             oos.writeObject(projectList);
             oos.writeObject(taskList);
         } catch (Exception ex) {
@@ -32,13 +32,13 @@ public class DataService {
     }
 
     public void loadDataBin(String userId) {
-        String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("projects-" + userLogin + ".dat"))) {
-            List<Project> projectList = (List<Project>) ois.readObject();
+        final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
+        try (final ObjectInputStream ois = new ObjectInputStream(new FileInputStream("projects-" + userLogin + ".dat"))) {
+            final List<Project> projectList = (List<Project>) ois.readObject();
             for (Project project : projectList) {
                 serviceLocator.getProjectService().merge(project);
             }
-            List<Task> taskList = (List<Task>) ois.readObject();
+            final List<Task> taskList = (List<Task>) ois.readObject();
             for (Task task : taskList) {
                 serviceLocator.getTaskService().merge(task);
             }

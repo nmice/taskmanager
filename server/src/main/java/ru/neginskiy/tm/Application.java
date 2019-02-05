@@ -8,7 +8,8 @@ public class Application {
         Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
-            -Сериализация - save, load
+            -Сериализация - save, load XML JSON через FASTERXML
+            -Try-Catch вынести на UI из сервисов
             -MyBatis
         */
     }
