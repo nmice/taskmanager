@@ -13,7 +13,9 @@ public class DataBinSaveCommand extends AbstractCommand {
     public void execute() {
         try {
             getBootstrap().getDataEndpointService().saveDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+            System.out.println("Project and task data saved");
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
         }
     }

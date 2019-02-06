@@ -11,7 +11,9 @@ public class UserLogoutCommand extends AbstractCommand {
         try {
             getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         getBootstrap().setActiveUser(null);
         System.out.println("You are logout");

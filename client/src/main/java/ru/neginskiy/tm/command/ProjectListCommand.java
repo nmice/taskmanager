@@ -13,11 +13,13 @@ public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = null;
+        List<Project> projectList;
         try {
             projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         if (projectList.size() == 0) {
             System.out.println("Projects not found");

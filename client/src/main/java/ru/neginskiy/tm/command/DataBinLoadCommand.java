@@ -13,7 +13,9 @@ public class DataBinLoadCommand extends AbstractCommand {
     public void execute() {
         try {
             getBootstrap().getDataEndpointService().loadDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+            System.out.println("Project and task data uploaded");
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
         }
     }

@@ -16,11 +16,13 @@ public class TaskEditCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please select project number to update :");
-        List<Task> taskList = null;
+        List<Task> taskList;
         try {
             taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         int index = 0;
         for (Task task : taskList) {
@@ -93,7 +95,9 @@ public class TaskEditCommand extends AbstractCommand {
         try {
             getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         System.out.println("Task updated");
     }

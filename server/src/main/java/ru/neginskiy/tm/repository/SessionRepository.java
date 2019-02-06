@@ -21,6 +21,15 @@ public class SessionRepository extends AbstractRepository<Session> {
         this.connection = connection;
     }
 
+    public void deleteOldUserSessions(String userId) {
+        List<Session> sessionList = getAll();
+        for (Session session : sessionList) {
+            if (userId.equals(session.getUserId()) && System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
+                delete(session.getId());
+            }
+        }
+    }
+
     public void validate(Session session) throws UncorrectSessionException {
         final Session sessionInBase = getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {//Session is not in a repository OR Signature is incorrect

@@ -13,11 +13,13 @@ public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Task> taskList = null;
+        List<Task> taskList;
         try {
             taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");

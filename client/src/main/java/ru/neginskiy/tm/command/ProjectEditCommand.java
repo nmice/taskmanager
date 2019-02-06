@@ -16,11 +16,13 @@ public class ProjectEditCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please select project number to update :");
-        List<Project> projectList = null;
+        List<Project> projectList;
         try {
             projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         int indexOfProject = 0;
         for (Project project : projectList) {
@@ -95,7 +97,9 @@ public class ProjectEditCommand extends AbstractCommand {
         try {
             getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         System.out.println("Project updated");
     }

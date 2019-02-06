@@ -51,7 +51,9 @@ public class ProjectCreateCommand extends AbstractCommand {
         try {
             getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         System.out.println("New project created");
     }

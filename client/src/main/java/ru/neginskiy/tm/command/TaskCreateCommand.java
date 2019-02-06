@@ -15,11 +15,13 @@ public class TaskCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        List<Project> projectList = null;
+        List<Project> projectList;
         try {
             projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         if (projectList.size() == 0) {
             System.out.println("Projects not found, please create a project first for the task");
@@ -86,7 +88,9 @@ public class TaskCreateCommand extends AbstractCommand {
         try {
             getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
         } catch (UncorrectSessionException_Exception e) {
+            getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
+            return;
         }
         System.out.println("New task created");
     }
