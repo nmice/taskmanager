@@ -30,4 +30,20 @@ public class DataEndpoint {
         serviceLocator.getSessionService().validate(session);
         serviceLocator.getDataService().loadDataBin(userId);
     }
+
+    @WebMethod
+    public void saveJsonBin(@WebParam(name = "session") Session session,
+                            @WebParam(name = "userId") String userId) throws UncorrectSessionException {
+        serviceLocator.getSessionService().validate(session);
+        serviceLocator.getDataService().saveDataJson(userId);
+    }
+
+    @WebMethod
+    public void loadJsonBin(@WebParam(name = "session") Session session,
+                            @WebParam(name = "userId") String userId) throws UncorrectSessionException {
+        serviceLocator.getSessionService().validate(session);
+        serviceLocator.getDataService().loadDataJson(userId);
+    }
+
+
 }

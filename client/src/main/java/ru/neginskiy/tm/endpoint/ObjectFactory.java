@@ -27,8 +27,12 @@ public class ObjectFactory {
     private final static QName _UncorrectSessionException_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "UncorrectSessionException");
     private final static QName _LoadDataBin_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadDataBin");
     private final static QName _LoadDataBinResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadDataBinResponse");
+    private final static QName _LoadJsonBin_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadJsonBin");
+    private final static QName _LoadJsonBinResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadJsonBinResponse");
     private final static QName _SaveDataBin_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "saveDataBin");
     private final static QName _SaveDataBinResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "saveDataBinResponse");
+    private final static QName _SaveJsonBin_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "saveJsonBin");
+    private final static QName _SaveJsonBinResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "saveJsonBinResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.neginskiy.tm.endpoint
@@ -62,6 +66,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LoadJsonBin }
+     * 
+     */
+    public LoadJsonBin createLoadJsonBin() {
+        return new LoadJsonBin();
+    }
+
+    /**
+     * Create an instance of {@link LoadJsonBinResponse }
+     * 
+     */
+    public LoadJsonBinResponse createLoadJsonBinResponse() {
+        return new LoadJsonBinResponse();
+    }
+
+    /**
      * Create an instance of {@link SaveDataBin }
      * 
      */
@@ -75,6 +95,22 @@ public class ObjectFactory {
      */
     public SaveDataBinResponse createSaveDataBinResponse() {
         return new SaveDataBinResponse();
+    }
+
+    /**
+     * Create an instance of {@link SaveJsonBin }
+     * 
+     */
+    public SaveJsonBin createSaveJsonBin() {
+        return new SaveJsonBin();
+    }
+
+    /**
+     * Create an instance of {@link SaveJsonBinResponse }
+     * 
+     */
+    public SaveJsonBinResponse createSaveJsonBinResponse() {
+        return new SaveJsonBinResponse();
     }
 
     /**
@@ -113,6 +149,24 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LoadJsonBin }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "loadJsonBin")
+    public JAXBElement<LoadJsonBin> createLoadJsonBin(LoadJsonBin value) {
+        return new JAXBElement<LoadJsonBin>(_LoadJsonBin_QNAME, LoadJsonBin.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LoadJsonBinResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "loadJsonBinResponse")
+    public JAXBElement<LoadJsonBinResponse> createLoadJsonBinResponse(LoadJsonBinResponse value) {
+        return new JAXBElement<LoadJsonBinResponse>(_LoadJsonBinResponse_QNAME, LoadJsonBinResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SaveDataBin }{@code >}}
      * 
      */
@@ -128,6 +182,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "saveDataBinResponse")
     public JAXBElement<SaveDataBinResponse> createSaveDataBinResponse(SaveDataBinResponse value) {
         return new JAXBElement<SaveDataBinResponse>(_SaveDataBinResponse_QNAME, SaveDataBinResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SaveJsonBin }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "saveJsonBin")
+    public JAXBElement<SaveJsonBin> createSaveJsonBin(SaveJsonBin value) {
+        return new JAXBElement<SaveJsonBin>(_SaveJsonBin_QNAME, SaveJsonBin.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SaveJsonBinResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "saveJsonBinResponse")
+    public JAXBElement<SaveJsonBinResponse> createSaveJsonBinResponse(SaveJsonBinResponse value) {
+        return new JAXBElement<SaveJsonBinResponse>(_SaveJsonBinResponse_QNAME, SaveJsonBinResponse.class, null, value);
     }
 
 }

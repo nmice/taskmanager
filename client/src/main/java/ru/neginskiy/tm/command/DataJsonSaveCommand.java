@@ -2,7 +2,7 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
-public class DataBinSaveCommand extends AbstractCommand {
+public class DataJsonSaveCommand extends AbstractCommand {
 
     @Override
     public boolean isSecure() {
@@ -12,8 +12,8 @@ public class DataBinSaveCommand extends AbstractCommand {
     @Override
     public void execute() {
         try {
-            getBootstrap().getDataEndpointService().saveDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-            System.out.println("Project and task data saved to bin");
+            getBootstrap().getDataEndpointService().saveJsonBin(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+            System.out.println("Project and task data saved from json");
         } catch (UncorrectSessionException_Exception e) {
             getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
@@ -22,11 +22,11 @@ public class DataBinSaveCommand extends AbstractCommand {
 
     @Override
     public String command() {
-        return "data-bin-save";
+        return "data-json-save";
     }
 
     @Override
     public String description() {
-        return "Save Bin Data";
+        return "Save Json Data";
     }
 }
