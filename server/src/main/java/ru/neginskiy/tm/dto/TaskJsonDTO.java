@@ -6,25 +6,28 @@ import java.util.Date;
 
 public class TaskJsonDTO {
 
-    private final String id;
-    private final String name;
-    private final String description;
-    private final Long dateBegin;
-    private final Long dateEnd;
-    private final String projectId;
-    private final String userId;
+    private String id;
+    private String name;
+    private String description;
+    private Long dateBegin;
+    private Long dateEnd;
+    private String projectId;
+    private String userId;
+
+    public TaskJsonDTO() {
+    }
 
     public TaskJsonDTO(Task task) {
         this.id = task.getId();
         this.name = task.getName();
         this.description = task.getDescription();
-        this.dateBegin = task.getDateBegin().getTime();
-        this.dateEnd = task.getDateBegin().getTime();
+        this.dateBegin = task.getDateBegin() == null ? null : task.getDateBegin().getTime();
+        this.dateEnd = task.getDateEnd() == null ? null : task.getDateEnd().getTime();
         this.projectId = task.getProjectId();
         this.userId = task.getUserId();
     }
 
-    public Task getTask() {
+    public Task createTask() {
         Task task = new Task();
         task.setId(getId());
         task.setName(getName());
@@ -62,5 +65,33 @@ public class TaskJsonDTO {
 
     public String getUserId() {
         return userId;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDateBegin(Long dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    public void setDateEnd(Long dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

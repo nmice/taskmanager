@@ -10,12 +10,15 @@ import java.util.List;
 
 public class Domain {
 
-    private final List<ProjectJsonDTO> projectJsonDTOList;
-    private final List<TaskJsonDTO> taskJsonDTOListList;
+    private List<ProjectJsonDTO> projectJsonDTOList;
+    private List<TaskJsonDTO> taskJsonDTOList;
 
-    public Domain(List<ProjectJsonDTO> projectJsonDTOList, List<TaskJsonDTO> taskJsonDTOListList) {
+    public Domain() {
+    }
+
+    public Domain(List<ProjectJsonDTO> projectJsonDTOList, List<TaskJsonDTO> taskJsonDTOList) {
         this.projectJsonDTOList = projectJsonDTOList;
-        this.taskJsonDTOListList = taskJsonDTOListList;
+        this.taskJsonDTOList = taskJsonDTOList;
     }
 
     public List<ProjectJsonDTO> getProjectJsonDTOList() {
@@ -23,26 +26,34 @@ public class Domain {
     }
 
     public List<TaskJsonDTO> getTaskJsonDTOList() {
-        return taskJsonDTOListList;
+        return taskJsonDTOList;
     }
 
-    public List<Project> getProjectList() {
+    public void setProjectJsonDTOList(List<ProjectJsonDTO> projectJsonDTOList) {
+        this.projectJsonDTOList = projectJsonDTOList;
+    }
+
+    public void setTaskJsonDTOList(List<TaskJsonDTO> taskJsonDTOList) {
+        this.taskJsonDTOList = taskJsonDTOList;
+    }
+
+    public List<Project> createProjectList() {
         List<ProjectJsonDTO> projectJsonDTOS = getProjectJsonDTOList();
         List<Project> projects = new ArrayList<>();
         Project project;
         for (ProjectJsonDTO projectJsonDTO:projectJsonDTOS){
-            project = projectJsonDTO.getProject();
+            project = projectJsonDTO.createProject();
             projects.add(project);
         }
         return projects;
     }
 
-    public List<Task> getTaskList() {
+    public List<Task> createTaskList() {
         List<TaskJsonDTO> taskJsonDTOS = getTaskJsonDTOList();
                List<Task> tasks = new ArrayList<>();
         Task task;
         for (TaskJsonDTO taskJsonDTO:taskJsonDTOS){
-                  task = taskJsonDTO.getTask();
+                  task = taskJsonDTO.createTask();
                tasks.add(task);
         }
         return tasks;

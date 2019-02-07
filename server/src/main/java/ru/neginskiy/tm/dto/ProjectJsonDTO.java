@@ -6,23 +6,26 @@ import java.util.Date;
 
 public class ProjectJsonDTO {
 
-    private final String id;
-    private final String name;
-    private final String description;
-    private final Long dateBegin;
-    private final Long dateEnd;
-    private final String userId;
+    private String id;
+    private String name;
+    private String description;
+    private Long dateBegin;
+    private Long dateEnd;
+    private String userId;
+
+    public ProjectJsonDTO() {
+    }
 
     public ProjectJsonDTO(Project project) {
         this.id = project.getId();
         this.name = project.getName();
         this.description = project.getDescription();
-        this.dateBegin = project.getDateBegin()== null ? null : project.getDateBegin().getTime();
+        this.dateBegin = project.getDateBegin() == null ? null : project.getDateBegin().getTime();
         this.dateEnd = project.getDateEnd() == null ? null : project.getDateEnd().getTime();
         this.userId = project.getUserId();
     }
 
-    public Project getProject() {
+    public Project createProject() {
         Project project = new Project();
         project.setId(getId());
         project.setName(getName());
@@ -55,5 +58,29 @@ public class ProjectJsonDTO {
 
     public String getUserId() {
         return userId;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDateBegin(Long dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    public void setDateEnd(Long dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -91,8 +91,8 @@ public class DataService {
             //final Domain domain = (Domain) mapper.getFactory().createParser(fileName).readValuesAs(Domain.class);
             final Domain domain = mapper.readValue(new File(fileName), Domain.class);
 
-            final List<Project> projectList = domain.getProjectList();
-            final List<Task> taskList = domain.getTaskList();
+            final List<Project> projectList = domain.createProjectList();
+            final List<Task> taskList = domain.createTaskList();
 
             for (Project project : projectList) {
                 serviceLocator.getProjectService().merge(project);

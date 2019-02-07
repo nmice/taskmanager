@@ -49,10 +49,6 @@ public class Bootstrap implements ServiceLocator {
         testUser.setLogin("test");
         testUser.setPasswordHash(String.valueOf(("test").hashCode()));
         getUserService().merge(testUser);
-        User testUser2 = new User();
-        testUser2.setLogin("test2");
-        testUser2.setPasswordHash(String.valueOf(("test2").hashCode()));
-        getUserService().merge(testUser2);
     }
 
     private void registryInNet() {
