@@ -10,9 +10,9 @@ public class Application {
        /*TODO
             +Сериализация JSON
             +Сериализация - save, load XML через FASTERXML
-            -Выпилить Юзера
+            +Выпилить Юзера
+            +Вынести в bootstrap логику ошибки по сессии Try-Catch
             -Пример с Сериализацией Date
-            -Вынести в bootstrap логику ошибки по сессии Try-Catch
             -MyBatis
         */
     }
