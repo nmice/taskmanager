@@ -8,9 +8,9 @@ public class Application {
         Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
-            -Сериализация - save, load XML JSON через FASTERXML
-            -Вынести в bootstrap логику ошибки по сессии
-            +Try-Catch вынести на UI из сервисов
+            +Сериализация JSON
+            -Сериализация - save, load XML через FASTERXML
+            -Вынести в bootstrap логику ошибки по сессии Try-Catch
             -MyBatis
         */
     }

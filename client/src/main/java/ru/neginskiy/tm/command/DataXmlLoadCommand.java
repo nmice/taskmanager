@@ -2,7 +2,7 @@ package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
-public class DataJsonSaveCommand extends AbstractCommand {
+public class DataXmlLoadCommand extends AbstractCommand {
 
     @Override
     public boolean isSecure() {
@@ -12,8 +12,8 @@ public class DataJsonSaveCommand extends AbstractCommand {
     @Override
     public void execute() {
         try {
-            getBootstrap().getDataEndpointService().saveDataJson(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-            System.out.println("Project and task data saved to json");
+            getBootstrap().getDataEndpointService().loadDataXml(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
+            System.out.println("Project and task data uploaded from xml");
         } catch (UncorrectSessionException_Exception e) {
             getBootstrap().setActiveUser(null);
             System.out.println("Uncorrect session, please log in");
@@ -22,11 +22,11 @@ public class DataJsonSaveCommand extends AbstractCommand {
 
     @Override
     public String command() {
-        return "data-json-save";
+        return "data-xml-load";
     }
 
     @Override
     public String description() {
-        return "Save Json Data";
+        return "Load XML Data";
     }
 }

@@ -1,6 +1,13 @@
 package ru.neginskiy.tm.service;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.domain.Domain;
 import ru.neginskiy.tm.dto.ProjectJsonDTO;
@@ -10,6 +17,7 @@ import ru.neginskiy.tm.entity.Task;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataService {
@@ -54,23 +62,7 @@ public class DataService {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String baseFile = "projects-" + userLogin + ".json";
 
-        final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
-        final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
-
-        final List<ProjectJsonDTO> projectJsonDTOList = new ArrayList<>();
-        final List<TaskJsonDTO> taskJsonDTOList = new ArrayList<>();
-
-        for (Project project : projectList) {
-            ProjectJsonDTO projectJsonDTO = new ProjectJsonDTO(project);
-            projectJsonDTOList.add(projectJsonDTO);
-        }
-
-        for (Task task : taskList) {
-            TaskJsonDTO taskJsonDTO = new TaskJsonDTO(task);
-            taskJsonDTOList.add(taskJsonDTO);
-        }
-
-        final Domain domain = new Domain(projectJsonDTOList,taskJsonDTOList);
+        final Domain domain = createDomain(userId);
 
         final ObjectMapper mapper = new ObjectMapper();
 
@@ -88,7 +80,6 @@ public class DataService {
         final ObjectMapper mapper = new ObjectMapper();
 
         try {
-            //final Domain domain = (Domain) mapper.getFactory().createParser(fileName).readValuesAs(Domain.class);
             final Domain domain = mapper.readValue(new File(fileName), Domain.class);
 
             final List<Project> projectList = domain.createProjectList();
@@ -105,6 +96,81 @@ public class DataService {
             System.out.println(ex.getMessage());
         }
     }
+
+    public void saveDataXml(String userId){
+        final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
+        final String fileName = "projects-" + userLogin + ".xml";
+
+        final Domain domain = createDomain(userId);
+
+        XmlMapper xmlMapper = new XmlMapper();
+        try {
+            xmlMapper.writeValue(new File(fileName), domain);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void loadDataXml(String userId) {
+        final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
+
+        final String fileName = "projects-" + userLogin + ".xml";
+        final XmlMapper mapper = new XmlMapper();
+
+        try {
+            final Domain domain = mapper.readValue(new File(fileName), Domain.class);
+
+            final List<Project> projectList = domain.createProjectList();
+            final List<Task> taskList = domain.createTaskList();
+
+            for (Project project : projectList) {
+                serviceLocator.getProjectService().merge(project);
+            }
+
+            for (Task task : taskList) {
+                serviceLocator.getTaskService().merge(task);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private Domain createDomain(String userId) {
+        final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
+        final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
+        final List<ProjectJsonDTO> projectJsonDTOList = new ArrayList<>();
+        final List<TaskJsonDTO> taskJsonDTOList = new ArrayList<>();
+        for (Project project : projectList) {
+            ProjectJsonDTO projectJsonDTO = new ProjectJsonDTO(project);
+            projectJsonDTOList.add(projectJsonDTO);
+        }
+        for (Task task : taskList) {
+            TaskJsonDTO taskJsonDTO = new TaskJsonDTO(task);
+            taskJsonDTOList.add(taskJsonDTO);
+        }
+        return new Domain(projectJsonDTOList, taskJsonDTOList);
+    }
+
+/*    static class TaskDeserializer extends StdDeserializer<Date> {
+
+        public TaskDeserializer() {
+            this(null);
+        }
+
+        public TaskDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        public Date deserialize(JsonParser jp, DeserializationContext ctxt)
+                throws IOException, JsonProcessingException {
+            JsonNode node = jp.getCodec().readTree(jp);
+            Date dateBegin = node.get("dateBegin") == null ? null : new Date(node.get("dateBegin").asLong());
+            Date dateEnd = node.get("dateEnd") == null ? null : new Date(node.get("dateEnd").asLong());
+
+            return new Task(id, itemName, new User(userId, null));
+        }
+    }*/
 
 }
 
