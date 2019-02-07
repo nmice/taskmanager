@@ -10,7 +10,7 @@ public class ExitCommand extends AbstractCommand {
     public void execute() {
         try {
             getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
-            getBootstrap().setActiveUser(null);
+            getBootstrap().setActiveSession(null);
             System.exit(0);
         } catch (UncorrectSessionException_Exception e) {
             System.exit(0);

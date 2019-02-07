@@ -14,16 +14,10 @@ public class TaskEditCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
+    public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
         List<Task> taskList;
-        try {
-            taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         int index = 0;
         for (Task task : taskList) {
             System.out.printf("%-3s%s%s%n", index++, " - ", task.getName());
@@ -92,13 +86,7 @@ public class TaskEditCommand extends AbstractCommand {
                 System.out.println("End date changed");
                 break;
         }
-        try {
-            getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
         System.out.println("Task updated");
     }
 

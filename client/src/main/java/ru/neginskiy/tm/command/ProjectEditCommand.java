@@ -14,16 +14,10 @@ public class ProjectEditCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
+    public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
         List<Project> projectList;
-        try {
-            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         int indexOfProject = 0;
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
@@ -94,13 +88,7 @@ public class ProjectEditCommand extends AbstractCommand {
                 break;
         }
 
-        try {
-            getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
         System.out.println("Project updated");
     }
 

@@ -9,7 +9,9 @@ public class Application {
         bt.init();
        /*TODO
             +Сериализация JSON
-            -Сериализация - save, load XML через FASTERXML
+            +Сериализация - save, load XML через FASTERXML
+            -Выпилить Юзера
+            -Пример с Сериализацией Date
             -Вынести в bootstrap логику ошибки по сессии Try-Catch
             -MyBatis
         */

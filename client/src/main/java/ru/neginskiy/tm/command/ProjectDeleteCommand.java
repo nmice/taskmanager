@@ -10,15 +10,10 @@ public class ProjectDeleteCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
+    public void execute() throws UncorrectSessionException_Exception {
         List<Project> projectList;
-        try {
-            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;
@@ -45,13 +40,7 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
         String id = project.getId();
 
-        try {
-            getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
         System.out.println("Project deleted");
     }
 

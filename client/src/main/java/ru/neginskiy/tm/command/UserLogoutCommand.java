@@ -7,15 +7,9 @@ public class UserLogoutCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
-        try {
-            getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
-        getBootstrap().setActiveUser(null);
+    public void execute() throws UncorrectSessionException_Exception {
+        getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
+        getBootstrap().setActiveSession(null);
         System.out.println("You are logout");
     }
 

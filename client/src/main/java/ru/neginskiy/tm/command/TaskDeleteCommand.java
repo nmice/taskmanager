@@ -10,15 +10,9 @@ public class TaskDeleteCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
+    public void execute() throws UncorrectSessionException_Exception {
         List<Task> taskList;
-        try {
-            taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;
@@ -42,13 +36,7 @@ public class TaskDeleteCommand extends AbstractCommand {
             System.out.println("Incorrect input, task not found");
             return;
         }
-        try {
-            getBootstrap().getTaskEndpointService().taskDelete(getBootstrap().getActiveSession(), task.getId());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        getBootstrap().getTaskEndpointService().taskDelete(getBootstrap().getActiveSession(), task.getId());
         System.out.println("Task deleted");
     }
 

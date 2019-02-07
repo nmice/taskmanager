@@ -16,7 +16,6 @@ public class Bootstrap {
     private final SessionEndpoint sessionEndpointService = new SessionEndpointService().getSessionEndpointPort();
     private final DataEndpoint DataEndpointService = new DataEndpointService().getDataEndpointPort();
 
-    private User activeUser;
     private Session activeSession;
 
     private final Scanner scanner = new Scanner(System.in);
@@ -55,12 +54,16 @@ public class Bootstrap {
             return;
         }
         try {
-            if (getActiveUser() != null || command.isSecure()) {
+            if (getActiveSession() != null || command.isSecure()) {
                 command.execute();
             } else {
                 System.out.println("This command is not available now, please login!");
             }
-        } catch (Exception ignored) {
+        } catch (UncorrectSessionException_Exception e) {
+            setActiveSession(null);
+            System.out.println("Uncorrect session, please log in");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -95,14 +98,6 @@ public class Bootstrap {
 
     public DataEndpoint getDataEndpointService() {
         return DataEndpointService;
-    }
-
-    public User getActiveUser() {
-        return activeUser;
-    }
-
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
     }
 
     public Session getActiveSession() {

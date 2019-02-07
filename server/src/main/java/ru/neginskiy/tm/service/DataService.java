@@ -150,27 +150,5 @@ public class DataService {
         }
         return new Domain(projectJsonDTOList, taskJsonDTOList);
     }
-
-/*    static class TaskDeserializer extends StdDeserializer<Date> {
-
-        public TaskDeserializer() {
-            this(null);
-        }
-
-        public TaskDeserializer(Class<?> vc) {
-            super(vc);
-        }
-
-        @Override
-        public Date deserialize(JsonParser jp, DeserializationContext ctxt)
-                throws IOException, JsonProcessingException {
-            JsonNode node = jp.getCodec().readTree(jp);
-            Date dateBegin = node.get("dateBegin") == null ? null : new Date(node.get("dateBegin").asLong());
-            Date dateEnd = node.get("dateEnd") == null ? null : new Date(node.get("dateEnd").asLong());
-
-            return new Task(id, itemName, new User(userId, null));
-        }
-    }*/
-
 }
 

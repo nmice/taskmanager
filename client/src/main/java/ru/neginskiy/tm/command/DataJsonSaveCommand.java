@@ -10,14 +10,9 @@ public class DataJsonSaveCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
-        try {
-            getBootstrap().getDataEndpointService().saveDataJson(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-            System.out.println("Project and task data saved to json");
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-        }
+    public void execute() throws UncorrectSessionException_Exception {
+        getBootstrap().getDataEndpointService().saveDataJson(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        System.out.println("Project and task data saved to json");
     }
 
     @Override

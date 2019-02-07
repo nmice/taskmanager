@@ -33,8 +33,6 @@ public class UserLoginCommand extends AbstractCommand {
         User user = getBootstrap().getUserEndpointService().findUser(login, passwordHash);
 
         if (user != null) {
-            getBootstrap().setActiveUser(user);
-
             Session session = getBootstrap().getSessionEndpointService().getNewSession(user.getId());
             getBootstrap().setActiveSession(session);
 

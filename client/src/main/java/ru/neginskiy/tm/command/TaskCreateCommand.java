@@ -14,15 +14,9 @@ public class TaskCreateCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
+    public void execute() throws UncorrectSessionException_Exception {
         List<Project> projectList;
-        try {
-            projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveUser().getId());
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found, please create a project first for the task");
             return;
@@ -50,7 +44,7 @@ public class TaskCreateCommand extends AbstractCommand {
 
         Task task = new Task();
         task.setProjectId(projectId);
-        task.setUserId(getBootstrap().getActiveUser().getId());
+        task.setUserId(getBootstrap().getActiveSession().getUserId());
 
 
         System.out.println("Please enter a name of the task :");
@@ -85,13 +79,7 @@ public class TaskCreateCommand extends AbstractCommand {
             return;
         }
 
-        try {
-            getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        getBootstrap().getTaskEndpointService().taskMerge(getBootstrap().getActiveSession(), task);
         System.out.println("New task created");
     }
 

@@ -12,9 +12,9 @@ public class ProjectCreateCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute() {
+    public void execute() throws UncorrectSessionException_Exception {
         Project project = new Project();
-        project.setUserId(getBootstrap().getActiveUser().getId());
+        project.setUserId(getBootstrap().getActiveSession().getUserId());
 
         System.out.println("Please enter a name of the project :");
         String name = getBootstrap().readLine();
@@ -48,13 +48,7 @@ public class ProjectCreateCommand extends AbstractCommand {
             return;
         }
 
-        try {
-            getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
-        } catch (UncorrectSessionException_Exception e) {
-            getBootstrap().setActiveUser(null);
-            System.out.println("Uncorrect session, please log in");
-            return;
-        }
+        getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
         System.out.println("New project created");
     }
 
