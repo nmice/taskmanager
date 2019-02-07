@@ -9,7 +9,8 @@ public class Application {
         bt.init();
        /*TODO
             -Сериализация - save, load XML JSON через FASTERXML
-            -Try-Catch вынести на UI из сервисов
+            -Вынести в bootstrap логику ошибки по сессии
+            +Try-Catch вынести на UI из сервисов
             -MyBatis
         */
     }

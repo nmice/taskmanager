@@ -3,14 +3,14 @@ package ru.neginskiy.tm.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.domain.Domain;
+import ru.neginskiy.tm.dto.ProjectJsonDTO;
+import ru.neginskiy.tm.dto.TaskJsonDTO;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 
-import javax.swing.text.html.parser.Entity;
 import java.io.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class DataService {
 
@@ -53,25 +53,29 @@ public class DataService {
     public void saveDataJson(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String baseFile = "projects-" + userLogin + ".json";
+
         final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
         final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
 
+        final List<ProjectJsonDTO> projectJsonDTOList = new ArrayList<>();
+        final List<TaskJsonDTO> taskJsonDTOList = new ArrayList<>();
+
+        for (Project project : projectList) {
+            ProjectJsonDTO projectJsonDTO = new ProjectJsonDTO(project);
+            projectJsonDTOList.add(projectJsonDTO);
+        }
+
+        for (Task task : taskList) {
+            TaskJsonDTO taskJsonDTO = new TaskJsonDTO(task);
+            taskJsonDTOList.add(taskJsonDTO);
+        }
+
+        final Domain domain = new Domain(projectJsonDTOList,taskJsonDTOList);
+
         final ObjectMapper mapper = new ObjectMapper();
 
-        //final Domain domain = new Domain();
-
-
         try {
-            for (Project project : projectList) {
-                mapper.writeValueAsString(project.getId());
-                mapper.writeValueAsString(project.getName());
-                mapper.writeValueAsString(project.getDescription());
-                mapper.writeValueAsString(project.getUserId());
-                mapper.writeValueAsString(project.getDateBegin().getTime());
-
-
-            }
-            //mapper.writeValue(new File(baseFile), domain);
+            mapper.writeValue(new File(baseFile), domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -84,8 +88,8 @@ public class DataService {
         final ObjectMapper mapper = new ObjectMapper();
 
         try {
-            final Domain domain = (Domain) mapper.getFactory().createParser(fileName).readValuesAs(Domain.class);
-            //final Domain domain = (Domain) mapper.readValue(new File(fileName), Domain.class);
+            //final Domain domain = (Domain) mapper.getFactory().createParser(fileName).readValuesAs(Domain.class);
+            final Domain domain = mapper.readValue(new File(fileName), Domain.class);
 
             final List<Project> projectList = domain.getProjectList();
             final List<Task> taskList = domain.getTaskList();
