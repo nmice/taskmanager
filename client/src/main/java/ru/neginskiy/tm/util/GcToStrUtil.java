@@ -15,7 +15,6 @@ public class GcToStrUtil {
             return new SimpleDateFormat(PATTERN).format(xmlGregCal.toGregorianCalendar().getTime());
         } catch (Exception e) {
             return null;
-            //System.out.println("error: " + e.getMessage());
         }
     }
 }

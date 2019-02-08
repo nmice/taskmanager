@@ -8,6 +8,11 @@
 
 <li> Maven (3.6.0)</li>
 
+<li> SOAP WS</li>
+
+<li> JDBC</li>
+
+
 <h3>Структура проекта</h3>
 
 <h3>- server -</h3>
@@ -26,11 +31,21 @@
 
 <li> ServiceLocator - интерфейс доступа к сервисам</li>
 
+<h4>[connection]</h4>
+
+<li> DBConnection - класс соединения с БД</li>
+
 <h4>[controller]</h4>
 
 <li> Bootstrap - класс начальной загрузки программы на сервере</li>
 
+<h4>[domain]</h4>
+
+<li> Domain - класс транспортного объекта для сериализации</li>
+
 <h4>[endpoint]</h4>
+
+<li> DataEndpoint - класс для сетевого доступа к сервисам сохранения и загрузки</li>
 
 <li> ProjectEndpoint - класс для сетевого доступа к сервисам проектов</li>
 
@@ -52,6 +67,10 @@
 
 <li> User - класс пользователь</li>
 
+<h4>[error]</h4>
+
+<li> UncorrectSessionException - класс ошибки сессии</li>
+
 <h4>[repository]</h4>
 
 <li> AbstractRepository - абстрактный класс репозитория</li>
@@ -66,6 +85,8 @@
 
 <h4>[service]</h4>
 
+<li> DataService - класс для сохранения и загрузки данных пользователя</li>
+
 <li> ProjectService - класс для выполнения операций над проектами</li>
 
 <li> SessionService - класс для выполнения операций над сессиями</li>
@@ -73,6 +94,12 @@
 <li> TaskService - класс для выполнения операций над задачами</li>
 
 <li> UserService - класс для выполнения операций над пользователями</li>
+
+<h4>[util]</h4>
+
+<li> AppConfig - утильный класс со static переменными, хранящих значения из config.properties</li>
+
+<li> SqlDateUtil - утильный класс с методом для перевода <i>java.util.Date</i> в <i>java.sql.Date</i> и обратно</li>
 
 <h4>Application - основной класс на сервере</h4>
 
@@ -85,6 +112,18 @@
 <h4>[command]</h4>
 
 <li> AbstractCommand - абстрактный класс команды</li>
+
+<li> DataBinLoadCommand - класс команды загрузки данных из dat-файла</li>
+
+<li> DataBinSaveCommand - класс команды сохранения данных в dat-файл</li>
+
+<li> DataJsonLoadCommand - класс команды загрузки данных из json-файла</li>
+
+<li> DataJsonSaveCommand - класс команды сохранения данных в json-файл</li>
+
+<li> DataXmlLoadCommand - класс команды загрузки данных из xml-файла</li>
+
+<li> DataXmlSaveCommand - класс команды сохранения данных в xml-файл</li>
 
 <li> ExitCommand - класс команды выхода</li>
 
@@ -106,6 +145,12 @@
 
 <li> TaskListCommand - класс выдачи информации по всем задачам</li>
 
+<li> UserCreateCommand - класс создания нового пользователя</li>
+
+<li> UserLoginCommand - класс создания новой сессии существующего пользователя</li>
+
+<li> UserLogoutCommand - класс закрытия сессии пользователя</li>
+
 <h4>[controller]</h4>
 
 <li> Bootstrap - класс начальной загрузки программы на клиенте</li>
@@ -117,6 +162,7 @@
 <h4>[util]</h4>
 
 <li> GcToStrUtil - утильный класс с методом для перевода <i>XMLGregorianCalendar</i> в <i>String</i></li>
+
 <li> StrToGcUtil - утильный класс с методом для перевода <i>String</i> в <i>XMLGregorianCalendar</i></li>
 
 <h4>App - основной класс на клиенте</h4>
