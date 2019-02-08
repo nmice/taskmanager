@@ -7,8 +7,6 @@ import ru.neginskiy.tm.error.UncorrectSessionException;
 import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
 
-import java.util.List;
-
 public class SessionService implements ISessionService {
 
     private final SessionRepository entityRepository;

@@ -2,7 +2,6 @@ package ru.neginskiy.tm.service;
 
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.IProjectService;
-import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.repository.ProjectRepository;
 import ru.neginskiy.tm.repository.TaskRepository;
 

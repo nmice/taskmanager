@@ -21,9 +21,7 @@ public class DataService {
     public void saveDataBin(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
-
         Domain domain = createDomain(userId);
-
         try (final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(domain);
         } catch (Exception ex) {
@@ -34,10 +32,8 @@ public class DataService {
     public void loadDataBin(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
-
         try (final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
             final Domain domain = (Domain) ois.readObject();
-
             mergeProjectsAndTasksFromDomain(domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -47,11 +43,8 @@ public class DataService {
     public void saveDataJson(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
-
         final Domain domain = createDomain(userId);
-
         final ObjectMapper mapper = new ObjectMapper();
-
         try {
             mapper.writeValue(new File(fileName), domain);
         } catch (Exception ex) {
@@ -62,12 +55,9 @@ public class DataService {
     public void loadDataJson(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
-
         final ObjectMapper mapper = new ObjectMapper();
-
         try {
             final Domain domain = mapper.readValue(new File(fileName), Domain.class);
-
             mergeProjectsAndTasksFromDomain(domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -77,9 +67,7 @@ public class DataService {
     public void saveDataXml(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
-
         final Domain domain = createDomain(userId);
-
         XmlMapper xmlMapper = new XmlMapper();
         try {
             xmlMapper.writeValue(new File(fileName), domain);
@@ -92,7 +80,6 @@ public class DataService {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
         final XmlMapper mapper = new XmlMapper();
-
         try {
             final Domain domain = mapper.readValue(new File(fileName), Domain.class);
             mergeProjectsAndTasksFromDomain(domain);
