@@ -8,7 +8,6 @@ public class SqlDateUtil {
         if (date == null) {
             return null;
         }
-
         return new java.sql.Date(date.getTime());
     }
 

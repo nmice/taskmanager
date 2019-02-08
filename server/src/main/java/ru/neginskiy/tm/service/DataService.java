@@ -3,7 +3,7 @@ package ru.neginskiy.tm.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import ru.neginskiy.tm.api.ServiceLocator;
-import ru.neginskiy.tm.domain.Domain;
+import ru.neginskiy.tm.dto.Domain;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 

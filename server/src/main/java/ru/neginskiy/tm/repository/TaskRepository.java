@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.repository;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.entity.Task;
 
 import java.sql.Connection;
@@ -13,8 +14,9 @@ import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
 public class TaskRepository extends AbstractRepository<Task> {
 
-    public TaskRepository(Connection connection) {
+    public TaskRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
         this.connection = connection;
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     public List<Task> getAllByUserId(String userId) {

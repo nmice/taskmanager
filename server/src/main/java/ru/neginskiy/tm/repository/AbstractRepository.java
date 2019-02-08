@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.repository;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.api.IRepository;
 import ru.neginskiy.tm.entity.AbstractEntity;
 
@@ -11,6 +12,8 @@ import java.util.*;
 public abstract class AbstractRepository<T extends AbstractEntity> implements IRepository<T> {
 
     Connection connection;
+
+    SqlSessionFactory sqlSessionFactory;
 
     public abstract void merge(T entity);
 
@@ -24,11 +27,5 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
 
     abstract List<T> fetchAll(ResultSet resultSet) throws SQLException;
 
-/*    List<T> fetchAll(ResultSet resultSet) throws SQLException {
-        final List<T> resultList = new ArrayList<>();
-        while (resultSet.next()) {
-            resultList.add(fetch(resultSet));
-        }
-        return resultList;
-    }*/
+
 }

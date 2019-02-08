@@ -1,5 +1,8 @@
-package ru.neginskiy.tm.repository;
+package ru.neginskiy.tm.api;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.entity.Project;
 
@@ -12,29 +15,16 @@ import java.util.List;
 
 import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
-public class ProjectRepository extends AbstractRepository<Project> {
+public interface IProjectRepository extends IRepository {
 
-    public ProjectRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
-        this.connection = connection;
-        this.sqlSessionFactory = sqlSessionFactory;
-    }
+    @Select("SELECT * FROM project where userId=(#{userId}")
+    List<Project> getAllByUserId(String userId);
 
-    public List<Project> getAllByUserId(String userId) {
-        final String query = "SELECT * FROM project where userId=?";
-        try {
-            final PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, userId);
-            final ResultSet resultSet = preparedStatement.executeQuery();
-            return fetchAll(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
-    }
-
-    @Override
-    public void merge(Project project) {
-       final String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
+    @Insert("INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
+            "ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
+            "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)")
+    void merge(Project project) {
+        final String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
                 "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)";
         try {
@@ -114,4 +104,5 @@ public class ProjectRepository extends AbstractRepository<Project> {
         }
         return resultList;
     }
+
 }

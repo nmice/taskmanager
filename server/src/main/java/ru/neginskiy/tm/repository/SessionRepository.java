@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.repository;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 import ru.neginskiy.tm.util.AppConfig;
@@ -17,8 +18,9 @@ public class SessionRepository extends AbstractRepository<Session> {
 
     private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
 
-    public SessionRepository(Connection connection) {
+    public SessionRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
         this.connection = connection;
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     public void deleteOldUserSessions(String userId) {

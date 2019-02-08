@@ -14,6 +14,8 @@ public class Application {
             +Вынести в bootstrap логику ошибки по сессии Try-Catch
             +Пример с Сериализацией Date
             -MyBatis
+            -throw sqlEx переместить из репо в сервисы
+            -тестить сессию через soapUI
         */
     }
 }

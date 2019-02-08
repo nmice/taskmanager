@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.domain;
+package ru.neginskiy.tm.dto;
 
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
