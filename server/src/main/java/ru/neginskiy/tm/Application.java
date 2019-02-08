@@ -12,7 +12,7 @@ public class Application {
             +Сериализация - save, load XML через FASTERXML
             +Выпилить Юзера
             +Вынести в bootstrap логику ошибки по сессии Try-Catch
-            -Пример с Сериализацией Date
+            +Пример с Сериализацией Date
             -MyBatis
         */
     }

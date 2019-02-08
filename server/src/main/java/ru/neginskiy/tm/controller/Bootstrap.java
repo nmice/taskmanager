@@ -46,6 +46,7 @@ public class Bootstrap implements ServiceLocator {
 
     private void createTestUser() {
         User testUser = new User();
+        testUser.setId("dba0d409-0622-4c62-8356-4bc48bdfcbf3");
         testUser.setLogin("test");
         testUser.setPasswordHash(String.valueOf(("test").hashCode()));
         getUserService().merge(testUser);

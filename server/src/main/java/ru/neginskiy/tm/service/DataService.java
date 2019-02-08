@@ -4,13 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.domain.Domain;
-import ru.neginskiy.tm.dto.ProjectJsonDTO;
-import ru.neginskiy.tm.dto.TaskJsonDTO;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataService {
@@ -23,12 +20,12 @@ public class DataService {
 
     public void saveDataBin(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
-        final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
-        final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
+        final String fileName = "projects-" + userLogin + ".dat";
 
-        try (final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("projects-" + userLogin + ".dat"))) {
-            oos.writeObject(projectList);
-            oos.writeObject(taskList);
+        Domain domain = createDomain(userId);
+
+        try (final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -36,16 +33,12 @@ public class DataService {
 
     public void loadDataBin(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
+        final String fileName = "projects-" + userLogin + ".dat";
 
-        try (final ObjectInputStream ois = new ObjectInputStream(new FileInputStream("projects-" + userLogin + ".dat"))) {
-            final List<Project> projectList = (List<Project>) ois.readObject();
-            for (Project project : projectList) {
-                serviceLocator.getProjectService().merge(project);
-            }
-            final List<Task> taskList = (List<Task>) ois.readObject();
-            for (Task task : taskList) {
-                serviceLocator.getTaskService().merge(task);
-            }
+        try (final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
+            final Domain domain = (Domain) ois.readObject();
+
+            mergeProjectsAndTasksFromDomain(domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -53,14 +46,14 @@ public class DataService {
 
     public void saveDataJson(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
-        final String baseFile = "projects-" + userLogin + ".json";
+        final String fileName = "projects-" + userLogin + ".json";
 
         final Domain domain = createDomain(userId);
 
         final ObjectMapper mapper = new ObjectMapper();
 
         try {
-            mapper.writeValue(new File(baseFile), domain);
+            mapper.writeValue(new File(fileName), domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -68,29 +61,20 @@ public class DataService {
 
     public void loadDataJson(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
-
         final String fileName = "projects-" + userLogin + ".json";
+
         final ObjectMapper mapper = new ObjectMapper();
 
         try {
             final Domain domain = mapper.readValue(new File(fileName), Domain.class);
 
-            final List<Project> projectList = domain.createProjectList();
-            final List<Task> taskList = domain.createTaskList();
-
-            for (Project project : projectList) {
-                serviceLocator.getProjectService().merge(project);
-            }
-
-            for (Task task : taskList) {
-                serviceLocator.getTaskService().merge(task);
-            }
+            mergeProjectsAndTasksFromDomain(domain);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void saveDataXml(String userId){
+    public void saveDataXml(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
 
@@ -106,42 +90,35 @@ public class DataService {
 
     public void loadDataXml(String userId) {
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
-
         final String fileName = "projects-" + userLogin + ".xml";
         final XmlMapper mapper = new XmlMapper();
 
         try {
             final Domain domain = mapper.readValue(new File(fileName), Domain.class);
-
-            final List<Project> projectList = domain.createProjectList();
-            final List<Task> taskList = domain.createTaskList();
-
-            for (Project project : projectList) {
-                serviceLocator.getProjectService().merge(project);
-            }
-
-            for (Task task : taskList) {
-                serviceLocator.getTaskService().merge(task);
-            }
+            mergeProjectsAndTasksFromDomain(domain);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
     private Domain createDomain(String userId) {
+        Domain domain = new Domain();
         final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
         final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
-        final List<ProjectJsonDTO> projectJsonDTOList = new ArrayList<>();
-        final List<TaskJsonDTO> taskJsonDTOList = new ArrayList<>();
+        domain.setProjectList(projectList);
+        domain.setTaskList(taskList);
+        return domain;
+    }
+
+    private void mergeProjectsAndTasksFromDomain(Domain domain) {
+        final List<Project> projectList = domain.getProjectList();
+        final List<Task> taskList = domain.getTaskList();
         for (Project project : projectList) {
-            ProjectJsonDTO projectJsonDTO = new ProjectJsonDTO(project);
-            projectJsonDTOList.add(projectJsonDTO);
+            serviceLocator.getProjectService().merge(project);
         }
         for (Task task : taskList) {
-            TaskJsonDTO taskJsonDTO = new TaskJsonDTO(task);
-            taskJsonDTOList.add(taskJsonDTO);
+            serviceLocator.getTaskService().merge(task);
         }
-        return new Domain(projectJsonDTOList, taskJsonDTOList);
     }
 }
 
