@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.repository;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.entity.User;
 
 import java.sql.Connection;
@@ -12,9 +11,8 @@ import java.util.List;
 
 public class UserRepository extends AbstractRepository<User> {
 
-    public UserRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
+    public UserRepository(Connection connection) {
         this.connection = connection;
-        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     public User findUser(String login, String passwordHash) {
@@ -105,7 +103,6 @@ public class UserRepository extends AbstractRepository<User> {
         return user;
     }
 
-    @Override
     protected User fetch(ResultSet resultSet) throws SQLException {
         final User user = new User();
         user.setId(resultSet.getString("id"));
@@ -114,7 +111,6 @@ public class UserRepository extends AbstractRepository<User> {
         return user;
     }
 
-    @Override
     protected List<User> fetchAll(ResultSet resultSet) throws SQLException {
         final List<User> resultList = new ArrayList<>();
         while (resultSet.next()) {

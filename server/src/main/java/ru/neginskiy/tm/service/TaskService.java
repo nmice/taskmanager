@@ -1,17 +1,19 @@
 package ru.neginskiy.tm.service;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import ru.neginskiy.tm.api.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.repository.TaskRepository;
 import ru.neginskiy.tm.api.ITaskService;
 
 import java.util.List;
 
 public class TaskService implements ITaskService {
 
-    private final TaskRepository entityRepository;
+    private final SqlSessionFactory sqlSessionFactory;
 
-    public TaskService(TaskRepository entityRepository) {
-        this.entityRepository = entityRepository;
+    public TaskService(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     @Override
@@ -19,7 +21,11 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        entityRepository.merge(task);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
+        taskMapper.merge(task);
+        session.commit();
+        session.close();
     }
 
     @Override
@@ -27,7 +33,12 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return entityRepository.getById(id);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
+        final Task task = taskMapper.getById(id);
+        session.commit();
+        session.close();
+        return task;
     }
 
     @Override
@@ -35,7 +46,13 @@ public class TaskService implements ITaskService {
         if (userId == null || userId.isEmpty()) {
             return null;
         }
-        return entityRepository.getAllByUserId(userId);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final ITaskRepository taskMapper = session.getMapper(
+                ITaskRepository.class);
+        final List<Task> taskList = taskMapper.getAllByUserId(userId);
+        session.commit();
+        session.close();
+        return taskList;
     }
 
     @Override
@@ -43,7 +60,19 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return entityRepository.delete(id);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
+        final Task task = taskMapper.getById(id);
+        if (task == null) {
+            return null;
+        }
+        int counter = taskMapper.delete(id);
+        if (counter == 0) {
+            return null;
+        }
+        session.commit();
+        session.close();
+        return task;
     }
 
 

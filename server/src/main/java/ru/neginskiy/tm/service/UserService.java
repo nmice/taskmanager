@@ -1,15 +1,17 @@
 package ru.neginskiy.tm.service;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import ru.neginskiy.tm.api.IUserRepository;
 import ru.neginskiy.tm.api.IUserService;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.UserRepository;
 
 public class UserService implements IUserService {
 
-    private final UserRepository entityRepository;
+    private final SqlSessionFactory sqlSessionFactory;
 
-    public UserService(UserRepository entityRepository) {
-        this.entityRepository = entityRepository;
+    public UserService(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     @Override
@@ -17,7 +19,11 @@ public class UserService implements IUserService {
         if (user == null) {
             return;
         }
-        entityRepository.merge(user);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IUserRepository userMapper = session.getMapper(IUserRepository.class);
+        userMapper.merge(user);
+        session.commit();
+        session.close();
     }
 
     @Override
@@ -25,7 +31,12 @@ public class UserService implements IUserService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return entityRepository.getById(id);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IUserRepository userMapper = session.getMapper(IUserRepository.class);
+        final User user = userMapper.getById(id);
+        session.commit();
+        session.close();
+        return user;
     }
 
     @Override
@@ -33,7 +44,12 @@ public class UserService implements IUserService {
         if (login == null || passwordHash == null) {
             return null;
         }
-        return entityRepository.findUser(login, passwordHash);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IUserRepository userMapper = session.getMapper(IUserRepository.class);
+        final User user = userMapper.findUser(login, passwordHash);
+        session.commit();
+        session.close();
+        return user;
     }
 
     @Override
@@ -41,6 +57,11 @@ public class UserService implements IUserService {
         if (login == null) {
             return true;
         }
-        return entityRepository.isRegistredLogin(login);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IUserRepository userMapper = session.getMapper(IUserRepository.class);
+        final User user = userMapper.getByLogin(login);
+        session.commit();
+        session.close();
+        return user!=null;
     }
 }

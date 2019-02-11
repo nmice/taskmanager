@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.repository;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.entity.Task;
 
 import java.sql.Connection;
@@ -14,9 +13,8 @@ import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
 public class TaskRepository extends AbstractRepository<Task> {
 
-    public TaskRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
+    public TaskRepository(Connection connection) {
         this.connection = connection;
-        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     public List<Task> getAllByUserId(String userId) {
@@ -107,7 +105,6 @@ public class TaskRepository extends AbstractRepository<Task> {
         return task;
     }
 
-    @Override
     protected Task fetch(ResultSet resultSet) throws SQLException {
         final Task task = new Task();
         task.setId(resultSet.getString("id"));
@@ -120,7 +117,6 @@ public class TaskRepository extends AbstractRepository<Task> {
         return task;
     }
 
-    @Override
     protected List<Task> fetchAll(ResultSet resultSet) throws SQLException {
         final List<Task> resultList = new ArrayList<>();
         while (resultSet.next()) {

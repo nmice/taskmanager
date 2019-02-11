@@ -1,26 +1,24 @@
 package ru.neginskiy.tm.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import ru.neginskiy.tm.api.ISessionRepository;
 import ru.neginskiy.tm.api.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
-import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
+
+import java.util.List;
 
 public class SessionService implements ISessionService {
 
-    private final SessionRepository entityRepository;
+    private final SqlSessionFactory sqlSessionFactory;
 
-    public SessionService(SessionRepository entityRepository) {
-        this.entityRepository = entityRepository;
-    }
+    private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
 
-    @Override
-    public Session delete(String id) {
-        if (id == null) {
-            return null;
-        }
-        return entityRepository.delete(id);
+    public SessionService(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     @Override
@@ -28,30 +26,65 @@ public class SessionService implements ISessionService {
         if (userId == null) {
             return null;
         }
-
-        entityRepository.deleteOldUserSessions(userId);
-
+        final SqlSession sqlSession = sqlSessionFactory.openSession();
+        final ISessionRepository sessionMapper = sqlSession.getMapper(ISessionRepository.class);
+        final List<Session> sessionList = sessionMapper.getAllByUserId(userId);
+        for (Session session : sessionList) {
+            if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
+                delete(session.getId());
+            }
+        }
         final Session session = new Session();
         session.setUserId(userId);
-
         final String secretKey = AppConfig.secretKey;
         final int saltCounter = AppConfig.saltCounter;
-
         String signature = DigestUtils.md5Hex(session.getId());
         for (int i = 0; i < saltCounter; i++) {
             signature = DigestUtils.md5Hex(signature + secretKey);
         }
         session.setSignature(signature);
-        entityRepository.merge(session);//Add to Session repository
+        sessionMapper.merge(session);
+        sqlSession.commit();
+        sqlSession.close();
         return session;
     }
+
+    @Override
+    public Session delete(String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
+        final SqlSession sqlSession = sqlSessionFactory.openSession();
+        final ISessionRepository sessionMapper = sqlSession.getMapper(ISessionRepository.class);
+        final Session session = sessionMapper.getById(id);
+        if (session == null) {
+            return null;
+        }
+        int counter = sessionMapper.delete(id);
+        if (counter == 0) {
+            return null;
+        }
+        sqlSession.commit();
+        sqlSession.close();
+        return session;
+    }
+
 
     @Override
     public void validate(Session session) throws UncorrectSessionException {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-        entityRepository.validate(session);
+        final SqlSession sqlSession = sqlSessionFactory.openSession();
+        final ISessionRepository sessionMapper = sqlSession.getMapper(ISessionRepository.class);
+        final Session sessionInBase = sessionMapper.getById(session.getId());
+        if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {//Session is not in a repository OR Signature is incorrect
+            throw new UncorrectSessionException();
+        }
+        if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {//Session is correct, but older than 30min
+            delete(session.getId());
+            throw new UncorrectSessionException();
+        }
     }
 }
 

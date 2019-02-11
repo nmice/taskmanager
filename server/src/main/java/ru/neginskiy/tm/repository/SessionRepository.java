@@ -1,9 +1,6 @@
 package ru.neginskiy.tm.repository;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import ru.neginskiy.tm.entity.Session;
-import ru.neginskiy.tm.error.UncorrectSessionException;
-import ru.neginskiy.tm.util.AppConfig;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,31 +13,8 @@ import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
 public class SessionRepository extends AbstractRepository<Session> {
 
-    private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
-
-    public SessionRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
+    public SessionRepository(Connection connection) {
         this.connection = connection;
-        this.sqlSessionFactory = sqlSessionFactory;
-    }
-
-    public void deleteOldUserSessions(String userId) {
-        List<Session> sessionList = getAll();
-        for (Session session : sessionList) {
-            if (userId.equals(session.getUserId()) && System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
-                delete(session.getId());
-            }
-        }
-    }
-
-    public void validate(Session session) throws UncorrectSessionException {
-        final Session sessionInBase = getById(session.getId());
-        if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {//Session is not in a repository OR Signature is incorrect
-            throw new UncorrectSessionException();
-        }
-        if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {//Session is correct, but older than 30min
-            delete(session.getId());
-            throw new UncorrectSessionException();
-        }
     }
 
     @Override
@@ -103,7 +77,6 @@ public class SessionRepository extends AbstractRepository<Session> {
         return session;
     }
 
-    @Override
     protected Session fetch(ResultSet resultSet) throws SQLException {
         final Session session = new Session();
         session.setId(resultSet.getString("id"));
@@ -113,7 +86,6 @@ public class SessionRepository extends AbstractRepository<Session> {
         return session;
     }
 
-    @Override
     protected List<Session> fetchAll(ResultSet resultSet) throws SQLException {
         final List<Session> resultList = new ArrayList<>();
         while (resultSet.next()) {

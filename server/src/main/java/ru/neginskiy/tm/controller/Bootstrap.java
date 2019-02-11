@@ -36,15 +36,15 @@ public class Bootstrap implements ServiceLocator {
         final Connection connection = dbConnection.getConnection();
         final SqlSessionFactory sqlSessionFactory = createSqlSessionFactory();
 
-        final TaskRepository taskRepository = new TaskRepository(connection, sqlSessionFactory);
-        final ProjectRepository projectRepository = new ProjectRepository(connection, sqlSessionFactory);
-        final UserRepository userRepository = new UserRepository(connection, sqlSessionFactory);
-        final SessionRepository sessionRepository = new SessionRepository(connection, sqlSessionFactory);
+        final TaskRepository taskRepository = new TaskRepository(connection);
+        final ProjectRepository projectRepository = new ProjectRepository(connection);
+        final UserRepository userRepository = new UserRepository(connection);
+        final SessionRepository sessionRepository = new SessionRepository(connection);
 
-        taskService = new TaskService(taskRepository);
-        projectService = new ProjectService(projectRepository, taskRepository);
-        userService = new UserService(userRepository);
-        sessionService = new SessionService(sessionRepository);
+        taskService = new TaskService(sqlSessionFactory);
+        projectService = new ProjectService(sqlSessionFactory);
+        userService = new UserService(sqlSessionFactory);
+        sessionService = new SessionService(sqlSessionFactory);
         dataService = new DataService(this);
 
         createTestUser();
@@ -53,13 +53,13 @@ public class Bootstrap implements ServiceLocator {
     }
 
     private SqlSessionFactory createSqlSessionFactory() {
-        final DataSource dataSource = new PooledDataSource(dbDriver,dbUrl,dbUsername,dbPassword);
-        final TransactionFactory transactionFactory=new JdbcTransactionFactory();
-        final Environment environment = new Environment("development", transactionFactory,dataSource);
+        final DataSource dataSource = new PooledDataSource(dbDriver, dbUrl, dbUsername, dbPassword);
+        final TransactionFactory transactionFactory = new JdbcTransactionFactory();
+        final Environment environment = new Environment("development", transactionFactory, dataSource);
         final Configuration configuration = new Configuration(environment);
 
         configuration.addMapper(IProjectRepository.class);
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder= new SqlSessionFactoryBuilder();
+        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         sqlSessionFactoryBuilder.build(configuration);
         return sqlSessionFactoryBuilder.build(configuration);
     }

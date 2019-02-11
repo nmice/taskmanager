@@ -1,21 +1,20 @@
 package ru.neginskiy.tm.service;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import ru.neginskiy.tm.api.IProjectRepository;
+import ru.neginskiy.tm.api.ITaskRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.IProjectService;
-import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
 
 import java.util.List;
 
 public class ProjectService implements IProjectService {
 
-    private final ProjectRepository projectRepository;
+    private final SqlSessionFactory sqlSessionFactory;
 
-    private final TaskRepository taskRepository;
-
-    public ProjectService(ProjectRepository projectRepository, TaskRepository taskRepository) {
-        this.projectRepository = projectRepository;
-        this.taskRepository = taskRepository;
+    public ProjectService(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     @Override
@@ -23,7 +22,11 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        projectRepository.merge(project);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IProjectRepository projectMapper = session.getMapper(IProjectRepository.class);
+        projectMapper.merge(project);
+        session.commit();
+        session.close();
     }
 
     @Override
@@ -31,7 +34,12 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return projectRepository.getById(id);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IProjectRepository projectMapper = session.getMapper(IProjectRepository.class);
+        final Project project = projectMapper.getById(id);
+        session.commit();
+        session.close();
+        return project;
     }
 
     @Override
@@ -39,7 +47,12 @@ public class ProjectService implements IProjectService {
         if (userId == null || userId.isEmpty()) {
             return null;
         }
-        return projectRepository.getAllByUserId(userId);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IProjectRepository projectMapper = session.getMapper(IProjectRepository.class);
+        final List<Project> projectList = projectMapper.getAllByUserId(userId);
+        session.commit();
+        session.close();
+        return projectList;
     }
 
     @Override
@@ -47,7 +60,20 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        taskRepository.deleteByProjectId(id);
-        return projectRepository.delete(id);
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IProjectRepository projectMapper = session.getMapper(IProjectRepository.class);
+        final Project project = projectMapper.getById(id);
+        if (project == null) {
+            return null;
+        }
+        int counter = projectMapper.delete(id);
+        if (counter == 0) {
+            return null;
+        }
+        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
+        taskMapper.deleteByProjectId(id);
+        session.commit();
+        session.close();
+        return project;
     }
 }
