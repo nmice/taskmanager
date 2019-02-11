@@ -58,7 +58,7 @@ public class Bootstrap implements ServiceLocator {
         final Environment environment = new Environment("development", transactionFactory,dataSource);
         final Configuration configuration = new Configuration(environment);
 
-        configuration.addMapper(IRepository.class);
+        configuration.addMapper(IProjectRepository.class);
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder= new SqlSessionFactoryBuilder();
         sqlSessionFactoryBuilder.build(configuration);
         return sqlSessionFactoryBuilder.build(configuration);

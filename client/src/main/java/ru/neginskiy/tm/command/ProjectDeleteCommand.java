@@ -40,7 +40,11 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
         String id = project.getId();
 
-        getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
+        Project returned = getBootstrap().getProjectEndpointService().projectDelete(getBootstrap().getActiveSession(), id);
+        if (returned==null){
+            System.out.println("Project is NULL");
+            return;
+        }
         System.out.println("Project deleted");
     }
 

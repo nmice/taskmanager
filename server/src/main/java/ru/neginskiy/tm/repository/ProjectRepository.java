@@ -1,6 +1,8 @@
 package ru.neginskiy.tm.repository;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import ru.neginskiy.tm.api.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 
 import java.sql.Connection;
@@ -12,7 +14,7 @@ import java.util.List;
 
 import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
 
-public class ProjectRepository extends AbstractRepository<Project> {
+public class ProjectRepository extends AbstractRepository<Project>{
 
     public ProjectRepository(Connection connection, SqlSessionFactory sqlSessionFactory) {
         this.connection = connection;
@@ -34,7 +36,7 @@ public class ProjectRepository extends AbstractRepository<Project> {
 
     @Override
     public void merge(Project project) {
-       final String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
+        final String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
                 "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)";
         try {
@@ -82,15 +84,18 @@ public class ProjectRepository extends AbstractRepository<Project> {
 
     @Override
     public Project delete(String id) {
-        final Project project = getById(id);
-        final String query = "DELETE FROM project where id=?";
-        try {
-            final PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        final SqlSession session = sqlSessionFactory.openSession();
+        final IProjectRepository projectMapper = session.getMapper(IProjectRepository.class);
+        final Project project = projectMapper.getById(id);
+        if (project == null) {
+            return null;
         }
+        int counter = projectMapper.delete(id);
+        if (counter == 0) {
+            return null;
+        }
+        session.commit();
+        session.close();
         return project;
     }
 

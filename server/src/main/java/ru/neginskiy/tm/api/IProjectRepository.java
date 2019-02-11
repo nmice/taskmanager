@@ -1,108 +1,37 @@
 package ru.neginskiy.tm.api;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.annotations.*;
 import ru.neginskiy.tm.entity.Project;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static ru.neginskiy.tm.util.SqlDateUtil.prepare;
+public interface IProjectRepository {
 
-public interface IProjectRepository extends IRepository {
+    @Select("SELECT * FROM project")
+    List<Project> getAll();
 
-    @Select("SELECT * FROM project where userId=(#{userId}")
+    @Select("SELECT * FROM project where userId=#{userId}")
+/*    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "dateBegin", column = "dateBegin"),
+            @Result(property = "dateEnd", column = "dateEnd"),
+            @Result(property = "userId", column = "userId")
+    })*/
     List<Project> getAllByUserId(String userId);
 
-    @Insert("INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
-            "ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
-            "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)")
-    void merge(Project project) {
-        final String query = "INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (?, ?, ?, ?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
-                "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, project.getId());
-            preparedStatement.setString(2, project.getName());
-            preparedStatement.setString(3, project.getDescription());
-            preparedStatement.setDate(4, prepare(project.getDateBegin()));
-            preparedStatement.setDate(5, prepare(project.getDateEnd()));
-            preparedStatement.setString(6, project.getUserId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    @Select("SELECT * FROM project where id=#{id}")
+    Project getById(String id);
 
-    @Override
-    public Project getById(String id) {
-        final String query = "SELECT * FROM project where id=?";
-        try {
-            final PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, id);
-            final ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return fetch(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+/*    @Insert("INSERT INTO project (id,name,description,dateBegin,dateEnd,userId) VALUES (#{id}, #{name}, #{description}, " +
+            "#{dateBegin}, #{dateEnd}, #{userId} ON DUPLICATE KEY UPDATE id = VALUES(id), name = VALUES(name), description = VALUES(description), " +
+            "dateBegin = VALUES(dateBegin), dateEnd = VALUES(dateEnd), userId = VALUES(userId)")*/
 
-    @Override
-    public List<Project> getAll() {
-        final String query = "SELECT * FROM project";
-        try {
-            final PreparedStatement preparedStatement = connection.prepareStatement(query);
-            final ResultSet resultSet = preparedStatement.executeQuery();
-            return fetchAll(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
-    }
+    @Update("UPDATE project set name = #{name}, description = #{description}, dateBegin = #{dateBegin}, " +
+            "dateEnd = #{dateEnd}, userId = #{userId}")
+    void merge(Project project);
 
-    @Override
-    public Project delete(String id) {
-        final Project project = getById(id);
-        final String query = "DELETE FROM project where id=?";
-        try {
-            final PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return project;
-    }
-
-    @Override
-    protected Project fetch(ResultSet resultSet) throws SQLException {
-        final Project project = new Project();
-        project.setId(resultSet.getString("id"));
-        project.setName(resultSet.getString("name"));
-        project.setDescription(resultSet.getString("description"));
-        project.setDateBegin(prepare(resultSet.getDate("dateBegin")));
-        project.setDateEnd(prepare(resultSet.getDate("dateEnd")));
-        project.setUserId(resultSet.getString("userId"));
-        return project;
-    }
-
-    @Override
-    protected List<Project> fetchAll(ResultSet resultSet) throws SQLException {
-        final List<Project> resultList = new ArrayList<>();
-        while (resultSet.next()) {
-            resultList.add(fetch(resultSet));
-        }
-        return resultList;
-    }
-
+    @Delete("DELETE FROM project where id=#{id}")
+    int delete(String id);
 }
