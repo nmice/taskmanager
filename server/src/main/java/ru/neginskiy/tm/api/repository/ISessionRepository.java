@@ -21,7 +21,7 @@ public interface ISessionRepository {
 
     @Delete("DELETE FROM session where id=#{id}")
     int delete(String id);
-
+/*
     @Delete("DELETE FROM session where userId=#{userId}")
-    int deleteByUserId(String userId);
+    int deleteByUserId(String userId);*/
 }
