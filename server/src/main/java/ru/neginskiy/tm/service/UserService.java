@@ -2,8 +2,8 @@ package ru.neginskiy.tm.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.neginskiy.tm.api.IUserRepository;
-import ru.neginskiy.tm.api.IUserService;
+import ru.neginskiy.tm.api.repository.IUserRepository;
+import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
 
 public class UserService implements IUserService {

@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.endpoint;
 
-import ru.neginskiy.tm.api.ISessionService;
+import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 

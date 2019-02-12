@@ -6,24 +6,24 @@ import org.apache.ibatis.session.*;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import ru.neginskiy.tm.api.*;
-import ru.neginskiy.tm.connection.DBConnection;
+import ru.neginskiy.tm.api.repository.IProjectRepository;
+import ru.neginskiy.tm.api.repository.ISessionRepository;
+import ru.neginskiy.tm.api.repository.ITaskRepository;
+import ru.neginskiy.tm.api.repository.IUserRepository;
+import ru.neginskiy.tm.api.service.IProjectService;
+import ru.neginskiy.tm.api.service.ISessionService;
+import ru.neginskiy.tm.api.service.ITaskService;
+import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.endpoint.*;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.SessionRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
-import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.UserRepository;
 import ru.neginskiy.tm.service.*;
 
 import javax.sql.DataSource;
 import javax.xml.ws.Endpoint;
-import java.sql.*;
 
 import static ru.neginskiy.tm.util.AppConfig.*;
 
 public class Bootstrap implements ServiceLocator {
-
-    private final DBConnection dbConnection = new DBConnection();
 
     private ITaskService taskService;
     private IProjectService projectService;
@@ -32,14 +32,7 @@ public class Bootstrap implements ServiceLocator {
     private DataService dataService;
 
     public void init() {
-        dbConnection.initDB();
-        final Connection connection = dbConnection.getConnection();
         final SqlSessionFactory sqlSessionFactory = createSqlSessionFactory();
-
-        final TaskRepository taskRepository = new TaskRepository(connection);
-        final ProjectRepository projectRepository = new ProjectRepository(connection);
-        final UserRepository userRepository = new UserRepository(connection);
-        final SessionRepository sessionRepository = new SessionRepository(connection);
 
         taskService = new TaskService(sqlSessionFactory);
         projectService = new ProjectService(sqlSessionFactory);
@@ -59,6 +52,10 @@ public class Bootstrap implements ServiceLocator {
         final Configuration configuration = new Configuration(environment);
 
         configuration.addMapper(IProjectRepository.class);
+        configuration.addMapper(ITaskRepository.class);
+        configuration.addMapper(IUserRepository.class);
+        configuration.addMapper(ISessionRepository.class);
+
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         sqlSessionFactoryBuilder.build(configuration);
         return sqlSessionFactoryBuilder.build(configuration);
@@ -98,9 +95,5 @@ public class Bootstrap implements ServiceLocator {
 
     public DataService getDataService() {
         return dataService;
-    }
-
-    public Connection getConnection() {
-        return dbConnection.getConnection();
     }
 }

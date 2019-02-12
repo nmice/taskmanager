@@ -3,8 +3,8 @@ package ru.neginskiy.tm.service;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.neginskiy.tm.api.ISessionRepository;
-import ru.neginskiy.tm.api.ISessionService;
+import ru.neginskiy.tm.api.repository.ISessionRepository;
+import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 import ru.neginskiy.tm.util.AppConfig;
@@ -16,6 +16,8 @@ public class SessionService implements ISessionService {
     private final SqlSessionFactory sqlSessionFactory;
 
     private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
+    private static final String SECRET_KEY = AppConfig.secretKey;
+    private static final int SALT_COUNTER = AppConfig.saltCounter;
 
     public SessionService(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
@@ -36,11 +38,9 @@ public class SessionService implements ISessionService {
         }
         final Session session = new Session();
         session.setUserId(userId);
-        final String secretKey = AppConfig.secretKey;
-        final int saltCounter = AppConfig.saltCounter;
         String signature = DigestUtils.md5Hex(session.getId());
-        for (int i = 0; i < saltCounter; i++) {
-            signature = DigestUtils.md5Hex(signature + secretKey);
+        for (int i = 0; i < SALT_COUNTER; i++) {
+            signature = DigestUtils.md5Hex(signature + SECRET_KEY);
         }
         session.setSignature(signature);
         sessionMapper.merge(session);

@@ -1,12 +1,11 @@
 package ru.neginskiy.tm.endpoint;
 
-import ru.neginskiy.tm.api.IUserService;
+import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.util.List;
 
 @WebService
 public class UserEndpoint {

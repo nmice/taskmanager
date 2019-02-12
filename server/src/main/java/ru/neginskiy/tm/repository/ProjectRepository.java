@@ -3,7 +3,6 @@ package ru.neginskiy.tm.repository;
 import ru.neginskiy.tm.entity.Project;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectRepository extends AbstractRepository<Project>{
@@ -13,7 +12,8 @@ public class ProjectRepository extends AbstractRepository<Project>{
     }
 
     @Override
-    public void merge(Project project) {
+    public void merge(Project entity) {
+
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ProjectRepository extends AbstractRepository<Project>{
 
     @Override
     public List<Project> getAll() {
-        return new ArrayList<>();
+        return null;
     }
 
     @Override

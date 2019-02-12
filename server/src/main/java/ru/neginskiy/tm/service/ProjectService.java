@@ -2,10 +2,10 @@ package ru.neginskiy.tm.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.neginskiy.tm.api.IProjectRepository;
-import ru.neginskiy.tm.api.ITaskRepository;
+import ru.neginskiy.tm.api.repository.IProjectRepository;
+import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Project;
-import ru.neginskiy.tm.api.IProjectService;
+import ru.neginskiy.tm.api.service.IProjectService;
 
 import java.util.List;
 

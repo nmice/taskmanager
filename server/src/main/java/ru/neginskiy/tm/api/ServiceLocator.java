@@ -1,5 +1,9 @@
 package ru.neginskiy.tm.api;
 
+import ru.neginskiy.tm.api.service.IProjectService;
+import ru.neginskiy.tm.api.service.ISessionService;
+import ru.neginskiy.tm.api.service.ITaskService;
+import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.service.DataService;
 
 public interface ServiceLocator {

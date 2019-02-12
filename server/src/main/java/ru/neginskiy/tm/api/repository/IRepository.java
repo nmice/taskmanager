@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.api;
+package ru.neginskiy.tm.api.repository;
 
 import ru.neginskiy.tm.entity.AbstractEntity;
 

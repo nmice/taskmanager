@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.api;
+package ru.neginskiy.tm.api.repository;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;

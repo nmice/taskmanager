@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.api;
+package ru.neginskiy.tm.api.service;
 
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
