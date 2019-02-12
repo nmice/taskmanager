@@ -10,8 +10,7 @@
 
 <li> SOAP WS</li>
 
-<li> JDBC</li>
-
+<li> myBatis (3.4.6)</li>
 
 <h3>Структура проекта</h3>
 
@@ -19,9 +18,21 @@
 
 <h4>[api]</h4>
 
-<li> IProjectService - интерфейс операций над проектами</li>
+<li> ServiceLocator - интерфейс доступа к сервисам</li>
 
-<li> IRepository - интерфейс репозиториев</li>
+<h4>[api.repository]</h4>
+
+<li> IProjectRepository - интерфейс операций над проектами через MyBatis</li>
+
+<li> ISessionRepository - интерфейс операций над сессиями через MyBatis</li>
+
+<li> ITaskRepository - интерфейс операций над задачами через MyBatis</li>
+
+<li> IUserRepository - интерфейс операций над пользователями через MyBatis</li>
+
+<h4>[api.service]</h4>
+
+<li> IProjectService - интерфейс операций над проектами</li>
 
 <li> ISessionService - интерфейс операций над сессиями</li>
 
@@ -29,17 +40,11 @@
 
 <li> IUserService - интерфейс операций над пользователями</li>
 
-<li> ServiceLocator - интерфейс доступа к сервисам</li>
-
-<h4>[connection]</h4>
-
-<li> DBConnection - класс соединения с БД</li>
-
 <h4>[controller]</h4>
 
 <li> Bootstrap - класс начальной загрузки программы на сервере</li>
 
-<h4>[domain]</h4>
+<h4>[dto]</h4>
 
 <li> Domain - класс транспортного объекта для сериализации</li>
 
@@ -98,8 +103,6 @@
 <h4>[util]</h4>
 
 <li> AppConfig - утильный класс со static переменными, хранящих значения из config.properties</li>
-
-<li> SqlDateUtil - утильный класс с методом для перевода <i>java.util.Date</i> в <i>java.sql.Date</i> и обратно</li>
 
 <h4>Application - основной класс на сервере</h4>
 
