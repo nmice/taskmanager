@@ -25,6 +25,9 @@ import static ru.neginskiy.tm.util.AppConfig.*;
 
 public class Bootstrap implements ServiceLocator {
 
+    private static final Class[] MAPPER_CLASSES = {IProjectRepository.class, ITaskRepository.class,
+            IUserRepository.class, ISessionRepository.class};
+
     private ITaskService taskService;
     private IProjectService projectService;
     private IUserService userService;
@@ -51,10 +54,9 @@ public class Bootstrap implements ServiceLocator {
         final Environment environment = new Environment("development", transactionFactory, dataSource);
         final Configuration configuration = new Configuration(environment);
 
-        configuration.addMapper(IProjectRepository.class);
-        configuration.addMapper(ITaskRepository.class);
-        configuration.addMapper(IUserRepository.class);
-        configuration.addMapper(ISessionRepository.class);
+        for (Class mapperClass : MAPPER_CLASSES) {
+            configuration.addMapper(mapperClass);
+        }
 
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         sqlSessionFactoryBuilder.build(configuration);
