@@ -1,17 +1,19 @@
 package ru.neginskiy.tm.api.service;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Task;
 
 import java.util.List;
 
 public interface ITaskService {
 
-    void merge(Task task);
+    void merge(@Nullable Task task);
 
-    Task getById(String id);
+    @Nullable Task getById(@Nullable String id);
 
-    List<Task> getAllByUserId(String userId);
+    @NotNull List<Task> getAllByUserId(@Nullable String userId);
 
-    Task delete(String id);
+    @Nullable Task delete(@Nullable String id);
 
 }

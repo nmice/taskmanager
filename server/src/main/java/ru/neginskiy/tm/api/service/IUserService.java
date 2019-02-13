@@ -1,17 +1,16 @@
 package ru.neginskiy.tm.api.service;
 
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.User;
-
-import java.util.List;
 
 public interface IUserService {
 
-    void merge(User user);
+    void merge(@Nullable User user);
 
-    User getById(String id);
+    @Nullable User getById(@Nullable String id);
 
-    User findUser(String login, String passwordHash);
+    @Nullable User findUser(@Nullable String login, @Nullable String passwordHash);
 
-    public boolean isRegistredLogin(String login);
+    boolean isRegistredLogin(@Nullable String login);
 
 }

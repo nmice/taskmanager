@@ -1,16 +1,18 @@
 package ru.neginskiy.tm.api.service;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Project;
 
 import java.util.List;
 
 public interface IProjectService {
 
-    void merge(Project project);
+    void merge(@Nullable Project project);
 
-    Project getById(String id);
+    @Nullable Project getById(@Nullable String id);
 
-    List<Project> getAllByUserId(String userId);
+    @NotNull List<Project> getAllByUserId(@Nullable String userId);
 
-    Project delete(String id);
+    @Nullable Project delete(@Nullable String id);
 }

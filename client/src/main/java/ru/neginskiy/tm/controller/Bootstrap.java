@@ -1,5 +1,7 @@
 package ru.neginskiy.tm.controller;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.command.AbstractCommand;
 import ru.neginskiy.tm.endpoint.*;
 
@@ -20,20 +22,20 @@ public class Bootstrap {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public void init(Class[] classes) throws IllegalAccessException, InstantiationException {
+    public void init(@NotNull Class[] classes) throws IllegalAccessException, InstantiationException {
         registry(classes);
         while (true) {
             receiveCommand();
         }
     }
 
-    private void registry(Class... classes) throws InstantiationException, IllegalAccessException {
+    private void registry(@NotNull Class... classes) throws InstantiationException, IllegalAccessException {
         for (Class clazz : classes) {
             registry(clazz);
         }
     }
 
-    private void registry(Class clazz) throws IllegalAccessException, InstantiationException {
+    private void registry(@NotNull Class clazz) throws IllegalAccessException, InstantiationException {
         final Object o = clazz.newInstance();
         if (o instanceof AbstractCommand) {
             final AbstractCommand abstractCommand = (AbstractCommand) clazz.newInstance();
@@ -67,7 +69,7 @@ public class Bootstrap {
         }
     }
 
-    public String readLine() {
+    public @Nullable String readLine() {
         final String str = scanner.nextLine().trim();
         if (str.isEmpty()) {
             System.out.println("Incorrect input");

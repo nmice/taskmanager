@@ -2,10 +2,13 @@ package ru.neginskiy.tm.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskService implements ITaskService {
@@ -17,7 +20,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public void merge(Task task) {
+    public void merge(@Nullable Task task) {
         if (task == null) {
             return;
         }
@@ -29,7 +32,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public Task getById(String id) {
+    public @Nullable Task getById(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
@@ -42,9 +45,9 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public List<Task> getAllByUserId(String userId) {
+    public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
         final SqlSession session = sqlSessionFactory.openSession();
         final ITaskRepository taskMapper = session.getMapper(
@@ -56,7 +59,7 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public Task delete(String id) {
+    public @Nullable Task delete(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }

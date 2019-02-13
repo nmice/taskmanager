@@ -13,26 +13,26 @@ public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        Project project = new Project();
+        final Project project = new Project();
         project.setUserId(getBootstrap().getActiveSession().getUserId());
 
         System.out.println("Please enter a name of the project :");
-        String name = getBootstrap().readLine();
+        final String name = getBootstrap().readLine();
         project.setName(name);
 
         System.out.println("Please enter a description of the project :");
-        String description = getBootstrap().readLine();
+        final String description = getBootstrap().readLine();
         project.setDescription(description);
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-        XMLGregorianCalendar dateBegin = getGcFromStr(getBootstrap().readLine());
+        final XMLGregorianCalendar dateBegin = getGcFromStr(getBootstrap().readLine());
         if (dateBegin == null) {
             System.out.println("Invalid date or format");
         }
         project.setDateBegin(dateBegin);
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-        XMLGregorianCalendar dateEnd = getGcFromStr(getBootstrap().readLine());
+        final XMLGregorianCalendar dateEnd = getGcFromStr(getBootstrap().readLine());
         if (dateEnd == null) {
             System.out.println("Invalid date or format");
         }

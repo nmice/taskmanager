@@ -5,6 +5,7 @@ import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.*;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.api.*;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
@@ -48,7 +49,7 @@ public class Bootstrap implements ServiceLocator {
         registryInNet();
     }
 
-    private SqlSessionFactory createSqlSessionFactory() {
+    private @NotNull SqlSessionFactory createSqlSessionFactory() {
         final DataSource dataSource = new PooledDataSource(dbDriver, dbUrl, dbUsername, dbPassword);
         final TransactionFactory transactionFactory = new JdbcTransactionFactory();
         final Environment environment = new Environment("development", transactionFactory, dataSource);

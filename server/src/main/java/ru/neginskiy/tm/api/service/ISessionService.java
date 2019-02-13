@@ -1,13 +1,14 @@
 package ru.neginskiy.tm.api.service;
 
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 
 public interface ISessionService {
 
-    Session delete(String id);
+    @Nullable Session delete(@Nullable String id);
 
-    Session getNewSession(String userId);
+    @Nullable Session getNewSession(@Nullable String userId);
 
-    void validate(Session session) throws UncorrectSessionException;
+    void validate(@Nullable Session session) throws UncorrectSessionException;
 }

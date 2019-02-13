@@ -13,14 +13,15 @@ public class TaskListCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        List<Task> taskList;
-        taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        final List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;
         }
         for (Task task : taskList) {
-            System.out.printf("%s (%s), %s - %s%n", task.getName(), task.getDescription(), getStrFromGc(task.getDateBegin()), getStrFromGc(task.getDateEnd()));
+            System.out.printf("%s (%s), %s - %s%n", task.getName(), task.getDescription(),
+                    getStrFromGc(task.getDateBegin()), getStrFromGc(task.getDateEnd()));
         }
     }
 

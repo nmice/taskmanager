@@ -2,11 +2,14 @@ package ru.neginskiy.tm.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectService implements IProjectService {
@@ -18,7 +21,7 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public void merge(Project project) {
+    public void merge(@Nullable Project project) {
         if (project == null) {
             return;
         }
@@ -30,7 +33,7 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public Project getById(String id) {
+    public @Nullable Project getById(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
@@ -43,12 +46,14 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<Project> getAllByUserId(String userId) {
+    public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
         final SqlSession session = sqlSessionFactory.openSession();
+
         final IProjectRepository projectMapper = session.getMapper(IProjectRepository.class);
+
         final List<Project> projectList = projectMapper.getAllByUserId(userId);
         session.commit();
         session.close();
@@ -56,7 +61,7 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public Project delete(String id) {
+    public @Nullable Project delete(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }

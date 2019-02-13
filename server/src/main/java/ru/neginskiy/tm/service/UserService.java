@@ -2,6 +2,7 @@ package ru.neginskiy.tm.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
@@ -15,7 +16,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void merge(User user) {
+    public void merge(@Nullable User user) {
         if (user == null) {
             return;
         }
@@ -27,7 +28,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getById(String id) {
+    public @Nullable User getById(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
@@ -40,7 +41,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User findUser(String login, String passwordHash) {
+    public @Nullable User findUser(@Nullable String login, @Nullable String passwordHash) {
         if (login == null || passwordHash == null) {
             return null;
         }
@@ -53,7 +54,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean isRegistredLogin(String login) {
+    public boolean isRegistredLogin(@Nullable String login) {
         if (login == null) {
             return true;
         }

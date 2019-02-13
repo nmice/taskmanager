@@ -11,7 +11,7 @@ public class UserLoginCommand extends AbstractCommand {
     @Override
     public void execute() {
         System.out.println("Please enter login :");
-        String login = getBootstrap().readLine();
+        final String login = getBootstrap().readLine();
         if (login == null) {
             System.out.println("Empty field, authorization failed!");
             return;
@@ -20,22 +20,17 @@ public class UserLoginCommand extends AbstractCommand {
             System.out.println("This login is not registered, authorization failed!");
             return;
         }
-
         System.out.println("Please enter password :");
-        String password = getBootstrap().readLine();
+        final String password = getBootstrap().readLine();
         if (password == null) {
             System.out.println("Empty field, authorization failed!");
             return;
         }
-
-        String passwordHash = String.valueOf(password.hashCode());
-
-        User user = getBootstrap().getUserEndpointService().findUser(login, passwordHash);
-
+        final String passwordHash = String.valueOf(password.hashCode());
+        final User user = getBootstrap().getUserEndpointService().findUser(login, passwordHash);
         if (user != null) {
             Session session = getBootstrap().getSessionEndpointService().getNewSession(user.getId());
             getBootstrap().setActiveSession(session);
-
             System.out.println("You are logged in as " + user.getLogin());
             return;
         }

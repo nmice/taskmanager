@@ -16,14 +16,13 @@ public class TaskEditCommand extends AbstractCommand {
     @Override
     public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
-        List<Task> taskList;
-        taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        final List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         int index = 0;
         for (Task task : taskList) {
             System.out.printf("%-3s%s%s%n", index++, " - ", task.getName());
         }
-
-        Task task;
+        final Task task;
         try {
             int taskNumber = Integer.parseInt(getBootstrap().readLine());
             task = taskList.get(taskNumber);
@@ -31,28 +30,28 @@ public class TaskEditCommand extends AbstractCommand {
                 System.out.println("Incorrect input, task not found");
                 return;
             }
-            System.out.printf("%s (%s), %s - %s%n", task.getName(), task.getDescription(), getStrFromGc(task.getDateBegin()), getStrFromGc(task.getDateEnd()));
+            System.out.printf("%s (%s), %s - %s%n", task.getName(), task.getDescription(),
+                    getStrFromGc(task.getDateBegin()), getStrFromGc(task.getDateEnd()));
         } catch (Exception e) {
             System.out.println("Incorrect input, task not found");
             return;
         }
-
         System.out.println("Enter the command: \r\n" +
                 "changename        - Change name of task \r\n" +
                 "changedescription - Change description of task \r\n" +
                 "changebegindate   - Change a begin date of task \r\n" +
                 "changeenddate     - Change a end date of task");
-        String updateCommandString = getBootstrap().readLine();
+        final String updateCommandString = getBootstrap().readLine();
         switch (updateCommandString) {
             case "changename":
                 System.out.println("Please enter a new task name : ");
-                String name = getBootstrap().readLine();
+                final String name = getBootstrap().readLine();
                 task.setName(name);
                 System.out.println("Name changed");
                 break;
             case "changedescription":
                 System.out.println("Please enter a new task description : ");
-                String description = getBootstrap().readLine();
+                final String description = getBootstrap().readLine();
                 task.setDescription(description);
                 System.out.println("Description changed");
                 break;

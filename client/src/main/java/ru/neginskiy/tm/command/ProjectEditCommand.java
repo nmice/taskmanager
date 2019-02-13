@@ -16,14 +16,13 @@ public class ProjectEditCommand extends AbstractCommand {
     @Override
     public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
-        List<Project> projectList;
-        projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        final List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         int indexOfProject = 0;
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
         }
-
-        Project project;
+        final Project project;
         try {
             int projectNumber = Integer.parseInt(getBootstrap().readLine());
             project = projectList.get(projectNumber);
@@ -43,17 +42,17 @@ public class ProjectEditCommand extends AbstractCommand {
                 "changedescription - Change description of project \r\n" +
                 "changebegindate   - Change a begin date of project \r\n" +
                 "changeenddate     - Change a end date of project");
-        String updateCommandString = getBootstrap().readLine();
+        final String updateCommandString = getBootstrap().readLine();
         switch (updateCommandString) {
             case "changename":
                 System.out.println("Please enter a new project name : ");
-                String name = getBootstrap().readLine();
+                final String name = getBootstrap().readLine();
                 project.setName(name);
                 System.out.println("Name changed");
                 break;
             case "changedescription":
                 System.out.println("Please enter a new project description : ");
-                String description = getBootstrap().readLine();
+                final String description = getBootstrap().readLine();
                 project.setDescription(description);
                 System.out.println("Description changed");
                 break;
@@ -63,7 +62,6 @@ public class ProjectEditCommand extends AbstractCommand {
                 if (dateBegin == null) {
                     return;
                 }
-
                 XMLGregorianCalendar dateEnd = project.getDateEnd();
                 if (dateEnd != null && dateEnd.getMillisecond() < dateBegin.getMillisecond()) {
                     System.out.println("End date must be later than the begin date, incorrect input");
@@ -87,7 +85,6 @@ public class ProjectEditCommand extends AbstractCommand {
                 System.out.println("End date changed");
                 break;
         }
-
         getBootstrap().getProjectEndpointService().projectMerge(getBootstrap().getActiveSession(), project);
         System.out.println("Project updated");
     }

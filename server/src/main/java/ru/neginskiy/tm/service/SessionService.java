@@ -3,6 +3,7 @@ package ru.neginskiy.tm.service;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
@@ -24,7 +25,7 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public Session getNewSession(String userId) {
+    public @Nullable Session getNewSession(@Nullable String userId) {
         if (userId == null) {
             return null;
         }
@@ -50,7 +51,7 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public Session delete(String id) {
+    public @Nullable Session delete(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
@@ -69,9 +70,8 @@ public class SessionService implements ISessionService {
         return session;
     }
 
-
     @Override
-    public void validate(Session session) throws UncorrectSessionException {
+    public void validate(@Nullable Session session) throws UncorrectSessionException {
         if (session == null) {
             throw new UncorrectSessionException();
         }

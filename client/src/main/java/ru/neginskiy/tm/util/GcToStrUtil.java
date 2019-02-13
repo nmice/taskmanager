@@ -1,5 +1,7 @@
 package ru.neginskiy.tm.util;
 
+import org.jetbrains.annotations.Nullable;
+
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
 
@@ -7,7 +9,7 @@ public class GcToStrUtil {
 
     private static final String PATTERN = "dd-MM-yyyy";
 
-    public static String getStrFromGc(XMLGregorianCalendar xmlGregCal) {
+    public static @Nullable String getStrFromGc(@Nullable final XMLGregorianCalendar xmlGregCal) {
         if (xmlGregCal == null) {
             return null;
         }

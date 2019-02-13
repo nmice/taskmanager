@@ -13,8 +13,8 @@ public class ProjectListCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        List<Project> projectList;
-        projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        final List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found");
             return;

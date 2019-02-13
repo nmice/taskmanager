@@ -2,23 +2,27 @@ package ru.neginskiy.tm.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.dto.Domain;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
+import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import java.io.*;
 import java.util.List;
 
 public class DataService {
 
-    ServiceLocator serviceLocator;
+    private final ServiceLocator serviceLocator;
 
     public DataService(ServiceLocator serviceLocator) {
         this.serviceLocator = serviceLocator;
     }
 
-    public void saveDataBin(String userId) {
+    public void saveDataBin(@Nullable String userId) throws UncorrectSessionException {
+        if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
         Domain domain = createDomain(userId);
@@ -29,7 +33,8 @@ public class DataService {
         }
     }
 
-    public void loadDataBin(String userId) {
+    public void loadDataBin(@Nullable String userId) throws UncorrectSessionException {
+        if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
         try (final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
@@ -40,7 +45,8 @@ public class DataService {
         }
     }
 
-    public void saveDataJson(String userId) {
+    public void saveDataJson(@Nullable String userId) throws UncorrectSessionException {
+        if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
         final Domain domain = createDomain(userId);
@@ -52,7 +58,8 @@ public class DataService {
         }
     }
 
-    public void loadDataJson(String userId) {
+    public void loadDataJson(@Nullable String userId) throws UncorrectSessionException {
+        if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
         final ObjectMapper mapper = new ObjectMapper();
@@ -64,7 +71,8 @@ public class DataService {
         }
     }
 
-    public void saveDataXml(String userId) {
+    public void saveDataXml(@Nullable String userId) throws UncorrectSessionException {
+        if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
         final Domain domain = createDomain(userId);
@@ -76,7 +84,8 @@ public class DataService {
         }
     }
 
-    public void loadDataXml(String userId) {
+    public void loadDataXml(@Nullable String userId) throws UncorrectSessionException {
+        if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
         final XmlMapper mapper = new XmlMapper();
@@ -88,7 +97,7 @@ public class DataService {
         }
     }
 
-    private Domain createDomain(String userId) {
+    private @NotNull Domain createDomain(@NotNull String userId) {
         Domain domain = new Domain();
         final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
         final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
@@ -97,7 +106,7 @@ public class DataService {
         return domain;
     }
 
-    private void mergeProjectsAndTasksFromDomain(Domain domain) {
+    private void mergeProjectsAndTasksFromDomain(@NotNull Domain domain) {
         final List<Project> projectList = domain.getProjectList();
         final List<Task> taskList = domain.getTaskList();
         for (Project project : projectList) {

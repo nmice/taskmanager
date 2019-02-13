@@ -8,15 +8,14 @@ public class UserCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        User user = new User();
+        final User user = new User();
 
         System.out.println("Please create a username :");
-        String login = getBootstrap().readLine();
+        final String login = getBootstrap().readLine();
         if (login == null) {
             System.out.println("Empty field, no new user created!");
             return;
         }
-
         if (getBootstrap().getUserEndpointService().isRegistredLogin(login)) {
             System.out.println("This login is already registered, no new user created!");
             return;
@@ -24,12 +23,12 @@ public class UserCreateCommand extends AbstractCommand {
         user.setLogin(login);
 
         System.out.println("Please create a password :");
-        String password = getBootstrap().readLine();
+        final String password = getBootstrap().readLine();
         if (password == null) {
             System.out.println("Empty field, no new user created!");
             return;
         }
-        String passwordHash = String.valueOf(password.hashCode());
+        final String passwordHash = String.valueOf(password.hashCode());
         user.setPasswordHash(passwordHash);
 
         getBootstrap().getUserEndpointService().userMerge(user);

@@ -11,20 +11,18 @@ public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        List<Task> taskList;
-        taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        final List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;
         }
-
         System.out.println("Please select task number to remove :");
         int indexOfTask = 0;
         for (Task task : taskList) {
             System.out.printf("%-3s%s%s%n", indexOfTask++, " - ", task.getName());
         }
-
-        Task task;
+        final Task task;
         try {
             int taskNumber = Integer.parseInt(getBootstrap().readLine());
             task = taskList.get(taskNumber);

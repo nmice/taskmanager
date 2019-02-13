@@ -15,8 +15,8 @@ public class TaskCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        List<Project> projectList;
-        projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        final List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found, please create a project first for the task");
             return;
@@ -27,8 +27,7 @@ public class TaskCreateCommand extends AbstractCommand {
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());
         }
-
-        Project project;
+        final Project project;
         try {
             int projectNumber = Integer.parseInt(getBootstrap().readLine());
             project = projectList.get(projectNumber);
@@ -40,30 +39,29 @@ public class TaskCreateCommand extends AbstractCommand {
             System.out.println("Incorrect input, project not found");
             return;
         }
-        String projectId = project.getId();
+        final String projectId = project.getId();
 
-        Task task = new Task();
+        final Task task = new Task();
         task.setProjectId(projectId);
         task.setUserId(getBootstrap().getActiveSession().getUserId());
 
-
         System.out.println("Please enter a name of the task :");
-        String name = getBootstrap().readLine();
+        final String name = getBootstrap().readLine();
         task.setName(name);
 
         System.out.println("Please enter a description of the task :");
-        String description = getBootstrap().readLine();
+        final String description = getBootstrap().readLine();
         task.setDescription(description);
 
         System.out.println("Please enter a begin date in the format DD-MM-YYYY :");
-        XMLGregorianCalendar dateBegin = getGcFromStr(getBootstrap().readLine());
+        final XMLGregorianCalendar dateBegin = getGcFromStr(getBootstrap().readLine());
         if (dateBegin == null) {
             System.out.println("Invalid date or format");
         }
         task.setDateBegin(dateBegin);
 
         System.out.println("Please enter a end date in the format DD-MM-YYYY :");
-        XMLGregorianCalendar dateEnd = getGcFromStr(getBootstrap().readLine());
+        final XMLGregorianCalendar dateEnd = getGcFromStr(getBootstrap().readLine());
         if (dateEnd == null) {
             System.out.println("Invalid date or format");
         }
