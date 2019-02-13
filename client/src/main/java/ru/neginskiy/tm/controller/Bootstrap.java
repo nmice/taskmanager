@@ -1,5 +1,8 @@
 package ru.neginskiy.tm.controller;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.command.AbstractCommand;
@@ -9,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+@NoArgsConstructor
+@Getter
 public class Bootstrap {
 
     private final Map<String, AbstractCommand> stringToCommand = new HashMap<>();
@@ -18,6 +23,7 @@ public class Bootstrap {
     private final SessionEndpoint sessionEndpointService = new SessionEndpointService().getSessionEndpointPort();
     private final DataEndpoint DataEndpointService = new DataEndpointService().getDataEndpointPort();
 
+    @Setter
     private Session activeSession;
 
     private final Scanner scanner = new Scanner(System.in);
@@ -76,37 +82,5 @@ public class Bootstrap {
             return null;
         }
         return str;
-    }
-
-    public Map<String, AbstractCommand> getStringToCommand() {
-        return stringToCommand;
-    }
-
-    public ProjectEndpoint getProjectEndpointService() {
-        return projectEndpointService;
-    }
-
-    public TaskEndpoint getTaskEndpointService() {
-        return taskEndpointService;
-    }
-
-    public UserEndpoint getUserEndpointService() {
-        return userEndpointService;
-    }
-
-    public SessionEndpoint getSessionEndpointService() {
-        return sessionEndpointService;
-    }
-
-    public DataEndpoint getDataEndpointService() {
-        return DataEndpointService;
-    }
-
-    public Session getActiveSession() {
-        return activeSession;
-    }
-
-    public void setActiveSession(Session activeSession) {
-        this.activeSession = activeSession;
     }
 }
