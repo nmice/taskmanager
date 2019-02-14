@@ -14,6 +14,10 @@ import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.entity.User;
+import ru.neginskiy.tm.repository.ProjectRepository;
+import ru.neginskiy.tm.repository.SessionRepository;
+import ru.neginskiy.tm.repository.TaskRepository;
+import ru.neginskiy.tm.repository.UserRepository;
 import ru.neginskiy.tm.service.*;
 
 import javax.xml.ws.Endpoint;
@@ -32,10 +36,15 @@ public class Bootstrap implements ServiceLocator {
     public void init() {
         final SessionFactory sessionFactory = createSessionFactory();
 
-        taskService = new TaskService(SessionFactory);
-        projectService = new ProjectService(SessionFactory);
-        userService = new UserService(SessionFactory);
-        sessionService = new SessionService(SessionFactory);
+        final TaskRepository taskRepository = new TaskRepository(sessionFactory);
+        final ProjectRepository projectRepository = new ProjectRepository(sessionFactory);
+        final UserRepository userRepository = new UserRepository(sessionFactory);
+        final SessionRepository sessionRepository = new SessionRepository(sessionFactory);
+
+        taskService = new TaskService(taskRepository);
+        projectService = new ProjectService(projectRepository, taskRepository);
+        userService = new UserService(userRepository);
+        sessionService = new SessionService(sessionRepository);
         dataService = new DataService(this);
 
         createTestUser();

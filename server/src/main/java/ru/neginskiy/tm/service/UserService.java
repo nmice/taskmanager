@@ -1,18 +1,17 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
+import ru.neginskiy.tm.repository.UserRepository;
 
 public class UserService implements IUserService {
 
-    private final SqlSessionFactory sqlSessionFactory;
+    private final UserRepository userRepository;
 
-    public UserService(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -63,6 +62,6 @@ public class UserService implements IUserService {
         final User user = userMapper.getByLogin(login);
         session.commit();
         session.close();
-        return user!=null;
+        return user != null;
     }
 }

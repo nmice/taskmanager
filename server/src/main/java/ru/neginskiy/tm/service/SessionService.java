@@ -1,27 +1,26 @@
 package ru.neginskiy.tm.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
+import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
 
 import java.util.List;
 
 public class SessionService implements ISessionService {
 
-    private final SqlSessionFactory sqlSessionFactory;
-
     private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
     private static final String SECRET_KEY = AppConfig.secretKey;
     private static final int SALT_COUNTER = AppConfig.saltCounter;
 
-    public SessionService(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+    private final SessionRepository sessionRepository;
+
+    public SessionService(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
     }
 
     @Override
@@ -29,12 +28,14 @@ public class SessionService implements ISessionService {
         if (userId == null) {
             return null;
         }
-        final SqlSession sqlSession = sqlSessionFactory.openSession();
-        final ISessionRepository sessionMapper = sqlSession.getMapper(ISessionRepository.class);
-        final List<Session> sessionList = sessionMapper.getAllByUserId(userId);
+
+
+
+
+
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
-                delete(session.getId());
+                delete(session);
             }
         }
         final Session session = new Session();

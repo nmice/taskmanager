@@ -1,22 +1,21 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
+import ru.neginskiy.tm.repository.TaskRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskService implements ITaskService {
 
-    private final SqlSessionFactory sqlSessionFactory;
+    private final TaskRepository taskRepository;
 
-    public TaskService(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
     @Override
