@@ -1,33 +1,27 @@
 package ru.neginskiy.tm.controller;
 
-import org.apache.ibatis.datasource.pooled.PooledDataSource;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.*;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.api.*;
-import ru.neginskiy.tm.api.repository.IProjectRepository;
-import ru.neginskiy.tm.api.repository.ISessionRepository;
-import ru.neginskiy.tm.api.repository.ITaskRepository;
-import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IProjectService;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.api.service.ITaskService;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.endpoint.*;
+import ru.neginskiy.tm.entity.Project;
+import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.service.*;
 
-import javax.sql.DataSource;
 import javax.xml.ws.Endpoint;
-
-import static ru.neginskiy.tm.util.AppConfig.*;
 
 public class Bootstrap implements ServiceLocator {
 
-    private static final Class[] MAPPER_CLASSES = {IProjectRepository.class, ITaskRepository.class,
-            IUserRepository.class, ISessionRepository.class};
+    private static final Class[] ANNOTATION_CLASSES = {User.class, Task.class,
+            Project.class, Session.class};
 
     private ITaskService taskService;
     private IProjectService projectService;
@@ -36,12 +30,12 @@ public class Bootstrap implements ServiceLocator {
     private DataService dataService;
 
     public void init() {
-        final SqlSessionFactory sqlSessionFactory = createSqlSessionFactory();
+        final SessionFactory sessionFactory = createSessionFactory();
 
-        taskService = new TaskService(sqlSessionFactory);
-        projectService = new ProjectService(sqlSessionFactory);
-        userService = new UserService(sqlSessionFactory);
-        sessionService = new SessionService(sqlSessionFactory);
+        taskService = new TaskService(SessionFactory);
+        projectService = new ProjectService(SessionFactory);
+        userService = new UserService(SessionFactory);
+        sessionService = new SessionService(SessionFactory);
         dataService = new DataService(this);
 
         createTestUser();
@@ -49,19 +43,13 @@ public class Bootstrap implements ServiceLocator {
         registryInNet();
     }
 
-    private @NotNull SqlSessionFactory createSqlSessionFactory() {
-        final DataSource dataSource = new PooledDataSource(dbDriver, dbUrl, dbUsername, dbPassword);
-        final TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        final Environment environment = new Environment("development", transactionFactory, dataSource);
-        final Configuration configuration = new Configuration(environment);
-
-        for (Class mapperClass : MAPPER_CLASSES) {
-            configuration.addMapper(mapperClass);
+    private @NotNull SessionFactory createSessionFactory() {
+        Configuration configuration = new Configuration().configure("config.properties");
+        for (Class anotationClass : ANNOTATION_CLASSES) {
+            configuration.addAnnotatedClass(anotationClass);
         }
-
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        sqlSessionFactoryBuilder.build(configuration);
-        return sqlSessionFactoryBuilder.build(configuration);
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        return configuration.buildSessionFactory(builder.build());
     }
 
     private void createTestUser() {

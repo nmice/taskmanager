@@ -4,20 +4,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
+@Table(name = "project")
 @NoArgsConstructor
 @Getter
 @Setter
 public class Project extends AbstractEntity {
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
+    @Column(name = "name")//not necessary
     private String name;
     private String description;
     private Date dateBegin;
     private Date dateEnd;
+
+    @ManyToOne
     private String userId;
 
     @Override

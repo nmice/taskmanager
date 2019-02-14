@@ -3,10 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>ru.neginskiy</groupId>
     <artifactId>task-manager</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>client</module>
+        <module>server</module>
+    </modules>
+    <packaging>pom</packaging>
+    <name>task-manager</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -22,7 +28,16 @@
         </developer>
     </developers>
     <build>
+        <finalName>task-manager</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -34,7 +49,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/taskmanager/lib</outputDirectory>
+                            <outputDirectory>${project.build.directory}/task-manager/lib</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
@@ -42,8 +57,7 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
+<!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.0.1</version>
@@ -64,35 +78,28 @@
                             <version>1.0-SNAPSHOT</version>
                             <type>jar</type>
                             <overWrite>true</overWrite>
-                            <outputDirectory>${project.build.directory}/taskmanager/bin</outputDirectory>
-                            <destFileName>server-to-do-list.jar</destFileName>
+                            <outputDirectory>${project.build.directory}/task-manager/bin</outputDirectory>
+                            <destFileName>task-manager.jar</destFileName>
                         </artifactItem>
                     </artifactItems>
                     <overWriteReleases>false</overWriteReleases>
                     <overWriteSnapshots>true</overWriteSnapshots>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>../lib</classpathPrefix>
-                            <mainClass>ru.neginskiy.tm.Application</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>../lib</classpathPrefix>
+                        <mainClass>ru.neginskiy.tm.Application</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+
         </plugins>
     </build>
     <dependencies>
@@ -154,8 +161,4 @@
             <version>5.4.1.Final</version>
         </dependency>
     </dependencies>
-    <modules>
-        <module>client</module>
-        <module>server</module>
-    </modules>
 </project>

@@ -3,6 +3,7 @@ package ru.neginskiy.tm.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -10,5 +11,6 @@ import java.util.UUID;
 @Setter
 public abstract class AbstractEntity implements Serializable {
 
+    @Id
     private String id = UUID.randomUUID().toString();
 }

@@ -3,7 +3,7 @@ package ru.neginskiy.tm;
 import ru.neginskiy.tm.command.*;
 import ru.neginskiy.tm.controller.Bootstrap;
 
-public class App {
+public class Application {
 
     private static final Class[] CLASSES = {ExitCommand.class, HelpCommand.class,
             TaskCreateCommand.class, TaskDeleteCommand.class, TaskEditCommand.class, TaskListCommand.class,

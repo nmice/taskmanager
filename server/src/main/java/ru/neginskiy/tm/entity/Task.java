@@ -4,9 +4,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
+@Table(name = "task")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -18,7 +24,13 @@ public class Task extends AbstractEntity {
     private String description;
     private Date dateBegin;
     private Date dateEnd;
+
+    @ManyToOne
+    @JoinColumn(name = "projectId")
     private String projectId;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private String userId;
 
     @Override
