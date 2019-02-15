@@ -53,7 +53,7 @@ public class ProjectService implements IProjectService {
         }
         Project project = getById(id);
         projectRepository.delete(project);
-        //taskRepository.deleteByProjectId(id);
+        taskRepository.deleteByProjectId(id);
         return project;
     }
 }

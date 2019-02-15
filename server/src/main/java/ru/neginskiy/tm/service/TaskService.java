@@ -23,11 +23,8 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        final SqlSession session = sqlSessionFactory.openSession();
-        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
-        taskMapper.merge(task);
-        session.commit();
-        session.close();
+        taskRepository.merge(task);
+
     }
 
     @Override
@@ -35,12 +32,7 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final SqlSession session = sqlSessionFactory.openSession();
-        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
-        final Task task = taskMapper.getById(id);
-        session.commit();
-        session.close();
-        return task;
+        return taskRepository.getById(id);
     }
 
     @Override
@@ -48,13 +40,7 @@ public class TaskService implements ITaskService {
         if (userId == null || userId.isEmpty()) {
             return new ArrayList<>();
         }
-        final SqlSession session = sqlSessionFactory.openSession();
-        final ITaskRepository taskMapper = session.getMapper(
-                ITaskRepository.class);
-        final List<Task> taskList = taskMapper.getAllByUserId(userId);
-        session.commit();
-        session.close();
-        return taskList;
+        return taskRepository.getAllByUserId(userId);
     }
 
     @Override
@@ -62,18 +48,8 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final SqlSession session = sqlSessionFactory.openSession();
-        final ITaskRepository taskMapper = session.getMapper(ITaskRepository.class);
-        final Task task = taskMapper.getById(id);
-        if (task == null) {
-            return null;
-        }
-        int counter = taskMapper.delete(id);
-        if (counter == 0) {
-            return null;
-        }
-        session.commit();
-        session.close();
+        Task task = getById(id);
+        taskRepository.delete(task);
         return task;
     }
 

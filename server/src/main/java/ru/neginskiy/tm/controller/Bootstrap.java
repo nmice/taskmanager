@@ -19,8 +19,12 @@ import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.repository.TaskRepository;
 import ru.neginskiy.tm.repository.UserRepository;
 import ru.neginskiy.tm.service.*;
+import ru.neginskiy.tm.util.AppConfig;
 
 import javax.xml.ws.Endpoint;
+import java.util.Properties;
+
+import static ru.neginskiy.tm.util.AppConfig.*;
 
 public class Bootstrap implements ServiceLocator {
 
@@ -52,9 +56,14 @@ public class Bootstrap implements ServiceLocator {
         registryInNet();
     }
 
-    private @NotNull SessionFactory createSessionFactory() {
-        Configuration configuration = new Configuration().configure("config.properties");
-        for (Class anotationClass : ANNOTATION_CLASSES) {
+private @NotNull SessionFactory createSessionFactory() {
+        Configuration configuration = new Configuration()
+                .setProperty("hibernate.connection.driver_class", dbDriver)
+                .setProperty("hibernate.connection.url", dbUrl)
+                .setProperty("hibernate.connection.username", dbUsername)
+                .setProperty("hibernate.connection.password", dbPassword)
+                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
+    for (Class anotationClass : ANNOTATION_CLASSES) {
             configuration.addAnnotatedClass(anotationClass);
         }
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());

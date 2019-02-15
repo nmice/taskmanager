@@ -3,6 +3,7 @@ package ru.neginskiy.tm.repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
@@ -20,7 +21,9 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public @NotNull List<Task> getAllByUserId(@NotNull String userId) {
-        List<Task> taskList = (List<Task>) sessionFactory.openSession().createQuery("from task where userId=`userId").list();
+        Query query = sessionFactory.openSession().createQuery("from Task where userId=:paramUserId");
+        query.setParameter("paramUserId",userId);
+        List<Task> taskList = (List<Task>) query.list();
         return taskList;
     }
 
@@ -49,6 +52,11 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public void deleteByProjectId(@NotNull String projectId) {
-
+        Query query = sessionFactory.openSession().createQuery("from Task where projectId=:paramProjectId");
+        query.setParameter("paramProjectId",projectId);
+        List<Task> taskList = (List<Task>) query.list();
+        for (Task task: taskList){
+            delete(task);
+        }
     }
 }

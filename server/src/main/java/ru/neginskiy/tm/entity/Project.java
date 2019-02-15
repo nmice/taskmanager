@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "project")
@@ -19,13 +17,16 @@ import java.util.Date;
 public class Project extends AbstractEntity {
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    @Id
+    private String id = UUID.randomUUID().toString();
     @Column(name = "name")//not necessary
     private String name;
     private String description;
     private Date dateBegin;
     private Date dateEnd;
-
+/*
     @ManyToOne
+    @JoinColumn(name = "user_id")*/
     private String userId;
 
     @Override

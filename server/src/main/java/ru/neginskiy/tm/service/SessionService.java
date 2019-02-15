@@ -28,16 +28,14 @@ public class SessionService implements ISessionService {
         if (userId == null) {
             return null;
         }
-
-
-
-
-
+        //Delete old session by user:
+        List<Session> sessionList = sessionRepository.getAllByUserId(userId);
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
-                delete(session);
+                sessionRepository.delete(session);
             }
         }
+        //Create new Session:
         final Session session = new Session();
         session.setUserId(userId);
         String signature = DigestUtils.md5Hex(session.getId());
@@ -45,9 +43,7 @@ public class SessionService implements ISessionService {
             signature = DigestUtils.md5Hex(signature + SECRET_KEY);
         }
         session.setSignature(signature);
-        sessionMapper.merge(session);
-        sqlSession.commit();
-        sqlSession.close();
+        sessionRepository.merge(session);
         return session;
     }
 
@@ -56,18 +52,8 @@ public class SessionService implements ISessionService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final SqlSession sqlSession = sqlSessionFactory.openSession();
-        final ISessionRepository sessionMapper = sqlSession.getMapper(ISessionRepository.class);
-        final Session session = sessionMapper.getById(id);
-        if (session == null) {
-            return null;
-        }
-        int counter = sessionMapper.delete(id);
-        if (counter == 0) {
-            return null;
-        }
-        sqlSession.commit();
-        sqlSession.close();
+        Session session = sessionRepository.getById(id);
+        sessionRepository.delete(session);
         return session;
     }
 
@@ -76,14 +62,12 @@ public class SessionService implements ISessionService {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-        final SqlSession sqlSession = sqlSessionFactory.openSession();
-        final ISessionRepository sessionMapper = sqlSession.getMapper(ISessionRepository.class);
-        final Session sessionInBase = sessionMapper.getById(session.getId());
+        final Session sessionInBase = sessionRepository.getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {//Session is not in a repository OR Signature is incorrect
             throw new UncorrectSessionException();
         }
         if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {//Session is correct, but older than 30min
-            delete(session.getId());
+            sessionRepository.delete(session);
             throw new UncorrectSessionException();
         }
     }

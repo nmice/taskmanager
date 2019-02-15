@@ -3,10 +3,13 @@ package ru.neginskiy.tm.repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
+
+import java.util.List;
 
 public class UserRepository implements IUserRepository {
 
@@ -18,8 +21,15 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public @Nullable User findUser(@NotNull String login, @NotNull String passwordHash) {
-        User user = (User) sessionFactory.openSession().createQuery("from task where login='login' and passwordHash='passwordHash'");
-        return user;
+        Query query = sessionFactory.openSession().createQuery(
+                "from User u where u.login=:paramLogin and u.passwordHash=:paramPasswordHash");
+        query.setParameter("paramLogin", login);
+        query.setParameter("paramPasswordHash", passwordHash);
+        List<User> userList = (List<User>) query.list();
+        if (userList.size() == 1) {
+            return userList.get(0);
+        }
+        return null;
     }
 
     @Override
@@ -47,7 +57,12 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public @Nullable User getByLogin(@NotNull String login) {
-        User user = (User) sessionFactory.openSession().createQuery("from user where login='login'");
-        return user;
+        Query query = sessionFactory.openSession().createQuery("from User u where u.login=:paramLogin");
+        query.setParameter("paramLogin", login);
+        List<User> userList = (List<User>) query.list();
+        if (userList.size() == 1) {
+            return userList.get(0);
+        }
+        return null;
     }
 }

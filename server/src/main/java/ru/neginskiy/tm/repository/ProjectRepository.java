@@ -3,6 +3,7 @@ package ru.neginskiy.tm.repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
@@ -20,7 +21,9 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     public @NotNull List<Project> getAllByUserId(@NotNull String userId) {
-        List<Project> projectList = (List<Project>) sessionFactory.openSession().createQuery("from task where userId=`userId").list();
+        Query query = sessionFactory.openSession().createQuery("from Project where userId=:paramUserId");
+        query.setParameter("paramUserId", userId);
+        List<Project> projectList = (List<Project>) query.list();
         return projectList;
     }
 

@@ -2,6 +2,7 @@ package ru.neginskiy.tm.repository;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
@@ -19,7 +20,9 @@ public class SessionRepository implements ISessionRepository {
 
     @Override
     public @NotNull List<Session> getAllByUserId(@NotNull String userId) {
-        List<Session> sessionList = (List<Session>) sessionFactory.openSession().createQuery("from session where userId=`userId").list();
+        Query query = sessionFactory.openSession().createQuery("from Session where userId=:paramUserId");
+        query.setParameter("paramUserId", userId);
+        List<Session> sessionList = (List<Session>) query.list();
         return sessionList;
     }
 
