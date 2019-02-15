@@ -2,7 +2,6 @@ package ru.neginskiy.tm.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;

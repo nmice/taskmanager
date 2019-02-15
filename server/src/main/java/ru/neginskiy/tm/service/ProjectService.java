@@ -2,8 +2,6 @@ package ru.neginskiy.tm.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.repository.IProjectRepository;
-import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
 import ru.neginskiy.tm.repository.ProjectRepository;

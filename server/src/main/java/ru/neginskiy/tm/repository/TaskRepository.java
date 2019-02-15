@@ -1,62 +1,74 @@
 package ru.neginskiy.tm.repository;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class TaskRepository implements ITaskRepository {
 
-    private final SessionFactory sessionFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
-    public TaskRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public TaskRepository(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
     public @NotNull List<Task> getAllByUserId(@NotNull String userId) {
-        Query query = sessionFactory.openSession().createQuery("from Task where userId=:paramUserId");
-        query.setParameter("paramUserId",userId);
-        List<Task> taskList = (List<Task>) query.list();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<Task> taskList = entityManager
+                .createQuery("from Task t where t.userId=:paramUserId", Task.class)
+                .setParameter("paramUserId", userId)
+                .getResultList();
+        entityManager.close();
         return taskList;
     }
 
     @Override
     public @Nullable Task getById(@NotNull String id) {
-        return sessionFactory.openSession().get(Task.class, id);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Task task = entityManager.find(Task.class, id);
+        entityManager.close();
+        return task;
     }
 
     @Override
     public void merge(@NotNull Task task) {
-        Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.saveOrUpdate(task);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(task);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void delete(@NotNull Task task) {
-        Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.delete(task);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.remove(task);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void deleteByProjectId(@NotNull String projectId) {
-        Query query = sessionFactory.openSession().createQuery("from Task where projectId=:paramProjectId");
-        query.setParameter("paramProjectId",projectId);
-        List<Task> taskList = (List<Task>) query.list();
-        for (Task task: taskList){
-            delete(task);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<Task> taskList = entityManager
+                .createQuery("from Task t where t.projectId=:paramProjectId", Task.class)
+                .setParameter("paramProjectId", projectId)
+                .getResultList();
+        entityManager.close();
+        entityManager.getTransaction().begin();
+        for (Task task : taskList) {
+            entityManager.remove(task);
         }
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

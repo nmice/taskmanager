@@ -7,27 +7,25 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
-@Table(name = "project")
+@Table(name = "project ")
 @NoArgsConstructor
 @Getter
 @Setter
 public class Project extends AbstractEntity {
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-    @Id
-    private String id = UUID.randomUUID().toString();
+
     @Column(name = "name")//not necessary
     private String name;
     private String description;
     private Date dateBegin;
     private Date dateEnd;
-/*
+
     @ManyToOne
-    @JoinColumn(name = "user_id")*/
-    private String userId;
+    @JoinColumn(name = "userId")
+    private User userId;
 
     @Override
     public String toString() {

@@ -1,7 +1,6 @@
 package ru.neginskiy.tm.repository;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
@@ -9,60 +8,64 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class UserRepository implements IUserRepository {
 
-    private final SessionFactory sessionFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
-    public UserRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public UserRepository(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
     public @Nullable User findUser(@NotNull String login, @NotNull String passwordHash) {
-        Query query = sessionFactory.openSession().createQuery(
-                "from User u where u.login=:paramLogin and u.passwordHash=:paramPasswordHash");
-        query.setParameter("paramLogin", login);
-        query.setParameter("paramPasswordHash", passwordHash);
-        List<User> userList = (List<User>) query.list();
-        if (userList.size() == 1) {
-            return userList.get(0);
-        }
-        return null;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<User> userList = entityManager
+                .createQuery("from User u where u.login=:paramLogin and u.passwordHash=:paramPasswordHash", User.class)
+                .setParameter("paramLogin", login)
+                .setParameter("paramPasswordHash", passwordHash)
+                .getResultList();
+        entityManager.close();
+        return userList.get(0);
     }
 
     @Override
     public @Nullable User getById(@NotNull String id) {
-        return sessionFactory.openSession().get(User.class, id);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        User user = entityManager.find(User.class, id);
+        entityManager.close();
+        return user;
     }
 
     @Override
     public void merge(@NotNull User user) {
-        Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.saveOrUpdate(user);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void delete(@NotNull User user) {
-        Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.delete(user);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.remove(user);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public @Nullable User getByLogin(@NotNull String login) {
-        Query query = sessionFactory.openSession().createQuery("from User u where u.login=:paramLogin");
-        query.setParameter("paramLogin", login);
-        List<User> userList = (List<User>) query.list();
-        if (userList.size() == 1) {
-            return userList.get(0);
-        }
-        return null;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<User> userList = entityManager
+                .createQuery("from User u where u.login=:paramLogin", User.class)
+                .setParameter("paramLogin", login)
+                .getResultList();
+        entityManager.close();
+        return userList.get(0);
     }
 }

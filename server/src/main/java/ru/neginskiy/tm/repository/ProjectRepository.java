@@ -1,52 +1,56 @@
 package ru.neginskiy.tm.repository;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class ProjectRepository implements IProjectRepository {
 
-    private final SessionFactory sessionFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
-    public ProjectRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public ProjectRepository(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
     public @NotNull List<Project> getAllByUserId(@NotNull String userId) {
-        Query query = sessionFactory.openSession().createQuery("from Project where userId=:paramUserId");
-        query.setParameter("paramUserId", userId);
-        List<Project> projectList = (List<Project>) query.list();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Project> projectList = entityManager
+                .createQuery("from Project p where p.userId=:paramUserId", Project.class)
+                .setParameter("paramUserId", userId)
+                .getResultList();
+        entityManager.close();
         return projectList;
     }
 
     @Override
     public @Nullable Project getById(@NotNull String id) {
-        return sessionFactory.openSession().get(Project.class, id);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Project project = entityManager.find(Project.class, id);
+        entityManager.close();
+        return project;
     }
 
     @Override
     public void merge(@NotNull Project project) {
-        Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.saveOrUpdate(project);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(project);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void delete(@NotNull Project project) {
-        Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.delete(project);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.remove(project);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

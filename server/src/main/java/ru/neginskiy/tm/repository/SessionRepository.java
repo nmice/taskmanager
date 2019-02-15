@@ -1,51 +1,56 @@
 package ru.neginskiy.tm.repository;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.entity.Session;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class SessionRepository implements ISessionRepository {
 
-    private final SessionFactory sessionFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
-    public SessionRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public SessionRepository(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
     public @NotNull List<Session> getAllByUserId(@NotNull String userId) {
-        Query query = sessionFactory.openSession().createQuery("from Session where userId=:paramUserId");
-        query.setParameter("paramUserId", userId);
-        List<Session> sessionList = (List<Session>) query.list();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Session> sessionList = entityManager
+                .createQuery("from Session s where s.userId=:paramUserId", Session.class)
+                .setParameter("paramUserId", userId)
+                .getResultList();
+        entityManager.close();
         return sessionList;
     }
 
     @Override
     public @Nullable Session getById(@NotNull String id) {
-        return sessionFactory.openSession().get(Session.class, id);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Session session = entityManager.find(Session.class, id);
+        entityManager.close();
+        return session;
     }
 
     @Override
     public void merge(@NotNull Session session) {
-        org.hibernate.Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.saveOrUpdate(session);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(session);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public void delete(@NotNull Session session) {
-        org.hibernate.Session hibernateSession = sessionFactory.openSession();
-        Transaction transaction = hibernateSession.beginTransaction();
-        hibernateSession.delete(session);
-        transaction.commit();
-        hibernateSession.close();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.remove(session);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

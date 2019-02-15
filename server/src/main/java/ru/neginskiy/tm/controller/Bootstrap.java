@@ -1,8 +1,11 @@
 package ru.neginskiy.tm.controller;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
 import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.api.*;
 import ru.neginskiy.tm.api.service.IProjectService;
@@ -19,10 +22,11 @@ import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.repository.TaskRepository;
 import ru.neginskiy.tm.repository.UserRepository;
 import ru.neginskiy.tm.service.*;
-import ru.neginskiy.tm.util.AppConfig;
 
+import javax.persistence.EntityManagerFactory;
 import javax.xml.ws.Endpoint;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 import static ru.neginskiy.tm.util.AppConfig.*;
 
@@ -38,12 +42,12 @@ public class Bootstrap implements ServiceLocator {
     private DataService dataService;
 
     public void init() {
-        final SessionFactory sessionFactory = createSessionFactory();
+        final EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
 
-        final TaskRepository taskRepository = new TaskRepository(sessionFactory);
-        final ProjectRepository projectRepository = new ProjectRepository(sessionFactory);
-        final UserRepository userRepository = new UserRepository(sessionFactory);
-        final SessionRepository sessionRepository = new SessionRepository(sessionFactory);
+        final TaskRepository taskRepository = new TaskRepository(entityManagerFactory);
+        final ProjectRepository projectRepository = new ProjectRepository(entityManagerFactory);
+        final UserRepository userRepository = new UserRepository(entityManagerFactory);
+        final SessionRepository sessionRepository = new SessionRepository(entityManagerFactory);
 
         taskService = new TaskService(taskRepository);
         projectService = new ProjectService(projectRepository, taskRepository);
@@ -52,22 +56,28 @@ public class Bootstrap implements ServiceLocator {
         dataService = new DataService(this);
 
         createTestUser();
-
         registryInNet();
     }
 
-private @NotNull SessionFactory createSessionFactory() {
-        Configuration configuration = new Configuration()
-                .setProperty("hibernate.connection.driver_class", dbDriver)
-                .setProperty("hibernate.connection.url", dbUrl)
-                .setProperty("hibernate.connection.username", dbUsername)
-                .setProperty("hibernate.connection.password", dbPassword)
-                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
-    for (Class anotationClass : ANNOTATION_CLASSES) {
-            configuration.addAnnotatedClass(anotationClass);
+    private @NotNull EntityManagerFactory createEntityManagerFactory() {
+        final Map<String, String> settings = new HashMap<>();
+        settings.put(Environment.DRIVER, jdbcDriver);
+        settings.put(Environment.URL, url);
+        settings.put(Environment.USER, username);
+        settings.put(Environment.PASS, password);
+        settings.put(Environment.DIALECT, hDialect);
+        settings.put(Environment.HBM2DDL_AUTO, hbm2ddlAuto);
+        settings.put(Environment.SHOW_SQL, hShowWQL);
+        final StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
+        registryBuilder.applySettings(settings);
+        final StandardServiceRegistry registry = registryBuilder.build();
+        final MetadataSources sources = new MetadataSources(registry);
+        for (Class anotationClass : ANNOTATION_CLASSES) {
+            sources.addAnnotatedClass(anotationClass);
         }
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-        return configuration.buildSessionFactory(builder.build());
+        final Metadata metadata = sources.getMetadataBuilder().build();
+        metadata.getSessionFactoryBuilder().build();
+        return metadata.getSessionFactoryBuilder().build();
     }
 
     private void createTestUser() {
