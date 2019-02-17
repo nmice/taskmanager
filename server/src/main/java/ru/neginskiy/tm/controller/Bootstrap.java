@@ -76,7 +76,6 @@ public class Bootstrap implements ServiceLocator {
             sources.addAnnotatedClass(anotationClass);
         }
         final Metadata metadata = sources.getMetadataBuilder().build();
-        metadata.getSessionFactoryBuilder().build();
         return metadata.getSessionFactoryBuilder().build();
     }
 

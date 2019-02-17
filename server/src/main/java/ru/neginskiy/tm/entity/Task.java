@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "task")
@@ -14,9 +15,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class Task extends AbstractEntity {
-
-    private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
+    @Id
+    private String id = UUID.randomUUID().toString();
     private String name;
     private String description;
     private Date dateBegin;
@@ -32,6 +32,7 @@ public class Task extends AbstractEntity {
 
     @Override
     public String toString() {
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return String.format("%s (%s), %s - %s", name, description, dateBegin == null ? null : formatter.format(dateBegin), dateEnd == null ? null : formatter.format(dateEnd));
     }
 }
