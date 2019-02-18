@@ -42,7 +42,6 @@ public class Bootstrap implements ServiceLocator {
 
     public void init() {
         final EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
-
         final TaskRepository taskRepository = new TaskRepository(entityManagerFactory);
         final ProjectRepository projectRepository = new ProjectRepository(entityManagerFactory);
         final UserRepository userRepository = new UserRepository(entityManagerFactory);

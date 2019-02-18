@@ -1,8 +1,5 @@
 package ru.neginskiy.tm.repository;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
@@ -66,6 +63,10 @@ public class UserRepository implements IUserRepository {
                 .setParameter("paramLogin", login)
                 .getResultList();
         entityManager.close();
-        return userList.get(0);
+        if (userList.size() > 0) {
+            return userList.get(0);
+        } else {
+            return null;
+        }
     }
 }

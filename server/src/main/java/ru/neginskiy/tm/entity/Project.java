@@ -17,13 +17,17 @@ public class Project extends AbstractEntity {
 
     @Column(name = "name")//not necessary
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "dateBegin")
     private Date dateBegin;
+    @Column(name = "dateEnd")
     private Date dateEnd;
-
-/*    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "userId")*/
+    @Column(name = "userId")
     private String userId;
+
 
     @Override
     public String toString() {
