@@ -8,11 +8,11 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.UUID;
 
-//@MappedSuperclass
+@MappedSuperclass
 @Getter
 @Setter
 public abstract class AbstractEntity implements Serializable {
 
-    //@Id
-    //private String id = UUID.randomUUID().toString();
+    @Id
+    private String id = UUID.randomUUID().toString();
 }

@@ -63,8 +63,6 @@ public class TaskRepository implements ITaskRepository {
                 .createQuery("from Task t where t.projectId=:paramProjectId", Task.class)
                 .setParameter("paramProjectId", projectId)
                 .getResultList();
-        entityManager.close();
-        entityManager.getTransaction().begin();
         for (Task task : taskList) {
             entityManager.remove(task);
         }
