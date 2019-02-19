@@ -4,12 +4,14 @@ package ru.neginskiy.tm.command;
 import ru.neginskiy.tm.endpoint.Session;
 import ru.neginskiy.tm.endpoint.User;
 
+import javax.persistence.NoResultException;
+
 public class UserLoginCommand extends AbstractCommand {
 
     private final boolean secure = true;
 
     @Override
-    public void execute() {
+    public void execute(){
         System.out.println("Please enter login :");
         final String login = getBootstrap().readLine();
         if (login == null) {
@@ -20,6 +22,7 @@ public class UserLoginCommand extends AbstractCommand {
             System.out.println("This login is not registered, authorization failed!");
             return;
         }
+
         System.out.println("Please enter password :");
         final String password = getBootstrap().readLine();
         if (password == null) {
@@ -34,7 +37,7 @@ public class UserLoginCommand extends AbstractCommand {
             System.out.println("You are logged in as " + user.getLogin());
             return;
         }
-        System.out.println("User not found");
+        System.out.println("User not found, authorization failed!");
     }
 
     @Override

@@ -7,6 +7,7 @@ import ru.neginskiy.tm.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class UserRepository implements IUserRepository {
@@ -20,17 +21,13 @@ public class UserRepository implements IUserRepository {
     @Override
     public @Nullable User findUser(@NotNull String login, @NotNull String passwordHash) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<User> userList = entityManager
+        User user = entityManager
                 .createQuery("from User u where u.login=:paramLogin and u.passwordHash=:paramPasswordHash", User.class)
                 .setParameter("paramLogin", login)
                 .setParameter("paramPasswordHash", passwordHash)
-                .getResultList();
+                .getSingleResult();
         entityManager.close();
-        if (userList.size() > 0) {
-            return userList.get(0);
-        } else {
-            return null;
-        }
+        return user;
     }
 
     @Override
@@ -60,17 +57,13 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public @Nullable User getByLogin(@NotNull String login) {
+    public @Nullable User getByLogin(@NotNull String login){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<User> userList = entityManager
+        User user = entityManager
                 .createQuery("from User u where u.login=:paramLogin", User.class)
                 .setParameter("paramLogin", login)
-                .getResultList();
+                .getSingleResult();
         entityManager.close();
-        if (userList.isEmpty()) {
-            return null;
-        } else {
-            return userList.get(0);
-        }
+        return user;
     }
 }

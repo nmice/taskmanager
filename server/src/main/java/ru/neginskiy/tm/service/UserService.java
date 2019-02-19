@@ -6,6 +6,8 @@ import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.repository.UserRepository;
 
+import javax.persistence.NoResultException;
+
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
@@ -35,7 +37,11 @@ public class UserService implements IUserService {
         if (login == null || passwordHash == null) {
             return null;
         }
-        return userRepository.findUser(login, passwordHash);
+        try {
+            return userRepository.findUser(login, passwordHash);
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -43,7 +49,11 @@ public class UserService implements IUserService {
         if (login == null) {
             return true;
         }
-        final User user = userRepository.getByLogin(login);
-        return user != null;
+        try {
+            final User user = userRepository.getByLogin(login);
+            return user != null;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 }

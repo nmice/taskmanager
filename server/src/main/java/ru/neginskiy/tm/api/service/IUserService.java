@@ -12,5 +12,4 @@ public interface IUserService {
     @Nullable User findUser(@Nullable String login, @Nullable String passwordHash);
 
     boolean isRegistredLogin(@Nullable String login);
-
 }

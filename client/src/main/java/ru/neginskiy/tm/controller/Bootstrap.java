@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.command.AbstractCommand;
 import ru.neginskiy.tm.endpoint.*;
 
+import javax.persistence.NoResultException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -67,12 +68,16 @@ public class Bootstrap {
             } else {
                 System.out.println("This command is not available now, please login!");
             }
-        } catch (UncorrectSessionException_Exception e) {
+        } catch (UncorrectSessionException_Exception sessionEx) {
             setActiveSession(null);
             System.out.println("Uncorrect session, please log in");
-        } catch (Exception e) {
+        } /*catch (NoResultException noResultException) {
+            System.out.println("User not found, authorization failed!");
+        } */catch (
+                Exception e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     public @Nullable String readLine() {
