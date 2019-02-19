@@ -11,7 +11,7 @@ public class DataJsonLoadCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        getBootstrap().getDataEndpointService().loadDataJson(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        getBootstrap().getDataEndpointService().loadDataJson(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         System.out.println("Project and task data uploaded from json");
     }
 

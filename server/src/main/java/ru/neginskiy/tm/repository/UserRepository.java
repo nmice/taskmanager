@@ -26,7 +26,11 @@ public class UserRepository implements IUserRepository {
                 .setParameter("paramPasswordHash", passwordHash)
                 .getResultList();
         entityManager.close();
-        return userList.get(0);
+        if (userList.size() > 0) {
+            return userList.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -63,10 +67,10 @@ public class UserRepository implements IUserRepository {
                 .setParameter("paramLogin", login)
                 .getResultList();
         entityManager.close();
-        if (userList.size() > 0) {
-            return userList.get(0);
-        } else {
+        if (userList.isEmpty()) {
             return null;
+        } else {
+            return userList.get(0);
         }
     }
 }

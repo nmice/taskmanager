@@ -22,7 +22,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="dateEnd" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/&gt;
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="userId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="user" type="{http://endpoint.tm.neginskiy.ru/}user" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
@@ -37,7 +37,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "dateEnd",
     "description",
     "name",
-    "userId"
+    "user"
 })
 public class Project
     extends AbstractEntity
@@ -49,7 +49,7 @@ public class Project
     protected XMLGregorianCalendar dateEnd;
     protected String description;
     protected String name;
-    protected String userId;
+    protected User user;
 
     /**
      * Gets the value of the dateBegin property.
@@ -148,27 +148,27 @@ public class Project
     }
 
     /**
-     * Gets the value of the userId property.
+     * Gets the value of the user property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link User }
      *     
      */
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * Sets the value of the userId property.
+     * Sets the value of the user property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link User }
      *     
      */
-    public void setUserId(String value) {
-        this.userId = value;
+    public void setUser(User value) {
+        this.user = value;
     }
 
 }

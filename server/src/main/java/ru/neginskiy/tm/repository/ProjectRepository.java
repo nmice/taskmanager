@@ -21,7 +21,7 @@ public class ProjectRepository implements IProjectRepository {
     public @NotNull List<Project> getAllByUserId(@NotNull String userId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Project> projectList = entityManager
-                .createQuery("from Project p where p.userId=:paramUserId", Project.class)
+                .createQuery("from Project p where p.user.id=:paramUserId", Project.class)
                 .setParameter("paramUserId", userId)
                 .getResultList();
         entityManager.close();

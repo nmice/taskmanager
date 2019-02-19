@@ -11,7 +11,7 @@ public class DataBinSaveCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        getBootstrap().getDataEndpointService().saveDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        getBootstrap().getDataEndpointService().saveDataBin(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         System.out.println("Project and task data saved to bin");
     }
 

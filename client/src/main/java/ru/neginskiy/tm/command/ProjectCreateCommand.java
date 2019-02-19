@@ -14,7 +14,7 @@ public class ProjectCreateCommand extends AbstractCommand {
     @Override
     public void execute() throws UncorrectSessionException_Exception {
         final Project project = new Project();
-        project.setUserId(getBootstrap().getActiveSession().getUserId());
+        project.setUser(getBootstrap().getActiveSession().getUser());
 
         System.out.println("Please enter a name of the project :");
         final String name = getBootstrap().readLine();

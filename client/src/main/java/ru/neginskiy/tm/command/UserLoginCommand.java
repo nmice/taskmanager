@@ -29,7 +29,7 @@ public class UserLoginCommand extends AbstractCommand {
         final String passwordHash = String.valueOf(password.hashCode());
         final User user = getBootstrap().getUserEndpointService().findUser(login, passwordHash);
         if (user != null) {
-            Session session = getBootstrap().getSessionEndpointService().getNewSession(user.getId());
+            Session session = getBootstrap().getSessionEndpointService().getNewSession(user);
             getBootstrap().setActiveSession(session);
             System.out.println("You are logged in as " + user.getLogin());
             return;

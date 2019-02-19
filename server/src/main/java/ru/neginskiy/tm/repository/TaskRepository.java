@@ -22,7 +22,7 @@ public class TaskRepository implements ITaskRepository {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List<Task> taskList = entityManager
-                .createQuery("from Task t where t.userId=:paramUserId", Task.class)
+                .createQuery("from Task t where t.user.id=:paramUserId", Task.class)
                 .setParameter("paramUserId", userId)
                 .getResultList();
         entityManager.close();
@@ -60,7 +60,7 @@ public class TaskRepository implements ITaskRepository {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         List<Task> taskList = entityManager
-                .createQuery("from Task t where t.projectId=:paramProjectId", Task.class)
+                .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
                 .setParameter("paramProjectId", projectId)
                 .getResultList();
         for (Task task : taskList) {

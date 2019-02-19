@@ -8,10 +8,7 @@ public class Application {
         Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
-            +NotNull, Nullable
-            +Lombok
             -Hibernate
-            -тесты сессии через soapUI
         */
     }
 }

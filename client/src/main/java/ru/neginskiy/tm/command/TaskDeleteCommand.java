@@ -12,7 +12,7 @@ public class TaskDeleteCommand extends AbstractCommand {
     @Override
     public void execute() throws UncorrectSessionException_Exception {
         final List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(
-                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         if (taskList.size() == 0) {
             System.out.println("Tasks not found");
             return;

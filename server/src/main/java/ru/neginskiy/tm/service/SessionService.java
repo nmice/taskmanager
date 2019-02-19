@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
@@ -23,12 +24,12 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public @Nullable Session getNewSession(@Nullable String userId) {
-        if (userId == null) {
+    public @Nullable Session getNewSession(@Nullable User user) {
+        if (user == null) {
             return null;
         }
         //Delete old session by user:
-        List<Session> sessionList = sessionRepository.getAllByUserId(userId);
+        List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
                 sessionRepository.delete(session);
@@ -36,7 +37,7 @@ public class SessionService implements ISessionService {
         }
         //Create new Session:
         final Session session = new Session();
-        session.setUserId(userId);
+        session.setUser(user);
         String signature = DigestUtils.md5Hex(session.getId());
         for (int i = 0; i < SALT_COUNTER; i++) {
             signature = DigestUtils.md5Hex(signature + SECRET_KEY);

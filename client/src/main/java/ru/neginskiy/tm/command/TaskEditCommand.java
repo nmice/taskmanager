@@ -17,7 +17,7 @@ public class TaskEditCommand extends AbstractCommand {
     public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
         final List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(
-                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         int index = 0;
         for (Task task : taskList) {
             System.out.printf("%-3s%s%s%n", index++, " - ", task.getName());

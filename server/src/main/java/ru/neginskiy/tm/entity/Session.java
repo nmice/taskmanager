@@ -14,9 +14,10 @@ import java.util.Date;
 @Setter
 public class Session extends AbstractEntity {
 
+    @Column(name = "time_stamp")
     private Date timeStamp = new Date();//default
-    /*@ManyToOne
-    @JoinColumn(name = "userId")*/
-    private String userId;
+    @ManyToOne
+    private User user;
+    @Column(name = "signature")
     private String signature;
 }

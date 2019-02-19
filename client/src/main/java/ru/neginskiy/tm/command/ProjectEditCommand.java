@@ -17,7 +17,7 @@ public class ProjectEditCommand extends AbstractCommand {
     public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
         final List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(
-                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         int indexOfProject = 0;
         for (Project project : projectList) {
             System.out.printf("%-3s%s%s%n", indexOfProject++, " - ", project.getName());

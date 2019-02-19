@@ -21,7 +21,7 @@ public class SessionRepository implements ISessionRepository {
     public @NotNull List<Session> getAllByUserId(@NotNull String userId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Session> sessionList = entityManager
-                .createQuery("from Session s where s.userId=:paramUserId", Session.class)
+                .createQuery("from Session s where s.user.id=:paramUserId", Session.class)
                 .setParameter("paramUserId", userId)
                 .getResultList();
         entityManager.close();

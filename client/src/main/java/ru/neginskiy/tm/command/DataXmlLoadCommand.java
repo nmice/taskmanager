@@ -11,7 +11,7 @@ public class DataXmlLoadCommand extends AbstractCommand {
 
     @Override
     public void execute() throws UncorrectSessionException_Exception {
-        getBootstrap().getDataEndpointService().loadDataXml(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+        getBootstrap().getDataEndpointService().loadDataXml(getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         System.out.println("Project and task data uploaded from xml");
     }
 

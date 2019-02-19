@@ -2,6 +2,7 @@ package ru.neginskiy.tm.endpoint;
 
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
+import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import javax.jws.WebMethod;
@@ -24,7 +25,7 @@ public class SessionEndpoint {
     }
 
     @WebMethod
-    public Session getNewSession(@WebParam(name = "userId") String userId) {
-        return sessionService.getNewSession(userId);
+    public Session getNewSession(@WebParam(name = "user") User user) {
+        return sessionService.getNewSession(user);
     }
 }

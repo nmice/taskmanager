@@ -16,7 +16,7 @@ public class TaskCreateCommand extends AbstractCommand {
     @Override
     public void execute() throws UncorrectSessionException_Exception {
         final List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(
-                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUserId());
+                getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         if (projectList.size() == 0) {
             System.out.println("Projects not found, please create a project first for the task");
             return;
@@ -42,8 +42,8 @@ public class TaskCreateCommand extends AbstractCommand {
         final String projectId = project.getId();
 
         final Task task = new Task();
-        task.setProjectId(projectId);
-        task.setUserId(getBootstrap().getActiveSession().getUserId());
+        task.setProject(project);
+        task.setUser(getBootstrap().getActiveSession().getUser());
 
         System.out.println("Please enter a name of the task :");
         final String name = getBootstrap().readLine();
