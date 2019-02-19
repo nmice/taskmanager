@@ -6,15 +6,14 @@ import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class TaskRepository implements ITaskRepository {
 
-    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager;
 
-    public TaskRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+    public TaskRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override

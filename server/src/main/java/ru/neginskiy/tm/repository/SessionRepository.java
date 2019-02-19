@@ -6,15 +6,14 @@ import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.entity.Session;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class SessionRepository implements ISessionRepository {
 
-    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager;
 
-    public SessionRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+    public SessionRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override

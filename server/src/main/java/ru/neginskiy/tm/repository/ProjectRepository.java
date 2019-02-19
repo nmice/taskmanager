@@ -7,25 +7,34 @@ import ru.neginskiy.tm.entity.Project;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class ProjectRepository implements IProjectRepository {
 
-    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager;
 
-    public ProjectRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+    public void close() {
+        entityManager.close();
+    }
+
+    public EntityTransaction getTransaction() {
+        return entityManager.getTransaction();
+    }
+
+    public ProjectRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
     public @NotNull List<Project> getAllByUserId(@NotNull String userId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Project> projectList = entityManager
+        List<Project> projectList =
+        entityManager.close();
+        return entityManager
                 .createQuery("from Project p where p.user.id=:paramUserId", Project.class)
                 .setParameter("paramUserId", userId)
                 .getResultList();
-        entityManager.close();
-        return projectList;
     }
 
     @Override
@@ -52,5 +61,9 @@ public class ProjectRepository implements IProjectRepository {
         entityManager.remove(project);
         entityManager.getTransaction().commit();
         entityManager.close();
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }

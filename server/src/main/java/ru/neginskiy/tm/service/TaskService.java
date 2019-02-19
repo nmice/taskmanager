@@ -2,6 +2,7 @@ package ru.neginskiy.tm.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 import ru.neginskiy.tm.repository.TaskRepository;
@@ -11,10 +12,10 @@ import java.util.List;
 
 public class TaskService implements ITaskService {
 
-    private final TaskRepository taskRepository;
+    private final ServiceLocator serviceLocator;
 
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public TaskService(ServiceLocator serviceLocator) {
+        this.serviceLocator = serviceLocator;
     }
 
     @Override

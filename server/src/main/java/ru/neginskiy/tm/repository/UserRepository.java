@@ -6,16 +6,13 @@ import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import java.util.List;
 
 public class UserRepository implements IUserRepository {
 
-    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager;
 
-    public UserRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+    public UserRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -57,7 +54,7 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public @Nullable User getByLogin(@NotNull String login){
+    public @Nullable User getByLogin(@NotNull String login) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         User user = entityManager
                 .createQuery("from User u where u.login=:paramLogin", User.class)

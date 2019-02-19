@@ -9,6 +9,7 @@ public class Application {
         bt.init();
        /*TODO
             -Hibernate
+            -Bootstrap Servicelocator, Services, Endpoints
         */
     }
 }

@@ -1,13 +1,14 @@
 package ru.neginskiy.tm.util;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
+import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.entity.*;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,11 +16,11 @@ import static ru.neginskiy.tm.util.AppConfig.*;
 
 public class HibernateSessionFactory {
 
+    private static final Class[] ANNOTATION_CLASSES = {User.class, Task.class,
+            Project.class, Session.class};
 
-    public static SessionFactory sessionFactory;
 
-    public static void buildFactory() {
-
+    public static @NotNull EntityManagerFactory createEntityManagerFactory() {
         final Map<String, String> settings = new HashMap<>();
         settings.put(Environment.DRIVER, jdbcDriver);
         settings.put(Environment.URL, url);
@@ -28,26 +29,15 @@ public class HibernateSessionFactory {
         settings.put(Environment.DIALECT, hDialect);
         settings.put(Environment.HBM2DDL_AUTO, hbm2ddlAuto);
         settings.put(Environment.SHOW_SQL, hShowWQL);
-
         final StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
-
         registryBuilder.applySettings(settings);
-
         final StandardServiceRegistry registry = registryBuilder.build();
-
         final MetadataSources sources = new MetadataSources(registry);
-
-        sources.addAnnotatedClass(Task.class);
-
-        sources.addAnnotatedClass(User.class);
-
-        sources.addAnnotatedClass(Session.class);
-
-        sources.addAnnotatedClass(Project.class);
-
+        for (Class anotationClass : ANNOTATION_CLASSES) {
+            sources.addAnnotatedClass(anotationClass);
+        }
         final Metadata metadata = sources.getMetadataBuilder().build();
-
-        sessionFactory = metadata.getSessionFactoryBuilder().build();
-
+        return metadata.getSessionFactoryBuilder().build();
     }
+
 }

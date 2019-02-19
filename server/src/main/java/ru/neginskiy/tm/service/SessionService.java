@@ -2,6 +2,7 @@ package ru.neginskiy.tm.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
+import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.User;
@@ -17,10 +18,10 @@ public class SessionService implements ISessionService {
     private static final String SECRET_KEY = AppConfig.secretKey;
     private static final int SALT_COUNTER = AppConfig.saltCounter;
 
-    private final SessionRepository sessionRepository;
+    private final ServiceLocator serviceLocator;
 
-    public SessionService(SessionRepository sessionRepository) {
-        this.sessionRepository = sessionRepository;
+    public SessionService(ServiceLocator serviceLocator) {
+        this.serviceLocator = serviceLocator;
     }
 
     @Override

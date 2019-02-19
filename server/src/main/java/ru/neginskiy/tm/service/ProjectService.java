@@ -2,22 +2,25 @@ package ru.neginskiy.tm.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import ru.neginskiy.tm.api.ServiceLocator;
+import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
 import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectService implements IProjectService {
 
-    private final ProjectRepository projectRepository;
-    private final TaskRepository taskRepository;
+    private final ServiceLocator serviceLocator;
 
-    public ProjectService(ProjectRepository projectRepository, TaskRepository taskRepository) {
-        this.projectRepository = projectRepository;
-        this.taskRepository = taskRepository;
+    public ProjectService(ServiceLocator serviceLocator) {
+        this.serviceLocator = serviceLocator;
+    }
+
+    public IProjectRepository getProjectRepository() {
+        return new ProjectRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
     }
 
     @Override
@@ -25,7 +28,9 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        projectRepository.merge(project);
+
+        getProjectRepository().merge(project);
+
     }
 
     @Override
@@ -42,7 +47,7 @@ public class ProjectService implements IProjectService {
             return new ArrayList<>();
         }
         return projectRepository.getAllByUserId(userId);
-    }
+}
 
     @Override
     public @Nullable Project delete(@Nullable String id) {

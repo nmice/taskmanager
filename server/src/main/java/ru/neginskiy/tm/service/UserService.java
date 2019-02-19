@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.service;
 
 import org.jetbrains.annotations.Nullable;
+import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
@@ -10,10 +11,10 @@ import javax.persistence.NoResultException;
 
 public class UserService implements IUserService {
 
-    private final UserRepository userRepository;
+    private final ServiceLocator serviceLocator;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(ServiceLocator serviceLocator) {
+        this.serviceLocator = serviceLocator;
     }
 
     @Override
