@@ -5,13 +5,14 @@ import ru.neginskiy.tm.controller.Bootstrap;
 public class Application {
 
     public static void main(String[] args) {
-        Bootstrap bt = new Bootstrap();
+        final Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
-            -Endpoint registry from property,
-            -JUnit сквозное тестирование с клиента на круды через эндпоинты,
-            -final\ы
+            +Endpoint registry from property,
+            +final\ы
             +Collection EmptyList inline
+            -JUnit сквозное тестирование с клиента на круды через эндпоинты,
+            -jar in pom
         */
     }
 }

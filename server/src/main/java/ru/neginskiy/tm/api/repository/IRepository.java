@@ -12,7 +12,7 @@ public interface IRepository<T extends AbstractEntity> {
 
     EntityTransaction getTransaction();
 
-    @Nullable T getById(String id);
+    @Nullable T getById(@NotNull String id);
 
     void merge(@NotNull T entity);
 

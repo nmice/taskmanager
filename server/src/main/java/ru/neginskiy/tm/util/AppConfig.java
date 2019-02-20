@@ -40,7 +40,6 @@ public class AppConfig {
             hbm2ddlAuto = properties.getProperty("hibernate.hbm2ddl.auto");
             host = properties.getProperty("host");
             port = properties.getProperty("port");
-
         } catch (IOException e) {
             e.printStackTrace();
         }

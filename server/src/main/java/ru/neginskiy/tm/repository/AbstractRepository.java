@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.repository;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IRepository;
 import ru.neginskiy.tm.entity.AbstractEntity;
 
@@ -17,12 +18,12 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
     }
 
     @Override
-    public EntityTransaction getTransaction() {
+    public @NotNull EntityTransaction getTransaction() {
         return entityManager.getTransaction();
     }
 
     @Override
-    public abstract T getById(String id);
+    public abstract @Nullable T getById(@NotNull String id);
 
     @Override
     public void merge(@NotNull T entity) {

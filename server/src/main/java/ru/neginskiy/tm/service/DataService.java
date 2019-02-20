@@ -8,7 +8,6 @@ import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.dto.Domain;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import java.io.*;
 import java.util.List;
@@ -21,7 +20,7 @@ public class DataService {
         this.serviceLocator = serviceLocator;
     }
 
-    public void saveDataBin(@Nullable String userId) throws UncorrectSessionException {
+    public void saveDataBin(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
@@ -33,7 +32,7 @@ public class DataService {
         }
     }
 
-    public void loadDataBin(@Nullable String userId) throws UncorrectSessionException {
+    public void loadDataBin(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
@@ -45,7 +44,7 @@ public class DataService {
         }
     }
 
-    public void saveDataJson(@Nullable String userId) throws UncorrectSessionException {
+    public void saveDataJson(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
@@ -58,7 +57,7 @@ public class DataService {
         }
     }
 
-    public void loadDataJson(@Nullable String userId) throws UncorrectSessionException {
+    public void loadDataJson(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
@@ -71,7 +70,7 @@ public class DataService {
         }
     }
 
-    public void saveDataXml(@Nullable String userId) throws UncorrectSessionException {
+    public void saveDataXml(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
@@ -84,7 +83,7 @@ public class DataService {
         }
     }
 
-    public void loadDataXml(@Nullable String userId) throws UncorrectSessionException {
+    public void loadDataXml(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
