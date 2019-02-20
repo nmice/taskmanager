@@ -3,11 +3,11 @@ package ru.neginskiy.tm.service;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.ServiceLocator;
+import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,20 +19,8 @@ public class TaskService implements ITaskService {
         this.serviceLocator = serviceLocator;
     }
 
-    @Override
-    public void merge(@Nullable Task task) {
-        if (task == null) {
-            return;
-        }
-        taskRepository.merge(task);
-    }
-
-    @Override
-    public @Nullable Task getById(@Nullable String id) {
-        if (id == null || id.isEmpty()) {
-            return null;
-        }
-        return taskRepository.getById(id);
+    private ITaskRepository getTaskRepository() {
+        return new TaskRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
     }
 
     @Override
@@ -40,7 +28,33 @@ public class TaskService implements ITaskService {
         if (userId == null || userId.isEmpty()) {
             return new ArrayList<>();
         }
-        return taskRepository.getAllByUserId(userId);
+        ITaskRepository taskRepository = getTaskRepository();
+        List<Task> taskList = taskRepository.getAllByUserId(userId);
+        taskRepository.close();
+        return taskList;
+    }
+
+    @Override
+    public @Nullable Task getById(@Nullable String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
+        ITaskRepository taskRepository = getTaskRepository();
+        Task task = taskRepository.getById(id);
+        taskRepository.close();
+        return task;
+    }
+
+    @Override
+    public void merge(@Nullable Task task) {
+        if (task == null) {
+            return;
+        }
+        ITaskRepository taskRepository = getTaskRepository();
+        taskRepository.getTransaction().begin();
+        taskRepository.merge(task);
+        taskRepository.getTransaction().commit();
+        taskRepository.close();
     }
 
     @Override
@@ -48,24 +62,25 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        Task task = getById(id);
+        ITaskRepository taskRepository = getTaskRepository();
+        taskRepository.getTransaction().begin();
+        Task task = taskRepository.getById(id);
         taskRepository.delete(task);
+        taskRepository.getTransaction().commit();
+        taskRepository.close();
         return task;
     }
 
     @Override
-    public void deleteByProjectId(@NotNull String projectId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        List<Task> taskList = entityManager
-                .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
-                .setParameter("paramProjectId", projectId)
-                .getResultList();
-        for (Task task : taskList) {
-            entityManager.remove(task);
+    public void deleteByProjectId(@Nullable String projectId) {
+        if (projectId == null || projectId.isEmpty()) {
+            return;
         }
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        ITaskRepository taskRepository = getTaskRepository();
+        taskRepository.getTransaction().begin();
+        taskRepository.deleteByProjectId(projectId);
+        taskRepository.getTransaction().commit();
+        taskRepository.close();
     }
 
 

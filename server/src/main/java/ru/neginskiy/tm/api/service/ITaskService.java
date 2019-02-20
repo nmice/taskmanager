@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ITaskService {
 
-    void merge(@Nullable Task task);
+    @NotNull List<Task> getAllByUserId(@Nullable String userId);
 
     @Nullable Task getById(@Nullable String id);
 
-    @NotNull List<Task> getAllByUserId(@Nullable String userId);
+    void merge(@Nullable Task task);
 
     @Nullable Task delete(@Nullable String id);
 

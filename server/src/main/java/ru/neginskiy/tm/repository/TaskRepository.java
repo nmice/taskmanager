@@ -8,9 +8,7 @@ import ru.neginskiy.tm.entity.Task;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class TaskRepository implements ITaskRepository {
-
-    private final EntityManager entityManager;
+public class TaskRepository extends AbstractRepository<Task> implements ITaskRepository {
 
     public TaskRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -18,45 +16,19 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public @NotNull List<Task> getAllByUserId(@NotNull String userId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Task> taskList = entityManager
+        return entityManager
                 .createQuery("from Task t where t.user.id=:paramUserId", Task.class)
                 .setParameter("paramUserId", userId)
                 .getResultList();
-        entityManager.close();
-        return taskList;
     }
 
     @Override
     public @Nullable Task getById(@NotNull String id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Task task = entityManager.find(Task.class, id);
-        entityManager.close();
-        return task;
-    }
-
-    @Override
-    public void merge(@NotNull Task task) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.merge(task);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    @Override
-    public void delete(@NotNull Task task) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.remove(task);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        return entityManager.find(Task.class, id);
     }
 
     @Override
     public void deleteByProjectId(@NotNull String projectId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
         List<Task> taskList = entityManager
                 .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
                 .setParameter("paramProjectId", projectId)
@@ -64,7 +36,5 @@ public class TaskRepository implements ITaskRepository {
         for (Task task : taskList) {
             entityManager.remove(task);
         }
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 }

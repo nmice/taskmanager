@@ -17,12 +17,20 @@ public class UserService implements IUserService {
         this.serviceLocator = serviceLocator;
     }
 
+    private IUserRepository getUserRepository() {
+        return new UserRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
+    }
+
     @Override
     public void merge(@Nullable User user) {
         if (user == null) {
             return;
         }
+        IUserRepository userRepository = getUserRepository();
+        userRepository.getTransaction().begin();
         userRepository.merge(user);
+        userRepository.getTransaction().commit();
+        userRepository.close();
     }
 
     @Override
@@ -30,7 +38,10 @@ public class UserService implements IUserService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return userRepository.getById(id);
+        IUserRepository userRepository = getUserRepository();
+        User user = userRepository.getById(id);
+        userRepository.close();
+        return user;
     }
 
     @Override
@@ -38,9 +49,14 @@ public class UserService implements IUserService {
         if (login == null || passwordHash == null) {
             return null;
         }
+        IUserRepository userRepository = getUserRepository();
         try {
-            return userRepository.findUser(login, passwordHash);
+            final User user = userRepository.findUser(login, passwordHash);
+            userRepository.close();
+            return user;
+
         } catch (NoResultException e) {
+            userRepository.close();
             return null;
         }
     }
@@ -50,10 +66,13 @@ public class UserService implements IUserService {
         if (login == null) {
             return true;
         }
+        IUserRepository userRepository = getUserRepository();
         try {
             final User user = userRepository.getByLogin(login);
+            userRepository.close();
             return user != null;
         } catch (NoResultException e) {
+            userRepository.close();
             return false;
         }
     }

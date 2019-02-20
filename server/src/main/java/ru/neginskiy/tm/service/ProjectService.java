@@ -63,7 +63,6 @@ public class ProjectService implements IProjectService {
             return null;
         }
         IProjectRepository projectRepository = getProjectRepository();
-
         Project project = getById(id);
         projectRepository.getTransaction().begin();
         projectRepository.delete(project);

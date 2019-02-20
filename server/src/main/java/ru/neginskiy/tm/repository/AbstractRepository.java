@@ -1,17 +1,40 @@
 package ru.neginskiy.tm.repository;
 
+import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.api.repository.IRepository;
 import ru.neginskiy.tm.entity.AbstractEntity;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.*;
 
 public abstract class AbstractRepository<T extends AbstractEntity> implements IRepository<T> {
 
-    public abstract void merge(T entity);
+    EntityManager entityManager;
 
+    @Override
+    public void close() {
+        entityManager.close();
+    }
+
+    @Override
+    public EntityTransaction getTransaction() {
+        return entityManager.getTransaction();
+    }
+
+    @Override
     public abstract T getById(String id);
 
-    public abstract List<T> getAll();
+    @Override
+    public abstract List<T> getAllByUserId(String userId);
 
-    public abstract T delete(String id);
+    @Override
+    public void merge(@NotNull T entity) {
+        entityManager.merge(entity);
+    }
+
+    @Override
+    public void delete(@NotNull T entity) {
+        entityManager.remove(entity);
+    }
 }

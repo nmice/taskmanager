@@ -22,4 +22,5 @@ public interface ITaskRepository {
     void close();
 
     EntityTransaction getTransaction();
+
 }

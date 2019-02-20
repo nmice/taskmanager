@@ -7,7 +7,7 @@ import ru.neginskiy.tm.entity.Project;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
-public interface IProjectRepository {
+public interface IProjectRepository extends IRepository<Project>{
 
     @NotNull List<Project> getAllByUserId(@NotNull String userId);
 

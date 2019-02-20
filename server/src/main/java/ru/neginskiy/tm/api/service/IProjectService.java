@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface IProjectService {
 
-    void merge(@Nullable Project project);
+    @NotNull List<Project> getAllByUserId(@Nullable String userId);
 
     @Nullable Project getById(@Nullable String id);
 
-    @NotNull List<Project> getAllByUserId(@Nullable String userId);
+    void merge(@Nullable Project project);
 
     @Nullable Project delete(@Nullable String id);
 }
