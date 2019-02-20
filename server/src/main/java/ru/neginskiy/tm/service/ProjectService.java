@@ -8,7 +8,7 @@ import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
 import ru.neginskiy.tm.repository.ProjectRepository;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProjectService implements IProjectService {
@@ -25,11 +25,9 @@ public class ProjectService implements IProjectService {
 
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
-        if (userId == null || userId.isEmpty()) {
-            return new ArrayList<>();
-        }
-        IProjectRepository projectRepository = getProjectRepository();
-        List<Project> projectList = projectRepository.getAllByUserId(userId);
+        if (userId == null || userId.isEmpty()) return Collections.emptyList();
+        final IProjectRepository projectRepository = getProjectRepository();
+        final List<Project> projectList = projectRepository.getAllByUserId(userId);
         projectRepository.close();
         return projectList;
     }
@@ -39,8 +37,8 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        IProjectRepository projectRepository = getProjectRepository();
-        Project project = projectRepository.getById(id);
+        final IProjectRepository projectRepository = getProjectRepository();
+        final Project project = projectRepository.getById(id);
         projectRepository.close();
         return project;
     }
@@ -50,7 +48,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        IProjectRepository projectRepository = getProjectRepository();
+        final IProjectRepository projectRepository = getProjectRepository();
         projectRepository.getTransaction().begin();
         projectRepository.merge(project);
         projectRepository.getTransaction().commit();
@@ -62,8 +60,8 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        IProjectRepository projectRepository = getProjectRepository();
-        Project project = getById(id);
+        final IProjectRepository projectRepository = getProjectRepository();
+        final Project project = getById(id);
         projectRepository.getTransaction().begin();
         projectRepository.delete(project);
         serviceLocator.getTaskService().deleteByProjectId(id);

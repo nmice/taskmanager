@@ -29,7 +29,7 @@ public class TaskRepository extends AbstractRepository<Task> implements ITaskRep
 
     @Override
     public void deleteByProjectId(@NotNull String projectId) {
-        List<Task> taskList = entityManager
+        final List<Task> taskList = entityManager
                 .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
                 .setParameter("paramProjectId", projectId)
                 .getResultList();

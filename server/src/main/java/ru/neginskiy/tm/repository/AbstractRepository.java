@@ -6,7 +6,6 @@ import ru.neginskiy.tm.entity.AbstractEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import java.util.*;
 
 public abstract class AbstractRepository<T extends AbstractEntity> implements IRepository<T> {
 
@@ -24,9 +23,6 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
 
     @Override
     public abstract T getById(String id);
-
-    @Override
-    public abstract List<T> getAllByUserId(String userId);
 
     @Override
     public void merge(@NotNull T entity) {

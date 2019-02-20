@@ -8,7 +8,7 @@ import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskService implements ITaskService {
@@ -25,9 +25,7 @@ public class TaskService implements ITaskService {
 
     @Override
     public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
-        if (userId == null || userId.isEmpty()) {
-            return new ArrayList<>();
-        }
+        if (userId == null || userId.isEmpty()) return Collections.emptyList();
         ITaskRepository taskRepository = getTaskRepository();
         List<Task> taskList = taskRepository.getAllByUserId(userId);
         taskRepository.close();
@@ -65,6 +63,9 @@ public class TaskService implements ITaskService {
         ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         Task task = taskRepository.getById(id);
+        if (task == null) {
+            return null;
+        }
         taskRepository.delete(task);
         taskRepository.getTransaction().commit();
         taskRepository.close();

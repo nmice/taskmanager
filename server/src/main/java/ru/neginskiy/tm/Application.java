@@ -8,8 +8,10 @@ public class Application {
         Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
-            -Hibernate
-            -Bootstrap Servicelocator, Services, Endpoints
+            -Endpoint registry from property,
+            -JUnit сквозное тестирование с клиента на круды через эндпоинты,
+            -final\ы
+            +Collection EmptyList inline
         */
     }
 }
