@@ -16,4 +16,5 @@ public interface ITaskService {
 
     @Nullable Task delete(@Nullable String id);
 
+    void deleteByProjectId(@Nullable String projectId);
 }

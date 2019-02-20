@@ -19,26 +19,8 @@ public class ProjectService implements IProjectService {
         this.serviceLocator = serviceLocator;
     }
 
-    public IProjectRepository getProjectRepository() {
+    private IProjectRepository getProjectRepository() {
         return new ProjectRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
-
-    @Override
-    public void merge(@Nullable Project project) {
-        if (project == null) {
-            return;
-        }
-
-        getProjectRepository().merge(project);
-
-    }
-
-    @Override
-    public @Nullable Project getById(@Nullable String id) {
-        if (id == null || id.isEmpty()) {
-            return null;
-        }
-        return projectRepository.getById(id);
     }
 
     @Override
@@ -46,17 +28,48 @@ public class ProjectService implements IProjectService {
         if (userId == null || userId.isEmpty()) {
             return new ArrayList<>();
         }
-        return projectRepository.getAllByUserId(userId);
-}
+        IProjectRepository projectRepository = getProjectRepository();
+        List<Project> projectList = projectRepository.getAllByUserId(userId);
+        projectRepository.close();
+        return projectList;
+    }
+
+    @Override
+    public @Nullable Project getById(@Nullable String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
+        IProjectRepository projectRepository = getProjectRepository();
+        Project project = projectRepository.getById(id);
+        projectRepository.close();
+        return project;
+    }
+
+    @Override
+    public void merge(@Nullable Project project) {
+        if (project == null) {
+            return;
+        }
+        IProjectRepository projectRepository = getProjectRepository();
+        projectRepository.getTransaction().begin();
+        projectRepository.merge(project);
+        projectRepository.getTransaction().commit();
+        projectRepository.close();
+    }
 
     @Override
     public @Nullable Project delete(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
+        IProjectRepository projectRepository = getProjectRepository();
+
         Project project = getById(id);
+        projectRepository.getTransaction().begin();
         projectRepository.delete(project);
-        taskRepository.deleteByProjectId(id);
+        serviceLocator.getTaskService().deleteByProjectId(id);
+        projectRepository.getTransaction().commit();
+        projectRepository.close();
         return project;
     }
 }

@@ -19,7 +19,6 @@ public class TaskRepository implements ITaskRepository {
     @Override
     public @NotNull List<Task> getAllByUserId(@NotNull String userId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
         List<Task> taskList = entityManager
                 .createQuery("from Task t where t.user.id=:paramUserId", Task.class)
                 .setParameter("paramUserId", userId)

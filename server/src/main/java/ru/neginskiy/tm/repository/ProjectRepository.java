@@ -6,7 +6,6 @@ import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
@@ -28,9 +27,6 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     public @NotNull List<Project> getAllByUserId(@NotNull String userId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Project> projectList =
-        entityManager.close();
         return entityManager
                 .createQuery("from Project p where p.user.id=:paramUserId", Project.class)
                 .setParameter("paramUserId", userId)
@@ -39,31 +35,16 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     public @Nullable Project getById(@NotNull String id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Project project = entityManager.find(Project.class, id);
-        entityManager.close();
-        return project;
+        return entityManager.find(Project.class, id);
     }
 
     @Override
     public void merge(@NotNull Project project) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
         entityManager.merge(project);
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     @Override
     public void delete(@NotNull Project project) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
         entityManager.remove(project);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
     }
 }

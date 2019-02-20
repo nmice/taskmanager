@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Task;
 
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public interface ITaskRepository {
@@ -17,4 +18,8 @@ public interface ITaskRepository {
     void delete(@NotNull Task task);
 
     void deleteByProjectId(@NotNull String projectId);
+
+    void close();
+
+    EntityTransaction getTransaction();
 }

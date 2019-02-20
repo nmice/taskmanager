@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.User;
 
+import javax.persistence.EntityTransaction;
+
 public interface IUserRepository {
 
     @Nullable User findUser(@NotNull String login,@NotNull String passwordHash);
@@ -15,4 +17,8 @@ public interface IUserRepository {
     void delete(@NotNull User user);
 
     @Nullable User getByLogin(@NotNull String login);
+
+    void close();
+
+    EntityTransaction getTransaction();
 }

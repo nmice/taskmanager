@@ -7,6 +7,7 @@ import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 import ru.neginskiy.tm.repository.TaskRepository;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,21 @@ public class TaskService implements ITaskService {
         Task task = getById(id);
         taskRepository.delete(task);
         return task;
+    }
+
+    @Override
+    public void deleteByProjectId(@NotNull String projectId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<Task> taskList = entityManager
+                .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
+                .setParameter("paramProjectId", projectId)
+                .getResultList();
+        for (Task task : taskList) {
+            entityManager.remove(task);
+        }
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
 

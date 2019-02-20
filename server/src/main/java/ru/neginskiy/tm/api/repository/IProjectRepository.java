@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Project;
 
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public interface IProjectRepository {
@@ -15,4 +16,8 @@ public interface IProjectRepository {
     void merge(@NotNull Project project);
 
     void delete(@NotNull Project project);
+
+    void close();
+
+    EntityTransaction getTransaction();
 }
