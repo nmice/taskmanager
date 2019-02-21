@@ -54,20 +54,6 @@ public class SessionService implements ISessionService {
     }
 
     @Override
-    public @Nullable Session delete(@Nullable String id) {
-        if (id == null || id.isEmpty()) {
-            return null;
-        }
-        final ISessionRepository sessionRepository = getSessionRepository();
-        sessionRepository.getTransaction().begin();
-        final Session session = sessionRepository.getById(id);
-        sessionRepository.delete(session);
-        sessionRepository.getTransaction().commit();
-        sessionRepository.close();
-        return session;
-    }
-
-    @Override
     public void validate(@Nullable Session session) throws UncorrectSessionException {
         if (session == null) {
             throw new UncorrectSessionException();

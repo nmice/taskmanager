@@ -47,10 +47,10 @@ public class Bootstrap implements ServiceLocator {
     }
 
     private void registryInNet() {
-        Endpoint.publish("http://" + host + ":" + port + "/" + taskEndpoint.getClass().getName() + "?wsdl", taskEndpoint);
-        Endpoint.publish("http://" + host + ":" + port + "/" + projectEndpoint.getClass().getName() + "?wsdl", projectEndpoint);
-        Endpoint.publish("http://" + host + ":" + port + "/" + userEndpoint.getClass().getName() + "?wsdl", userEndpoint);
-        Endpoint.publish("http://" + host + ":" + port + "/" + sessionEndpoint.getClass().getName() + "?wsdl", sessionEndpoint);
-        Endpoint.publish("http://" + host + ":" + port + "/" + dataEndpoint.getClass().getName() + "?wsdl", dataEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + taskEndpoint.getClass().getSimpleName() + "?wsdl", taskEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + projectEndpoint.getClass().getSimpleName() + "?wsdl", projectEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + userEndpoint.getClass().getSimpleName() + "?wsdl", userEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + sessionEndpoint.getClass().getSimpleName() + "?wsdl", sessionEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + dataEndpoint.getClass().getSimpleName() + "?wsdl", dataEndpoint);
     }
 }

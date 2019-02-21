@@ -3,7 +3,6 @@ package ru.neginskiy.tm.endpoint;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -16,12 +15,6 @@ public class SessionEndpoint {
 
     public SessionEndpoint(ServiceLocator serviceLocator) {
         this.serviceLocator = serviceLocator;
-    }
-
-    @WebMethod
-    public Session sessionDelete(@WebParam(name = "session") Session session) throws UncorrectSessionException {
-        serviceLocator.getSessionService().validate(session);
-        return serviceLocator.getSessionService().delete(session.getId());
     }
 
     @WebMethod

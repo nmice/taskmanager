@@ -1,7 +1,5 @@
 package ru.neginskiy.tm.command;
 
-import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
-
 public class DataJsonSaveCommand extends AbstractCommand {
 
     @Override
@@ -10,7 +8,7 @@ public class DataJsonSaveCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws UncorrectSessionException_Exception {
+    public void execute(){
         getBootstrap().getDataEndpointService().saveDataJson(getBootstrap().getActiveSession(),
                 getBootstrap().getActiveSession().getUser().getId());
         System.out.println("Project and task data saved to json");

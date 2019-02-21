@@ -67,7 +67,7 @@ public class Bootstrap {
             } else {
                 System.out.println("This command is not available now, please login!");
             }
-        } catch (UncorrectSessionException_Exception sessionEx) {
+        } catch (RuntimeException sessionEx) {
             setActiveSession(null);
             System.out.println("Uncorrect session, please log in");
         } catch (Exception e) {

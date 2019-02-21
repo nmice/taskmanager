@@ -1,14 +1,11 @@
 package ru.neginskiy.tm.command;
 
-import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
-
 public class UserLogoutCommand extends AbstractCommand {
 
     private final boolean secure = false;
 
     @Override
-    public void execute() throws UncorrectSessionException_Exception {
-        getBootstrap().getSessionEndpointService().sessionDelete(getBootstrap().getActiveSession());
+    public void execute() {
         getBootstrap().setActiveSession(null);
         System.out.println("You are logout");
     }

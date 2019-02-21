@@ -24,7 +24,6 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _UncorrectSessionException_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "UncorrectSessionException");
     private final static QName _LoadDataBin_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadDataBin");
     private final static QName _LoadDataBinResponse_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadDataBinResponse");
     private final static QName _LoadDataJson_QNAME = new QName("http://endpoint.tm.neginskiy.ru/", "loadDataJson");
@@ -43,14 +42,6 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link UncorrectSessionException }
-     * 
-     */
-    public UncorrectSessionException createUncorrectSessionException() {
-        return new UncorrectSessionException();
     }
 
     /**
@@ -163,15 +154,6 @@ public class ObjectFactory {
      */
     public User createUser() {
         return new User();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UncorrectSessionException }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://endpoint.tm.neginskiy.ru/", name = "UncorrectSessionException")
-    public JAXBElement<UncorrectSessionException> createUncorrectSessionException(UncorrectSessionException value) {
-        return new JAXBElement<UncorrectSessionException>(_UncorrectSessionException_QNAME, UncorrectSessionException.class, null, value);
     }
 
     /**
