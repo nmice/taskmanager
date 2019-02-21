@@ -1,36 +1,35 @@
 package ru.neginskiy.tm.endpoint;
 
-import ru.neginskiy.tm.api.service.IUserService;
+import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.User;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.persistence.NoResultException;
 
 @WebService
 public class UserEndpoint {
 
-    private IUserService userService;
+    private ServiceLocator serviceLocator;
 
-    public UserEndpoint(IUserService userService) {
-        this.userService = userService;
+    public UserEndpoint(ServiceLocator serviceLocator) {
+        this.serviceLocator = serviceLocator;
     }
 
     @WebMethod
     public void userMerge(@WebParam(name = "user") User user) {
-        userService.merge(user);
+        serviceLocator.getUserService().merge(user);
     }
 
 
     @WebMethod
     public boolean isRegistredLogin(@WebParam(name = "login") String login) {
-        return userService.isRegistredLogin(login);
+        return serviceLocator.getUserService().isRegistredLogin(login);
     }
 
     @WebMethod
     public User findUser(@WebParam(name = "login") String login,
                          @WebParam(name = "passwordHash") String passwordHash) {
-        return userService.findUser(login, passwordHash);
+        return serviceLocator.getUserService().findUser(login, passwordHash);
     }
 }

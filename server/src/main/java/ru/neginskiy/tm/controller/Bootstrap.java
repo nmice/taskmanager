@@ -24,6 +24,11 @@ public class Bootstrap implements ServiceLocator {
     private final IProjectService projectService = new ProjectService(serviceLocator);
     private final IUserService userService = new UserService(serviceLocator);
     private final ISessionService sessionService = new SessionService(serviceLocator);
+    private final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);
+    private final ProjectEndpoint projectEndpoint = new ProjectEndpoint(serviceLocator);
+    private final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
+    private final SessionEndpoint sessionEndpoint = new SessionEndpoint(serviceLocator);
+    private final DataEndpoint dataEndpoint = new DataEndpoint(serviceLocator);
     private final EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
 
     public void init() {
@@ -40,10 +45,10 @@ public class Bootstrap implements ServiceLocator {
     }
 
     private void registryInNet() {
-        Endpoint.publish("http://localhost:1234/TaskEndpoint?wsdl", new TaskEndpoint(serviceLocator));
-        Endpoint.publish("http://localhost:1234/ProjectEndpoint?wsdl", new ProjectEndpoint(serviceLocator));
-        Endpoint.publish("http://localhost:1234/UserEndpoint?wsdl", new UserEndpoint(userService));
-        Endpoint.publish("http://localhost:1234/SessionEndpoint?wsdl", new SessionEndpoint(sessionService));
-        Endpoint.publish("http://localhost:1234/DataEndpoint?wsdl", new DataEndpoint(serviceLocator));
+        Endpoint.publish("http://localhost:1234/TaskEndpoint?wsdl", taskEndpoint);
+        Endpoint.publish("http://localhost:1234/ProjectEndpoint?wsdl", projectEndpoint);
+        Endpoint.publish("http://localhost:1234/UserEndpoint?wsdl", userEndpoint);
+        Endpoint.publish("http://localhost:1234/SessionEndpoint?wsdl", sessionEndpoint);
+        Endpoint.publish("http://localhost:1234/DataEndpoint?wsdl", dataEndpoint);
     }
 }
