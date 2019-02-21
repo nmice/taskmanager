@@ -8,7 +8,7 @@ import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskService implements ITaskService {
@@ -25,11 +25,9 @@ public class TaskService implements ITaskService {
 
     @Override
     public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
-        if (userId == null || userId.isEmpty()) {
-            return new ArrayList<>();
-        }
-        ITaskRepository taskRepository = getTaskRepository();
-        List<Task> taskList = taskRepository.getAllByUserId(userId);
+        if (userId == null || userId.isEmpty()) return Collections.emptyList();
+        final ITaskRepository taskRepository = getTaskRepository();
+        final List<Task> taskList = taskRepository.getAllByUserId(userId);
         taskRepository.close();
         return taskList;
     }
@@ -39,8 +37,8 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        ITaskRepository taskRepository = getTaskRepository();
-        Task task = taskRepository.getById(id);
+        final ITaskRepository taskRepository = getTaskRepository();
+        final Task task = taskRepository.getById(id);
         taskRepository.close();
         return task;
     }
@@ -50,7 +48,7 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        ITaskRepository taskRepository = getTaskRepository();
+        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         taskRepository.merge(task);
         taskRepository.getTransaction().commit();
@@ -62,9 +60,12 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        ITaskRepository taskRepository = getTaskRepository();
+        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
-        Task task = taskRepository.getById(id);
+        final Task task = taskRepository.getById(id);
+        if (task == null) {
+            return null;
+        }
         taskRepository.delete(task);
         taskRepository.getTransaction().commit();
         taskRepository.close();
@@ -76,7 +77,7 @@ public class TaskService implements ITaskService {
         if (projectId == null || projectId.isEmpty()) {
             return;
         }
-        ITaskRepository taskRepository = getTaskRepository();
+        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         taskRepository.deleteByProjectId(projectId);
         taskRepository.getTransaction().commit();

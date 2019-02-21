@@ -14,10 +14,12 @@ public class AppConfig {
     public static String url;
     public static String username;
     public static String password;
+    public static String dbPrefix;
     public static String hDialect;
     public static String hShowWQL;
     public static String hbm2ddlAuto;
-    public static String dbPrefix;
+    public static String host;
+    public static String port;
 
     static {
         final Properties properties = new Properties();
@@ -29,13 +31,15 @@ public class AppConfig {
             saltCounter = Integer.parseInt(properties.getProperty("saltCounter"));
             sessionLifetime = Integer.parseInt(properties.getProperty("sessionLifetime"));
             jdbcDriver = properties.getProperty("jdbc.driver");
-            url = properties.getProperty("url");
-            username = properties.getProperty("username");
-            password = properties.getProperty("password");
+            url = properties.getProperty("db.url");
+            username = properties.getProperty("db.username");
+            password = properties.getProperty("db.password");
+            dbPrefix = properties.getProperty("db.prefix");
             hDialect = properties.getProperty("hibernate.dialect");
             hShowWQL = properties.getProperty("hibernate.showSQL");
             hbm2ddlAuto = properties.getProperty("hibernate.hbm2ddl.auto");
-            dbPrefix = properties.getProperty("db.prefix");
+            host = properties.getProperty("host");
+            port = properties.getProperty("port");
         } catch (IOException e) {
             e.printStackTrace();
         }

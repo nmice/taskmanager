@@ -6,19 +6,11 @@ import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 
 public class UserRepository extends AbstractRepository<User> implements IUserRepository {
 
     public UserRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
-    }
-
-    @Override
-    public List<User> getAllByUserId(String userId) {
-        return entityManager
-                .createQuery("from User", User.class)
-                .getResultList();
     }
 
     @Override

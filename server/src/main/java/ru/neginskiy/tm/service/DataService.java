@@ -8,7 +8,6 @@ import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.dto.Domain;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import java.io.*;
 import java.util.List;
@@ -21,11 +20,11 @@ public class DataService {
         this.serviceLocator = serviceLocator;
     }
 
-    public void saveDataBin(@Nullable String userId) throws UncorrectSessionException {
+    public void saveDataBin(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
-        Domain domain = createDomain(userId);
+        final Domain domain = createDomain(userId);
         try (final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(domain);
         } catch (Exception ex) {
@@ -33,7 +32,7 @@ public class DataService {
         }
     }
 
-    public void loadDataBin(@Nullable String userId) throws UncorrectSessionException {
+    public void loadDataBin(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".dat";
@@ -45,7 +44,7 @@ public class DataService {
         }
     }
 
-    public void saveDataJson(@Nullable String userId) throws UncorrectSessionException {
+    public void saveDataJson(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
@@ -58,7 +57,7 @@ public class DataService {
         }
     }
 
-    public void loadDataJson(@Nullable String userId) throws UncorrectSessionException {
+    public void loadDataJson(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".json";
@@ -71,12 +70,12 @@ public class DataService {
         }
     }
 
-    public void saveDataXml(@Nullable String userId) throws UncorrectSessionException {
+    public void saveDataXml(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
         final Domain domain = createDomain(userId);
-        XmlMapper xmlMapper = new XmlMapper();
+        final XmlMapper xmlMapper = new XmlMapper();
         try {
             xmlMapper.writeValue(new File(fileName), domain);
         } catch (IOException e) {
@@ -84,7 +83,7 @@ public class DataService {
         }
     }
 
-    public void loadDataXml(@Nullable String userId) throws UncorrectSessionException {
+    public void loadDataXml(@Nullable String userId) {
         if (userId == null) return;
         final String userLogin = serviceLocator.getUserService().getById(userId).getLogin();
         final String fileName = "projects-" + userLogin + ".xml";
@@ -98,7 +97,7 @@ public class DataService {
     }
 
     private @NotNull Domain createDomain(@NotNull String userId) {
-        Domain domain = new Domain();
+        final Domain domain = new Domain();
         final List<Project> projectList = serviceLocator.getProjectService().getAllByUserId(userId);
         final List<Task> taskList = serviceLocator.getTaskService().getAllByUserId(userId);
         domain.setProjectList(projectList);

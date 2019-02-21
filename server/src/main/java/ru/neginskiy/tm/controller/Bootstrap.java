@@ -10,6 +10,8 @@ import ru.neginskiy.tm.endpoint.*;
 import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.service.*;
 
+import static ru.neginskiy.tm.util.AppConfig.*;
+
 import javax.persistence.EntityManagerFactory;
 import javax.xml.ws.Endpoint;
 
@@ -37,7 +39,7 @@ public class Bootstrap implements ServiceLocator {
     }
 
     private void createTestUser() {
-        User testUser = new User();
+        final User testUser = new User();
         testUser.setId("dba0d409-0622-4c62-8356-4bc48bdfcbf3");
         testUser.setLogin("test");
         testUser.setPasswordHash(String.valueOf(("test").hashCode()));
@@ -45,10 +47,10 @@ public class Bootstrap implements ServiceLocator {
     }
 
     private void registryInNet() {
-        Endpoint.publish("http://localhost:1234/TaskEndpoint?wsdl", taskEndpoint);
-        Endpoint.publish("http://localhost:1234/ProjectEndpoint?wsdl", projectEndpoint);
-        Endpoint.publish("http://localhost:1234/UserEndpoint?wsdl", userEndpoint);
-        Endpoint.publish("http://localhost:1234/SessionEndpoint?wsdl", sessionEndpoint);
-        Endpoint.publish("http://localhost:1234/DataEndpoint?wsdl", dataEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + taskEndpoint.getClass().getSimpleName() + "?wsdl", taskEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + projectEndpoint.getClass().getSimpleName() + "?wsdl", projectEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + userEndpoint.getClass().getSimpleName() + "?wsdl", userEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + sessionEndpoint.getClass().getSimpleName() + "?wsdl", sessionEndpoint);
+        Endpoint.publish("http://" + host + ":" + port + "/" + dataEndpoint.getClass().getSimpleName() + "?wsdl", dataEndpoint);
     }
 }

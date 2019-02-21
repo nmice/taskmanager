@@ -1,21 +1,20 @@
 package ru.neginskiy.tm.api.repository;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.AbstractEntity;
 
 import javax.persistence.EntityTransaction;
-import java.util.List;
 
 public interface IRepository<T extends AbstractEntity> {
-
-    List<T> getAllByUserId(String userId);
-
-    T getById(String id);
-
-    void merge(T entity);
-
-    void delete(T entity);
 
     void close();
 
     EntityTransaction getTransaction();
+
+    @Nullable T getById(@NotNull String id);
+
+    void merge(@NotNull T entity);
+
+    void delete(@NotNull T entity);
 }

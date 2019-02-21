@@ -26,7 +26,7 @@ public class UserService implements IUserService {
         if (user == null) {
             return;
         }
-        IUserRepository userRepository = getUserRepository();
+        final IUserRepository userRepository = getUserRepository();
         userRepository.getTransaction().begin();
         userRepository.merge(user);
         userRepository.getTransaction().commit();
@@ -38,8 +38,8 @@ public class UserService implements IUserService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        IUserRepository userRepository = getUserRepository();
-        User user = userRepository.getById(id);
+        final IUserRepository userRepository = getUserRepository();
+        final User user = userRepository.getById(id);
         userRepository.close();
         return user;
     }
@@ -49,7 +49,7 @@ public class UserService implements IUserService {
         if (login == null || passwordHash == null) {
             return null;
         }
-        IUserRepository userRepository = getUserRepository();
+        final IUserRepository userRepository = getUserRepository();
         try {
             final User user = userRepository.findUser(login, passwordHash);
             userRepository.close();
@@ -66,7 +66,7 @@ public class UserService implements IUserService {
         if (login == null) {
             return true;
         }
-        IUserRepository userRepository = getUserRepository();
+        final IUserRepository userRepository = getUserRepository();
         try {
             final User user = userRepository.getByLogin(login);
             userRepository.close();

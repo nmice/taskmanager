@@ -4,8 +4,6 @@ package ru.neginskiy.tm.command;
 import ru.neginskiy.tm.endpoint.Session;
 import ru.neginskiy.tm.endpoint.User;
 
-import javax.persistence.NoResultException;
-
 public class UserLoginCommand extends AbstractCommand {
 
     private final boolean secure = true;
