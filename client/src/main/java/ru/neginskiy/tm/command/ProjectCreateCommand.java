@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -11,7 +12,7 @@ public class ProjectCreateCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute(){
+    public void execute() throws UncorrectSessionException_Exception {
         final Project project = new Project();
         project.setUser(getBootstrap().getActiveSession().getUser());
 

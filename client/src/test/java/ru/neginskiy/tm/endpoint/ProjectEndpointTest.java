@@ -59,7 +59,7 @@ public class ProjectEndpointTest {
     }
 
     @Test
-    public void testProjectMerge(){
+    public void testProjectMerge() throws UncorrectSessionException_Exception {
         projectEndpoint.projectMerge(session, EXPECTED_PROJECT);
         final Project actualProject = projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getId(), actualProject.getId());
@@ -70,17 +70,16 @@ public class ProjectEndpointTest {
         Assert.assertEquals(EXPECTED_PROJECT.getUser().getLogin(), actualProject.getUser().getLogin());
 
         try {
-            session.setSignature("123");
+            session.setSignature("abracadabra");
             projectEndpoint.projectMerge(session, EXPECTED_PROJECT);
             Assert.fail("Expected UncorrectedSessionException");
-        } catch (RuntimeException ex) {
-            ex.printStackTrace();
+        } catch (UncorrectSessionException_Exception ex) {
             Assert.assertNotEquals("", ex.getMessage());
         }
     }
 
     @Test
-    public void testProjectDelete(){
+    public void testProjectDelete() throws UncorrectSessionException_Exception {
         projectEndpoint.projectMerge(session, EXPECTED_PROJECT);
         taskEndpoint.taskMerge(session, EXPECTED_TASK);
         final Project actualProject = projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
@@ -99,13 +98,13 @@ public class ProjectEndpointTest {
             session.setSignature("abracadabra");
             projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
             Assert.fail("Expected UncorrectedSessionException");
-        } catch (RuntimeException ex) {
-            Assert.assertNotEquals("", ex.getMessage());
+        } catch (UncorrectSessionException_Exception ex) {
+            Assert.assertEquals("Session is uncorrect", ex.getMessage());
         }
     }
 
     @Test
-    public void testProjectGetAllByUserId(){
+    public void testProjectGetAllByUserId() throws UncorrectSessionException_Exception {
         final int expected0 = 0;
         Assert.assertEquals(expected0, projectEndpoint.projectGetAllByUserId(session, USER.getId()).size());
 
@@ -118,18 +117,18 @@ public class ProjectEndpointTest {
 
         try {
             session.setSignature("abracadabra");
-            projectEndpoint.projectGetAllByUserId(session, EXPECTED_PROJECT.getId());
+            projectEndpoint.projectGetAllByUserId(session, USER.getId());
             Assert.fail("Expected UncorrectedSessionException");
-        } catch (RuntimeException ex) {
+        } catch (UncorrectSessionException_Exception ex) {
             Assert.assertNotEquals("", ex.getMessage());
         }
     }
 
     @Test
-    public void testProjectGetById(){
+    public void testProjectGetById() throws UncorrectSessionException_Exception {
         projectEndpoint.projectMerge(session, EXPECTED_PROJECT);
         taskEndpoint.taskMerge(session, EXPECTED_TASK);
-        final Project actualProject = projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
+        final Project actualProject = projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getId(), actualProject.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getName(), actualProject.getName());
         Assert.assertEquals(EXPECTED_PROJECT.getDescription(), actualProject.getDescription());
@@ -137,15 +136,14 @@ public class ProjectEndpointTest {
         Assert.assertEquals(EXPECTED_PROJECT.getDateEnd(), actualProject.getDateEnd());
         Assert.assertEquals(EXPECTED_PROJECT.getUser().getLogin(), actualProject.getUser().getLogin());
 
+        projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
         Assert.assertNull(projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId()));
-
-        Assert.assertNull(taskEndpoint.taskGetById(session, EXPECTED_TASK.getId()));
 
         try {
             session.setSignature("abracadabra");
-            projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
+            projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId());
             Assert.fail("Expected UncorrectedSessionException");
-        } catch (RuntimeException ex) {
+        } catch (UncorrectSessionException_Exception ex) {
             Assert.assertNotEquals("", ex.getMessage());
         }
     }

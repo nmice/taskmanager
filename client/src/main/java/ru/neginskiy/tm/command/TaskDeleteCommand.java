@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Task;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class TaskDeleteCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute(){
+    public void execute() throws UncorrectSessionException_Exception {
         final List<Task> taskList = getBootstrap().getTaskEndpointService().taskGetAllByUserId(
                 getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
         if (taskList.size() == 0) {

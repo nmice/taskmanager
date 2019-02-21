@@ -10,50 +10,139 @@ import static ru.neginskiy.tm.util.StrToGcUtil.getGcFromStr;
 
 public class TaskEndpointTest {
 
-    private final User user = new User();
-    private final String userId = "testJUnitId";
-    private final String login = "testJUnitLogin";
-    private final String password = "testJUnitPasswordHash";
-    private final String passwordHash = String.valueOf(password.hashCode());
+    private static final User USER = new User();
+    private static final String USER_ID = "testJUnitId";
+    private static final String LOGIN = "testJUnitLogin";
+    private static final String PASSWORD = "testJUnitPasswordHash";
+    private static final String PASSWORD_HASH = String.valueOf(PASSWORD.hashCode());
 
     private SessionEndpoint sessionEndpoint;
     private Session session;
 
     private TaskEndpoint taskEndpoint;
-    private final Task expectedTask = new Task();
-    private final String taskId = "testJUnitId";
-    private final String name = "testJUnitName";
-    private final String description = "testJUnitDescription";
-    private final XMLGregorianCalendar testDate1 = getGcFromStr("21-02-2019");
-    private final XMLGregorianCalendar testDate2 = getGcFromStr(null);
-    private final String projectId = "testJUnitProjectId";
+    private static final Task EXPECTED_TASK = new Task();
+    private static final String TASK_ID = "testJUnitTaskId";
+    private static final String NAME = "testJUnitName";
+    private static final String DESCRIPTION = "testJUnitDescription";
+    private static final XMLGregorianCalendar DATE_BEGIN = getGcFromStr("21-02-2019");
+    private static final XMLGregorianCalendar DATE_END = getGcFromStr(null);
+
+    private static final Project EXPECTED_PROJECT = new Project();
+    private static final String PROJECT_ID = "testJUnitProjectId";
 
     @Before
     public void before() {
-        user.setId(userId);
-        user.setLogin(login);
-        user.setPasswordHash(passwordHash);
+        USER.setId(USER_ID);
+        USER.setLogin(LOGIN);
+        USER.setPasswordHash(PASSWORD_HASH);
 
         sessionEndpoint = new SessionEndpointService().getSessionEndpointPort();
-        session = sessionEndpoint.getNewSession(user);
+        session = sessionEndpoint.getNewSession(USER);
+
+        EXPECTED_PROJECT.setId(PROJECT_ID);
+        EXPECTED_PROJECT.setName(NAME);
+        EXPECTED_PROJECT.setDescription(DESCRIPTION);
+        EXPECTED_PROJECT.setDateBegin(DATE_BEGIN);
+        EXPECTED_PROJECT.setDateEnd(DATE_END);
+        EXPECTED_PROJECT.setUser(USER);
 
         taskEndpoint = new TaskEndpointService().getTaskEndpointPort();
-        expectedTask.setId(taskId);
-        expectedTask.setName(name);
-        expectedTask.setDescription(description);
-        expectedTask.setDateBegin(testDate1);
-        expectedTask.setDateEnd(testDate2);
+        EXPECTED_TASK.setId(TASK_ID);
+        EXPECTED_TASK.setName(NAME);
+        EXPECTED_TASK.setDescription(DESCRIPTION);
+        EXPECTED_TASK.setDateBegin(DATE_BEGIN);
+        EXPECTED_TASK.setDateEnd(DATE_END);
+        EXPECTED_TASK.setProject(EXPECTED_PROJECT);
+        EXPECTED_TASK.setUser(USER);
     }
 
     @Test
-    public void testTaskMerge(){
-        taskEndpoint.taskMerge(session, expectedTask);
-        final Task actualTask = taskEndpoint.taskGetById(session, expectedTask.getId());
+    public void testTaskMerge() throws UncorrectSessionException_Exception {
+        taskEndpoint.taskMerge(session, EXPECTED_TASK);
+        final Task actualTask = taskEndpoint.taskGetById(session, EXPECTED_TASK.getId());
+        Assert.assertEquals(EXPECTED_TASK.getId(), actualTask.getId());
+        Assert.assertEquals(EXPECTED_TASK.getName(), actualTask.getName());
+        Assert.assertEquals(EXPECTED_TASK.getDescription(), actualTask.getDescription());
+        Assert.assertEquals(EXPECTED_TASK.getDateBegin(), actualTask.getDateBegin());
+        Assert.assertEquals(EXPECTED_TASK.getDateEnd(), actualTask.getDateEnd());
+        Assert.assertEquals(EXPECTED_TASK.getProject().getId(), actualTask.getProject().getId());
+        Assert.assertEquals(EXPECTED_TASK.getUser().getLogin(), actualTask.getUser().getLogin());
 
-        Assert.assertEquals(expectedTask.getId(), actualTask.getId());
-        Assert.assertEquals(expectedTask.getName(), actualTask.getName());
-        Assert.assertEquals(expectedTask.getDescription(), actualTask.getDescription());
-        Assert.assertEquals(expectedTask.getDateBegin(), actualTask.getDateBegin());
-        Assert.assertEquals(expectedTask.getDateEnd(), actualTask.getDateEnd());
+        try {
+            session.setSignature("abracadabra");
+            taskEndpoint.taskMerge(session, EXPECTED_TASK);
+            Assert.fail("Expected UncorrectedSessionException");
+        } catch (UncorrectSessionException_Exception ex) {
+            Assert.assertNotEquals("", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testTaskDelete() throws UncorrectSessionException_Exception {
+        taskEndpoint.taskMerge(session, EXPECTED_TASK);
+        final Task actualTask = taskEndpoint.taskDelete(session, EXPECTED_TASK.getId());
+        Assert.assertEquals(EXPECTED_TASK.getId(), actualTask.getId());
+        Assert.assertEquals(EXPECTED_TASK.getName(), actualTask.getName());
+        Assert.assertEquals(EXPECTED_TASK.getDescription(), actualTask.getDescription());
+        Assert.assertEquals(EXPECTED_TASK.getDateBegin(), actualTask.getDateBegin());
+        Assert.assertEquals(EXPECTED_TASK.getDateEnd(), actualTask.getDateEnd());
+        Assert.assertEquals(EXPECTED_TASK.getProject().getId(), actualTask.getProject().getId());
+        Assert.assertEquals(EXPECTED_TASK.getUser().getLogin(), actualTask.getUser().getLogin());
+
+        Assert.assertNull(taskEndpoint.taskDelete(session, EXPECTED_TASK.getId()));
+
+        Assert.assertNull(taskEndpoint.taskGetById(session, EXPECTED_TASK.getId()));
+
+        try {
+            session.setSignature("abracadabra");
+            taskEndpoint.taskDelete(session, EXPECTED_TASK.getId());
+            Assert.fail("Expected UncorrectedSessionException");
+        } catch (UncorrectSessionException_Exception ex) {
+            Assert.assertEquals("Session is uncorrect", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testTaskGetAllByUserId() throws UncorrectSessionException_Exception {
+        final int expected0 = 0;
+        Assert.assertEquals(expected0, taskEndpoint.taskGetAllByUserId(session, USER.getId()).size());
+
+        taskEndpoint.taskMerge(session, EXPECTED_TASK);
+        final int expected1 = 1;
+        Assert.assertEquals(expected1, taskEndpoint.taskGetAllByUserId(session, USER.getId()).size());
+
+        taskEndpoint.taskMerge(session, EXPECTED_TASK);
+        Assert.assertEquals(expected1, taskEndpoint.taskGetAllByUserId(session, USER.getId()).size());
+
+        try {
+            session.setSignature("abracadabra");
+            taskEndpoint.taskGetAllByUserId(session, USER.getId());
+            Assert.fail("Expected UncorrectedSessionException");
+        } catch (UncorrectSessionException_Exception ex) {
+            Assert.assertNotEquals("", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testTaskGetById() throws UncorrectSessionException_Exception {
+        taskEndpoint.taskMerge(session, EXPECTED_TASK);
+        final Task actualTask = taskEndpoint.taskGetById(session, EXPECTED_TASK.getId());
+        Assert.assertEquals(EXPECTED_TASK.getId(), actualTask.getId());
+        Assert.assertEquals(EXPECTED_TASK.getName(), actualTask.getName());
+        Assert.assertEquals(EXPECTED_TASK.getDescription(), actualTask.getDescription());
+        Assert.assertEquals(EXPECTED_TASK.getDateBegin(), actualTask.getDateBegin());
+        Assert.assertEquals(EXPECTED_TASK.getDateEnd(), actualTask.getDateEnd());
+        Assert.assertEquals(EXPECTED_TASK.getUser().getLogin(), actualTask.getUser().getLogin());
+
+        taskEndpoint.taskDelete(session, EXPECTED_TASK.getId());
+        Assert.assertNull(taskEndpoint.taskGetById(session, EXPECTED_TASK.getId()));
+
+        try {
+            session.setSignature("abracadabra");
+            taskEndpoint.taskDelete(session, EXPECTED_PROJECT.getId());
+            Assert.fail("Expected UncorrectedSessionException");
+        } catch (UncorrectSessionException_Exception ex) {
+            Assert.assertNotEquals("", ex.getMessage());
+        }
     }
 }

@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.command;
 
 import ru.neginskiy.tm.endpoint.Project;
+import ru.neginskiy.tm.endpoint.UncorrectSessionException_Exception;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
@@ -13,7 +14,7 @@ public class ProjectEditCommand extends AbstractCommand {
     private final boolean secure = false;
 
     @Override
-    public void execute(){
+    public void execute() throws UncorrectSessionException_Exception {
         System.out.println("Please select project number to update :");
         final List<Project> projectList = getBootstrap().getProjectEndpointService().projectGetAllByUserId(
                 getBootstrap().getActiveSession(), getBootstrap().getActiveSession().getUser().getId());
