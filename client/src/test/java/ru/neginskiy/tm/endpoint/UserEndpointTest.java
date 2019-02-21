@@ -9,16 +9,18 @@ public class UserEndpointTest {
 
     @Test
     public void testMergeUser() {
-        User expectedUser = new User();
-        expectedUser.setId("testJUnitId");
-        expectedUser.setLogin("testJUnitLogin");
-        expectedUser.setPasswordHash("testJUnitPasswordHash");
-        getUserEndpointPort().
-
-
-        int[] actuals = mergeSortedArrays(new int[]{1, 2, 5}, new int[]{3, 4});
-        Assert.assertArrayEquals("An error has occurred", expecteds, actuals);
-
+        final UserEndpoint userEndpoint = new UserEndpointService().getUserEndpointPort();
+        final User expectedUser = new User();
+        final String id = "testJUnitId";
+        expectedUser.setId(id);
+        final String login = "testJUnitLogin";
+        expectedUser.setLogin(login);
+        final String password = "testJUnitPasswordHash";
+        final String passwordHash = String.valueOf(password.hashCode());
+        expectedUser.setPasswordHash(passwordHash);
+        userEndpoint.userMerge(expectedUser);
+        final User actualUser = userEndpoint.findUser(login,passwordHash);
+        Assert.assertEquals(expectedUser, actualUser);
     }
 
 }

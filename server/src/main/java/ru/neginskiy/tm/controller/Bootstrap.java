@@ -20,7 +20,6 @@ import static ru.neginskiy.tm.util.HibernateSessionFactory.createEntityManagerFa
 @Getter
 public class Bootstrap implements ServiceLocator {
 
-
     private final ServiceLocator serviceLocator = this;
     private final DataService dataService = new DataService(serviceLocator);
     private final ITaskService taskService = new TaskService(serviceLocator);
