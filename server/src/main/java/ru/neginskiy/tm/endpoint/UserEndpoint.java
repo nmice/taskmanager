@@ -1,7 +1,9 @@
 package ru.neginskiy.tm.endpoint;
 
 import ru.neginskiy.tm.api.ServiceLocator;
+import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.User;
+import ru.neginskiy.tm.error.UncorrectSessionException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -20,7 +22,6 @@ public class UserEndpoint {
     public void userMerge(@WebParam(name = "user") User user) {
         serviceLocator.getUserService().merge(user);
     }
-
 
     @WebMethod
     public boolean isRegistredLogin(@WebParam(name = "login") String login) {

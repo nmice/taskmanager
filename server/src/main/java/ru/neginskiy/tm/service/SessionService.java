@@ -35,9 +35,10 @@ public class SessionService implements ISessionService {
             return null;
         }
         final ISessionRepository sessionRepository = getSessionRepository();
-        sessionRepository.getTransaction().begin();
         //Delete old session by User
+        sessionRepository.getTransaction().begin();
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
+        int size = sessionList.size();
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
                 sessionRepository.delete(session);

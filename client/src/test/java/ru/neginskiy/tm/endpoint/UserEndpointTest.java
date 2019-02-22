@@ -6,24 +6,23 @@ import org.junit.Test;
 
 public class UserEndpointTest {
 
-    private UserEndpoint userEndpoint;
+    private UserEndpoint userEndpoint = new UserEndpointService().getUserEndpointPort();
     private final static User EXPECTED_USER = new User();
     private static final String ID = "testJUnitId";
     private static final String LOGIN = "testJUnitLogin";
-    private static final String PASSWORD = "testJUnitPasswordHash";
+    private static final String PASSWORD = "testJUnitPassword";
     private static final String PASSWORD_HASH = String.valueOf(PASSWORD.hashCode());
 
     @Before
     public void before() {
-        userEndpoint =new UserEndpointService().getUserEndpointPort();
         EXPECTED_USER.setId(ID);
         EXPECTED_USER.setLogin(LOGIN);
         EXPECTED_USER.setPasswordHash(PASSWORD_HASH);
+        userEndpoint.userMerge(EXPECTED_USER);
     }
 
     @Test
     public void testUserMerge() {
-        userEndpoint.userMerge(EXPECTED_USER);
         final User actualUser = userEndpoint.findUser(LOGIN, PASSWORD_HASH);
         Assert.assertEquals(EXPECTED_USER.getId(), actualUser.getId());
         Assert.assertEquals(EXPECTED_USER.getLogin(), actualUser.getLogin());
@@ -32,7 +31,6 @@ public class UserEndpointTest {
 
     @Test
     public void testIsRegistredLogin() {
-        userEndpoint.userMerge(EXPECTED_USER);
         final boolean expected1 = true;
         Assert.assertEquals(expected1, userEndpoint.isRegistredLogin("testJUnitLogin"));
         final boolean expected2 = false;
@@ -41,7 +39,6 @@ public class UserEndpointTest {
 
     @Test
     public void testFindUser() {
-        userEndpoint.userMerge(EXPECTED_USER);
         final User actualUser1 = userEndpoint.findUser(LOGIN, PASSWORD_HASH);
         Assert.assertEquals(EXPECTED_USER.getId(), actualUser1.getId());
         Assert.assertEquals(EXPECTED_USER.getLogin(), actualUser1.getLogin());
