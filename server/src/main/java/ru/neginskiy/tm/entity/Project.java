@@ -3,10 +3,11 @@ package ru.neginskiy.tm.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "project ")
@@ -25,6 +26,8 @@ public class Project extends AbstractEntity {
     private Date dateEnd;
     @ManyToOne
     private User user;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private transient Set<Task> taskList = new HashSet<>();
 
     @Override
     public String toString() {

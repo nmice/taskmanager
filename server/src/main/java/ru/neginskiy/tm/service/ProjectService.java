@@ -66,7 +66,6 @@ public class ProjectService implements IProjectService {
             return null;
         }
         projectRepository.getTransaction().begin();
-        serviceLocator.getTaskService().deleteByProjectId(id);
         projectRepository.delete(project);
         projectRepository.getTransaction().commit();
         projectRepository.close();
