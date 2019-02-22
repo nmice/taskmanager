@@ -5,9 +5,9 @@ import ru.neginskiy.tm.entity.User;
 
 public interface IUserService {
 
-    void merge(@Nullable User user);
-
     @Nullable User getById(@Nullable String id);
+
+    void merge(@Nullable User user);
 
     @Nullable User findUser(@Nullable String login, @Nullable String passwordHash);
 

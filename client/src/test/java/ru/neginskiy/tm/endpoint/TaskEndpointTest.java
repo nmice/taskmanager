@@ -11,10 +11,11 @@ import static ru.neginskiy.tm.util.StrToGcUtil.getGcFromStr;
 
 public class TaskEndpointTest {
 
+    private UserEndpoint userEndpoint = new UserEndpointService().getUserEndpointPort();
     private static final User USER = new User();
     private static final String USER_ID = "testJUnitId";
     private static final String LOGIN = "testJUnitLogin";
-    private static final String PASSWORD = "testJUnitPasswordHash";
+    private static final String PASSWORD = "testJUnitPassword";
     private static final String PASSWORD_HASH = String.valueOf(PASSWORD.hashCode());
 
     private SessionEndpoint sessionEndpoint = new SessionEndpointService().getSessionEndpointPort();
@@ -33,11 +34,15 @@ public class TaskEndpointTest {
     private static final Task EXPECTED_TASK = new Task();
     private static final String TASK_ID = "testJUnitTaskId";
 
+    private static final String UNCORRECT_SIGNATURE = "abracadabra";
+    private static final String UNCORRECT_SESSION_EXCEPTION_MSG = "Session is uncorrect";
+
     @Before
     public void before() {
         USER.setId(USER_ID);
         USER.setLogin(LOGIN);
         USER.setPasswordHash(PASSWORD_HASH);
+        userEndpoint.userMerge(USER);
 
         session = sessionEndpoint.getNewSession(USER);
         correctSignature = session.getSignature();
@@ -72,11 +77,11 @@ public class TaskEndpointTest {
         Assert.assertEquals(EXPECTED_TASK.getUser().getLogin(), actualTask.getUser().getLogin());
 
         try {
-            session.setSignature("abracadabra");
+            session.setSignature(UNCORRECT_SIGNATURE);
             taskEndpoint.taskMerge(session, EXPECTED_TASK);
             Assert.fail("Expected UncorrectedSessionException");
         } catch (UncorrectSessionException_Exception ex) {
-            Assert.assertNotEquals("", ex.getMessage());
+            Assert.assertEquals(UNCORRECT_SESSION_EXCEPTION_MSG, ex.getMessage());
         }
     }
 
@@ -98,11 +103,11 @@ public class TaskEndpointTest {
         Assert.assertNull(taskEndpoint.taskGetById(session, EXPECTED_TASK.getId()));
 
         try {
-            session.setSignature("abracadabra");
+            session.setSignature(UNCORRECT_SIGNATURE);
             taskEndpoint.taskDelete(session, EXPECTED_TASK.getId());
             Assert.fail("Expected UncorrectedSessionException");
         } catch (UncorrectSessionException_Exception ex) {
-            Assert.assertEquals("Session is uncorrect", ex.getMessage());
+            Assert.assertEquals(UNCORRECT_SESSION_EXCEPTION_MSG, ex.getMessage());
         }
     }
 
@@ -120,11 +125,11 @@ public class TaskEndpointTest {
         Assert.assertEquals(expected1, taskEndpoint.taskGetAllByUserId(session, USER.getId()).size());
 
         try {
-            session.setSignature("abracadabra");
+            session.setSignature(UNCORRECT_SIGNATURE);
             taskEndpoint.taskGetAllByUserId(session, USER.getId());
             Assert.fail("Expected UncorrectedSessionException");
         } catch (UncorrectSessionException_Exception ex) {
-            Assert.assertNotEquals("", ex.getMessage());
+            Assert.assertEquals(UNCORRECT_SESSION_EXCEPTION_MSG, ex.getMessage());
         }
     }
 
@@ -144,11 +149,11 @@ public class TaskEndpointTest {
         Assert.assertNull(taskEndpoint.taskGetById(session, EXPECTED_TASK.getId()));
 
         try {
-            session.setSignature("abracadabra");
+            session.setSignature(UNCORRECT_SIGNATURE);
             taskEndpoint.taskDelete(session, EXPECTED_TASK.getId());
             Assert.fail("Expected UncorrectedSessionException");
         } catch (UncorrectSessionException_Exception ex) {
-            Assert.assertNotEquals("", ex.getMessage());
+            Assert.assertEquals(UNCORRECT_SESSION_EXCEPTION_MSG, ex.getMessage());
         }
     }
 
