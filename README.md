@@ -10,7 +10,7 @@
 
 <li> SOAP WS</li>
 
-<li> myBatis (3.4.6)</li>
+<li> Hibernate (5.3.8.Final)</li>
 
 <h3>Структура проекта</h3>
 
@@ -22,23 +22,25 @@
 
 <h4>[api.repository]</h4>
 
-<li> IProjectRepository - интерфейс операций над проектами через MyBatis</li>
+<li> IRepository - интерфейс операций над сущностями</li>
 
-<li> ISessionRepository - интерфейс операций над сессиями через MyBatis</li>
+<li> IProjectRepository - интерфейс операций над проектами</li>
 
-<li> ITaskRepository - интерфейс операций над задачами через MyBatis</li>
+<li> ISessionRepository - интерфейс операций над сессиями</li>
 
-<li> IUserRepository - интерфейс операций над пользователями через MyBatis</li>
+<li> ITaskRepository - интерфейс операций над задачами</li>
+
+<li> IUserRepository - интерфейс операций над пользователями</li>
 
 <h4>[api.service]</h4>
 
-<li> IProjectService - интерфейс операций над проектами</li>
+<li> IProjectService - интерфейс логики операций над проектами</li>
 
-<li> ISessionService - интерфейс операций над сессиями</li>
+<li> ISessionService - интерфейс логики операций над сессиями</li>
 
-<li> ITaskService - интерфейс операций над задачами</li>
+<li> ITaskService - интерфейс логики операций над задачами</li>
 
-<li> IUserService - интерфейс операций над пользователями</li>
+<li> IUserService - интерфейс логики операций над пользователями</li>
 
 <h4>[controller]</h4>
 
@@ -103,6 +105,8 @@
 <h4>[util]</h4>
 
 <li> AppConfig - утильный класс со static переменными, хранящих значения из config.properties</li>
+
+<li> HibernateSessionFactory - утильный класс для создания SessionFactory</li>
 
 <h4>Application - основной класс на сервере</h4>
 

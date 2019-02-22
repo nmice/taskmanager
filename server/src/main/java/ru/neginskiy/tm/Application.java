@@ -8,11 +8,14 @@ public class Application {
         final Bootstrap bt = new Bootstrap();
         bt.init();
        /*TODO
+            +hibernate
             +Endpoint registry from property,
             +final\ы
             +Collection EmptyList inline
-            -JUnit сквозное тестирование с клиента на круды через эндпоинты,
+            +JUnit сквозное тестирование с клиента на круды через эндпоинты
             -jar in pom
+            -README change
+            -WELD
         */
     }
 }
