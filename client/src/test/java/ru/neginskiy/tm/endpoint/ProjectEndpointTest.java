@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.endpoint;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +17,11 @@ public class ProjectEndpointTest {
     private static final String PASSWORD = "testJUnitPasswordHash";
     private static final String PASSWORD_HASH = String.valueOf(PASSWORD.hashCode());
 
-    private SessionEndpoint sessionEndpoint;
+    private SessionEndpoint sessionEndpoint = new SessionEndpointService().getSessionEndpointPort();
     private Session session;
+    private String correctSignature;
 
-    private ProjectEndpoint projectEndpoint;
+    private ProjectEndpoint projectEndpoint = new ProjectEndpointService().getProjectEndpointPort();
     private static final Project EXPECTED_PROJECT = new Project();
     private static final String PROJECT_ID = "testJUnitProjectId";
     private static final String NAME = "testJUnitName";
@@ -27,8 +29,8 @@ public class ProjectEndpointTest {
     private static final XMLGregorianCalendar DATE_BEGIN = getGcFromStr("21-02-2019");
     private static final XMLGregorianCalendar DATE_END = getGcFromStr(null);
 
-    private TaskEndpoint taskEndpoint;
-    private static final Task EXPECTED_TASK = new Task();
+    private TaskEndpoint taskEndpoint = new TaskEndpointService().getTaskEndpointPort();
+    private static final Task TASK = new Task();
     private static final String TASK_ID = "testJUnitTaskId";
 
     @Before
@@ -37,10 +39,9 @@ public class ProjectEndpointTest {
         USER.setLogin(LOGIN);
         USER.setPasswordHash(PASSWORD_HASH);
 
-        sessionEndpoint = new SessionEndpointService().getSessionEndpointPort();
         session = sessionEndpoint.getNewSession(USER);
+        correctSignature = session.getSignature();
 
-        projectEndpoint = new ProjectEndpointService().getProjectEndpointPort();
         EXPECTED_PROJECT.setId(PROJECT_ID);
         EXPECTED_PROJECT.setName(NAME);
         EXPECTED_PROJECT.setDescription(DESCRIPTION);
@@ -48,14 +49,13 @@ public class ProjectEndpointTest {
         EXPECTED_PROJECT.setDateEnd(DATE_END);
         EXPECTED_PROJECT.setUser(USER);
 
-        taskEndpoint = new TaskEndpointService().getTaskEndpointPort();
-        EXPECTED_TASK.setId(TASK_ID);
-        EXPECTED_TASK.setName(NAME);
-        EXPECTED_TASK.setDescription(DESCRIPTION);
-        EXPECTED_TASK.setDateBegin(DATE_BEGIN);
-        EXPECTED_TASK.setDateEnd(DATE_END);
-        EXPECTED_TASK.setProject(EXPECTED_PROJECT);
-        EXPECTED_TASK.setUser(USER);
+        TASK.setId(TASK_ID);
+        TASK.setName(NAME);
+        TASK.setDescription(DESCRIPTION);
+        TASK.setDateBegin(DATE_BEGIN);
+        TASK.setDateEnd(DATE_END);
+        TASK.setProject(EXPECTED_PROJECT);
+        TASK.setUser(USER);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ProjectEndpointTest {
     @Test
     public void testProjectDelete() throws UncorrectSessionException_Exception {
         projectEndpoint.projectMerge(session, EXPECTED_PROJECT);
-        taskEndpoint.taskMerge(session, EXPECTED_TASK);
+        taskEndpoint.taskMerge(session, TASK);
         final Project actualProject = projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getId(), actualProject.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getName(), actualProject.getName());
@@ -90,9 +90,10 @@ public class ProjectEndpointTest {
         Assert.assertEquals(EXPECTED_PROJECT.getDateEnd(), actualProject.getDateEnd());
         Assert.assertEquals(EXPECTED_PROJECT.getUser().getLogin(), actualProject.getUser().getLogin());
 
-        Assert.assertNull(projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId()));
+        Assert.assertNull(projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId()));
 
-        Assert.assertNull(taskEndpoint.taskGetById(session, EXPECTED_TASK.getId()));
+        Assert.assertNull(projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId()));
+        Assert.assertNull(taskEndpoint.taskGetById(session, TASK.getId()));
 
         try {
             session.setSignature("abracadabra");
@@ -127,7 +128,6 @@ public class ProjectEndpointTest {
     @Test
     public void testProjectGetById() throws UncorrectSessionException_Exception {
         projectEndpoint.projectMerge(session, EXPECTED_PROJECT);
-        taskEndpoint.taskMerge(session, EXPECTED_TASK);
         final Project actualProject = projectEndpoint.projectGetById(session, EXPECTED_PROJECT.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getId(), actualProject.getId());
         Assert.assertEquals(EXPECTED_PROJECT.getName(), actualProject.getName());
@@ -146,5 +146,12 @@ public class ProjectEndpointTest {
         } catch (UncorrectSessionException_Exception ex) {
             Assert.assertNotEquals("", ex.getMessage());
         }
+    }
+
+    @After
+    public void after() throws UncorrectSessionException_Exception {
+        session.setSignature(correctSignature);
+        taskEndpoint.taskDelete(session, TASK.getId());
+        projectEndpoint.projectDelete(session, EXPECTED_PROJECT.getId());
     }
 }
