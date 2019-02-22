@@ -9,7 +9,7 @@
     </parent>
     <build>
         <plugins>
-<!--            <plugin>
+           <!-- <plugin>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-codegen-plugin</artifactId>
             <version>3.2.7</version>
