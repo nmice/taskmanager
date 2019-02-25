@@ -12,21 +12,21 @@
     <build>
         <finalName>task-manager</finalName>
         <plugins>
-            <!--            <plugin>
-                            <groupId>com.webcohesion.enunciate</groupId>
-                            <artifactId>enunciate-maven-plugin</artifactId>
-                            <version>2.11.1</version>
-                            <executions>
-                                <execution>
-                                    <goals>
-                                        <goal>docs</goal>
-                                    </goals>
-                                    <configuration>
-                                        <docsDir>${project.build.directory}/docs</docsDir>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>-->
+            <plugin>
+                <groupId>com.webcohesion.enunciate</groupId>
+                <artifactId>enunciate-maven-plugin</artifactId>
+                <version>2.11.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>docs</goal>
+                        </goals>
+                        <configuration>
+                            <docsDir>${project.build.directory}/docs</docsDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -71,7 +71,7 @@
                     <artifactItems>
                         <artifactItem>
                             <groupId>ru.neginskiy</groupId>
-                            <artifactId>task-manager</artifactId>
+                            <artifactId>server</artifactId>
                             <version>1.0-SNAPSHOT</version>
                             <type>jar</type>
                             <overWrite>true</overWrite>
