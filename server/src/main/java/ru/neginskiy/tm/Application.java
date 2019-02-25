@@ -13,8 +13,8 @@ public class Application {
             +final\ы
             +Collection EmptyList inline
             +JUnit сквозное тестирование с клиента на круды через эндпоинты
-            -jar in pom
-            -README change
+            +jar in pom
+            +README change
             -WELD
         */
     }
