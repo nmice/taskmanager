@@ -5,6 +5,9 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class UserRepository extends AbstractRepository<User> implements IUserRepository {
 
     @Override

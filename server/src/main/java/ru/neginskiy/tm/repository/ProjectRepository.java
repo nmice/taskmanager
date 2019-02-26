@@ -5,8 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class ProjectRepository extends AbstractRepository<Project> implements IProjectRepository {
 
     @Override

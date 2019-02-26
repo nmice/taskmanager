@@ -10,7 +10,6 @@ import ru.neginskiy.tm.entity.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class HibernateSessionFactory {
 
     @Produces
     @ApplicationScoped
-    public static @NotNull EntityManagerFactory createEntityManager() {
+    public static @NotNull EntityManagerFactory createEntityManagerFactory() {
         final Map<String, String> settings = new HashMap<>();
         settings.put(Environment.DRIVER, jdbcDriver);
         settings.put(Environment.URL, url);
