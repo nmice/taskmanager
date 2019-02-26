@@ -8,6 +8,7 @@ import ru.neginskiy.tm.api.service.IProjectService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,11 +16,17 @@ import java.util.List;
 public class ProjectService implements IProjectService {
 
     @Inject
+    EntityManagerFactory entityManagerFactory;
+
+    @Inject
     private IProjectRepository projectRepository;
 
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
+
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
+
         final List<Project> projectList = projectRepository.getAllByUserId(userId);
         projectRepository.close();
         return projectList;
@@ -30,6 +37,9 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
+
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
+
         final Project project = projectRepository.getById(id);
         projectRepository.close();
         return project;
@@ -40,6 +50,9 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
+
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
+
         projectRepository.getTransaction().begin();
         projectRepository.merge(project);
         projectRepository.getTransaction().commit();
@@ -55,6 +68,9 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return null;
         }
+
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
+
         projectRepository.getTransaction().begin();
         projectRepository.delete(project);
         projectRepository.getTransaction().commit();
