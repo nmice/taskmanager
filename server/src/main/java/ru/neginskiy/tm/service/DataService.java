@@ -9,16 +9,16 @@ import ru.neginskiy.tm.dto.Domain;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.io.*;
 import java.util.List;
 
+@ApplicationScoped
 public class DataService {
 
-    private final ServiceLocator serviceLocator;
-
-    public DataService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
+    @Inject
+    private ServiceLocator serviceLocator;
 
     public void saveDataBin(@Nullable String userId) {
         if (userId == null) return;

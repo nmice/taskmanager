@@ -1,27 +1,23 @@
 package ru.neginskiy.tm.service;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
-import ru.neginskiy.tm.repository.ProjectRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
+@ApplicationScoped
 public class ProjectService implements IProjectService {
 
-    private final ServiceLocator serviceLocator;
-
-    public ProjectService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private IProjectRepository getProjectRepository() {
-        return new ProjectRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    private IProjectRepository projectRepository;
 
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {

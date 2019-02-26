@@ -5,6 +5,7 @@ import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 
+import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -13,11 +14,8 @@ import java.util.List;
 @WebService
 public class ProjectEndpoint {
 
+    @Inject
     private ServiceLocator serviceLocator;
-
-    public ProjectEndpoint(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
 
     @WebMethod
     public void projectMerge(@WebParam(name = "session") Session session,

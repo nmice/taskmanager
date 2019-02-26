@@ -5,13 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
 
-import javax.persistence.EntityManager;
-
 public class UserRepository extends AbstractRepository<User> implements IUserRepository {
-
-    public UserRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public @Nullable User getById(@NotNull String id) {

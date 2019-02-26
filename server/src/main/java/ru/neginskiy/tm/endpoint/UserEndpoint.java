@@ -1,10 +1,9 @@
 package ru.neginskiy.tm.endpoint;
 
 import ru.neginskiy.tm.api.ServiceLocator;
-import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.error.UncorrectSessionException;
 
+import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -12,11 +11,8 @@ import javax.jws.WebService;
 @WebService
 public class UserEndpoint {
 
+    @Inject
     private ServiceLocator serviceLocator;
-
-    public UserEndpoint(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
 
     @WebMethod
     public void userMerge(@WebParam(name = "user") User user) {

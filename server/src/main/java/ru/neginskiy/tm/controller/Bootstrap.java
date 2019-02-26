@@ -12,29 +12,37 @@ import ru.neginskiy.tm.service.*;
 
 import static ru.neginskiy.tm.util.AppConfig.*;
 
-import javax.persistence.EntityManagerFactory;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.xml.ws.Endpoint;
 
-import static ru.neginskiy.tm.util.HibernateSessionFactory.createEntityManagerFactory;
-
+@ApplicationScoped
 @Getter
 public class Bootstrap implements ServiceLocator {
 
-    private final ServiceLocator serviceLocator = this;
-    private final DataService dataService = new DataService(serviceLocator);
-    private final ITaskService taskService = new TaskService(serviceLocator);
-    private final IProjectService projectService = new ProjectService(serviceLocator);
-    private final IUserService userService = new UserService(serviceLocator);
-    private final ISessionService sessionService = new SessionService(serviceLocator);
-    private final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);
-    private final ProjectEndpoint projectEndpoint = new ProjectEndpoint(serviceLocator);
-    private final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
-    private final SessionEndpoint sessionEndpoint = new SessionEndpoint(serviceLocator);
-    private final DataEndpoint dataEndpoint = new DataEndpoint(serviceLocator);
-    private final EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
+    @Inject
+    private DataService dataService;
+    @Inject
+    private ITaskService taskService;
+    @Inject
+    private IProjectService projectService;
+    @Inject
+    private IUserService userService;
+    @Inject
+    private ISessionService sessionService;
+    @Inject
+    private TaskEndpoint taskEndpoint;
+    @Inject
+    private ProjectEndpoint projectEndpoint;
+    @Inject
+    private UserEndpoint userEndpoint;
+    @Inject
+    private SessionEndpoint sessionEndpoint;
+    @Inject
+    private DataEndpoint dataEndpoint;
 
     public void init() {
-        createTestUser();
+        //createTestUser();
         registryInNet();
     }
 

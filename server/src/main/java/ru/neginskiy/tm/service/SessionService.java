@@ -1,33 +1,29 @@
 package ru.neginskiy.tm.service;
 
+import lombok.Getter;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.error.UncorrectSessionException;
-import ru.neginskiy.tm.repository.SessionRepository;
 import ru.neginskiy.tm.util.AppConfig;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.List;
 
+@Getter
+@ApplicationScoped
 public class SessionService implements ISessionService {
 
     private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
     private static final String SECRET_KEY = AppConfig.secretKey;
     private static final int SALT_COUNTER = AppConfig.saltCounter;
 
-    private final ServiceLocator serviceLocator;
-
-    public SessionService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private ISessionRepository getSessionRepository() {
-        return new SessionRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    private ISessionRepository sessionRepository;
 
     @Override
     public @Nullable Session getNewSession(@Nullable User user) {

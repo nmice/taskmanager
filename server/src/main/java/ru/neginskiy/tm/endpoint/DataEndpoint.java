@@ -4,6 +4,7 @@ import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 
+import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -11,11 +12,8 @@ import javax.jws.WebService;
 @WebService
 public class DataEndpoint {
 
+    @Inject
     private ServiceLocator serviceLocator;
-
-    public DataEndpoint(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
 
     @WebMethod
     public void saveDataBin(@WebParam(name = "session") Session session,

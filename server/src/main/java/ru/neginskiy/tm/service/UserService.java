@@ -1,25 +1,21 @@
 package ru.neginskiy.tm.service;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.UserRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
+@Getter
+@ApplicationScoped
 public class UserService implements IUserService {
 
-    private final ServiceLocator serviceLocator;
-
-    public UserService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private IUserRepository getUserRepository() {
-        return new UserRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    private IUserRepository userRepository;
 
     @Override
     public void merge(@Nullable User user) {

@@ -1,27 +1,23 @@
 package ru.neginskiy.tm.service;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
-import ru.neginskiy.tm.repository.TaskRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
+@ApplicationScoped
 public class TaskService implements ITaskService {
 
-    private final ServiceLocator serviceLocator;
-
-    public TaskService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private ITaskRepository getTaskRepository() {
-        return new TaskRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    private ITaskRepository taskRepository;
 
     @Override
     public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
