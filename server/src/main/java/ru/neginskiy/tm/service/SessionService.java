@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.service;
 
-import lombok.Getter;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
@@ -14,7 +13,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 
-@Getter
 @ApplicationScoped
 public class SessionService implements ISessionService {
 
@@ -30,7 +28,6 @@ public class SessionService implements ISessionService {
         if (user == null) {
             return null;
         }
-        final ISessionRepository sessionRepository = getSessionRepository();
         //Delete old session by User
         sessionRepository.getTransaction().begin();
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
@@ -55,7 +52,6 @@ public class SessionService implements ISessionService {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-        final ISessionRepository sessionRepository = getSessionRepository();
         final Session sessionInBase = sessionRepository.getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {
             //Session is not in a repository OR Signature is incorrect

@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.service;
 
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
-@Getter
 @ApplicationScoped
 public class TaskService implements ITaskService {
 
@@ -22,7 +20,6 @@ public class TaskService implements ITaskService {
     @Override
     public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        final ITaskRepository taskRepository = getTaskRepository();
         final List<Task> taskList = taskRepository.getAllByUserId(userId);
         taskRepository.close();
         return taskList;
@@ -33,7 +30,6 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
         final Task task = taskRepository.getById(id);
         taskRepository.close();
         return task;
@@ -44,7 +40,6 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         taskRepository.merge(task);
         taskRepository.getTransaction().commit();
@@ -56,7 +51,6 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         final Task task = taskRepository.getById(id);
         if (task == null) {
@@ -73,7 +67,6 @@ public class TaskService implements ITaskService {
         if (projectId == null || projectId.isEmpty()) {
             return;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         taskRepository.deleteByProjectId(projectId);
         taskRepository.getTransaction().commit();

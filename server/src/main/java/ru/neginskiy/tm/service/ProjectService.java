@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.service;
 
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
-@Getter
 @ApplicationScoped
 public class ProjectService implements IProjectService {
 
@@ -22,7 +20,6 @@ public class ProjectService implements IProjectService {
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        final IProjectRepository projectRepository = getProjectRepository();
         final List<Project> projectList = projectRepository.getAllByUserId(userId);
         projectRepository.close();
         return projectList;
@@ -33,7 +30,6 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final IProjectRepository projectRepository = getProjectRepository();
         final Project project = projectRepository.getById(id);
         projectRepository.close();
         return project;
@@ -44,7 +40,6 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        final IProjectRepository projectRepository = getProjectRepository();
         projectRepository.getTransaction().begin();
         projectRepository.merge(project);
         projectRepository.getTransaction().commit();
@@ -56,7 +51,6 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final IProjectRepository projectRepository = getProjectRepository();
         final Project project = getById(id);
         if (project == null) {
             return null;
