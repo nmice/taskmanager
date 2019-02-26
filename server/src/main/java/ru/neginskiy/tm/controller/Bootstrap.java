@@ -42,7 +42,7 @@ public class Bootstrap implements ServiceLocator {
     private DataEndpoint dataEndpoint;
 
     public void init() {
-        //createTestUser();
+        createTestUser();
         registryInNet();
     }
 
