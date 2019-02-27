@@ -11,7 +11,6 @@ import ru.neginskiy.tm.util.AppConfig;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 @ApplicationScoped
@@ -21,8 +20,6 @@ public class SessionService implements ISessionService {
     private static final String SECRET_KEY = AppConfig.secretKey;
     private static final int SALT_COUNTER = AppConfig.saltCounter;
 
-    @Inject
-    EntityManagerFactory entityManagerFactory;
 
     @Inject
     private ISessionRepository sessionRepository;
@@ -33,9 +30,6 @@ public class SessionService implements ISessionService {
             return null;
         }
         //Delete old session by User
-
-        sessionRepository.setEntityManager(entityManagerFactory.createEntityManager());
-
         sessionRepository.getTransaction().begin();
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
         int size = sessionList.size();
@@ -59,9 +53,6 @@ public class SessionService implements ISessionService {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-
-        sessionRepository.setEntityManager(entityManagerFactory.createEntityManager());
-
         final Session sessionInBase = sessionRepository.getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {
             //Session is not in a repository OR Signature is incorrect

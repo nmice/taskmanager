@@ -23,7 +23,7 @@ public class HibernateSessionFactory {
 
     @Produces
     @ApplicationScoped
-    public static @NotNull EntityManagerFactory createEntityManagerFactory() {
+    public static @NotNull EntityManagerFactory getEntityManagerFactory() {
         final Map<String, String> settings = new HashMap<>();
         settings.put(Environment.DRIVER, jdbcDriver);
         settings.put(Environment.URL, url);

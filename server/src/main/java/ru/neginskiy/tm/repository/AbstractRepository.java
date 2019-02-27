@@ -5,17 +5,14 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IRepository;
 import ru.neginskiy.tm.entity.AbstractEntity;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 public abstract class AbstractRepository<T extends AbstractEntity> implements IRepository<T> {
 
+    @Inject
     EntityManager entityManager;
-
-    @Override
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public void close() {
