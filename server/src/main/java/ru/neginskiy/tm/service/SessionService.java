@@ -62,10 +62,10 @@ public class SessionService implements ISessionService {
             //Session is not in a repository OR Signature is incorrect
             throw new UncorrectSessionException();
         }
-        if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
+        if (System.currentTimeMillis() - sessionInBase.getTimeStamp().getTime() > SESSION_LIFETIME) {
             //Session is correct, but older than SessionLifeTime
             sessionRepository.getTransaction().begin();
-            sessionRepository.delete(session);
+            sessionRepository.delete(sessionInBase);
             sessionRepository.getTransaction().commit();
             sessionRepository.close();
             throw new UncorrectSessionException();
