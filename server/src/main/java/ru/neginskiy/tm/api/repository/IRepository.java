@@ -10,6 +10,8 @@ import javax.persistence.EntityTransaction;
 
 public interface IRepository<T extends AbstractEntity> {
 
+    void setEntityManager(EntityManager entityManager);
+
     void close();
 
     EntityTransaction getTransaction();
