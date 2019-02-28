@@ -2,31 +2,29 @@ package ru.neginskiy.tm.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
-import ru.neginskiy.tm.repository.ProjectRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
+@ApplicationScoped
 public class ProjectService implements IProjectService {
 
-    private final ServiceLocator serviceLocator;
+    @Inject
+    private IProjectRepository projectRepository;
 
-    public ProjectService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private IProjectRepository getProjectRepository() {
-        return new ProjectRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    EntityManagerFactory entityManagerFactory;
 
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        final IProjectRepository projectRepository = getProjectRepository();
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final List<Project> projectList = projectRepository.getAllByUserId(userId);
         projectRepository.close();
         return projectList;
@@ -37,7 +35,7 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final IProjectRepository projectRepository = getProjectRepository();
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Project project = projectRepository.getById(id);
         projectRepository.close();
         return project;
@@ -48,7 +46,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        final IProjectRepository projectRepository = getProjectRepository();
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
         projectRepository.getTransaction().begin();
         projectRepository.merge(project);
         projectRepository.getTransaction().commit();
@@ -60,11 +58,11 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final IProjectRepository projectRepository = getProjectRepository();
         final Project project = getById(id);
         if (project == null) {
             return null;
         }
+        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
         projectRepository.getTransaction().begin();
         projectRepository.delete(project);
         projectRepository.getTransaction().commit();

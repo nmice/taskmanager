@@ -5,14 +5,11 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 
-import javax.persistence.EntityManager;
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class TaskRepository extends AbstractRepository<Task> implements ITaskRepository {
-
-    public TaskRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public @NotNull List<Task> getAllByUserId(@NotNull String userId) {

@@ -8,6 +8,8 @@ import org.hibernate.cfg.Environment;
 import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.entity.*;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +21,9 @@ public class HibernateSessionFactory {
     private static final Class[] ANNOTATION_CLASSES = {User.class, Task.class,
             Project.class, Session.class};
 
-
-    public static @NotNull EntityManagerFactory createEntityManagerFactory() {
+    @Produces
+    @ApplicationScoped
+    public static @NotNull EntityManagerFactory getEntityManagerFactory() {
         final Map<String, String> settings = new HashMap<>();
         settings.put(Environment.DRIVER, jdbcDriver);
         settings.put(Environment.URL, url);

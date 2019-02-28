@@ -1,32 +1,32 @@
 package ru.neginskiy.tm.service;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.UserRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 
+@Getter
+@ApplicationScoped
 public class UserService implements IUserService {
 
-    private final ServiceLocator serviceLocator;
+    @Inject
+    private IUserRepository userRepository;
 
-    public UserService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private IUserRepository getUserRepository() {
-        return new UserRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    EntityManagerFactory entityManagerFactory;
 
     @Override
     public void merge(@Nullable User user) {
         if (user == null) {
             return;
         }
-        final IUserRepository userRepository = getUserRepository();
+        userRepository.setEntityManager(entityManagerFactory.createEntityManager());
         userRepository.getTransaction().begin();
         userRepository.merge(user);
         userRepository.getTransaction().commit();
@@ -38,7 +38,7 @@ public class UserService implements IUserService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final IUserRepository userRepository = getUserRepository();
+        userRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final User user = userRepository.getById(id);
         userRepository.close();
         return user;
@@ -49,12 +49,11 @@ public class UserService implements IUserService {
         if (login == null || passwordHash == null) {
             return null;
         }
-        final IUserRepository userRepository = getUserRepository();
         try {
+            userRepository.setEntityManager(entityManagerFactory.createEntityManager());
             final User user = userRepository.findUser(login, passwordHash);
             userRepository.close();
             return user;
-
         } catch (NoResultException e) {
             userRepository.close();
             return null;
@@ -66,8 +65,8 @@ public class UserService implements IUserService {
         if (login == null) {
             return true;
         }
-        final IUserRepository userRepository = getUserRepository();
         try {
+            userRepository.setEntityManager(entityManagerFactory.createEntityManager());
             final User user = userRepository.getByLogin(login);
             userRepository.close();
             return user != null;

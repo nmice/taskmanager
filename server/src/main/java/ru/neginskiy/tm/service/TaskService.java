@@ -2,31 +2,29 @@ package ru.neginskiy.tm.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
-import ru.neginskiy.tm.repository.TaskRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
+@ApplicationScoped
 public class TaskService implements ITaskService {
 
-    private final ServiceLocator serviceLocator;
+    @Inject
+    private ITaskRepository taskRepository;
 
-    public TaskService(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
-    }
-
-    private ITaskRepository getTaskRepository() {
-        return new TaskRepository(serviceLocator.getEntityManagerFactory().createEntityManager());
-    }
+    @Inject
+    EntityManagerFactory entityManagerFactory;
 
     @Override
     public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        final ITaskRepository taskRepository = getTaskRepository();
+        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final List<Task> taskList = taskRepository.getAllByUserId(userId);
         taskRepository.close();
         return taskList;
@@ -37,7 +35,7 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
+        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Task task = taskRepository.getById(id);
         taskRepository.close();
         return task;
@@ -48,7 +46,7 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
+        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         taskRepository.getTransaction().begin();
         taskRepository.merge(task);
         taskRepository.getTransaction().commit();
@@ -60,12 +58,13 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
-        taskRepository.getTransaction().begin();
+        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Task task = taskRepository.getById(id);
         if (task == null) {
+            taskRepository.close();
             return null;
         }
+        taskRepository.getTransaction().begin();
         taskRepository.delete(task);
         taskRepository.getTransaction().commit();
         taskRepository.close();
@@ -77,7 +76,6 @@ public class TaskService implements ITaskService {
         if (projectId == null || projectId.isEmpty()) {
             return;
         }
-        final ITaskRepository taskRepository = getTaskRepository();
         taskRepository.getTransaction().begin();
         taskRepository.deleteByProjectId(projectId);
         taskRepository.getTransaction().commit();

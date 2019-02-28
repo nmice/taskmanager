@@ -13,6 +13,11 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
     EntityManager entityManager;
 
     @Override
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    @Override
     public void close() {
         entityManager.close();
     }

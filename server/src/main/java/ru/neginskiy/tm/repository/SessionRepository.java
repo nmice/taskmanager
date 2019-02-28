@@ -5,14 +5,11 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.entity.Session;
 
-import javax.persistence.EntityManager;
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class SessionRepository extends AbstractRepository<Session> implements ISessionRepository {
-
-    public SessionRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public @NotNull List<Session> getAllByUserId(@NotNull String userId) {

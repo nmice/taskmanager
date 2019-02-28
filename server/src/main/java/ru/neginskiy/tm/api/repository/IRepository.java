@@ -4,9 +4,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.AbstractEntity;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 public interface IRepository<T extends AbstractEntity> {
+
+    void setEntityManager(EntityManager entityManager);
 
     void close();
 
