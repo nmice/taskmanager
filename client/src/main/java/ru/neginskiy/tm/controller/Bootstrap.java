@@ -8,20 +8,29 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.command.AbstractCommand;
 import ru.neginskiy.tm.endpoint.*;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-@NoArgsConstructor
+@ApplicationScoped
+//@NoArgsConstructor
 @Getter
 public class Bootstrap {
 
     private final Map<String, AbstractCommand> stringToCommand = new HashMap<>();
-    private final TaskEndpoint taskEndpointService = new TaskEndpointService().getTaskEndpointPort();
-    private final ProjectEndpoint projectEndpointService = new ProjectEndpointService().getProjectEndpointPort();
-    private final UserEndpoint userEndpointService = new UserEndpointService().getUserEndpointPort();
-    private final SessionEndpoint sessionEndpointService = new SessionEndpointService().getSessionEndpointPort();
-    private final DataEndpoint DataEndpointService = new DataEndpointService().getDataEndpointPort();
+
+    @Inject
+    private TaskEndpoint taskEndpointService;
+    @Inject
+    private ProjectEndpoint projectEndpointService;
+    @Inject
+    private UserEndpoint userEndpointService;
+    @Inject
+    private SessionEndpoint sessionEndpointService;
+    @Inject
+    private DataEndpoint dataEndpointService;
 
     @Setter
     private Session activeSession;
