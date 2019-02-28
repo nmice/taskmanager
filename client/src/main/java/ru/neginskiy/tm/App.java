@@ -16,10 +16,12 @@ public class App {
             DataXmlLoadCommand.class, DataXmlSaveCommand.class};
 
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
-        SeContainerInitializer.newInstance().addPackages(App.class)
-                .initialize().
-                select(Bootstrap.class).
-                get().
-                init(CLASSES);
+        SeContainerInitializer
+                .newInstance()
+                .addPackages(App.class)
+                .initialize()
+                .select(Bootstrap.class)
+                .get()
+                .init(CLASSES);
     }
 }
