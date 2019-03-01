@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.service;
 
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
@@ -12,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class TaskService implements ITaskService {
 
@@ -24,9 +26,7 @@ public class TaskService implements ITaskService {
     @Override
     public @NotNull List<Task> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final List<Task> taskList = taskRepository.getAllByUserId(userId);
-        taskRepository.close();
         return taskList;
     }
 
@@ -35,9 +35,7 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Task task = taskRepository.getById(id);
-        taskRepository.close();
         return task;
     }
 
@@ -46,11 +44,7 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
-        taskRepository.getTransaction().begin();
         taskRepository.merge(task);
-        taskRepository.getTransaction().commit();
-        taskRepository.close();
     }
 
     @Override
@@ -58,16 +52,11 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        taskRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Task task = taskRepository.getById(id);
         if (task == null) {
-            taskRepository.close();
             return null;
         }
-        taskRepository.getTransaction().begin();
         taskRepository.delete(task);
-        taskRepository.getTransaction().commit();
-        taskRepository.close();
         return task;
     }
 
@@ -76,11 +65,6 @@ public class TaskService implements ITaskService {
         if (projectId == null || projectId.isEmpty()) {
             return;
         }
-        taskRepository.getTransaction().begin();
         taskRepository.deleteByProjectId(projectId);
-        taskRepository.getTransaction().commit();
-        taskRepository.close();
     }
-
-
 }

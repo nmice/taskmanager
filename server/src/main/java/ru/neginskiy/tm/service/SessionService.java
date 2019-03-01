@@ -1,6 +1,7 @@
 package ru.neginskiy.tm.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.api.service.ISessionService;
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class SessionService implements ISessionService {
 
@@ -33,9 +35,7 @@ public class SessionService implements ISessionService {
             return null;
         }
         //Delete old session by User
-        sessionRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
-        sessionRepository.getTransaction().begin();
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
                 sessionRepository.delete(session);
@@ -46,8 +46,6 @@ public class SessionService implements ISessionService {
         session.setUser(user);
         session.setSignature(createSaltHashSignature(session.getId()));
         sessionRepository.merge(session);
-        sessionRepository.getTransaction().commit();
-        sessionRepository.close();
         return session;
     }
 
@@ -56,7 +54,6 @@ public class SessionService implements ISessionService {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-        sessionRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Session sessionInBase = sessionRepository.getById(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {
             //Session is not in a repository OR Signature is incorrect
@@ -64,13 +61,9 @@ public class SessionService implements ISessionService {
         }
         if (System.currentTimeMillis() - sessionInBase.getTimeStamp().getTime() > SESSION_LIFETIME) {
             //Session is correct, but older than SessionLifeTime
-            sessionRepository.getTransaction().begin();
             sessionRepository.delete(sessionInBase);
-            sessionRepository.getTransaction().commit();
-            sessionRepository.close();
             throw new UncorrectSessionException();
         }
-        sessionRepository.close();
     }
 
     private String createSaltHashSignature(String id) {

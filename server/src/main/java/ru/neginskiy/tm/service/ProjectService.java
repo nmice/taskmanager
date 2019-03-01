@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.service;
 
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
@@ -12,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class ProjectService implements IProjectService {
 
@@ -24,9 +26,7 @@ public class ProjectService implements IProjectService {
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final List<Project> projectList = projectRepository.getAllByUserId(userId);
-        projectRepository.close();
         return projectList;
     }
 
@@ -35,9 +35,7 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
         final Project project = projectRepository.getById(id);
-        projectRepository.close();
         return project;
     }
 
@@ -46,11 +44,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
-        projectRepository.getTransaction().begin();
         projectRepository.merge(project);
-        projectRepository.getTransaction().commit();
-        projectRepository.close();
     }
 
     @Override
@@ -62,11 +56,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return null;
         }
-        projectRepository.setEntityManager(entityManagerFactory.createEntityManager());
-        projectRepository.getTransaction().begin();
         projectRepository.delete(project);
-        projectRepository.getTransaction().commit();
-        projectRepository.close();
         return project;
     }
 }

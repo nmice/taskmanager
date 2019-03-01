@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 @ApplicationScoped
-//@NoArgsConstructor
+@NoArgsConstructor
 @Getter
 public class Bootstrap {
 

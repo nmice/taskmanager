@@ -2,6 +2,7 @@ package ru.neginskiy.tm.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.ServiceLocator;
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 import java.io.*;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class DataService {
 
