@@ -9,7 +9,6 @@ import ru.neginskiy.tm.api.service.IProjectService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,9 +18,6 @@ public class ProjectService implements IProjectService {
 
     @Inject
     private IProjectRepository projectRepository;
-
-    @Inject
-    EntityManagerFactory entityManagerFactory;
 
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
