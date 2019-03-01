@@ -6,7 +6,7 @@ import ru.neginskiy.tm.entity.Session;
 
 import java.util.List;
 
-//@Repository
+@Repository
 public interface ISessionRepository extends IRepository<Session> {
 
     @NotNull List<Session> getAllByUserId(@NotNull String userId);

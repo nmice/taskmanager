@@ -7,27 +7,11 @@ import ru.neginskiy.tm.entity.AbstractEntity;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 public abstract class AbstractRepository<T extends AbstractEntity> implements IRepository<T> {
 
     @Inject
     EntityManager entityManager;
-
-    @Override
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    @Override
-    public void close() {
-        entityManager.close();
-    }
-
-    @Override
-    public @NotNull EntityTransaction getTransaction() {
-        return entityManager.getTransaction();
-    }
 
     @Override
     public abstract @Nullable T getById(@NotNull String id);

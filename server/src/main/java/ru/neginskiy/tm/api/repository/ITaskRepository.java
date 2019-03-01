@@ -6,7 +6,7 @@ import ru.neginskiy.tm.entity.Task;
 
 import java.util.List;
 
-//@Repository
+@Repository
 public interface ITaskRepository extends IRepository<Task> {
 
     @NotNull List<Task> getAllByUserId(@NotNull String userId);
