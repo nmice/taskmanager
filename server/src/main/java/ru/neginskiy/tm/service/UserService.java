@@ -34,7 +34,7 @@ public class UserService implements IUserService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final User user = userRepository.getById(id);
+        final User user = userRepository.findBy(id);
         return user;
     }
 

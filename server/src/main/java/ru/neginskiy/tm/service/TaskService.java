@@ -35,7 +35,7 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Task task = taskRepository.getById(id);
+        final Task task = taskRepository.findBy(id);
         return task;
     }
 
@@ -52,19 +52,11 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Task task = taskRepository.getById(id);
+        final Task task = taskRepository.findBy(id);
         if (task == null) {
             return null;
         }
-        taskRepository.delete(task);
+        taskRepository.remove(task);
         return task;
-    }
-
-    @Override
-    public void deleteByProjectId(@Nullable String projectId) {
-        if (projectId == null || projectId.isEmpty()) {
-            return;
-        }
-        taskRepository.deleteByProjectId(projectId);
     }
 }

@@ -15,6 +15,4 @@ public interface ITaskService {
     void merge(@Nullable Task task);
 
     @Nullable Task delete(@Nullable String id);
-
-    void deleteByProjectId(@Nullable String projectId);
 }

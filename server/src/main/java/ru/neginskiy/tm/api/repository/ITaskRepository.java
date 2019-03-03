@@ -1,5 +1,7 @@
 package ru.neginskiy.tm.api.repository;
 
+import org.apache.deltaspike.data.api.FullEntityRepository;
+import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.neginskiy.tm.entity.Task;
@@ -7,9 +9,8 @@ import ru.neginskiy.tm.entity.Task;
 import java.util.List;
 
 @Repository
-public interface ITaskRepository extends IRepository<Task> {
+public interface ITaskRepository extends FullEntityRepository<Task, String> {
 
+    @Query("FROM Task t where t.user.id = ?1")
     @NotNull List<Task> getAllByUserId(@NotNull String userId);
-
-    void deleteByProjectId(@NotNull String projectId);
 }

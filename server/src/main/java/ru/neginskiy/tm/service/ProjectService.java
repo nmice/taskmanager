@@ -22,8 +22,7 @@ public class ProjectService implements IProjectService {
     @Override
     public @NotNull List<Project> getAllByUserId(@Nullable String userId) {
         if (userId == null || userId.isEmpty()) return Collections.emptyList();
-        final List<Project> projectList = projectRepository.getAllByUserId(userId);
-        return projectList;
+        return projectRepository.getAllByUserId(userId);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Project project = projectRepository.getById(id);
+        final Project project = projectRepository.findBy(id);
         return project;
     }
 
@@ -52,7 +51,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return null;
         }
-        projectRepository.delete(project);
+        projectRepository.remove(project);
         return project;
     }
 }

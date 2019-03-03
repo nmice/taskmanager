@@ -38,7 +38,7 @@ public class SessionService implements ISessionService {
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
-                sessionRepository.delete(session);
+                sessionRepository.remove(session);
             }
         }
         //Create new Session:
@@ -54,14 +54,14 @@ public class SessionService implements ISessionService {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-        final Session sessionInBase = sessionRepository.getById(session.getId());
+        final Session sessionInBase = sessionRepository.findBy(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {
             //Session is not in a repository OR Signature is incorrect
             throw new UncorrectSessionException();
         }
         if (System.currentTimeMillis() - sessionInBase.getTimeStamp().getTime() > SESSION_LIFETIME) {
             //Session is correct, but older than SessionLifeTime
-            sessionRepository.delete(sessionInBase);
+            sessionRepository.remove(sessionInBase);
             throw new UncorrectSessionException();
         }
     }
