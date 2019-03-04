@@ -1,6 +1,5 @@
 package ru.neginskiy.tm.api.repository;
 
-import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.FullEntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;

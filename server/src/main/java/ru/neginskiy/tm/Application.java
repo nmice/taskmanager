@@ -10,11 +10,10 @@ public class Application {
         SeContainerInitializer.newInstance().addPackages(Application.class)
                 .initialize().select(Bootstrap.class).get().init();
        /*TODO
-            +WELD on Client
+            +DeltaSpike
+            +Repo as interfaces
+            +Transactional
             +README change
-            -DeltaSpike
-            -Repo as interfaces
-            -Transactional
         */
     }
 }

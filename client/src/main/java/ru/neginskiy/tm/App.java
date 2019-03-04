@@ -5,7 +5,6 @@ import ru.neginskiy.tm.controller.Bootstrap;
 
 import javax.enterprise.inject.se.SeContainerInitializer;
 
-
 public class App {
 
     private static final Class[] CLASSES = {ExitCommand.class, HelpCommand.class,

@@ -56,5 +56,4 @@ public class DataEndpoint {
         serviceLocator.getSessionService().validate(session);
         serviceLocator.getDataService().loadDataXml(userId);
     }
-
 }

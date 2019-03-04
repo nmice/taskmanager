@@ -90,7 +90,6 @@
             <scope>compile</scope>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.core/deltaspike-core-api -->
         <dependency>
             <groupId>org.apache.deltaspike.core</groupId>
@@ -116,7 +115,7 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-api -->
+        <!--https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-api-->
         <dependency>
             <groupId>org.apache.deltaspike.modules</groupId>
             <artifactId>deltaspike-data-module-api</artifactId>
@@ -129,7 +128,6 @@
             <version>RELEASE</version>
             <scope>runtime</scope>
         </dependency>
-
 
     </dependencies>
 </project>

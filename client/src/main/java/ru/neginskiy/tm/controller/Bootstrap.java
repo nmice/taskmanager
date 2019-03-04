@@ -82,7 +82,6 @@ public class Bootstrap {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public @Nullable String readLine() {

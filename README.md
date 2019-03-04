@@ -14,6 +14,8 @@
 
 <li> Weld SE (Core) (3.1.0.Final)</li>
 
+<li> Apache DeltaSpike Core API</li>
+
 <h3>Структура проекта</h3>
 
 <h3>- server -</h3>

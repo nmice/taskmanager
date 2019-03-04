@@ -1,5 +1,6 @@
 package ru.neginskiy.tm.util;
 
+
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
