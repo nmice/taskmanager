@@ -52,7 +52,7 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Task task = taskRepository.findBy(id);
+        final Task task = getById(id);
         if (task == null) {
             return null;
         }

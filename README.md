@@ -14,7 +14,7 @@
 
 <li> Weld SE (Core) (3.1.0.Final)</li>
 
-<li> Apache DeltaSpike Core API</li>
+<li> Apache DeltaSpike (1.9.0)</li>
 
 <h3>Структура проекта</h3>
 
@@ -26,15 +26,13 @@
 
 <h4>[api.repository]</h4>
 
-<li> IRepository - интерфейс операций над сущностями</li>
+<li> IProjectRepository - интерфейс репозитория проектов</li>
 
-<li> IProjectRepository - интерфейс операций над проектами</li>
+<li> ISessionRepository - интерфейс репозитория сессий<li>
 
-<li> ISessionRepository - интерфейс операций над сессиями</li>
+<li> ITaskRepository - интерфейс репозитория задач</li>
 
-<li> ITaskRepository - интерфейс операций над задачами</li>
-
-<li> IUserRepository - интерфейс операций над пользователями</li>
+<li> IUserRepository - интерфейс репозитория пользователей</li>
 
 <h4>[api.service]</h4>
 
@@ -82,18 +80,6 @@
 
 <li> UncorrectSessionException - класс ошибки сессии</li>
 
-<h4>[repository]</h4>
-
-<li> AbstractRepository - абстрактный класс репозитория</li>
-
-<li> ProjectRepository - класс для хранения и доступа к хранилищу проектов</li>
-
-<li> SessionRepository - класс для хранения и доступа к хранилищу сессий</li>
-
-<li> TaskRepository - класс для хранения и доступа к хранилищу задач</li>
-
-<li> UserRepository - класс для хранения и доступа к хранилищу пользователей</li>
-
 <h4>[service]</h4>
 
 <li> DataService - класс для сохранения и загрузки данных пользователя</li>
@@ -111,6 +97,8 @@
 <li> AppConfig - утильный класс со static переменными, хранящих значения из config.properties</li>
 
 <li> HibernateSessionFactory - утильный класс для создания EntityManagerFactory</li>
+
+<li> EntityManagerProducer - утильный класс для создания EntityManager</li>
 
 <h4>Application - основной класс на сервере</h4>
 
@@ -169,6 +157,10 @@
 <h4>[endpoint]</h4>
 
 <li> Классы, сгенерированные с помощью Endpoint</li>
+
+<h4>[producer]</h4>
+
+<li> EndpointsProducer - утильный класс для создания Endpoint</li>
 
 <h4>[util]</h4>
 
