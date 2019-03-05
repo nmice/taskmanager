@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/project-list")
-public class ProjectListServlet extends HttpServlet {
+@WebServlet("/project-delete")
+public class ProjectDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProjectRepository projectRepository = ProjectRepository.getInstance();
+        if (req.getParameter("del") != null && req.getParameter("id") != null) {
+            String id = req.getParameter("id");
+            projectRepository.delete(id);
+        }
         req.setAttribute("projects", projectRepository.getAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
         requestDispatcher.forward(req, resp);

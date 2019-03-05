@@ -16,7 +16,6 @@ public class Project extends AbstractEntity {
     private String description;
     private Date dateBegin;
     private Date dateEnd;
-    //private String user;
 
     @Override
     public String toString() {

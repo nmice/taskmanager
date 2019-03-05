@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.servlets;
 
-import ru.neginskiy.tm.repository.ProjectRepository;
+import ru.neginskiy.tm.repository.TaskRepository;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/project-list")
-public class ProjectListServlet extends HttpServlet {
+@WebServlet("/task-delete")
+public class TaskDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProjectRepository projectRepository = ProjectRepository.getInstance();
-        req.setAttribute("projects", projectRepository.getAll());
+        TaskRepository taskRepository = TaskRepository.getInstance();
+        if (req.getParameter("del") != null && req.getParameter("id") != null) {
+            String id = req.getParameter("id");
+            taskRepository.delete(id);
+        }
+        req.setAttribute("projects", taskRepository.getAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
         requestDispatcher.forward(req, resp);
     }
