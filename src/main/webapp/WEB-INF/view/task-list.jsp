@@ -10,15 +10,15 @@
 <table>
     <tr>
         <td width="200">
-            <button><h3><a href="/server">HOME</a></h3></button>
+            <button><h3><a href="/task-manager">HOME</a></h3></button>
         </td>
         <td width="200">
-            <button><h3><a href="/server/task-form?projectId=<%=request.getAttribute("projectId")%>">
+            <button><h3><a href="task-form?projectId=<%=request.getAttribute("projectId")%>">
                 ADD TASK
             </a></h3></button>
         </td>
         <td width="200">
-            <button><h3><a href="/server/project-list">
+            <button><h3><a href="project-list">
                 GO TO PROJECT LIST
             </a></h3></button>
         </td>
@@ -63,14 +63,14 @@
         </td>
         <%-- editing. Add id to url for getting it in method doGet()--%>
         <td>
-            <a href="/server/task-form?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
+            <a href="task-form?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
                 EDIT
             </a>
         </td>
         <%-- deleting. Add id to url for getting it in method doPost()--%>
         <td>
             <form method="get">
-                <a href="/server/task-delete?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
+                <a href="task-delete?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
                     DELETE
                 </a>
             </form>

@@ -2,18 +2,19 @@
 <head>
     <title>Project-form</title>
 </head>
-
 <body>
 <div>
-    Set Project properties:<br>
-    <form action="/server/project-merge" method="post">
+    Set Task properties:<br>
+    <form action="task-merge" method="post">
         <%
-           if (request.getParameter("id")!=null){
+            if (request.getParameter("id") != null) {
         %>
         <input type="hidden" name="id" value=<%=request.getParameter("id")%>>
         <%
             }
         %>
+        <input type="hidden" name="projectId" value=<%=request.getParameter("projectId")%>>
+
         <table>
             <tr>
                 <td>Name</td>
@@ -27,13 +28,14 @@
                 <td>Begin Date</td>
                 <td><input type="text" name="dateBegin"></td>
             </tr>
+
             <tr>
                 <td>End Date</td>
                 <td><input type="text" name="dateEnd"></td>
             </tr>
         </table>
         <input type="submit" value="OK">
-        <input type="button" value="Cancel" onClick='location.href="/server/project-list"'>
+        <input type="button" value="Cancel" onClick='location.href="/task-list"'>
     </form>
 </div>
 </body>
