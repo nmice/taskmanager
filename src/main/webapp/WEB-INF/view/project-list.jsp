@@ -5,25 +5,30 @@
 <html>
 <head>
     <title>Project-list</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <table>
     <tr>
         <td width="200">
-            <button><h3><a href="/task-manager">HOME</a></h3></button>
+            <h3><a href="/task-manager">
+                <button>HOME</button>
+            </a></h3>
         </td>
         <td width="200">
-            <button><h3><a href="project-form">ADD PROJECT</a></h3></button>
+            <h3><a href="project-form">
+                <button>ADD PROJECT</button>
+            </a></h3>
         </td>
     </tr>
 </table>
 
 <h2>PROJECT LIST</h2>
 
-<table>
+<table border="1" width="100%" cellpadding="5">
     <thead>
     <tr align="left">
-        <th width="300">Name</th>
+        <th width="200">Name</th>
         <th width="200">Description</th>
         <th width="200">Begin date</th>
         <th width="200">End date</th>
@@ -32,11 +37,6 @@
         <th width="200">Task list</th>
     </tr>
     </thead>
-    <tr>
-        <td colspan="5">
-            <hr>
-        </td>
-    </tr>
     <%
         final List<Project> projectList = (List<Project>) request.getAttribute("projects");
         final Format formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -52,27 +52,33 @@
             <%=formatter.format(project.getDateBegin())%>
             <%}%>
         </td>
-        <td><%if (project.getDateBegin() != null) {%>
+        <td><%if (project.getDateEnd() != null) {%>
             <%=formatter.format(project.getDateEnd())%>
             <%}%>
         </td>
         <%-- editing. Add id to url for getting it in method doGet()--%>
         <td>
             <a href="project-form?id=<%=project.getId()%>">
-                EDIT
+                <button>
+                    EDIT
+                </button>
             </a>
         </td>
         <%-- deleting. Add id to url for getting it in method doPost()--%>
         <td>
             <form method="get">
                 <a href="project-delete?id=<%=project.getId()%>">
-                    DELETE
+                    <button>
+                        DELETE
+                    </button>
                 </a>
             </form>
         </td>
         <td>
             <a href="task-list?projectId=<%=project.getId()%>">
-                GET TASKS
+                <button>
+                    GET TASKS
+                </button>
             </a>
         </td>
     </tr>

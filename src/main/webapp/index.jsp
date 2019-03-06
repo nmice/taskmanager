@@ -1,8 +1,11 @@
 <html>
+<head>
+    <title>Taskmanager-3000</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" >
+</head>
 <body>
-<h2>TASKMANAGER</h2>
-<ul>
-    <li><a href="project-list">PROJECT LIST</a></li>
-</ul>
+<div class="text">
+    <h1><a href="project-list"><button>TASKMANAGER - 3000</button></a></h1>
+</div>
 </body>
 </html>

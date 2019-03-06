@@ -24,4 +24,5 @@ public class ProjectDeleteServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
         requestDispatcher.forward(req, resp);
     }
+    /*TODO DTO in DeltaSpike branch*/
 }

@@ -1,10 +1,11 @@
 <html>
 <head>
     <title>Project-form</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <div>
-    Set Task properties:<br>
+    SET TASK PROPERTIES:<br>
     <form action="task-merge" method="post">
         <%
             if (request.getParameter("id") != null) {
@@ -15,7 +16,7 @@
         %>
         <input type="hidden" name="projectId" value=<%=request.getParameter("projectId")%>>
 
-        <table>
+        <table border="1" cellpadding="5">
             <tr>
                 <td>Name</td>
                 <td><input type="text" name="name"></td>
@@ -35,7 +36,7 @@
             </tr>
         </table>
         <input type="submit" value="OK">
-        <input type="button" value="Cancel" onClick='location.href="/task-list"'>
+        <input type="button" value="Cancel" onClick='location.href="task-list"'>
     </form>
 </div>
 </body>
