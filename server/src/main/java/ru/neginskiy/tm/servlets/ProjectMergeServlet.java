@@ -18,9 +18,8 @@ public class ProjectMergeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProjectRepository projectRepository = ProjectRepository.getInstance();
         mergeProjectByRequest(req);
-        req.setAttribute("projects", projectRepository.getAll());
+        req.setAttribute("projects", ProjectRepository.getInstance().getAll());
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -28,40 +27,42 @@ public class ProjectMergeServlet extends HttpServlet {
     private void mergeProjectByRequest(HttpServletRequest request) {
         ProjectRepository projectRepository = ProjectRepository.getInstance();
         Project project;
+
         String id = request.getParameter("id");
         if (id == null || id.isEmpty()) {
             project = new Project();
         } else {
             project = projectRepository.getById(id);
         }
-        String name;
-        try {
-            name = request.getParameter("name");
-        } catch (Exception e) {
+
+        String name = request.getParameter("name");
+        if (name == null || name.isEmpty()) {
             name = project.getName();
         }
-        String description;
-        try {
-            description = request.getParameter("description");
-        } catch (Exception e) {
+        project.setName(name);
+
+        String description = request.getParameter("description");
+        if (description == null || description.isEmpty()) {
             description = project.getDescription();
         }
+        project.setDescription(description);
+
         Date dateBegin;
         try {
             dateBegin = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dateBegin"));
         } catch (Exception e) {
             dateBegin = project.getDateBegin();
         }
+        project.setDateBegin(dateBegin);
+
         Date dateEnd;
         try {
-            dateEnd = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dateBegin"));
+            dateEnd = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dateEnd"));
         } catch (Exception e) {
             dateEnd = project.getDateEnd();
         }
-        project.setName(name);
-        project.setDescription(description);
-        project.setDateBegin(dateBegin);
         project.setDateEnd(dateEnd);
+
         projectRepository.merge(project);
     }
 }

@@ -13,7 +13,7 @@
             <button><h3><a href="/server">Home</a></h3></button>
         </td>
         <td width="200">
-            <button><h3><a href="/server/project-form?formtype=add">Add Project</a></h3></button>
+            <button><h3><a href="/server/project-form">Add Project</a></h3></button>
         </td>
     </tr>
 </table>
@@ -29,6 +29,7 @@
         <th width="200">End date</th>
         <th width="200">Edit</th>
         <th width="200">Delete</th>
+        <th width="200">Task list</th>
     </tr>
     </thead>
     <tr>
@@ -57,17 +58,22 @@
         </td>
         <%-- editing. Add id to url for getting it in method doGet()--%>
         <td>
-            <a href="/server/project-form?id=<%=project.getId()%>&formtype=edit">
+            <a href="/server/project-form?id=<%=project.getId()%>">
                 EDIT
             </a>
         </td>
         <%-- deleting. Add id to url for getting it in method doPost()--%>
         <td>
             <form method="get">
-                <a href="/server/project-delete?id=<%=project.getId()%>&del=true">
+                <a href="/server/project-delete?id=<%=project.getId()%>">
                     DELETE
                 </a>
             </form>
+        </td>
+        <td>
+            <a href="/server/task-list?projectId=<%=project.getId()%>">
+                GET TASKS
+            </a>
         </td>
     </tr>
     <%

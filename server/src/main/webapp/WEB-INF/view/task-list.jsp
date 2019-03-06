@@ -1,5 +1,7 @@
 <%@ page import="ru.neginskiy.tm.entity.Task" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.Format" %>
 <html>
 <head>
     <title>Task-list</title>
@@ -8,15 +10,21 @@
 <table>
     <tr>
         <td width="200">
-            <button><h3><a href="/server">Home</a></h3></button>
+            <button><h3><a href="/server">HOME</a></h3></button>
         </td>
         <td width="200">
-            <button><h3><a href="project-form.jsp?formtype=add">Add Project</a></h3></button>
+            <button><h3><a href="/server/task-form?projectId=<%=request.getAttribute("projectId")%>">
+                ADD TASK
+            </a></h3></button>
+        </td>
+        <td width="200">
+            <button><h3><a href="/server/project-list">
+                GO TO PROJECT LIST
+            </a></h3></button>
         </td>
     </tr>
 </table>
 <h2>TASK LIST</h2>
-
 
 <table>
     <thead>
@@ -36,30 +44,33 @@
         </td>
     </tr>
     <%
-        List<Task> taskList = (List<Task>) request.getAttribute("projects");
+        List<Task> taskList = (List<Task>) request.getAttribute("tasks");
+        final Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         if (taskList != null) {
             for (Task task : taskList) {
     %>
-
     <tr>
         <td><%=task.getName()%>
         </td>
         <td><%=task.getDescription()%>
+        <td><%if (task.getDateBegin() != null) {%>
+            <%=formatter.format(task.getDateBegin())%>
+            <%}%>
         </td>
-        <td><%=task.getDateBegin()%>
-        </td>
-        <td><%=task.getDateEnd()%>
+        <td><%if (task.getDateBegin() != null) {%>
+            <%=formatter.format(task.getDateEnd())%>
+            <%}%>
         </td>
         <%-- editing. Add id to url for getting it in method doGet()--%>
         <td>
-            <a href="project-form.jsp?id=<%=task.getId()%>&formtype=edit">
+            <a href="/server/task-form?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
                 EDIT
             </a>
         </td>
         <%-- deleting. Add id to url for getting it in method doPost()--%>
         <td>
             <form method="get">
-                <a href="/server/project-delete?id=<%=task.getId()%>&del=true">
+                <a href="/server/task-delete?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
                     DELETE
                 </a>
             </form>

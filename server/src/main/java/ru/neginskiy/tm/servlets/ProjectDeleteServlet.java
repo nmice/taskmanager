@@ -16,7 +16,7 @@ public class ProjectDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProjectRepository projectRepository = ProjectRepository.getInstance();
-        if (req.getParameter("del") != null && req.getParameter("id") != null) {
+        if (req.getParameter("id") != null) {
             String id = req.getParameter("id");
             projectRepository.delete(id);
         }
