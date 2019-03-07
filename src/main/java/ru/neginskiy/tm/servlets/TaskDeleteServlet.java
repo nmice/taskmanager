@@ -2,7 +2,6 @@ package ru.neginskiy.tm.servlets;
 
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +19,6 @@ public class TaskDeleteServlet extends HttpServlet {
             String id = req.getParameter("id");
             taskRepository.delete(id);
         }
-        String projectId = req.getParameter("projectId");
-        req.setAttribute("tasks", taskRepository.getByProjectId(projectId));
-        req.setAttribute("projectId", projectId);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/task-list.jsp");
-        requestDispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/task-list");
     }
 }

@@ -5,8 +5,8 @@
 </head>
 <body>
 <div>
-    SET TASK PROPERTIES:<br>
-    <form action="task-merge" method="post">
+    SET PROJECT PROPERTIES:<br>
+    <form action="task-merge" method="get">
         <%
             if (request.getParameter("id") != null) {
         %>
@@ -16,7 +16,7 @@
         %>
         <input type="hidden" name="projectId" value=<%=request.getParameter("projectId")%>>
 
-        <table border="1" cellpadding="5">
+        <table>
             <tr>
                 <td>Name</td>
                 <td><input type="text" name="name"></td>
@@ -29,7 +29,6 @@
                 <td>Begin Date</td>
                 <td><input type="text" name="dateBegin"></td>
             </tr>
-
             <tr>
                 <td>End Date</td>
                 <td><input type="text" name="dateEnd"></td>

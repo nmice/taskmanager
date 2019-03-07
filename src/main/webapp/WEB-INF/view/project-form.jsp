@@ -6,7 +6,7 @@
 <body>
 <div>
     SET TASK PROPERTIES:<br>
-    <form action="project-merge" method="post">
+    <form action="project-merge" method="get">
         <%
             if (request.getParameter("id") != null) {
         %>
@@ -14,7 +14,7 @@
         <%
             }
         %>
-        <table border="1" cellpadding="5">
+        <table>
             <tr>
                 <td>Name</td>
                 <td><input type="text" name="name"></td>

@@ -10,17 +10,17 @@
 <body>
 <table>
     <tr>
-        <td width="200">
+        <td>
             <h3><a href="/task-manager">
                 <button>HOME</button>
             </a></h3>
         </td>
-        <td width="200">
+        <td>
             <h3><a href="task-form?projectId=<%=request.getAttribute("projectId")%>">
                 <button>ADD TASK</button>
             </a></h3>
         </td>
-        <td width="200">
+        <td>
             <h3><a href="project-list">
                 <button>PROJECT LIST</button>
             </a></h3>
@@ -28,16 +28,15 @@
     </tr>
 </table>
 <h2>TASK LIST</h2>
-
-<table border="1" width="100%" cellpadding="5">
+<table>
     <thead>
-    <tr align="left">
-        <th width="200">Name</th>
-        <th width="200">Description</th>
-        <th width="200">Begin date</th>
-        <th width="200">End date</th>
-        <th width="200">Edit</th>
-        <th width="200">Delete</th>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Begin date</th>
+        <th>End date</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <%
@@ -60,21 +59,14 @@
         </td>
         <%-- editing. Add id to url for getting it in method doGet()--%>
         <td>
-            <a href="task-form?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
-                <button>
-                    EDIT
-                </button>
+            <a href="task-form?id=<%=task.getId()%>">
+                <button>EDIT</button>
             </a>
         </td>
-        <%-- deleting. Add id to url for getting it in method doPost()--%>
         <td>
-            <form method="get">
-                <a href="task-delete?id=<%=task.getId()%>&projectId=<%=request.getAttribute("projectId")%>">
-                    <button>
-                        DELETE
-                    </button>
-                </a>
-            </form>
+            <a href="task-delete?id=<%=task.getId()%><%--&projectId=<%=task.getProjectId()%>--%>">
+                <button>DELETE</button>
+            </a>
         </td>
     </tr>
     <%
@@ -82,7 +74,5 @@
         }
     %>
 </table>
-
-
 </body>
 </html>

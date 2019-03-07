@@ -2,7 +2,6 @@ package ru.neginskiy.tm.servlets;
 
 import ru.neginskiy.tm.repository.ProjectRepository;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +19,7 @@ public class ProjectDeleteServlet extends HttpServlet {
             String id = req.getParameter("id");
             projectRepository.delete(id);
         }
-        req.setAttribute("projects", projectRepository.getAll());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
-        requestDispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/project-list");
     }
     /*TODO DTO in DeltaSpike branch*/
 }

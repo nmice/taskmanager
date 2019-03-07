@@ -3,7 +3,6 @@ package ru.neginskiy.tm.servlets;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.repository.ProjectRepository;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,11 +16,10 @@ import java.util.Date;
 public class ProjectMergeServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mergeProjectByRequest(req);
         req.setAttribute("projects", ProjectRepository.getInstance().getAll());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
-        requestDispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/project-list");
     }
 
     private void mergeProjectByRequest(HttpServletRequest request) {

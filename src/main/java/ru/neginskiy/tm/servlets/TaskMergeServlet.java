@@ -3,7 +3,6 @@ package ru.neginskiy.tm.servlets;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.repository.TaskRepository;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,15 +16,9 @@ import java.util.Date;
 public class TaskMergeServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mergeTaskByRequest(req);
-        TaskRepository taskRepository = TaskRepository.getInstance();
-        String projectId = req.getParameter("projectId");
-        req.setAttribute("tasks", taskRepository.getByProjectId(projectId));
-        req.setAttribute("projectId", projectId);
-
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/task-list.jsp");
-        requestDispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/task-list");
     }
 
     private void mergeTaskByRequest(HttpServletRequest request) {
