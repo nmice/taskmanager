@@ -59,12 +59,12 @@
         </td>
         <%-- editing. Add id to url for getting it in method doGet()--%>
         <td>
-            <a href="task-form?id=<%=task.getId()%>">
+            <a href="task-form?id=<%=task.getId()%>&projectId=<%=task.getProjectId()%>">
                 <button>EDIT</button>
             </a>
         </td>
         <td>
-            <a href="task-delete?id=<%=task.getId()%><%--&projectId=<%=task.getProjectId()%>--%>">
+            <a href="task-delete?id=<%=task.getId()%>&projectId=<%=task.getProjectId()%>">
                 <button>DELETE</button>
             </a>
         </td>

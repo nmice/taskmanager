@@ -18,7 +18,7 @@ public class TaskMergeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mergeTaskByRequest(req);
-        resp.sendRedirect(req.getContextPath() + "/task-list");
+        resp.sendRedirect(req.getContextPath() + "/task-list?projectId="+req.getParameter("projectId"));
     }
 
     private void mergeTaskByRequest(HttpServletRequest request) {

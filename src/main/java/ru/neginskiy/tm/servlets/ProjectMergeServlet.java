@@ -18,7 +18,7 @@ public class ProjectMergeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mergeProjectByRequest(req);
-        req.setAttribute("projects", ProjectRepository.getInstance().getAll());
+        //req.setAttribute("projects", ProjectRepository.getInstance().getAll());
         resp.sendRedirect(req.getContextPath() + "/project-list");
     }
 

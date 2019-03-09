@@ -19,6 +19,6 @@ public class TaskDeleteServlet extends HttpServlet {
             String id = req.getParameter("id");
             taskRepository.delete(id);
         }
-        resp.sendRedirect(req.getContextPath() + "/task-list");
+        resp.sendRedirect(req.getContextPath() + "/task-list?projectId="+req.getParameter("projectId"));
     }
 }
