@@ -1,5 +1,8 @@
 package ru.neginskiy.tm.servlets;
 
+import ru.neginskiy.tm.entity.User;
+import ru.neginskiy.tm.repository.UserRepository;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,19 +18,38 @@ public class AuthorizationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UserRepository userRepository = UserRepository.getInstance();
 
-        HttpSession activeSession = req.getSession();
-        String message;
-        if (activeSession.isNew()) {
-            message = "Welcome to TASKMANAGER!";
+        String username = req.getParameter("username");
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+
+        if (username == null) {
+            //is a create user page:
+            if(userRepository.isRegistredLogin(name)){
+                req.setAttribute("loginMessage", "This login is registred now!");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
+                requestDispatcher.forward(req, resp);
+            }
+            User user = new User();
+            user.setLogin(name);
+            user.setPassword(password);
+            userRepository.merge(user);
+            req.setAttribute("loginMessage", "Please login");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
+            requestDispatcher.forward(req, resp);
         } else {
-            message = "Glad to see You again!";
+            //is a login page:
+            User user = userRepository.findUser(username, password);
+            if (user == null) {
+                req.setAttribute("loginMessage", "User not found!");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
+                requestDispatcher.forward(req, resp);
+            } else {
+                HttpSession session = req.getSession();
+                session.setAttribute("userId",user.getId());
+                resp.sendRedirect(req.getContextPath() + "/project-list");
+            }
         }
-
-        req.setAttribute("msg", message);
-
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
-        requestDispatcher.forward(req, resp);
-
     }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="ru.neginskiy.tm.entity.Task" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -10,16 +11,9 @@
 </head>
 <body>
 <div align="center">
-            <h3><a href="/task-manager">
-                <button>HOME</button>
-            </a></h3>
-            <h3><a href="task-form?projectId=<%=request.getAttribute("projectId")%>">
-                <button>ADD TASK</button>
-            </a></h3>
-            <h3><a href="project-list">
-                <button>PROJECT LIST</button>
-            </a></h3>
-
+            <h3><a href="/task-manager"><button>HOME</button></a>
+            <a href="task-form?projectId=<%=request.getAttribute("projectId")%>"><button>ADD TASK</button></a>
+            <a href="project-list"><button>PROJECT LIST</button></a></h3>
 <h2>TASK LIST</h2>
 <table>
     <thead>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="ru.neginskiy.tm.entity.Project" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -10,17 +11,13 @@
 </head>
 <body>
 <div align="center">
-            <h3><a href="/task-manager">
-                <button>HOME</button>
-            </a></h3>
-
-            <h3><a href="project-form">
-                <button>ADD PROJECT</button>
-            </a></h3>
+            <h3><a href="/task-manager"><button>HOME</button></a>
+            <a href="project-form"><button>ADD PROJECT</button></a>
+            <a href="logout"><button>LOGOUT</button></a>
+            </h3>
 </div>
-<div align="center">
+<div align="center" >
     <h2>PROJECT LIST</h2>
-
     <table>
     <thead>
     <tr>
@@ -66,6 +63,7 @@
         }
     %>
     </table>
+    <h3>USER_ID=<%=session.getAttribute("userId")%></h3>
 </div>
 </body>
 </html>

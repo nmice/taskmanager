@@ -15,17 +15,14 @@ public class StartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        HttpSession activeSession = req.getSession();
+/*        HttpSession activeSession = req.getSession();
         String message;
         if (activeSession.isNew()) {
             message = "Welcome to TASKMANAGER!";
         } else {
             message = "Glad to see You again!";
         }
-
-        req.setAttribute("msg", message);
-
+        req.setAttribute("msg", message);*/
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
         requestDispatcher.forward(req, resp);
 

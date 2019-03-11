@@ -10,5 +10,5 @@ import lombok.Setter;
 public class User extends AbstractEntity {
 
     private String login;
-    private String passwordHash;
+    private String password;
 }
