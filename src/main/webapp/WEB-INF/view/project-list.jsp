@@ -5,27 +5,23 @@
 <html>
 <head>
     <title>Project-list</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<table>
-    <tr>
-        <td>
+<div align="center">
             <h3><a href="/task-manager">
                 <button>HOME</button>
             </a></h3>
-        </td>
-        <td>
+
             <h3><a href="project-form">
                 <button>ADD PROJECT</button>
             </a></h3>
-        </td>
-    </tr>
-</table>
+</div>
+<div align="center">
+    <h2>PROJECT LIST</h2>
 
-<h2>PROJECT LIST</h2>
-
-<table>
+    <table>
     <thead>
     <tr>
         <th>Name</th>
@@ -69,6 +65,7 @@
             }
         }
     %>
-</table>
+    </table>
+</div>
 </body>
 </html>

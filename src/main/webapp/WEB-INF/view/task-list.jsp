@@ -5,28 +5,21 @@
 <html>
 <head>
     <title>Task-list</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<table>
-    <tr>
-        <td>
+<div align="center">
             <h3><a href="/task-manager">
                 <button>HOME</button>
             </a></h3>
-        </td>
-        <td>
             <h3><a href="task-form?projectId=<%=request.getAttribute("projectId")%>">
                 <button>ADD TASK</button>
             </a></h3>
-        </td>
-        <td>
             <h3><a href="project-list">
                 <button>PROJECT LIST</button>
             </a></h3>
-        </td>
-    </tr>
-</table>
+
 <h2>TASK LIST</h2>
 <table>
     <thead>
@@ -74,5 +67,6 @@
         }
     %>
 </table>
+</div>
 </body>
 </html>

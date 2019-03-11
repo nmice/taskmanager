@@ -1,10 +1,11 @@
 <html>
 <head>
     <title>Project-form</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div>
+<div class="form">
     SET TASK PROPERTIES:<br>
     <form action="project-merge" method="get">
         <%
