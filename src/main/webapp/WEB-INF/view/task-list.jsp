@@ -11,56 +11,48 @@
 </head>
 <body>
 <div align="center">
-            <h3><a href="/task-manager"><button>HOME</button></a>
-            <a href="task-form?projectId=<%=request.getAttribute("projectId")%>"><button>ADD TASK</button></a>
-            <a href="project-list"><button>PROJECT LIST</button></a></h3>
-<h2>TASK LIST</h2>
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Begin date</th>
-        <th>End date</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <%
-        List<Task> taskList = (List<Task>) request.getAttribute("tasks");
-        final Format formatter = new SimpleDateFormat("dd-MM-yyyy");
-        if (taskList != null) {
-            for (Task task : taskList) {
-    %>
-    <tr>
-        <td><%=task.getName()%>
-        </td>
-        <td><%=task.getDescription()%>
-        <td><%if (task.getDateBegin() != null) {%>
-            <%=formatter.format(task.getDateBegin())%>
-            <%}%>
-        </td>
-        <td><%if (task.getDateEnd() != null) {%>
-            <%=formatter.format(task.getDateEnd())%>
-            <%}%>
-        </td>
-        <%-- editing. Add id to url for getting it in method doGet()--%>
-        <td>
-            <a href="task-form?id=<%=task.getId()%>&projectId=<%=task.getProjectId()%>">
-                <button>EDIT</button>
-            </a>
-        </td>
-        <td>
-            <a href="task-delete?id=<%=task.getId()%>&projectId=<%=task.getProjectId()%>">
-                <button>DELETE</button>
-            </a>
-        </td>
-    </tr>
-    <%
-            }
-        }
-    %>
-</table>
+    <h3><a href="/task-manager">
+        <button>HOME</button>
+    </a>
+        <a href="task-form?projectId=${param.projectId}">
+            <button>ADD TASK</button>
+        </a>
+        <a href="project-list">
+            <button>PROJECT LIST</button>
+        </a></h3>
+    <h2>TASK LIST</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Begin date</th>
+            <th>End date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <c:if test="${!empty tasks}">
+            <c:forEach var="task" items="${tasks}">
+                <tr>
+                    <td>${task.getName()}</td>
+                    <td>${task.getDescription()}</td>
+                    <td><c:if test="${!empty task.getDateBegin()}">
+                        <fmt:formatDate value="${task.getDateBegin()}" pattern="dd-MM-yyyy"/>
+                    </c:if></td>
+                    <td><c:if test="${!empty task.getDateEnd()}">
+                        <fmt:formatDate value="${task.getDateEnd()}" pattern="dd-MM-yyyy"/>
+                    </c:if></td>
+                    <td><a href="task-form?id=${task.getId()}&projectId=${task.getProjectId()}">
+                        <button>EDIT</button>
+                    </a></td>
+                    <td><a href="task-delete?id=${task.getId()}&projectId=${task.getProjectId()}">
+                        <button>DELETE</button>
+                    </a></td>
+                </tr>
+            </c:forEach>
+        </c:if>
+    </table>
 </div>
 </body>
 </html>

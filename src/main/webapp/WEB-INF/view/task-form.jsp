@@ -9,21 +9,12 @@
 <div class="form">
     SET TASK PROPERTIES:<br>
     <form action="task-merge" method="get">
-        <%
-            if (request.getParameter("id") != null) {
-        %>
-        <input type="hidden" name="id" value=<%=request.getParameter("id")%>>
-        <%
-            }
-        %>
-        <%
-            if (request.getParameter("projectId") != null) {
-        %>
-        <input type="hidden" name="projectId" value=<%=request.getParameter("projectId")%>>
-        <%
-            }
-        %>
-
+        <c:if test="${!empty param.id}">
+            <input type="hidden" name="id" value=${param.id}>
+        </c:if>
+        <c:if test="${!empty param.projectId}">
+            <input type="hidden" name="projectId" value=${param.projectId}>
+        </c:if>
         <table>
             <tr>
                 <td>Name</td>
@@ -35,15 +26,16 @@
             </tr>
             <tr>
                 <td>Begin Date</td>
-                <td><input type="text" name="dateBegin"></td>
+                <td><input type="text" placeholder="DD-MM-YYYY" name="dateBegin"></td>
             </tr>
             <tr>
                 <td>End Date</td>
-                <td><input type="text" name="dateEnd"></td>
+                <td><input type="text" placeholder="DD-MM-YYYY" name="dateEnd"></td>
             </tr>
         </table>
         <input type="submit" value="OK">
-        <input type="button" value="Cancel" onClick='location.href="task-list?projectId=<%=request.getParameter("projectId")%>"'>
+        <input type="button" value="Cancel"
+               onClick='location.href="task-list?projectId=${param.projectId}"'>
     </form>
 </div>
 </body>

@@ -7,15 +7,11 @@
 </head>
 <body>
 <div class="form">
-    SET TASK PROPERTIES:<br>
+    SET PROJECT PROPERTIES:<br>
     <form action="project-merge" method="get">
-        <%
-            if (request.getParameter("id") != null) {
-        %>
-        <input type="hidden" name="id" value=<%=request.getParameter("id")%>>
-        <%
-            }
-        %>
+        <c:if test="${!empty param.id}">
+            <input type="hidden" name="id" value=${param.id}>
+        </c:if>
         <table>
             <tr>
                 <td>Name</td>
@@ -27,11 +23,11 @@
             </tr>
             <tr>
                 <td>Begin Date</td>
-                <td><input type="text" name="dateBegin"></td>
+                <td><input type="text" placeholder="DD-MM-YYYY" name="dateBegin"></td>
             </tr>
             <tr>
                 <td>End Date</td>
-                <td><input type="text" name="dateEnd"></td>
+                <td><input type="text" placeholder="DD-MM-YYYY" name="dateEnd"></td>
             </tr>
         </table>
         <input type="submit" value="OK">
