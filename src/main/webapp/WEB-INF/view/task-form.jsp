@@ -34,8 +34,7 @@
             </tr>
         </table>
         <input type="submit" value="OK">
-        <input type="button" value="Cancel"
-               onClick='location.href="task-list?projectId=${param.projectId}"'>
+        <input type="button" value="Cancel" onClick='location.href="task-list?projectId=${param.projectId}"'>
     </form>
 </div>
 </body>

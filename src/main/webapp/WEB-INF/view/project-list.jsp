@@ -39,12 +39,16 @@
                 <tr>
                     <td>${project.getName()}</td>
                     <td>${project.getDescription()}</td>
+
+
                     <td><c:if test="${!empty project.getDateBegin()}">
                         <fmt:formatDate value="${project.getDateBegin()}" pattern="dd-MM-yyyy"/>
                     </c:if></td>
                     <td><c:if test="${!empty project.getDateEnd()}">
                         <fmt:formatDate value="${project.getDateEnd()}" pattern="dd-MM-yyyy"/>
                     </c:if></td>
+
+
                     <td><a href="project-form?id=${project.getId()}">
                         <button>EDIT</button>
                     </a></td>

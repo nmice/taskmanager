@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="ru.neginskiy.tm.entity.Task" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.text.Format" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <title>Task-list</title>
@@ -37,12 +35,16 @@
                 <tr>
                     <td>${task.getName()}</td>
                     <td>${task.getDescription()}</td>
-                    <td><c:if test="${!empty task.getDateBegin()}">
+                    <td>
+                    <c:if test="${!empty task.getDateBegin()}">
                         <fmt:formatDate value="${task.getDateBegin()}" pattern="dd-MM-yyyy"/>
-                    </c:if></td>
-                    <td><c:if test="${!empty task.getDateEnd()}">
+                    </c:if>
+                    </td>
+                    <td>
+                    <c:if test="${!empty task.getDateEnd()}">
                         <fmt:formatDate value="${task.getDateEnd()}" pattern="dd-MM-yyyy"/>
-                    </c:if></td>
+                    </c:if>
+                    </td>
                     <td><a href="task-form?id=${task.getId()}&projectId=${task.getProjectId()}">
                         <button>EDIT</button>
                     </a></td>
