@@ -24,13 +24,13 @@
             <c:if test="${!empty loginMessage}">
                 <h2>${loginMessage}</h2>
             </c:if>
-            <form class="register-form" action="authorization" method="get">
+            <form class="register-form" action="login" method="get">
                 <input type="text" placeholder="name" name="name"/>
                 <input type="password" placeholder="password" name="password"/>
                 <button type="submit">create</button>
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
             </form>
-            <form class="login-form" action="authorization" method="get">
+            <form class="login-form" action="login" method="get">
                 <input type="text" placeholder="username" name="username"/>
                 <input type="password" placeholder="password" name="password"//>
                 <button type="submit">login</button>
