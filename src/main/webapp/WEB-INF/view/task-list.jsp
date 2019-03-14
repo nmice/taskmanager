@@ -9,15 +9,17 @@
 </head>
 <body>
 <div align="center">
-    <h3><a href="/task-manager">
-        <button>HOME</button>
-    </a>
+    <h3>
+        <a href="project-list">
+            <button>PROJECT LIST</button>
+        </a>
         <a href="task-form?projectId=${param.projectId}">
             <button>ADD TASK</button>
         </a>
-        <a href="project-list">
-            <button>PROJECT LIST</button>
-        </a></h3>
+        <a href="logout">
+            <button>LOGOUT</button>
+        </a>
+    </h3>
     <h2>TASK LIST</h2>
     <table>
         <thead>
