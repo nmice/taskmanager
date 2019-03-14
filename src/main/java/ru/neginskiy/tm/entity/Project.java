@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 public class Project extends AbstractEntity {
 
-    private String name;
+    private String name = "NEW PROJECT";
     private String description;
     private Date dateBegin;
     private Date dateEnd;

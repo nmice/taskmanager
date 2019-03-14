@@ -36,7 +36,8 @@ public class UserRepository extends AbstractRepository<User> {
         return null;
     }
 
-    public @Nullable boolean isRegistredLogin(@NotNull String login) {
+    public boolean isRegistredLogin(@Nullable String login) {
+        if (login == null) return false;
         List<User> userList = getAll();
         for (User userInList : userList) {
             if (userInList.getLogin().equals(login)) {

@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 public class Task extends AbstractEntity {
 
-    private String name;
+    private String name = "NEW TASK";
     private String description;
     private Date dateBegin;
     private Date dateEnd;
