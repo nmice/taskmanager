@@ -1,5 +1,8 @@
 package ru.neginskiy.tm.servlets;
 
+import ru.neginskiy.tm.repository.TaskRepository;
+
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,9 @@ import java.io.IOException;
 
 @WebServlet("/task-form")
 public class TaskFormServlet extends HttpServlet {
+
+    @Inject
+    TaskRepository taskRepository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

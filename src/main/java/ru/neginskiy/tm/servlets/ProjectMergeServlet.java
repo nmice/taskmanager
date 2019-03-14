@@ -3,6 +3,7 @@ package ru.neginskiy.tm.servlets;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.repository.ProjectRepository;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,9 @@ import java.util.Date;
 @WebServlet("/project-merge")
 public class ProjectMergeServlet extends HttpServlet {
 
+    @Inject
+    ProjectRepository projectRepository;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mergeProjectByRequest(req);
@@ -22,7 +26,6 @@ public class ProjectMergeServlet extends HttpServlet {
     }
 
     private void mergeProjectByRequest(HttpServletRequest request) {
-        ProjectRepository projectRepository = ProjectRepository.getInstance();
         Project project;
 
         String id = request.getParameter("id");

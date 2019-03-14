@@ -4,27 +4,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.User;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class UserRepository extends AbstractRepository<User> {
-
-    private static UserRepository instance;
-
-    private UserRepository() {
-    }
-
-    public static UserRepository getInstance() {
-        if (instance == null) {
-            User demoUser = new User();
-            demoUser.setId("UID");
-            demoUser.setLogin("test");
-            demoUser.setPassword("test");
-            instance = new UserRepository();
-            instance.merge(demoUser);
-            return instance;
-        }
-        return instance;
-    }
 
     public @Nullable User findUser(@NotNull String login, @NotNull String password) {
         List<User> userList = getAll();

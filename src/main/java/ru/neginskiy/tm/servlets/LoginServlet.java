@@ -3,6 +3,7 @@ package ru.neginskiy.tm.servlets;
 import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.repository.UserRepository;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +17,11 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+    @Inject
+    UserRepository userRepository;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserRepository userRepository = UserRepository.getInstance();
 
         String username = req.getParameter("username");
         String name = req.getParameter("name");
