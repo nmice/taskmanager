@@ -5,9 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.neginskiy</groupId>
-    <artifactId>task-manager</artifactId>
+    <artifactId>taskmanager</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <modules>
+        <module>task-manager</module>
+        <module>client</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>task-manager</name>
 
