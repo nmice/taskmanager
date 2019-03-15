@@ -26,7 +26,7 @@ public class UserEndpoint {
 
     @WebMethod
     public User findUser(@WebParam(name = "login") String login,
-                         @WebParam(name = "passwordHash") String passwordHash) {
-        return userRepository.findUser(login, passwordHash);
+                         @WebParam(name = "password") String password) {
+        return userRepository.findUser(login, password);
     }
 }

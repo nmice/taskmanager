@@ -28,7 +28,7 @@ public class TaskEndpoint {
     }
 
     @WebMethod
-    public List<Task> taskGetAllByUserId() {
+    public List<Task> taskGetAll() {
         return taskRepository.getAll();
     }
 

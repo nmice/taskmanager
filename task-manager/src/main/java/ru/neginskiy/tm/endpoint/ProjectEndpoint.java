@@ -26,7 +26,7 @@ public class ProjectEndpoint {
     }
 
     @WebMethod
-    public List<Project> projectGetAllByUserId() {
+    public List<Project> projectGetAll() {
         return projectRepository.getAll();
     }
 
