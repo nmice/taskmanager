@@ -1,4 +1,36 @@
 -------------------------------------------------------------------------------
 Test set: ru.neginskiy.tm.endpoint.TaskEndpointTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.329 s - in ru.neginskiy.tm.endpoint.TaskEndpointTest
+Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in ru.neginskiy.tm.endpoint.TaskEndpointTest
+testTaskDelete(ru.neginskiy.tm.endpoint.TaskEndpointTest)  Time elapsed: 0 s  <<< ERROR!
+javax.xml.ws.WebServiceException: 
+Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
+	http://localhost:8080/task-manager/UserEndpoint?wsdl.
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+
+testTaskGetAll(ru.neginskiy.tm.endpoint.TaskEndpointTest)  Time elapsed: 0 s  <<< ERROR!
+javax.xml.ws.WebServiceException: 
+Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
+	http://localhost:8080/task-manager/UserEndpoint?wsdl.
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+
+testTaskMerge(ru.neginskiy.tm.endpoint.TaskEndpointTest)  Time elapsed: 0 s  <<< ERROR!
+javax.xml.ws.WebServiceException: 
+Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
+	http://localhost:8080/task-manager/UserEndpoint?wsdl.
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+
+testTaskGetById(ru.neginskiy.tm.endpoint.TaskEndpointTest)  Time elapsed: 0 s  <<< ERROR!
+javax.xml.ws.WebServiceException: 
+Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
+	http://localhost:8080/task-manager/UserEndpoint?wsdl.
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
+	at ru.neginskiy.tm.endpoint.TaskEndpointTest.<init>(TaskEndpointTest.java:14)
+

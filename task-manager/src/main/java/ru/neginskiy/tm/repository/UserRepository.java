@@ -10,24 +10,30 @@ import java.util.List;
 @ApplicationScoped
 public class UserRepository extends AbstractRepository<User> {
 
-    public @Nullable User findUser(@NotNull String login, @NotNull String password) {
-        List<User> userList = getAll();
-        for (User userInList : userList) {
-            if (userInList.getLogin().equals(login) && userInList.getPassword().equals(password)) {
-                return userInList;
-            }
-        }
-        return null;
+    @Override
+    public @Nullable User getById(@NotNull String id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public @NotNull List<User> getAll() {
+        return entityManager
+                .createQuery("from User u", User.class)
+                .getResultList();
     }
 
     public boolean isRegistredLogin(@Nullable String login) {
-        if (login == null) return false;
-        List<User> userList = getAll();
-        for (User userInList : userList) {
-            if (userInList.getLogin().equals(login)) {
-                return true;
-            }
-        }
-        return false;
+        return entityManager
+                .createQuery("from User u where u.login=:paramLogin", User.class)
+                .setParameter("paramLogin", login)
+                .getSingleResult() != null;
+    }
+
+    public @Nullable User findUser(@NotNull String login, @NotNull String password) {
+        return entityManager
+                .createQuery("from User u where u.login=:paramLogin and u.passwordHash=:paramPassword", User.class)
+                .setParameter("paramLogin", login)
+                .setParameter("paramPassword", password)
+                .getSingleResult();
     }
 }

@@ -12,5 +12,5 @@ public interface IRepository<T extends AbstractEntity> {
 
     List<T> getAll();
 
-    T delete(String id);
+    void delete(T entity);
 }

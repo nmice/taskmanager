@@ -30,7 +30,6 @@ public class TaskEndpointTest {
     private static final Task EXPECTED_TASK = new Task();
     private static final String TASK_ID = "testJUnitTaskId";
 
-
     @Before
     public void before() {
         USER.setId(USER_ID);
