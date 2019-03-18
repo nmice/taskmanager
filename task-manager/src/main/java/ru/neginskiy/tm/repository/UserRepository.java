@@ -5,8 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.User;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class UserRepository extends AbstractRepository<User> {
 
@@ -31,7 +33,7 @@ public class UserRepository extends AbstractRepository<User> {
 
     public @Nullable User findUser(@NotNull String login, @NotNull String password) {
         return entityManager
-                .createQuery("from User u where u.login=:paramLogin and u.passwordHash=:paramPassword", User.class)
+                .createQuery("from User u where u.login=:paramLogin and u.password=:paramPassword", User.class)
                 .setParameter("paramLogin", login)
                 .setParameter("paramPassword", password)
                 .getSingleResult();

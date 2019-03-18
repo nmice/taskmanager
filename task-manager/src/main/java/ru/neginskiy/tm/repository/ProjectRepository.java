@@ -5,8 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Project;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class ProjectRepository extends AbstractRepository<Project> {
 

@@ -5,8 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.entity.Task;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @ApplicationScoped
 public class TaskRepository extends AbstractRepository<Task> {
 
@@ -32,9 +34,9 @@ public class TaskRepository extends AbstractRepository<Task> {
         }
     }
 
-    public List<Task> getByProjectId(@NotNull String projectId) {
+    public @NotNull List<Task> getByProjectId(@NotNull String projectId) {
         return entityManager
-                .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
+                .createQuery("from Task t where t.projectId=:paramProjectId", Task.class)
                 .setParameter("paramProjectId", projectId)
                 .getResultList();
     }
