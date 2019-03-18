@@ -24,19 +24,9 @@ public class TaskRepository extends AbstractRepository<Task> {
                 .getResultList();
     }
 
-    public void deleteByProjectId(@NotNull String projectId) {
-        final List<Task> taskList = entityManager
-                .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
-                .setParameter("paramProjectId", projectId)
-                .getResultList();
-        for (Task task : taskList) {
-            entityManager.remove(task);
-        }
-    }
-
     public @NotNull List<Task> getByProjectId(@NotNull String projectId) {
         return entityManager
-                .createQuery("from Task t where t.projectId=:paramProjectId", Task.class)
+                .createQuery("from Task t where t.project.id=:paramProjectId", Task.class)
                 .setParameter("paramProjectId", projectId)
                 .getResultList();
     }

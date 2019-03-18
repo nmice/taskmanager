@@ -18,7 +18,8 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements IR
     }
 
     @Override
-    public void delete(@NotNull T entity) {
+    public void deleteById(@NotNull String id) {
+        T entity = getById(id);
         entityManager.remove(entity);
     }
 }

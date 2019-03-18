@@ -51,7 +51,7 @@ public class StartServlet extends HttpServlet {
         demoTask.setDescription("DESCRIPTION");
         demoTask.setDateBegin(new Date());
         demoTask.setDateEnd(new Date(System.currentTimeMillis() + 1_000_000_000));
-        demoTask.setProjectId("PID");
+        demoTask.setProject(demoProject);
         taskRepository.merge(demoTask);
 
         HttpSession activeSession = req.getSession();

@@ -20,7 +20,7 @@ public class TaskDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("id") != null) {
             String id = req.getParameter("id");
-            taskRepository.delete(taskRepository.getById(id));
+            taskRepository.deleteById(id);
         }
         resp.sendRedirect(req.getContextPath() + "/task-list?projectId="+req.getParameter("projectId"));
     }

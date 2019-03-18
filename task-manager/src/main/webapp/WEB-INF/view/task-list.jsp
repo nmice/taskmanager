@@ -47,10 +47,10 @@
                         <fmt:formatDate value="${task.getDateEnd()}" pattern="dd-MM-yyyy"/>
                     </c:if>
                     </td>
-                    <td><a href="task-form?id=${task.getId()}&projectId=${task.getProjectId()}">
+                    <td><a href="task-form?id=${task.getId()}&projectId=${task.getProject().getId()}">
                         <button>EDIT</button>
                     </a></td>
-                    <td><a href="task-delete?id=${task.getId()}&projectId=${task.getProjectId()}">
+                    <td><a href="task-delete?id=${task.getId()}&projectId=${task.getProject().getId()}">
                         <button>DELETE</button>
                     </a></td>
                 </tr>

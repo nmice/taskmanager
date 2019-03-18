@@ -1,6 +1,8 @@
 package ru.neginskiy.tm.servlets;
 
+import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
+import ru.neginskiy.tm.repository.ProjectRepository;
 import ru.neginskiy.tm.repository.TaskRepository;
 
 import javax.inject.Inject;
@@ -18,6 +20,8 @@ public class TaskMergeServlet extends HttpServlet {
 
     @Inject
     TaskRepository taskRepository;
+    @Inject
+    ProjectRepository projectRepository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -64,10 +68,11 @@ public class TaskMergeServlet extends HttpServlet {
         task.setDateEnd(dateEnd);
 
         String projectId = request.getParameter("projectId");
+        Project project;
         if (projectId == null || projectId.isEmpty()) {
-            projectId = task.getProjectId();
+            project = task.getProject();
         }
-        task.setProjectId(projectId);
+        task.setProject(projectRepository.getById(projectId));
 
         taskRepository.merge(task);
     }

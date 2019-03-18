@@ -15,18 +15,15 @@ import java.io.IOException;
 public class ProjectDeleteServlet extends HttpServlet {
 
     @Inject
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     @Inject
-    TaskRepository taskRepository;
+    private TaskRepository taskRepository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         if (req.getParameter("id") != null) {
             String id = req.getParameter("id");
-            taskRepository.deleteByProjectId(id);
-            projectRepository.delete(projectRepository.getById(id));
+            projectRepository.deleteById(id);
         }
         resp.sendRedirect(req.getContextPath() + "/project-list");
     }

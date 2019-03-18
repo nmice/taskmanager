@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,7 +19,9 @@ public class Task extends AbstractEntity {
     private String description;
     private Date dateBegin;
     private Date dateEnd;
-    private String projectId;
+    @ManyToOne
+    private Project project;
+    /*private String projectId;*/
 
     @Override
     public String toString() {

@@ -33,7 +33,7 @@ public class TaskEndpoint {
     }
 
     @WebMethod
-    public void taskDelete(@WebParam(name = "task") Task task) {
-        taskRepository.delete(task);
+    public void taskDelete(@WebParam(name = "id") String id) {
+        taskRepository.deleteById(id);
     }
 }
