@@ -22,8 +22,6 @@
 
 <h4>[api]</h4>
 
-<li> ServiceLocator - интерфейс доступа к сервисам</li>
-
 <h4>[api.repository]</h4>
 
 <li> IProjectRepository - интерфейс репозитория проектов</li>
@@ -43,14 +41,6 @@
 <li> ITaskService - интерфейс логики операций над задачами</li>
 
 <li> IUserService - интерфейс логики операций над пользователями</li>
-
-<h4>[controller]</h4>
-
-<li> Bootstrap - класс начальной загрузки программы на сервере</li>
-
-<h4>[dto]</h4>
-
-<li> Domain - класс транспортного объекта для сериализации</li>
 
 <h4>[endpoint]</h4>
 
@@ -102,6 +92,7 @@
 
 <h4>Application - основной класс на сервере</h4>
 
+
 <h3>- client -</h3>
 
 <h4>[api]</h4>
@@ -111,18 +102,6 @@
 <h4>[command]</h4>
 
 <li> AbstractCommand - абстрактный класс команды</li>
-
-<li> DataBinLoadCommand - класс команды загрузки данных из dat-файла</li>
-
-<li> DataBinSaveCommand - класс команды сохранения данных в dat-файл</li>
-
-<li> DataJsonLoadCommand - класс команды загрузки данных из json-файла</li>
-
-<li> DataJsonSaveCommand - класс команды сохранения данных в json-файл</li>
-
-<li> DataXmlLoadCommand - класс команды загрузки данных из xml-файла</li>
-
-<li> DataXmlSaveCommand - класс команды сохранения данных в xml-файл</li>
 
 <li> ExitCommand - класс команды выхода</li>
 
@@ -157,10 +136,6 @@
 <h4>[endpoint]</h4>
 
 <li> Классы, сгенерированные с помощью Endpoint</li>
-
-<h4>[producer]</h4>
-
-<li> EndpointsProducer - утильный класс для создания Endpoint</li>
 
 <h4>[util]</h4>
 
