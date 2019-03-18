@@ -26,7 +26,7 @@ public class ProjectDeleteServlet extends HttpServlet {
         if (req.getParameter("id") != null) {
             String id = req.getParameter("id");
             taskRepository.deleteByProjectId(id);
-            projectRepository.delete(id);
+            projectRepository.delete(projectRepository.getById(id));
         }
         resp.sendRedirect(req.getContextPath() + "/project-list");
     }

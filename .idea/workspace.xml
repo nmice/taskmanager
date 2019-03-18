@@ -1,145 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="40b4442a-76d9-4e37-af48-9895ba31e517" name="Default Changelist" comment="">
+    <list default="true" id="f867d8b0-7c89-497e-a9e5-a9b86aa6c443" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/test/java/ru/neginskiy/tm/endpoint/TaskEndpointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/ru/neginskiy/tm/endpoint/TaskEndpointTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/surefire-reports/TEST-ru.neginskiy.tm.endpoint.ProjectEndpointTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/surefire-reports/TEST-ru.neginskiy.tm.endpoint.ProjectEndpointTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/surefire-reports/TEST-ru.neginskiy.tm.endpoint.TaskEndpointTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/surefire-reports/TEST-ru.neginskiy.tm.endpoint.TaskEndpointTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/surefire-reports/TEST-ru.neginskiy.tm.endpoint.UserEndpointTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/surefire-reports/TEST-ru.neginskiy.tm.endpoint.UserEndpointTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/surefire-reports/ru.neginskiy.tm.endpoint.ProjectEndpointTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/surefire-reports/ru.neginskiy.tm.endpoint.ProjectEndpointTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/surefire-reports/ru.neginskiy.tm.endpoint.TaskEndpointTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/surefire-reports/ru.neginskiy.tm.endpoint.TaskEndpointTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/surefire-reports/ru.neginskiy.tm.endpoint.UserEndpointTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/surefire-reports/ru.neginskiy.tm.endpoint.UserEndpointTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/test-classes/ru/neginskiy/tm/endpoint/TaskEndpointTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/test-classes/ru/neginskiy/tm/endpoint/TaskEndpointTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/api/IRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/api/IRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/AbstractEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/AbstractEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/AbstractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/AbstractRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/ProjectDeleteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/ProjectDeleteServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskDeleteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskDeleteServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskmanager.iml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/client/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/server/target/" />
     <ignored path="$PROJECT_DIR$/task-manager/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="task-manager" />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/resources/META-INF/persistence.xml">
+    <leaf>
+      <file leaf-file-name="TaskEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+            <state relative-caret-position="159">
+              <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#783#784#0" expanded="true" />
+                <element signature="e#831#832#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/User.java">
+      <file leaf-file-name="ProjectEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="7" />
+            <state relative-caret-position="191">
+              <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#459#460#0" expanded="true" />
+                <element signature="e#507#508#0" expanded="true" />
+                <element signature="e#835#836#0" expanded="true" />
+                <element signature="e#879#880#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Task.java">
+      <file leaf-file-name="UserEndpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/UserEndpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+            <state relative-caret-position="165">
+              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="TaskDeleteServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskDeleteServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectDeleteServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/ProjectDeleteServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="128">
+              <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskListServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskListServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/AbstractRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="24">
               <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#483#484#0" expanded="true" />
-                <element signature="e#526#527#0" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
-                <element signature="e#823#824#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/api/IRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProjectRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="342">
               <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#448#449#0" expanded="true" />
-                <element signature="e#508#509#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="TaskRepository.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-              <folding>
-                <element signature="e#335#336#0" expanded="true" />
-                <element signature="e#395#396#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/UserRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+            <state relative-caret-position="365">
+              <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1064#1065#0" expanded="true" />
-                <element signature="e#1121#1122#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Project.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/AbstractEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -170,59 +162,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/util/ServletFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/repository/UserRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/LoginServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/ProjectDeleteServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/ProjectListServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/ProjectMergeServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/TaskDeleteServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/TaskFormServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/TaskListServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/TaskMergeServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/servlets/StartServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/endpoint/DataEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/endpoint/AbstractEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/endpoint/UserEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/task-list.jsp" />
-        <option value="$PROJECT_DIR$/server/pom.xml" />
-        <option value="$PROJECT_DIR$/task-manager/pom.xml" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/ProjectCreateCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/ProjectDeleteCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/ProjectEditCommand.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/ProjectListCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/App.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/TaskDeleteCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/TaskListCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/TaskEditCommand.java" />
         <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/TaskCreateCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/UserCreateCommand.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/command/UserLoginCommand.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/UserEndpoint.java" />
-        <option value="$PROJECT_DIR$/client/src/main/java/ru/neginskiy/tm/controller/Bootstrap.java" />
-        <option value="$PROJECT_DIR$/client/src/test/java/ru/neginskiy/tm/endpoint/UserEndpointTest.java" />
-        <option value="$PROJECT_DIR$/client/pom.xml" />
-        <option value="$PROJECT_DIR$/client/src/test/java/ru/neginskiy/tm/endpoint/ProjectEndpointTest.java" />
-        <option value="$PROJECT_DIR$/client/src/test/java/ru/neginskiy/tm/endpoint/TaskEndpointTest.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/User.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Task.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/Project.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/entity/AbstractEntity.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/api/IRepository.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/AbstractRepository.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/UserRepository.java" />
+        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java" />
+        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskDeleteServlet.java" />
+        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/ProjectDeleteServlet.java" />
         <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java" />
-        <option value="$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java" />
       </list>
     </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
@@ -246,21 +198,20 @@
       <select />
     </treeState>
   </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="853" />
     <option name="width" value="1074" />
     <option name="height" value="1047" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -301,16 +252,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="tm" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="task-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tm" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
+              <item name="endpoint" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
@@ -321,25 +263,13 @@
               <item name="tm" type="462c0819:PsiDirectoryNode" />
               <item name="repository" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="task-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="task-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -384,9 +314,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="ProjectEndpointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
@@ -396,11 +323,20 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="ru.neginskiy.tm.endpoint" />
       <option name="MAIN_CLASS_NAME" value="ru.neginskiy.tm.endpoint.ProjectEndpointTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
     </configuration>
     <configuration name="TaskEndpointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
@@ -410,11 +346,20 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="ru.neginskiy.tm.endpoint" />
       <option name="MAIN_CLASS_NAME" value="ru.neginskiy.tm.endpoint.TaskEndpointTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <module name="taskmanager" />
@@ -425,44 +370,15 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" />
       <option name="WORKING_DIRECTORY" />
-      <method v="2">
+      <method>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="taskmanager" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="JUnit.ProjectEndpointTest" />
+      <item itemvalue="JUnit.TaskEndpointTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TaskEndpointTest" />
@@ -476,11 +392,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="40b4442a-76d9-4e37-af48-9895ba31e517" name="Default Changelist" comment="" />
-      <created>1552466875758</created>
+      <changelist id="f867d8b0-7c89-497e-a9e5-a9b86aa6c443" name="Default" comment="" />
+      <created>1552765574180</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1552466875758</updated>
+      <updated>1552765574180</updated>
+      <workItem from="1552765578290" duration="1139000" />
     </task>
     <servers />
   </component>
@@ -492,75 +409,55 @@
       <configuration name="TaskEndpointTest" configurationId="JUnit" />
     </history-entry>
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="792000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" visible="true" weight="0.22844176" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="right" id="CDI" weight="0.32980332" />
+      <window_info id="Capture Tool" />
+      <window_info id="Designer" />
+      <window_info anchor="right" id="Database" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Designer" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="DB Execution Console" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="JSF" weight="0.32980332" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info id="Image Layers" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3294893" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info id="Persistence" sideWeight="0.50082374" side_tool="true" weight="0.24962178" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49917626" visible="true" weight="0.24962178" />
+      <window_info anchor="right" id="Bean Validation" weight="0.32980332" />
+      <window_info id="Web" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info active="true" id="Favorites" sideWeight="0.50082374" side_tool="true" visible="true" weight="0.24962178" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" visible="true" weight="0.24946696" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="DB Browser" order="8" weight="0.32995737" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jsp" />
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/ru/neginskiy/tm/endpoint/DataEndpoint.java" />
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/api/IProjectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/webapp/WEB-INF/view/task-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskMergeServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/api/ITaskService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/AbstractEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -630,9 +527,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="12" column="78" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -654,40 +548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="17" column="80" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/UserEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#791#792#0" expanded="true" />
-            <element signature="e#839#840#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#459#460#0" expanded="true" />
-            <element signature="e#507#508#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -740,9 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1394">
           <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -750,9 +607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="86" selection-start-line="10" selection-start-column="86" selection-end-line="10" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -761,9 +615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,9 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -781,9 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -857,43 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/AbstractRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#483#484#0" expanded="true" />
-            <element signature="e#526#527#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#823#824#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#335#336#0" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#508#509#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/UserRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -902,6 +710,107 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1064#1065#0" expanded="true" />
             <element signature="e#1121#1122#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/ru/neginskiy/tm/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/ru/neginskiy/tm/service/DataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/ProjectRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/AbstractRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/TaskEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
+            <element signature="e#831#832#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/ProjectEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#459#460#0" expanded="true" />
+            <element signature="e#507#508#0" expanded="true" />
+            <element signature="e#835#836#0" expanded="true" />
+            <element signature="e#879#880#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/endpoint/UserEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskDeleteServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/ProjectDeleteServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/servlets/TaskListServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-manager/src/main/java/ru/neginskiy/tm/repository/TaskRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

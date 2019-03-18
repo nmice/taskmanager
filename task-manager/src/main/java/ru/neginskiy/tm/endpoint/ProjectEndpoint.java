@@ -31,7 +31,7 @@ public class ProjectEndpoint {
     }
 
     @WebMethod
-    public Project projectDelete(@WebParam(name = "id") String id) {
-        return projectRepository.delete(id);
+    public void projectDelete(@WebParam(name = "id") Project project) {
+        projectRepository.delete(project);
     }
 }
