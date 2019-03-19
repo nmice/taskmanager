@@ -30,7 +30,7 @@ public class StartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-/*        User demoUser = new User();
+        User demoUser = new User();
         demoUser.setId("UID");
         demoUser.setLogin("test");
         demoUser.setPassword("test");
@@ -51,7 +51,7 @@ public class StartServlet extends HttpServlet {
         demoTask.setDateBegin(new Date());
         demoTask.setDateEnd(new Date(System.currentTimeMillis() + 1_000_000_000));
         demoTask.setProject(demoProject);
-        taskService.merge(demoTask);*/
+        taskService.merge(demoTask);
 
         HttpSession activeSession = req.getSession();
         String message;

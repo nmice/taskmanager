@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
+
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
@@ -8,6 +8,7 @@ import ru.neginskiy.tm.entity.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 
 @Transactional
 @ApplicationScoped

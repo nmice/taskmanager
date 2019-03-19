@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
@@ -8,6 +8,7 @@ import ru.neginskiy.tm.entity.Task;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 
