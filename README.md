@@ -12,9 +12,11 @@
 
 <li> Hibernate (5.3.8.Final)</li>
 
-<li> Weld SE (Core) (3.1.0.Final)</li>
+<li> WildFly (2.0.1.Final)</li>
 
 <li> Apache DeltaSpike (1.9.0)</li>
+
+<li> WildFly (2.0.1.Final)</li>
 
 <h3>Структура проекта</h3>
 
@@ -26,29 +28,15 @@
 
 <li> IProjectRepository - интерфейс репозитория проектов</li>
 
-<li> ISessionRepository - интерфейс репозитория сессий<li>
-
 <li> ITaskRepository - интерфейс репозитория задач</li>
 
 <li> IUserRepository - интерфейс репозитория пользователей</li>
-
-<h4>[api.service]</h4>
-
-<li> IProjectService - интерфейс логики операций над проектами</li>
-
-<li> ISessionService - интерфейс логики операций над сессиями</li>
-
-<li> ITaskService - интерфейс логики операций над задачами</li>
-
-<li> IUserService - интерфейс логики операций над пользователями</li>
 
 <h4>[endpoint]</h4>
 
 <li> DataEndpoint - класс для сетевого доступа к сервисам сохранения и загрузки</li>
 
 <li> ProjectEndpoint - класс для сетевого доступа к сервисам проектов</li>
-
-<li> SessionEndpoint - класс для сетевого доступа к сервисам cессий</li>
 
 <li> TaskEndpoint - класс для сетевого доступа к сервисам задач</li>
 
@@ -60,38 +48,47 @@
 
 <li> Project - класс проект</li>
 
-<li> Session - класс сессия</li>
-
 <li> Task - класс задача</li>
 
 <li> User - класс пользователь</li>
 
-<h4>[error]</h4>
-
-<li> UncorrectSessionException - класс ошибки сессии</li>
-
 <h4>[service]</h4>
 
-<li> DataService - класс для сохранения и загрузки данных пользователя</li>
-
 <li> ProjectService - класс для выполнения операций над проектами</li>
-
-<li> SessionService - класс для выполнения операций над сессиями</li>
 
 <li> TaskService - класс для выполнения операций над задачами</li>
 
 <li> UserService - класс для выполнения операций над пользователями</li>
 
+<h4>[servlets]</h4>
+
+<li> LoginServlet - сервлет логики обработки данных для авторизации/создания пользователя</li>
+
+<li> LogoutServlet - сервлет логики завершения сеанса</li>
+
+<li> ProjectDeleteServlet - сервлет логики удаления проекта</li>
+
+<li> ProjectFormServlet - сервлет перенаправления на форму создания/редактирования проекта</li>
+
+<li> ProjectListServlet - сервлет отображения проектов</li>
+
+<li> ProjectMergeServlet - сервлет добавления/редактирования проекта</li>
+
+<li> StartServlet - стартовый сервлет</li>
+
+<li> TaskDeleteServlet - сервлет логики удаления задачи</li>
+
+<li> TaskFormServlet - сервлет перенаправления на форму создания/редактирования задачи</li>
+
+<li> TaskListServlet - сервлет отображения задач</li>
+
+<li> TaskMergeServlet - сервлет добавления/редактирования задачи</li>
+
 <h4>[util]</h4>
-
-<li> AppConfig - утильный класс со static переменными, хранящих значения из config.properties</li>
-
-<li> HibernateSessionFactory - утильный класс для создания EntityManagerFactory</li>
 
 <li> EntityManagerProducer - утильный класс для создания EntityManager</li>
 
-<h4>Application - основной класс на сервере</h4>
-
+<li> ServletFilter - утильный класс для фильтра страниц при заходе без авторизации</li>
 
 <h3>- client -</h3>
 
@@ -148,7 +145,3 @@
 <h3>Сборка проекта</h3>
 
 <li> mvn clean install</li>
-
-<h3>Запуск</h3>
-
-<li> java -jar ./taskmanager.jar</li>
