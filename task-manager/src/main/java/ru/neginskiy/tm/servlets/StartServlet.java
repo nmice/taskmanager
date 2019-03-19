@@ -3,9 +3,9 @@ package ru.neginskiy.tm.servlets;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
-import ru.neginskiy.tm.repository.UserRepository;
+import ru.neginskiy.tm.service.ProjectService;
+import ru.neginskiy.tm.service.TaskService;
+import ru.neginskiy.tm.service.UserService;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -18,24 +18,23 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 
-
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 
     @Inject
-    UserRepository userRepository;
+    private TaskService taskService;
     @Inject
-    ProjectRepository projectRepository;
+    private ProjectService projectService;
     @Inject
-    TaskRepository taskRepository;
+    UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User demoUser = new User();
+/*        User demoUser = new User();
         demoUser.setId("UID");
         demoUser.setLogin("test");
         demoUser.setPassword("test");
-        userRepository.merge(demoUser);
+        userService.merge(demoUser);
 
         Project demoProject = new Project();
         demoProject.setId("PID");
@@ -43,7 +42,7 @@ public class StartServlet extends HttpServlet {
         demoProject.setDescription("DESCRIPTION");
         demoProject.setDateBegin(new Date());
         demoProject.setDateEnd(new Date(System.currentTimeMillis() + 1_000_000_000));
-        projectRepository.merge(demoProject);
+        projectService.merge(demoProject);
 
         Task demoTask = new Task();
         demoTask.setId("TID");
@@ -52,7 +51,7 @@ public class StartServlet extends HttpServlet {
         demoTask.setDateBegin(new Date());
         demoTask.setDateEnd(new Date(System.currentTimeMillis() + 1_000_000_000));
         demoTask.setProject(demoProject);
-        taskRepository.merge(demoTask);
+        taskService.merge(demoTask);*/
 
         HttpSession activeSession = req.getSession();
         String message;

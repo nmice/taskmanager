@@ -10,8 +10,8 @@ import ru.neginskiy.tm.entity.User;
 @Repository
 public interface IUserRepository extends FullEntityRepository<User, String> {
 
-    @Query("FROM User u where u.login = ?1 and u.passwordHash = ?2")
-    @Nullable User findUser(@NotNull String login, @NotNull String passwordHash);
+    @Query("FROM User u where u.login = ?1 and u.password = ?2")
+    @Nullable User findUser(@NotNull String login, @NotNull String password);
 
     @Query("FROM User u where u.login = ?1")
     @Nullable User getByLogin(@NotNull String login);

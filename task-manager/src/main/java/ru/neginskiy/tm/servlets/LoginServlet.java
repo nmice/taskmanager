@@ -1,7 +1,8 @@
 package ru.neginskiy.tm.servlets;
 
+import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.UserRepository;
+import ru.neginskiy.tm.service.UserService;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -11,14 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.io.IOException;
 
-
+@Transactional
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     @Inject
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 
         if (username == null) {
             //is a create user page:
-            if(userRepository.isRegistredLogin(name)){
+            if (userService.isRegistredLogin(name)) {
                 req.setAttribute("loginMessage", "This login is registred now!");
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
                 requestDispatcher.forward(req, resp);
@@ -37,20 +39,20 @@ public class LoginServlet extends HttpServlet {
             User user = new User();
             user.setLogin(name);
             user.setPassword(password);
-            userRepository.merge(user);
+            userService.merge(user);
             req.setAttribute("loginMessage", "Please login");
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
             requestDispatcher.forward(req, resp);
         } else {
             //is a login page:
-            User user = userRepository.findUser(username, password);
+            User user = userService.findUser(username, password);
             if (user == null) {
                 req.setAttribute("loginMessage", "User not found!");
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/login.jsp");
                 requestDispatcher.forward(req, resp);
             } else {
                 HttpSession session = req.getSession();
-                session.setAttribute("userId",user.getId());
+                session.setAttribute("userId", user.getId());
                 resp.sendRedirect(req.getContextPath() + "/project-list");
             }
         }

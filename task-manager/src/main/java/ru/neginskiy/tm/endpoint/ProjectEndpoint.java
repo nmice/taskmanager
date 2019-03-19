@@ -1,7 +1,7 @@
 package ru.neginskiy.tm.endpoint;
 
+import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
-import ru.neginskiy.tm.repository.ProjectRepository;
 
 import javax.inject.Inject;
 import javax.jws.WebMethod;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ProjectEndpoint {
 
     @Inject
-    private ProjectRepository projectRepository;
+    private IProjectRepository projectRepository;
 
     @WebMethod
     public void projectMerge(@WebParam(name = "project") Project project) {
@@ -22,16 +22,16 @@ public class ProjectEndpoint {
 
     @WebMethod
     public Project projectGetById(@WebParam(name = "id") String id) {
-        return projectRepository.getById(id);
+        return projectRepository.findBy(id);
     }
 
     @WebMethod
     public List<Project> projectGetAll() {
-        return projectRepository.getAll();
+        return projectRepository.findAll();
     }
 
     @WebMethod
     public void projectDelete(@WebParam(name = "id") String id) {
-        projectRepository.deleteById(id);
+        projectRepository.remove(projectRepository.findBy(id));
     }
 }

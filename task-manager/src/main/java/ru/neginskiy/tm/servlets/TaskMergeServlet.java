@@ -2,8 +2,8 @@ package ru.neginskiy.tm.servlets;
 
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
+import ru.neginskiy.tm.service.ProjectService;
+import ru.neginskiy.tm.service.TaskService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,14 +19,14 @@ import java.util.Date;
 public class TaskMergeServlet extends HttpServlet {
 
     @Inject
-    TaskRepository taskRepository;
+    private TaskService taskService;
     @Inject
-    ProjectRepository projectRepository;
+    private ProjectService projectService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mergeTaskByRequest(req);
-        resp.sendRedirect(req.getContextPath() + "/task-list?projectId="+req.getParameter("projectId"));
+        resp.sendRedirect(req.getContextPath() + "/task-list?projectId=" + req.getParameter("projectId"));
     }
 
     private void mergeTaskByRequest(HttpServletRequest request) {
@@ -36,7 +36,7 @@ public class TaskMergeServlet extends HttpServlet {
         if (id == null || id.isEmpty()) {
             task = new Task();
         } else {
-            task = taskRepository.getById(id);
+            task = taskService.getById(id);
         }
 
         String name = request.getParameter("name");
@@ -72,8 +72,8 @@ public class TaskMergeServlet extends HttpServlet {
         if (projectId == null || projectId.isEmpty()) {
             project = task.getProject();
         }
-        task.setProject(projectRepository.getById(projectId));
+        task.setProject(projectService.getById(projectId));
 
-        taskRepository.merge(task);
+        taskService.merge(task);
     }
 }

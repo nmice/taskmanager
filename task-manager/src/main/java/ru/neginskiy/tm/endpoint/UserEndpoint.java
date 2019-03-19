@@ -1,7 +1,7 @@
 package ru.neginskiy.tm.endpoint;
 
+import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.entity.User;
-import ru.neginskiy.tm.repository.UserRepository;
 
 import javax.inject.Inject;
 import javax.jws.WebMethod;
@@ -12,7 +12,7 @@ import javax.jws.WebService;
 public class UserEndpoint {
 
     @Inject
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @WebMethod
     public void userMerge(@WebParam(name = "user") User user) {
@@ -21,7 +21,7 @@ public class UserEndpoint {
 
     @WebMethod
     public boolean isRegistredLogin(@WebParam(name = "login") String login) {
-        return userRepository.isRegistredLogin(login);
+        return userRepository.getByLogin(login)!=null;
     }
 
     @WebMethod

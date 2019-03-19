@@ -21,5 +21,17 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-api:8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.mail:javax.mail:1.6.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.core:deltaspike-core-api:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.core:deltaspike-core-impl:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.cdictrl:deltaspike-cdictrl-api:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.cdictrl:deltaspike-cdictrl-weld:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.modules:deltaspike-data-module-api:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.modules:deltaspike-partial-bean-module-api:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.modules:deltaspike-jpa-module-api:1.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-data-module-impl:1.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-partial-bean-module-impl:1.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-proxy-module-api:1.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-proxy-module-impl-asm:1.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-jpa-module-impl:1.9.0" level="project" />
   </component>
 </module>

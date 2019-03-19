@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.servlets;
 
-import ru.neginskiy.tm.repository.ProjectRepository;
+import ru.neginskiy.tm.service.ProjectService;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -15,11 +15,11 @@ import java.io.IOException;
 public class ProjectListServlet extends HttpServlet {
 
     @Inject
-    ProjectRepository projectRepository;
+    private ProjectService projectService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("projects", projectRepository.getAll());
+        req.setAttribute("projects", projectService.getAll());
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-list.jsp");
         requestDispatcher.forward(req, resp);

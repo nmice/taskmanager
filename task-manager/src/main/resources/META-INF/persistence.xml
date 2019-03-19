@@ -4,6 +4,7 @@
                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
     <persistence-unit name="DataSourceEx" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/DataSourceEx</jta-data-source>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

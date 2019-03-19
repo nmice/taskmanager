@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ITaskRepository extends FullEntityRepository<Task, String> {
 
-    @Query("FROM Task t where t.user.id = ?1")
-    @NotNull List<Task> getAllByUserId(@NotNull String userId);
+    @Query("FROM Task t where t.project.id = ?1")
+    @NotNull List<Task> getAllByProjectId(@NotNull String projectId);
 }

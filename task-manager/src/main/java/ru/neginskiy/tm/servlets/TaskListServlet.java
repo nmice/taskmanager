@@ -1,7 +1,6 @@
 package ru.neginskiy.tm.servlets;
 
-import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
+import ru.neginskiy.tm.service.TaskService;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -16,14 +15,14 @@ import java.io.IOException;
 public class TaskListServlet extends HttpServlet {
 
     @Inject
-    TaskRepository taskRepository;
+    private TaskService taskService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String projectId = req.getParameter("projectId");
         req.setAttribute("projectId", projectId);
 
-        req.setAttribute("tasks", taskRepository.getByProjectId(projectId));
+        req.setAttribute("tasks", taskService.getAllByProjectId(projectId));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/task-list.jsp");
         requestDispatcher.forward(req, resp);

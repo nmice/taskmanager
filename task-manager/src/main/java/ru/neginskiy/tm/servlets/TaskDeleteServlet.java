@@ -1,6 +1,6 @@
 package ru.neginskiy.tm.servlets;
 
-import ru.neginskiy.tm.repository.TaskRepository;
+import ru.neginskiy.tm.service.TaskService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -14,13 +14,13 @@ import java.io.IOException;
 public class TaskDeleteServlet extends HttpServlet {
 
     @Inject
-    TaskRepository taskRepository;
+    private TaskService taskService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("id") != null) {
             String id = req.getParameter("id");
-            taskRepository.deleteById(id);
+            taskService.deleteById(id);
         }
         resp.sendRedirect(req.getContextPath() + "/task-list?projectId="+req.getParameter("projectId"));
     }

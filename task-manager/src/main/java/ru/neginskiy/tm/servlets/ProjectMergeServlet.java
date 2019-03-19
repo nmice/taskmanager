@@ -1,7 +1,7 @@
 package ru.neginskiy.tm.servlets;
 
 import ru.neginskiy.tm.entity.Project;
-import ru.neginskiy.tm.repository.ProjectRepository;
+import ru.neginskiy.tm.service.ProjectService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import java.util.Date;
 public class ProjectMergeServlet extends HttpServlet {
 
     @Inject
-    ProjectRepository projectRepository;
+    private ProjectService projectService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class ProjectMergeServlet extends HttpServlet {
         if (id == null || id.isEmpty()) {
             project = new Project();
         } else {
-            project = projectRepository.getById(id);
+            project = projectService.getById(id);
         }
 
         String name = request.getParameter("name");
@@ -63,6 +63,6 @@ public class ProjectMergeServlet extends HttpServlet {
         }
         project.setDateEnd(dateEnd);
 
-        projectRepository.merge(project);
+        projectService.merge(project);
     }
 }

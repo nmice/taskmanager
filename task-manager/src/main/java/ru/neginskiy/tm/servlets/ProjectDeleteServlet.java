@@ -1,7 +1,6 @@
 package ru.neginskiy.tm.servlets;
 
-import ru.neginskiy.tm.repository.ProjectRepository;
-import ru.neginskiy.tm.repository.TaskRepository;
+import ru.neginskiy.tm.service.ProjectService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 @WebServlet("/project-delete")
 public class ProjectDeleteServlet extends HttpServlet {
 
     @Inject
-    private ProjectRepository projectRepository;
-    @Inject
-    private TaskRepository taskRepository;
+    private ProjectService projectService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("id") != null) {
             String id = req.getParameter("id");
-            projectRepository.deleteById(id);
+            projectService.deleteById(id);
         }
         resp.sendRedirect(req.getContextPath() + "/project-list");
     }
-    /*TODO DTO in DeltaSpike branch*/
 }

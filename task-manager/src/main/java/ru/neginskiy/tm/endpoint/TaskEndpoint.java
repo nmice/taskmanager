@@ -1,9 +1,7 @@
 package ru.neginskiy.tm.endpoint;
 
-
-
+import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
-import ru.neginskiy.tm.repository.TaskRepository;
 
 import javax.inject.Inject;
 import javax.jws.WebMethod;
@@ -15,7 +13,7 @@ import java.util.List;
 public class TaskEndpoint {
 
     @Inject
-    private TaskRepository taskRepository;
+    private ITaskRepository taskRepository;
 
     @WebMethod
     public void taskMerge(@WebParam(name = "task") Task task) {
@@ -24,16 +22,16 @@ public class TaskEndpoint {
 
     @WebMethod
     public Task taskGetById(@WebParam(name = "id") String id) {
-        return taskRepository.getById(id);
+        return taskRepository.findBy(id);
     }
 
     @WebMethod
     public List<Task> taskGetAll() {
-        return taskRepository.getAll();
+        return taskRepository.findAll();
     }
 
     @WebMethod
     public void taskDelete(@WebParam(name = "id") String id) {
-        taskRepository.deleteById(id);
+        taskRepository.remove(taskRepository.findBy(id));
     }
 }
