@@ -1,6 +1,9 @@
 package ru.neginskiy.tm.controller;
 
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import ru.neginskiy.tm.api.*;
 import ru.neginskiy.tm.api.service.IProjectService;
 import ru.neginskiy.tm.api.service.ISessionService;
@@ -12,33 +15,34 @@ import ru.neginskiy.tm.service.*;
 
 import static ru.neginskiy.tm.util.AppConfig.*;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.xml.ws.Endpoint;
 
-@ApplicationScoped
+@Controller
+/*
+@Component
+*/
 @Getter
 public class Bootstrap implements ServiceLocator {
 
-    @Inject
+    @Autowired
     private DataService dataService;
-    @Inject
+    @Autowired
     private ITaskService taskService;
-    @Inject
+    @Autowired
     private IProjectService projectService;
-    @Inject
+    @Autowired
     private IUserService userService;
-    @Inject
+    @Autowired
     private ISessionService sessionService;
-    @Inject
+    @Autowired
     private TaskEndpoint taskEndpoint;
-    @Inject
+    @Autowired
     private ProjectEndpoint projectEndpoint;
-    @Inject
+    @Autowired
     private UserEndpoint userEndpoint;
-    @Inject
+    @Autowired
     private SessionEndpoint sessionEndpoint;
-    @Inject
+    @Autowired
     private DataEndpoint dataEndpoint;
 
     public void init() {

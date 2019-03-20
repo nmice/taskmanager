@@ -84,50 +84,71 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+<!--        <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.core/deltaspike-core-api -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.deltaspike.core/deltaspike-core-api &ndash;&gt;
         <dependency>
             <groupId>org.apache.deltaspike.core</groupId>
             <artifactId>deltaspike-core-api</artifactId>
             <version>RELEASE </version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.core/deltaspike-core-impl -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.deltaspike.core/deltaspike-core-impl &ndash;&gt;
         <dependency>
             <groupId>org.apache.deltaspike.core</groupId>
             <artifactId>deltaspike-core-impl</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <!--https://mvnrepository.com/artifact/org.apache.deltaspike.cdictrl/deltaspike-cdictrl-api-->
+        &lt;!&ndash;https://mvnrepository.com/artifact/org.apache.deltaspike.cdictrl/deltaspike-cdictrl-api&ndash;&gt;
         <dependency>
             <groupId>org.apache.deltaspike.cdictrl</groupId>
             <artifactId>deltaspike-cdictrl-api</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.cdictrl/deltaspike-cdictrl-weld -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.deltaspike.cdictrl/deltaspike-cdictrl-weld &ndash;&gt;
         <dependency>
             <groupId>org.apache.deltaspike.cdictrl</groupId>
             <artifactId>deltaspike-cdictrl-weld</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <!--https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-api-->
+        &lt;!&ndash;https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-api&ndash;&gt;
         <dependency>
             <groupId>org.apache.deltaspike.modules</groupId>
             <artifactId>deltaspike-data-module-api</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-impl -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-impl &ndash;&gt;
         <dependency>
             <groupId>org.apache.deltaspike.modules</groupId>
             <artifactId>deltaspike-data-module-impl</artifactId>
             <version>RELEASE</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 </project>

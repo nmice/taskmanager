@@ -1,10 +1,63 @@
 package ru.neginskiy.tm.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@Configuration
+@ComponentScan/*("ru.neginskiy.tm")*/
+@PropertySource("classpath:config.properties")
+@EnableTransactionManagement
+@EnableJpaRepositories("ru.neginskiy.tm.api.repository")
+
 public class AppConfig {
+
+    @Autowired
+    private Environment env;
+
+/*    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan("ru.titov.taskmanagerserver.entity");
+        final JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(additionalProperties());
+        return em;
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("datasource.driverClassName"));
+        dataSource.setUrl(env.getProperty("datasource.url"));
+        dataSource.setUsername(env.getProperty("datasource.login"));
+        dataSource.setPassword(env.getProperty("datasource.password"));
+        return dataSource;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+        return transactionManager;
+    }
+
+    private Properties additionalProperties() {
+        final Properties properties = new Properties();
+        properties.setProperty(Environment.HBM2DDL_AUTO, env.getProperty("datasource.hbm2ddlauto"));
+        properties.setProperty(Environment.DIALECT, env.getProperty("datasource.dialect"));
+        properties.setProperty(Environment.SHOW_SQL, env.getProperty("datasource.showSql"));
+        return properties;
+    }*/
 
     private static final String PROPERTY_FILE = "config.properties";
     public static String secretKey;
