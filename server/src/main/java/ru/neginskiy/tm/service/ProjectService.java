@@ -12,8 +12,8 @@ import ru.neginskiy.tm.api.service.IProjectService;
 import java.util.Collections;
 import java.util.List;
 
-@Service
 @Transactional
+@Service
 public class ProjectService implements IProjectService {
 
     @Autowired
@@ -30,7 +30,7 @@ public class ProjectService implements IProjectService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Project project = projectRepository.findBy(id);
+        final Project project = projectRepository.getOne(id);
         return project;
     }
 
@@ -39,7 +39,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return;
         }
-        projectRepository.merge(project);
+        projectRepository.save(project);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ProjectService implements IProjectService {
         if (project == null) {
             return null;
         }
-        projectRepository.remove(project);
+        projectRepository.delete(project);
         return project;
     }
 }

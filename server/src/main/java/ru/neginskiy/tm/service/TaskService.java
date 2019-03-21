@@ -1,26 +1,26 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.api.service.ITaskService;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
 
 @Transactional
-@ApplicationScoped
+@Service
 public class TaskService implements ITaskService {
 
-    @Inject
+    @Autowired
     private ITaskRepository taskRepository;
 
-    @Inject
+    @Autowired
     EntityManagerFactory entityManagerFactory;
 
     @Override
@@ -35,7 +35,7 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Task task = taskRepository.findBy(id);
+        final Task task = taskRepository.getOne(id);
         return task;
     }
 
@@ -44,7 +44,7 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return;
         }
-        taskRepository.merge(task);
+        taskRepository.save(task);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class TaskService implements ITaskService {
         if (task == null) {
             return null;
         }
-        taskRepository.remove(task);
+        taskRepository.delete(task);
         return task;
     }
 }

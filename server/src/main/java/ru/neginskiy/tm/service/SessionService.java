@@ -1,8 +1,10 @@
 package ru.neginskiy.tm.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
 import ru.neginskiy.tm.api.service.ISessionService;
 import ru.neginskiy.tm.entity.Session;
@@ -10,19 +12,17 @@ import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 import ru.neginskiy.tm.util.AppConfig;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 @Transactional
-@ApplicationScoped
+@Service
 public class SessionService implements ISessionService {
 
-    @Inject
+    @Autowired
     private ISessionRepository sessionRepository;
 
-    @Inject
+    @Autowired
     EntityManagerFactory entityManagerFactory;
 
     private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
@@ -38,14 +38,14 @@ public class SessionService implements ISessionService {
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
         for (Session session : sessionList) {
             if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
-                sessionRepository.remove(session);
+                sessionRepository.delete(session);
             }
         }
         //Create new Session:
         final Session session = new Session();
         session.setUser(user);
         session.setSignature(createSaltHashSignature(session.getId()));
-        sessionRepository.merge(session);
+        sessionRepository.save(session);
         return session;
     }
 
@@ -54,14 +54,14 @@ public class SessionService implements ISessionService {
         if (session == null) {
             throw new UncorrectSessionException();
         }
-        final Session sessionInBase = sessionRepository.findBy(session.getId());
+        final Session sessionInBase = sessionRepository.getOne(session.getId());
         if (sessionInBase == null || !sessionInBase.getSignature().equals(session.getSignature())) {
             //Session is not in a repository OR Signature is incorrect
             throw new UncorrectSessionException();
         }
         if (System.currentTimeMillis() - sessionInBase.getTimeStamp().getTime() > SESSION_LIFETIME) {
             //Session is correct, but older than SessionLifeTime
-            sessionRepository.remove(sessionInBase);
+            sessionRepository.delete(sessionInBase);
             throw new UncorrectSessionException();
         }
     }

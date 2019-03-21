@@ -1,24 +1,24 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.IUserRepository;
 import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 
 @Transactional
-@ApplicationScoped
+@Service
 public class UserService implements IUserService {
 
-    @Inject
+    @Autowired
     private IUserRepository userRepository;
 
-    @Inject
+    @Autowired
     EntityManagerFactory entityManagerFactory;
 
     @Override
@@ -26,7 +26,7 @@ public class UserService implements IUserService {
         if (user == null) {
             return;
         }
-        userRepository.merge(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UserService implements IUserService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final User user = userRepository.findBy(id);
+        final User user = userRepository.getOne(id);
         return user;
     }
 
