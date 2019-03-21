@@ -1,22 +1,22 @@
 package ru.neginskiy.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.IProjectRepository;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.api.service.IProjectService;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
+@Service
 @Transactional
-@ApplicationScoped
 public class ProjectService implements IProjectService {
 
-    @Inject
+    @Autowired
     private IProjectRepository projectRepository;
 
     @Override

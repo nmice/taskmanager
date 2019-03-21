@@ -1,20 +1,22 @@
 package ru.neginskiy.tm.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.Session;
 import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.error.UncorrectSessionException;
 
-import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
+@Component
 @WebService
 public class TaskEndpoint {
 
-    @Inject
+    @Autowired
     private ServiceLocator serviceLocator;
 
     @WebMethod

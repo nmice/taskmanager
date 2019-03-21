@@ -2,24 +2,24 @@ package ru.neginskiy.tm.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.dto.Domain;
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.io.*;
 import java.util.List;
 
 @Transactional
-@ApplicationScoped
+@Service
 public class DataService {
 
-    @Inject
+    @Autowired
     private ServiceLocator serviceLocator;
 
     public void saveDataBin(@Nullable String userId) {

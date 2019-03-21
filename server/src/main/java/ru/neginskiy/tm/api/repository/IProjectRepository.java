@@ -1,17 +1,17 @@
 package ru.neginskiy.tm.api.repository;
 
-import org.apache.deltaspike.data.api.FullEntityRepository;
-import org.apache.deltaspike.data.api.Query;
-import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import ru.neginskiy.tm.entity.Project;
 
 import java.util.List;
 
+@Repository
+public interface IProjectRepository extends JpaRepository<Project, String> {
 
-@Repository(forEntity = Project.class)
-public interface IProjectRepository extends FullEntityRepository<Project, String>{
-
-    @Query("FROM Project p where p.user.id = ?1")
-    @NotNull List<Project> getAllByUserId(@NotNull String userId);
+    @Query("select p FROM Project p where p.user.id = :userId")
+    @NotNull List<Project> getAllByUserId(@NotNull @Param("userId") String userId);
 }

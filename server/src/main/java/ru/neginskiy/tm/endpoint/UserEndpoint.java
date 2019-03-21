@@ -1,17 +1,19 @@
 package ru.neginskiy.tm.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.neginskiy.tm.api.ServiceLocator;
 import ru.neginskiy.tm.entity.User;
 
-import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+@Component
 @WebService
 public class UserEndpoint {
 
-    @Inject
+    @Autowired
     private ServiceLocator serviceLocator;
 
     @WebMethod
