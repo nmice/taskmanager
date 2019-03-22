@@ -3,7 +3,6 @@ package ru.neginskiy.tm.controller;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import ru.neginskiy.tm.api.*;
 import ru.neginskiy.tm.api.service.IProjectService;
 import ru.neginskiy.tm.api.service.ISessionService;
@@ -17,11 +16,8 @@ import static ru.neginskiy.tm.util.AppConfig.*;
 
 import javax.xml.ws.Endpoint;
 
-@Controller
-/*
-@Component
-*/
 @Getter
+@Component
 public class Bootstrap implements ServiceLocator {
 
     @Autowired

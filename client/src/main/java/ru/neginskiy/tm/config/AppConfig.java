@@ -1,37 +1,35 @@
-package ru.neginskiy.tm.producer;
+package ru.neginskiy.tm.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import ru.neginskiy.tm.endpoint.*;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+@ComponentScan("ru.neginskiy.tm")
+@Configuration
+public class AppConfig {
 
-public class EndpointsProducer {
-
-    @Produces
-    @ApplicationScoped
+    @Bean
     public TaskEndpoint getTaskEndpoint() {
         return new TaskEndpointService().getTaskEndpointPort();
     }
 
-    @Produces
-    @ApplicationScoped
+    @Bean
     public UserEndpoint getUserEndpointService() {
         return new UserEndpointService().getUserEndpointPort();
     }
-    @Produces
-    @ApplicationScoped
+
+    @Bean
     public SessionEndpoint getSessionEndpointService() {
         return new SessionEndpointService().getSessionEndpointPort();
     }
 
-    @Produces
-    @ApplicationScoped
+    @Bean
     public DataEndpoint getDataEndpointService() {
         return new DataEndpointService().getDataEndpointPort();
     }
 
-    @Produces
-    @ApplicationScoped
+    @Bean
     public ProjectEndpoint getProjectEndpointService() {
         return new ProjectEndpointService().getProjectEndpointPort();
     }

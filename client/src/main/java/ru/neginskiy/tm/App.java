@@ -1,9 +1,10 @@
 package ru.neginskiy.tm;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.neginskiy.tm.command.*;
+import ru.neginskiy.tm.config.AppConfig;
 import ru.neginskiy.tm.controller.Bootstrap;
-
-import javax.enterprise.inject.se.SeContainerInitializer;
 
 public class App {
 
@@ -15,7 +16,10 @@ public class App {
             DataXmlLoadCommand.class, DataXmlSaveCommand.class};
 
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
-        SeContainerInitializer.newInstance().addPackages(App.class).initialize()
-                .select(Bootstrap.class).get().init(CLASSES);
+
+        final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        final Bootstrap bootstrap = context.getBean(Bootstrap.class);
+        bootstrap.init(CLASSES);
     }
 }

@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan/*("ru.neginskiy.tm")*/
+@ComponentScan("ru.neginskiy.tm")
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories("ru.neginskiy.tm.api.repository")
@@ -49,6 +49,7 @@ public class AppConfig {
             e.printStackTrace();
         }
     }
+    //TODO CREATE SESSIONUTIL
 
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String HIBERNATE_SHOW_SQL = "hibernate.showSQL";

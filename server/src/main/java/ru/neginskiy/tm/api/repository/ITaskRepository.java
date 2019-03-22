@@ -9,7 +9,7 @@ import ru.neginskiy.tm.entity.Task;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public interface ITaskRepository extends JpaRepository<Task, String> {
 
     @Query("select t FROM Task t where t.user.id = :userId")

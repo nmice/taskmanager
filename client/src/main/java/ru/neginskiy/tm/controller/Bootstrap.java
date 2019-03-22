@@ -5,31 +5,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import ru.neginskiy.tm.command.AbstractCommand;
 import ru.neginskiy.tm.endpoint.*;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-@ApplicationScoped
+@Component
 @NoArgsConstructor
 @Getter
 public class Bootstrap {
 
     private final Map<String, AbstractCommand> stringToCommand = new HashMap<>();
 
-    @Inject
+    @Autowired
     private TaskEndpoint taskEndpointService;
-    @Inject
+    @Autowired
     private ProjectEndpoint projectEndpointService;
-    @Inject
+    @Autowired
     private UserEndpoint userEndpointService;
-    @Inject
+    @Autowired
     private SessionEndpoint sessionEndpointService;
-    @Inject
+    @Autowired
     private DataEndpoint dataEndpointService;
 
     @Setter
