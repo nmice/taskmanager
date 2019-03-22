@@ -25,7 +25,7 @@ public class Project extends AbstractEntity {
     private Date dateEnd;
     @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private transient List<Task> taskList = new ArrayList<>();
 
     @Override
