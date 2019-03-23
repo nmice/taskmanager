@@ -2,6 +2,7 @@ package ru.neginskiy.tm.controller;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.neginskiy.tm.api.*;
 import ru.neginskiy.tm.api.service.IProjectService;
@@ -11,8 +12,6 @@ import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.endpoint.*;
 import ru.neginskiy.tm.entity.User;
 import ru.neginskiy.tm.service.*;
-
-import static ru.neginskiy.tm.util.AppConfig.*;
 
 import javax.xml.ws.Endpoint;
 
@@ -40,6 +39,12 @@ public class Bootstrap implements ServiceLocator {
     private SessionEndpoint sessionEndpoint;
     @Autowired
     private DataEndpoint dataEndpoint;
+
+    @Value("${host}")
+    private String host;
+
+    @Value("${port}")
+    private String port;
 
     public void init() {
         createTestUser();

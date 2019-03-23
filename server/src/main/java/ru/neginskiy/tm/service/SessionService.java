@@ -3,6 +3,7 @@ package ru.neginskiy.tm.service;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.ISessionRepository;
@@ -25,9 +26,14 @@ public class SessionService implements ISessionService {
     @Autowired
     EntityManagerFactory entityManagerFactory;
 
-    private static final int SESSION_LIFETIME = AppConfig.sessionLifetime;
-    private static final String SECRET_KEY = AppConfig.secretKey;
-    private static final int SALT_COUNTER = AppConfig.saltCounter;
+    @Value("${sessionLifetime}")
+    private String SESSION_LIFETIME;
+
+    @Value("${secretKey}")
+    private String SECRET_KEY;
+
+    @Value("${saltCounter}")
+    private String SALT_COUNTER;
 
     @Override
     public @Nullable Session getNewSession(@Nullable User user) {
@@ -36,8 +42,9 @@ public class SessionService implements ISessionService {
         }
         //Delete old session by User
         final List<Session> sessionList = sessionRepository.getAllByUserId(user.getId());
+        final int sessionLifeTime = Integer.parseInt(SESSION_LIFETIME);
         for (Session session : sessionList) {
-            if (System.currentTimeMillis() - session.getTimeStamp().getTime() > SESSION_LIFETIME) {
+            if (System.currentTimeMillis() - session.getTimeStamp().getTime() > sessionLifeTime) {
                 sessionRepository.delete(session);
             }
         }
@@ -59,7 +66,8 @@ public class SessionService implements ISessionService {
             //Session is not in a repository OR Signature is incorrect
             throw new UncorrectSessionException();
         }
-        if (System.currentTimeMillis() - sessionInBase.getTimeStamp().getTime() > SESSION_LIFETIME) {
+        final int sessionLifeTime = Integer.parseInt(SESSION_LIFETIME);
+        if (System.currentTimeMillis() - sessionInBase.getTimeStamp().getTime() > sessionLifeTime) {
             //Session is correct, but older than SessionLifeTime
             sessionRepository.delete(sessionInBase);
             throw new UncorrectSessionException();
@@ -68,7 +76,8 @@ public class SessionService implements ISessionService {
 
     private String createSaltHashSignature(String id) {
         String signature = DigestUtils.md5Hex(id);
-        for (int i = 0; i < SALT_COUNTER; i++) {
+        final int saltCounter = Integer.parseInt(SALT_COUNTER);
+        for (int i = 0; i < saltCounter; i++) {
             signature = DigestUtils.md5Hex(signature + SECRET_KEY);
         }
         return signature;

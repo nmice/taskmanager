@@ -27,30 +27,6 @@ import java.util.Properties;
 @EnableJpaRepositories("ru.neginskiy.tm.api.repository")
 public class AppConfig {
 
-    private static final String PROPERTY_FILE = "config.properties";
-    public static String secretKey;
-    public static int saltCounter;
-    public static int sessionLifetime;
-    public static String host;
-    public static String port;
-
-    static {
-        final Properties properties = new Properties();
-        final InputStream is = AppConfig.class.getClassLoader().getResourceAsStream(PROPERTY_FILE);
-
-        try {
-            properties.load(is);
-            secretKey = properties.getProperty("secretKey");
-            saltCounter = Integer.parseInt(properties.getProperty("saltCounter"));
-            sessionLifetime = Integer.parseInt(properties.getProperty("sessionLifetime"));
-            host = properties.getProperty("host");
-            port = properties.getProperty("port");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    //TODO CREATE SESSIONUTIL
-
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String HIBERNATE_SHOW_SQL = "hibernate.showSQL";
     private static final String HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
