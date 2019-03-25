@@ -12,6 +12,7 @@ import ru.neginskiy.tm.api.service.ITaskService;
 import javax.persistence.EntityManagerFactory;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -32,11 +33,9 @@ public class TaskService implements ITaskService {
 
     @Override
     public @Nullable Task getById(@Nullable String id) {
-        if (id == null || id.isEmpty()) {
-            return null;
-        }
-        final Task task = taskRepository.getOne(id);
-        return task;
+        if (id == null || id.isEmpty()) return null;
+        final Optional<Task> task = taskRepository.findById(id);
+        return task.orElse(null);
     }
 
     @Override
@@ -52,10 +51,11 @@ public class TaskService implements ITaskService {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Task task = getById(id);
-        if (task == null) {
+        final Optional<Task> optional = taskRepository.findById(id);
+        if (!optional.isPresent()) {
             return null;
         }
+        final Task task = optional.get();
         taskRepository.delete(task);
         return task;
     }

@@ -9,41 +9,41 @@
     </parent>
     <build>
         <plugins>
-           <!-- <plugin>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-codegen-plugin</artifactId>
-            <version>3.2.7</version>
-            <executions>
-                <execution>
-                    <id>generate-sources</id>
-                    <phase>generate-sources</phase>
-                    <configuration>
-                        <sourceRoot>${project.basedir}/src/main/java</sourceRoot>
-                        <wsdlOptions>
-                            &lt;!&ndash; На все Endpoint +?wsdl&ndash;&gt;
-                            <wsdlOption>
-                                <wsdl>http://localhost:1234/TaskEndpoint?wsdl</wsdl>
-                            </wsdlOption>
-                            <wsdlOption>
-                                <wsdl>http://localhost:1234/ProjectEndpoint?wsdl</wsdl>
-                            </wsdlOption>
-                            <wsdlOption>
-                                <wsdl>http://localhost:1234/UserEndpoint?wsdl</wsdl>
-                            </wsdlOption>
-                            <wsdlOption>
-                                <wsdl>http://localhost:1234/SessionEndpoint?wsdl</wsdl>
-                            </wsdlOption>
-                            <wsdlOption>
-                                <wsdl>http://localhost:1234/DataEndpoint?wsdl</wsdl>
-                            </wsdlOption>
-                        </wsdlOptions>
-                    </configuration>
-                    <goals>
-                        <goal>wsdl2java</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>-->
+           <!--<plugin>-->
+            <!--<groupId>org.apache.cxf</groupId>-->
+            <!--<artifactId>cxf-codegen-plugin</artifactId>-->
+            <!--<version>3.2.7</version>-->
+            <!--<executions>-->
+                <!--<execution>-->
+                    <!--<id>generate-sources</id>-->
+                    <!--<phase>generate-sources</phase>-->
+                    <!--<configuration>-->
+                        <!--<sourceRoot>${project.basedir}/src/main/java</sourceRoot>-->
+                        <!--<wsdlOptions>-->
+                            <!--&lt;!&ndash; На все Endpoint +?wsdl&ndash;&gt;-->
+                            <!--<wsdlOption>-->
+                                <!--<wsdl>http://localhost:1234/TaskEndpoint?wsdl</wsdl>-->
+                            <!--</wsdlOption>-->
+                            <!--<wsdlOption>-->
+                                <!--<wsdl>http://localhost:1234/ProjectEndpoint?wsdl</wsdl>-->
+                            <!--</wsdlOption>-->
+                            <!--<wsdlOption>-->
+                                <!--<wsdl>http://localhost:1234/UserEndpoint?wsdl</wsdl>-->
+                            <!--</wsdlOption>-->
+                            <!--<wsdlOption>-->
+                                <!--<wsdl>http://localhost:1234/SessionEndpoint?wsdl</wsdl>-->
+                            <!--</wsdlOption>-->
+                            <!--<wsdlOption>-->
+                                <!--<wsdl>http://localhost:1234/DataEndpoint?wsdl</wsdl>-->
+                            <!--</wsdlOption>-->
+                        <!--</wsdlOptions>-->
+                    <!--</configuration>-->
+                    <!--<goals>-->
+                        <!--<goal>wsdl2java</goal>-->
+                    <!--</goals>-->
+                <!--</execution>-->
+            <!--</executions>-->
+        <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -14,4 +14,17 @@ public interface IProjectRepository extends JpaRepository<Project, String> {
 
     @Query("select p FROM Project p where p.user.id = :userId")
     @NotNull List<Project> getAllByUserId(@NotNull @Param("userId") String userId);
+
+    @Override
+    Project getOne(String s);
+
+    @Override
+    <S extends Project> S save(S s);
+
+    @Override
+    void deleteById(String s);
+
+    @Override
+    void delete(Project project);
+
 }

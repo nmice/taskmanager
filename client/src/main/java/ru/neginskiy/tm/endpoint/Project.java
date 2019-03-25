@@ -1,11 +1,8 @@
 
 package ru.neginskiy.tm.endpoint;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -25,7 +22,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="dateEnd" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/&gt;
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="taskList" type="{http://endpoint.tm.neginskiy.ru/}task" maxOccurs="unbounded" minOccurs="0"/&gt;
  *         &lt;element name="user" type="{http://endpoint.tm.neginskiy.ru/}user" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/extension&gt;
@@ -41,7 +37,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "dateEnd",
     "description",
     "name",
-    "taskList",
     "user"
 })
 public class Project
@@ -54,8 +49,6 @@ public class Project
     protected XMLGregorianCalendar dateEnd;
     protected String description;
     protected String name;
-    @XmlElement(nillable = true)
-    protected List<Task> taskList;
     protected User user;
 
     /**
@@ -152,35 +145,6 @@ public class Project
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    /**
-     * Gets the value of the taskList property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the taskList property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTaskList().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Task }
-     * 
-     * 
-     */
-    public List<Task> getTaskList() {
-        if (taskList == null) {
-            taskList = new ArrayList<Task>();
-        }
-        return this.taskList;
     }
 
     /**
