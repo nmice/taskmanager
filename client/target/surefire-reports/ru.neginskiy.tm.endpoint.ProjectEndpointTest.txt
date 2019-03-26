@@ -1,36 +1,36 @@
 -------------------------------------------------------------------------------
 Test set: ru.neginskiy.tm.endpoint.ProjectEndpointTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.151 s <<< FAILURE! - in ru.neginskiy.tm.endpoint.ProjectEndpointTest
-testProjectGetById(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.906 s <<< FAILURE! - in ru.neginskiy.tm.endpoint.ProjectEndpointTest
+testProjectGetById(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.203 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.before(ProjectEndpointTest.java:37)
 
-testProjectDelete(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
+testProjectGetById(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.203 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class java.lang.reflect.InvocationTargetException,message=null Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.after(ProjectEndpointTest.java:109)
 
-testProjectGetAll(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
+testProjectDelete(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.016 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.before(ProjectEndpointTest.java:37)
 
-testProjectMerge(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.<init>(ProjectEndpointTest.java:14)
+testProjectDelete(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.032 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class java.lang.reflect.InvocationTargetException,message=null Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.after(ProjectEndpointTest.java:109)
+
+testProjectGetAll(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.016 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.before(ProjectEndpointTest.java:37)
+
+testProjectGetAll(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.016 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class java.lang.reflect.InvocationTargetException,message=null Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.after(ProjectEndpointTest.java:109)
+
+testProjectMerge(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.016 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.before(ProjectEndpointTest.java:37)
+
+testProjectMerge(ru.neginskiy.tm.endpoint.ProjectEndpointTest)  Time elapsed: 0.016 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class org.apache.deltaspike.data.api.QueryInvocationException,message=Failed calling Repository: [Repository=ru.neginskiy.tm.api.repository.ITaskRepository,entity=ru.neginskiy.tm.entity.Task,method=findBy,exception=class java.lang.reflect.InvocationTargetException,message=null Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.ProjectEndpointTest.after(ProjectEndpointTest.java:109)
 

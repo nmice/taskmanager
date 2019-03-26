@@ -1,28 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: ru.neginskiy.tm.endpoint.UserEndpointTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in ru.neginskiy.tm.endpoint.UserEndpointTest
-testIsRegistredLogin(ru.neginskiy.tm.endpoint.UserEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.UserEndpointTest.<init>(UserEndpointTest.java:9)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.UserEndpointTest.<init>(UserEndpointTest.java:9)
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.062 s <<< FAILURE! - in ru.neginskiy.tm.endpoint.UserEndpointTest
+testIsRegistredLogin(ru.neginskiy.tm.endpoint.UserEndpointTest)  Time elapsed: 0.016 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.UserEndpointTest.before(UserEndpointTest.java:20)
 
 testFindUser(ru.neginskiy.tm.endpoint.UserEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.UserEndpointTest.<init>(UserEndpointTest.java:9)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.UserEndpointTest.<init>(UserEndpointTest.java:9)
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.UserEndpointTest.before(UserEndpointTest.java:20)
 
-testUserMerge(ru.neginskiy.tm.endpoint.UserEndpointTest)  Time elapsed: 0 s  <<< ERROR!
-javax.xml.ws.WebServiceException: 
-Failed to access the WSDL at: http://localhost:8080/task-manager/UserEndpoint?wsdl. It failed with: 
-	http://localhost:8080/task-manager/UserEndpoint?wsdl.
-	at ru.neginskiy.tm.endpoint.UserEndpointTest.<init>(UserEndpointTest.java:9)
-Caused by: java.io.FileNotFoundException: http://localhost:8080/task-manager/UserEndpoint?wsdl
-	at ru.neginskiy.tm.endpoint.UserEndpointTest.<init>(UserEndpointTest.java:9)
+testUserMerge(ru.neginskiy.tm.endpoint.UserEndpointTest)  Time elapsed: 0.015 s  <<< ERROR!
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: WFLYJPA0060: Transaction is required to perform this operation (either use a transaction or extended persistence context) Please see the server log to find more detail regarding exact cause of the failure.
+	at ru.neginskiy.tm.endpoint.UserEndpointTest.before(UserEndpointTest.java:20)
 
