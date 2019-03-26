@@ -18,7 +18,6 @@ public class App {
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 
         final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-
         final Bootstrap bootstrap = context.getBean(Bootstrap.class);
         bootstrap.init(CLASSES);
     }

@@ -9,7 +9,7 @@ import ru.neginskiy.tm.entity.Project;
 
 import java.util.List;
 
-//@Repository
+@Repository
 public interface IProjectRepository extends JpaRepository<Project, String> {
 
     @Query("select p FROM Project p where p.user.id = :userId")

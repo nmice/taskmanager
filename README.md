@@ -12,9 +12,11 @@
 
 <li> Hibernate (5.3.8.Final)</li>
 
-<li> Weld SE (Core) (3.1.0.Final)</li>
+<li> Spring Core Container (5.1.5)</li>
 
-<li> Apache DeltaSpike (1.9.0)</li>
+<li> Spring ORM (5.1.5)</li>
+
+<li> Spring Data Jpa (2.1.5)</li>
 
 <h3>Структура проекта</h3>
 
@@ -94,11 +96,7 @@
 
 <h4>[util]</h4>
 
-<li> AppConfig - утильный класс со static переменными, хранящих значения из config.properties</li>
-
-<li> HibernateSessionFactory - утильный класс для создания EntityManagerFactory</li>
-
-<li> EntityManagerProducer - утильный класс для создания EntityManager</li>
+<li> AppConfig - класс конфигурации Spring на основе из config.properties</li>
 
 <h4>Application - основной класс на сервере</h4>
 

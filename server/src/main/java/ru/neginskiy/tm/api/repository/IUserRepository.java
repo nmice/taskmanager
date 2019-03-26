@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.neginskiy.tm.entity.User;
 
-//@Repository
+@Repository
 public interface IUserRepository extends JpaRepository<User, String> {
 
     @Query("select u FROM User u where u.login = :login and u.passwordHash = :passwordHash")

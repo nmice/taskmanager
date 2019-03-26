@@ -9,7 +9,7 @@ import ru.neginskiy.tm.entity.Session;
 
 import java.util.List;
 
-//@Repository
+@Repository
 public interface ISessionRepository extends JpaRepository<Session, String> {
 
     @Query("select s FROM Session s where s.user.id = :userId")
