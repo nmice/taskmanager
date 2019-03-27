@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.servlets;
+package ru.neginskiy.tm.controller;
 
 import ru.neginskiy.tm.entity.Project;
 import ru.neginskiy.tm.entity.Task;

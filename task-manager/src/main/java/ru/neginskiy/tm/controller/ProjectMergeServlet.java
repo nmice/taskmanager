@@ -1,9 +1,7 @@
-package ru.neginskiy.tm.servlets;
+package ru.neginskiy.tm.controller;
 
 import ru.neginskiy.tm.entity.Project;
-import ru.neginskiy.tm.entity.Task;
 import ru.neginskiy.tm.service.ProjectService;
-import ru.neginskiy.tm.service.TaskService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -15,65 +13,56 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//@WebServlet("/task-merge")
-public class TaskMergeServlet extends HttpServlet {
+@WebServlet("/project-merge")
+public class ProjectMergeServlet extends HttpServlet {
 
-    @Inject
-    private TaskService taskService;
     @Inject
     private ProjectService projectService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        mergeTaskByRequest(req);
-        resp.sendRedirect(req.getContextPath() + "/task-list?projectId=" + req.getParameter("projectId"));
+        mergeProjectByRequest(req);
+        resp.sendRedirect(req.getContextPath() + "/project-list");
     }
 
-    private void mergeTaskByRequest(HttpServletRequest request) {
-        Task task;
+    private void mergeProjectByRequest(HttpServletRequest request) {
+        Project project;
 
         String id = request.getParameter("id");
         if (id == null || id.isEmpty()) {
-            task = new Task();
+            project = new Project();
         } else {
-            task = taskService.getById(id);
+            project = projectService.getById(id);
         }
 
         String name = request.getParameter("name");
         if (name == null || name.isEmpty()) {
-            name = task.getName();
+            name = project.getName();
         }
-        task.setName(name);
+        project.setName(name);
 
         String description = request.getParameter("description");
         if (description == null || description.isEmpty()) {
-            description = task.getDescription();
+            description = project.getDescription();
         }
-        task.setDescription(description);
+        project.setDescription(description);
 
         Date dateBegin;
         try {
             dateBegin = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dateBegin"));
         } catch (Exception e) {
-            dateBegin = task.getDateBegin();
+            dateBegin = project.getDateBegin();
         }
-        task.setDateBegin(dateBegin);
+        project.setDateBegin(dateBegin);
 
         Date dateEnd;
         try {
             dateEnd = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dateEnd"));
         } catch (Exception e) {
-            dateEnd = task.getDateEnd();
+            dateEnd = project.getDateEnd();
         }
-        task.setDateEnd(dateEnd);
+        project.setDateEnd(dateEnd);
 
-        String projectId = request.getParameter("projectId");
-        Project project;
-        if (projectId == null || projectId.isEmpty()) {
-            project = task.getProject();
-        }
-        task.setProject(projectService.getById(projectId));
-
-        taskService.merge(task);
+        projectService.merge(project);
     }
 }

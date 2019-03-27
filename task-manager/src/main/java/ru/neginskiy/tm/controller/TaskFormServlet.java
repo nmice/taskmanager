@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.servlets;
+package ru.neginskiy.tm.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/project-form")
-public class ProjectFormServlet extends HttpServlet {
+@WebServlet("/task-form")
+public class TaskFormServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/project-form.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/view/task-form.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

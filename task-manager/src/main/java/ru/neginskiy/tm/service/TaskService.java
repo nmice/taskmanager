@@ -52,4 +52,9 @@ public class TaskService implements ITaskService {
         taskRepository.delete(task);
         return task;
     }
+
+    @Override
+    public @NotNull List<Task> getAllByProjectId(@NotNull String projectId) {
+        return taskRepository.getAllByProjectId(projectId);
+    }
 }

@@ -1,4 +1,4 @@
-package ru.neginskiy.tm.servlets;
+package ru.neginskiy.tm.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
