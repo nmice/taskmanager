@@ -3,8 +3,6 @@ package ru.neginskiy.tm.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
@@ -28,11 +26,9 @@ public class Project extends AbstractEntity {
     private Date dateEnd;
     @ManyToOne
     private User user;
-
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-///*    @NotFound(action = NotFoundAction.IGNORE)*/
     private  List<Task> taskList = new ArrayList<>();
-//
+
     @Override
     public String toString() {
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
