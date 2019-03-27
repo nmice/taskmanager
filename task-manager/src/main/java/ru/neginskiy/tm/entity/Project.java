@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,11 +25,16 @@ public class Project extends AbstractEntity {
     private Date dateBegin;
     private Date dateEnd;
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private transient List<Task> taskList = new ArrayList<>();
+    private  List<Task> taskList = new ArrayList<>();
 
     @Override
     public String toString() {
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return String.format("%s (%s), %s - %s", name, description, dateBegin == null ? null : formatter.format(dateBegin), dateEnd == null ? null : formatter.format(dateEnd));
+    }
+
+    @XmlTransient
+    public List<Task> getTaskList() {
+        return taskList;
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/task-merge")
+//@WebServlet("/task-merge")
 public class TaskMergeServlet extends HttpServlet {
 
     @Inject

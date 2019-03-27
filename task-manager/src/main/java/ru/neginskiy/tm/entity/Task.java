@@ -21,7 +21,6 @@ public class Task extends AbstractEntity {
     private Date dateEnd;
     @ManyToOne
     private Project project;
-    /*private String projectId;*/
 
     @Override
     public String toString() {

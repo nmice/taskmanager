@@ -1,37 +1,40 @@
 package ru.neginskiy.tm.service;
 
-
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.IUserRepository;
+import ru.neginskiy.tm.api.service.IUserService;
 import ru.neginskiy.tm.entity.User;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.NoResultException;
-import javax.transaction.Transactional;
 
 @Transactional
-@ApplicationScoped
-public class UserService{
+@Service
+public class UserService implements IUserService {
 
-    @Inject
+    @Autowired
     private IUserRepository userRepository;
 
+    @Override
     public void merge(@Nullable User user) {
         if (user == null) {
             return;
         }
-        userRepository.merge(user);
+        userRepository.save(user);
     }
 
+    @Override
     public @Nullable User getById(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final User user = userRepository.findBy(id);
+        final User user = userRepository.getOne(id);
         return user;
     }
 
+    @Override
     public @Nullable User findUser(@Nullable String login, @Nullable String passwordHash) {
         if (login == null || passwordHash == null) {
             return null;
@@ -44,6 +47,7 @@ public class UserService{
         }
     }
 
+    @Override
     public boolean isRegistredLogin(@Nullable String login) {
         if (login == null) {
             return true;

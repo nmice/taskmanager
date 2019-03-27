@@ -1,54 +1,55 @@
 package ru.neginskiy.tm.service;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.neginskiy.tm.api.repository.ITaskRepository;
 import ru.neginskiy.tm.entity.Task;
+import ru.neginskiy.tm.api.service.ITaskService;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
-@ApplicationScoped
-public class TaskService {
+@Service
+public class TaskService implements ITaskService {
 
-    @Inject
+    @Autowired
     private ITaskRepository taskRepository;
 
-    public @NotNull List<Task> getAllByProjectId(@Nullable String projectId) {
-        if (projectId == null || projectId.isEmpty()) return Collections.emptyList();
-        final List<Task> taskList = taskRepository.getAllByProjectId(projectId);
-        return taskList;
+    @Override
+    public @NotNull List<Task> getAll() {
+        return taskRepository.findAll();
     }
 
+    @Override
     public @Nullable Task getById(@Nullable String id) {
-        if (id == null || id.isEmpty()) {
-            return null;
-        }
-        final Task task = taskRepository.findBy(id);
-        return task;
+        if (id == null || id.isEmpty()) return null;
+        final Optional<Task> task = taskRepository.findById(id);
+        return task.orElse(null);
     }
 
+    @Override
     public void merge(@Nullable Task task) {
         if (task == null) {
             return;
         }
-        taskRepository.merge(task);
+        taskRepository.save(task);
     }
 
+    @Override
     public @Nullable Task deleteById(@Nullable String id) {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        final Task task = getById(id);
-        if (task == null) {
+        final Optional<Task> optional = taskRepository.findById(id);
+        if (!optional.isPresent()) {
             return null;
         }
-        taskRepository.remove(task);
+        final Task task = optional.get();
+        taskRepository.delete(task);
         return task;
     }
 }
